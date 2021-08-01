@@ -241,22 +241,47 @@
 <p>另  Django 的 app/oj/setting.py文件需做如下修改</p>
 </blockquote>
 <blockquote>
-<p><img src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210728205741096.png" alt="image-20210728205741096" style="zoom:10%;" />！！该方法可以实现登入，但在提交问题时会出错</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210728205741096.png"
+                      alt="image-20210728205741096" style="zoom:10%;" 
+                >！！该方法可以实现登入，但在提交问题时会出错</p>
 </blockquote>
 <blockquote>
 <p> 正确方法如下:</p>
 </blockquote>
 <blockquote>
-<p> <img src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730141913322.png" style="zoom:50%;" />  oj/dev_settings.py: 用于调试环境的配置</p>
+<p> <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730141913322.png"
+                      style="zoom:50%;" 
+                >  oj/dev_settings.py: 用于调试环境的配置</p>
 </blockquote>
 <blockquote>
-<p><img src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730142131016.png" alt="image-20210730142131016" style="zoom:50%;" />  oj/production_settings.py: 用于生产环境的配置</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730142131016.png"
+                      alt="image-20210730142131016" style="zoom:50%;" 
+                >  oj/production_settings.py: 用于生产环境的配置</p>
 </blockquote>
 <blockquote>
-<p><img src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730142655656.png" alt="image-20210730142655656" style="zoom:50%;" />  oj/settings.py: Django 配置 Redis</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730142655656.png"
+                      alt="image-20210730142655656" style="zoom:50%;" 
+                >  oj/settings.py: Django 配置 Redis</p>
 </blockquote>
 <blockquote>
-<p> <img src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730143136700.png" alt="image-20210730143136700" style="zoom:50%;" />  docker-compose.yml: 在环境变量中添加 Redis 密码</p>
+<p> <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730143136700.png"
+                      alt="image-20210730143136700" style="zoom:50%;" 
+                >  docker-compose.yml: 在环境变量中添加 Redis 密码</p>
 </blockquote>
 <blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d  <span class="comment"># 使 docker-compose.yml 生效【Recreating Done 的 image 无需执行下步】</span></span><br><span class="line">docker restart istep-backend  <span class="comment"># 使修改的 .py 文件生效</span></span><br></pre></td></tr></table></figure></blockquote>

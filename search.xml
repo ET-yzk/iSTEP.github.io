@@ -11,7 +11,12 @@
 <p>我的理解: 服务器端为了保存某些数据，或实现某些必要的功能，当用户访问服务器时，将数据临时保存在服务器端以供完成服务器端的其他某些功能。服务器需要保存的数据可以以cookie的方式存储在客户端，而session的功能就是将服务器需要保存的数据存储在服务端。例如账号登录记录的功能，可以以session的方式将登录状态保存在服务器端，这样当用户访问其他程序时，需要用到登录的地方，都可以从该用户的session中取出该用户的数据，为用户服务。</p>
 <h2 id="2-session和cookie的区别"><a href="#2-session和cookie的区别" class="headerlink" title="2.session和cookie的区别"></a>2.session和cookie的区别</h2><hr>
 <p>session的底层是基于cookie技术来实现的，在早期保存会话状态一直用的cookie，cookie是保存在客户端的明文键值对，但这样直接保存重要信息是不安全的，后来衍生了session，session是加密后的cookie键值，加密后的值即使被人截取，也无法获取到密码等敏感信息，避免了重要资源信息泄露。当用户打开浏览器，去访问服务器的时候，服务器会为每个用户的浏览器创建一个会话对象(session对象)，并且为每个session对象创建一个session_id。当session对象创建成功后，会以cookie的方式将这个session_id回写给浏览器，当用户再次进行访问服务器时，及带了具有session_id的cookie数据来一起访问服务器，服务器通过不同session的 session_id来找出与其相关联的session对象，通过不同的session对象来为不同的用户服务。</p>
-<p><img src="https://gitee.com/yzketx/image-markdown/raw/master/img/1389184-20180528135915678-1257197184.png" alt="img"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/1389184-20180528135915678-1257197184.png"
+                      alt="img"
+                ></p>
 <h2 id="3-在Django中session的使用方法-示例"><a href="#3-在Django中session的使用方法-示例" class="headerlink" title="3.在Django中session的使用方法-示例"></a>3.在Django中session的使用方法-示例</h2><hr>
 <p>Django中默认支持Session，其内部提供了5种类型的Session供开发者使用：</p>
 <p><strong>·</strong> 数据库（默认）<br>        <strong>·</strong> 缓存<br>        **· **文件<br>        <strong>·</strong> 缓存+数据库<br>        **· **加密cookie</p>
@@ -86,13 +91,38 @@
 <h2 id="申请-JetBrains-学生认证"><a href="#申请-JetBrains-学生认证" class="headerlink" title="申请 JetBrains 学生认证"></a>申请 JetBrains 学生认证</h2><ol>
 <li><p>打开 <a class="link"   href="https://www.jetbrains.com/shop/eform/students" >JetBrains学生申请链接<i class="fas fa-external-link-alt"></i></a></p>
 </li>
-<li><p>依次填入你的信息<br>注意！！邮箱必须是学校账号，如 <a class="link"   href="http://mail.zjgsu.edu.cn/" >浙江工商大学邮箱<i class="fas fa-external-link-alt"></i></a> <strong>学号@pop.zjgsu.edu.cn</strong><br><img src="https://gitee.com/yzketx/image-markdown/raw/master/img/jetbrains%E5%AD%A6%E7%94%9F%E7%94%B3%E8%AF%B7.png" alt="image-20210713124733657"></p>
+<li><p>依次填入你的信息<br>注意！！邮箱必须是学校账号，如 <a class="link"   href="http://mail.zjgsu.edu.cn/" >浙江工商大学邮箱<i class="fas fa-external-link-alt"></i></a> <strong>学号@pop.zjgsu.edu.cn</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/jetbrains%E5%AD%A6%E7%94%9F%E7%94%B3%E8%AF%B7.png"
+                      alt="image-20210713124733657"
+                ></p>
 </li>
-<li><p>前往邮箱验证邮件<br>接下来前往学校的邮箱系统验证邮件，如果进去发现收件箱里没有邮件，可能因为被拦截了，因此要到拦截队列里去找。<br>验证成功之后如下<br><img src="https://img-blog.csdnimg.cn/20200302144057720.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NjU2ODc5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<li><p>前往邮箱验证邮件<br>接下来前往学校的邮箱系统验证邮件，如果进去发现收件箱里没有邮件，可能因为被拦截了，因此要到拦截队列里去找。<br>验证成功之后如下<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img-blog.csdnimg.cn/20200302144057720.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NjU2ODc5,size_16,color_FFFFFF,t_70"
+                      alt="在这里插入图片描述"
+                ></p>
 </li>
-<li><p>确认信件信息并注册jetbrians账号<img src="https://gitee.com/yzketx/image-markdown/raw/master/img/1343525-20180403165217221-912419064.png" alt="img"></p>
+<li><p>确认信件信息并注册jetbrians账号<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/1343525-20180403165217221-912419064.png"
+                      alt="img"
+                ></p>
 <p>然后jetbrians提示已经成功，并发信件给你</p>
-<p><img src="https://gitee.com/yzketx/image-markdown/raw/master/img/1343525-20180403165248908-561819286.png" alt="img"> 打开链接，会出现注册页面，填入你的用户名，密码就注册成功，最后跳转至个人主页<br><img src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210713130319829.png" alt="image-20210713130319829"><br>最后使用你注册的账号登陆就可以使用了。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/1343525-20180403165248908-561819286.png"
+                      alt="img"
+                > 打开链接，会出现注册页面，填入你的用户名，密码就注册成功，最后跳转至个人主页<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210713130319829.png"
+                      alt="image-20210713130319829"
+                ><br>最后使用你注册的账号登陆就可以使用了。</p>
 </li>
 <li><p>在JetBrains产品中登录或填写提供的 License ID即可激活使用。</p>
 </li>
@@ -144,22 +174,47 @@
 <p>另  Django 的 app/oj/setting.py文件需做如下修改</p>
 </blockquote>
 <blockquote>
-<p><img src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210728205741096.png" alt="image-20210728205741096" style="zoom:10%;" />！！该方法可以实现登入，但在提交问题时会出错</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210728205741096.png"
+                      alt="image-20210728205741096" style="zoom:10%;" 
+                >！！该方法可以实现登入，但在提交问题时会出错</p>
 </blockquote>
 <blockquote>
 <p> 正确方法如下:</p>
 </blockquote>
 <blockquote>
-<p> <img src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730141913322.png" style="zoom:50%;" />  oj/dev_settings.py: 用于调试环境的配置</p>
+<p> <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730141913322.png"
+                      style="zoom:50%;" 
+                >  oj/dev_settings.py: 用于调试环境的配置</p>
 </blockquote>
 <blockquote>
-<p><img src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730142131016.png" alt="image-20210730142131016" style="zoom:50%;" />  oj/production_settings.py: 用于生产环境的配置</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730142131016.png"
+                      alt="image-20210730142131016" style="zoom:50%;" 
+                >  oj/production_settings.py: 用于生产环境的配置</p>
 </blockquote>
 <blockquote>
-<p><img src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730142655656.png" alt="image-20210730142655656" style="zoom:50%;" />  oj/settings.py: Django 配置 Redis</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730142655656.png"
+                      alt="image-20210730142655656" style="zoom:50%;" 
+                >  oj/settings.py: Django 配置 Redis</p>
 </blockquote>
 <blockquote>
-<p> <img src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730143136700.png" alt="image-20210730143136700" style="zoom:50%;" />  docker-compose.yml: 在环境变量中添加 Redis 密码</p>
+<p> <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730143136700.png"
+                      alt="image-20210730143136700" style="zoom:50%;" 
+                >  docker-compose.yml: 在环境变量中添加 Redis 密码</p>
 </blockquote>
 <blockquote>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d  <span class="comment"># 使 docker-compose.yml 生效【Recreating Done 的 image 无需执行下步】</span></span><br><span class="line">docker restart istep-backend  <span class="comment"># 使修改的 .py 文件生效</span></span><br></pre></td></tr></table></figure></blockquote>
@@ -514,7 +569,12 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps -ef | grep postgres</span><br></pre></td></tr></table></figure>
 
 <p>具体效果如图1所示：</p>
-<center><img src="https://gitee.com/yzketx/image-markdown/raw/master/img/241757.png" alt="图1" style="zoom:80%;" /> 图 1</center>
+<center><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/241757.png"
+                      alt="图1" style="zoom:80%;" 
+                > 图 1</center>
 
 <hr>
 <h5 id="和-server-交互"><a href="#和-server-交互" class="headerlink" title="和 server 交互"></a>和 server 交互</h5><ul>
@@ -542,7 +602,12 @@
 <li>默认情况下，数据库管理员登录认证的方式为 peer。其含义是，本地 Linux 用户可以直接登录到同名的数据库用户，无需输入数据库用户的密码；</li>
 </ul>
 <p>示例效果如图2所示：</p>
-<center><img src="https://gitee.com/yzketx/image-markdown/raw/master/img/241924.png" alt="图2" style="zoom:80%;" /> 图 2</center>
+<center><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/241924.png"
+                      alt="图2" style="zoom:80%;" 
+                > 图 2</center>
 
 <h5 id="修改数据库用户密码"><a href="#修改数据库用户密码" class="headerlink" title="修改数据库用户密码"></a>修改数据库用户密码</h5><p>修改用户密码的示例如下：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#首先连接到数据库</span></span><br><span class="line">sudo -u postgres psql postgres</span><br><span class="line"><span class="comment">#然后在交互环境中修改密码，若修改成功则打印出ALTER ROLE字样</span></span><br><span class="line">&gt; postgres=<span class="comment"># ALTER USER postgres WITH PASSWORD &#x27;postgres&#x27;;</span></span><br><span class="line"><span class="comment">#退出交互环境</span></span><br><span class="line">&gt; postgres=<span class="comment"># q</span></span><br></pre></td></tr></table></figure>
