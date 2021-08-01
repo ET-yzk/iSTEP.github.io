@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="iSTEP">
+    <meta name="description" content="iSTEP Blogs">
+    <meta name="author" content="iSTEP">
+    
+    <title>
+        
+            Redis |
+        
+        iSTEP&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                iSTEP&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/changelog"
+                            >
+                                更新日志
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/changelog">更新日志</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Redis</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">iSTEP</span>
+                        
+                            <span class="author-label">Lv2</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2021-08-01 17:15:05
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/DB/">DB</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.9k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>11 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>Redis的index-1中的keys中保存有django.contrib.sessions.cache等数据</p>
+<p>即Django的会话框架将缓存临时保存在次，同时借助restframework搭建认证框架。</p>
+<h3 id="Redis中的数据结构"><a href="#Redis中的数据结构" class="headerlink" title="Redis中的数据结构"></a>Redis中的数据结构</h3><hr>
+<h5 id="Redis简介"><a href="#Redis简介" class="headerlink" title="Redis简介"></a>Redis简介</h5><p><code>Redis </code>是一个速度非常快的非关系型数据库（<code>non-relational database</code>），它可以存储键（<code>key</code>）和五种不同类型的值（<code>value</code>）之间的映射（<code>mapping</code>），可基于内存存储亦可持久化到硬盘的日志型，<code>Key-Value</code> 数据库。</p>
+<h6 id="Redis与其他数据库的对比"><a href="#Redis与其他数据库的对比" class="headerlink" title="Redis与其他数据库的对比"></a>Redis与其他数据库的对比</h6><p>如果你使用过关系型数据库，例如：<code>Mysql</code>，那么你肯定写过关联两张表数据的查询语句。而 <code>Redis </code>属于 <code>NoSQL</code>，它不使用表，也不会预定义数据模式或强制用户对 <code>Redis </code>的各种数据进行关联。</p>
+<blockquote>
+<p><code>NoSQL</code>（<code>Not Only SQL</code>）</p>
+</blockquote>
+<blockquote>
+<p>意指“不仅仅是<code>SQL</code>”，其泛指非关系型数据库，主要分为四类：键值（<code>Key-Value</code>）存储数据库，列存储数据库，文档型数据库，图形（<code>Graph</code>）数据库。</p>
+</blockquote>
+<p><code>Redis </code>也经常与高性能键值缓存服务器 <code>memcached</code> 做比较：两者均可用于存储键值映射，性能相差也甚少，但 <code>Redis </code>能存储除普通字符串值之外的四种数据结构，而 <code>memcached</code> 只能存储普通的字符串值。这些不同使得 <code>Redis </code>能够解决更为广泛的问题，而且既能作为主数据库使用，也可以作为辅助数据库使用。</p>
+<p>我们通过一张表来对比常用的数据库与缓存服务器：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>数据存储选项</th>
+<th>查询类型</th>
+<th>附加功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Redis</code></td>
+<td>基于内存的非关系型数据库</td>
+<td>字符串、列表、集合、哈希、有序集合</td>
+<td>针对数据类型有专属命令，另有批量操作和不完全的事务支持</td>
+<td>发布与订阅、复制、持久化、脚本扩展</td>
+</tr>
+<tr>
+<td><code>memcached</code></td>
+<td>基于内存的键值<strong>缓存</strong></td>
+<td>键值映射</td>
+<td>创建、读取、更新、删除等</td>
+<td>多线程支持</td>
+</tr>
+<tr>
+<td><code>MySQL</code></td>
+<td>关系型数据库</td>
+<td>数据表、视图等</td>
+<td>查询、插入、更新、删除、内置函数、自定义存储过程等</td>
+<td>支持 <code>ACID</code> 性质、复制等</td>
+</tr>
+<tr>
+<td><code>MongoDB</code></td>
+<td>基于硬盘的非关系型文档存储数据库</td>
+<td>无 <code>schema</code> 的 <code>BSON</code> 文档</td>
+<td>创建、读取、更新、删除、条件查询等</td>
+<td>复制、分片、空间索引等</td>
+</tr>
+</tbody></table>
+<h6 id="Redis的特性"><a href="#Redis的特性" class="headerlink" title="Redis的特性"></a>Redis的特性</h6><p>由于 <code>Redis </code>是内存型数据库，在使用之前就要考虑当服务器被关闭时，服务器存储的数据是否能保留。Redis 拥有两种不同形式的持久化方法，都可以用紧凑的格式将数据写入硬盘：</p>
+<ul>
+<li><p><code>RDB</code>持久化</p>
+<ul>
+<li>在指定的时间间隔内生成数据集的时间点快照</li>
+</ul>
+</li>
+<li><p><code>AOF</code>持久化</p>
+<ul>
+<li>记录服务器执行的所有写操作命令</li>
+<li>新命令会被<strong>追加</strong>到文件的末尾</li>
+<li>在服务器启动时，通过重新执行这些命令还原数据集</li>
+</ul>
+</li>
+</ul>
+<p>除此之外，为了扩展 <code>Redis </code>的读性能，并为 <code>Redis </code>提供故障转移支持，<code>Redis </code>实现了主从复制特性：</p>
+<ul>
+<li>执行复制的从服务器连接主服务器<ul>
+<li>接收主服务器发送的初始副本</li>
+<li>接收主服务器执行的所有写命令</li>
+</ul>
+</li>
+<li>在从服务器上执行所有写命令，实时更新数据库</li>
+<li>读命令可以向任意一个从服务器发送</li>
+</ul>
+<h5 id="快速安装-Redis-与-Python"><a href="#快速安装-Redis-与-Python" class="headerlink" title="快速安装 Redis 与 Python"></a>快速安装 Redis 与 Python</h5><p>为了避免安装到旧版 <code>Redis </code>的问题，我们直接使用源码编译安装 <code>Redis</code>，首先你需要获取并安装 <code>make</code> 等一系列构建工具：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update$ sudo apt-get install make gcc python-dev</span><br></pre></td></tr></table></figure>
+
+<p>构建工具安装完毕后，你需要执行以下操作：</p>
+<ul>
+<li>从 <code>https://redis.io/download</code> 下载最新的稳定版本 <code>Redis </code>源码</li>
+<li>解压源码，编译、安装并启动 <code>Redis </code></li>
+<li>下载并安装 <code>Python</code> 语言的 <code>Redis </code>客户端库</li>
+</ul>
+<p>其中，安装 <code>Redis </code>的过程如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~:$ wget -q http://download.redis.io/releases/redis-5.0.0.tar.gz</span><br><span class="line">~:$ tar -xzf redis-5.0.0.tar.gz</span><br><span class="line">~:$ <span class="built_in">cd</span> redis-5.0.0  <span class="comment"># 注意观察编译消息，最后不应该产生任何错误（`Error`）</span></span><br><span class="line">~/redis-5.0.0:$ make  <span class="comment"># 注意观察安装消息，最后不应该产生任何错误（`Error`）</span></span><br><span class="line">~/redis-5.0.0:$ sudo make install  <span class="comment"># 启动 Redis 服务器，注意通过日志确认 Redis 顺利启动</span></span><br><span class="line">~/redis-5.0.0:$ redis-server redis.conf</span><br></pre></td></tr></table></figure>
+
+<p>除了上述的启动 Redis 服务器方式，你还可以通过 Redis 默认的配置在后台启动它（常用启动方式）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ redis-server &amp;</span><br></pre></td></tr></table></figure>
+
+<p>因为近几年发布的 <code>Ubuntu</code> 和 <code>Debian</code> 都预装了 <code>Python 2.6</code> 或 <code>Python 2.7</code>，所以你不再需要花时间去安装 <code>Python</code>。你可以通过一个名为 <code>setuptools</code> 的辅助包更方便的下载和安装 <code>Redis </code>客户端：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~:$ sudo python -m easy_install redis hiredis</span><br></pre></td></tr></table></figure>
+
+<p>这里的 <code>redis</code> 包为 <code>Python</code> 提供了连接 <code>Redis </code>的接口，<code>hiredis</code> 包则是可选的，它是一个使用 <code>C</code> 语言编写的高性能 <code>Redis </code>客户端。</p>
+<h5 id="Redis数据结构简介"><a href="#Redis数据结构简介" class="headerlink" title="Redis数据结构简介"></a>Redis数据结构简介</h5><p><code>Redis </code>的五种数据结构分别是：</p>
+<ul>
+<li>字符串（<code>STRING</code>）</li>
+<li>列表（<code>LIST</code>）</li>
+<li>集合（<code>SET</code>）</li>
+<li>哈希（<code>HASH</code>）</li>
+<li>有序集合（<code>ZSET</code>）</li>
+</ul>
+<p><code>ZSET</code> 可以说是 <code>Redis </code>特有的数据结构，这里简要介绍他们的功能和小部分命令。他们的存储的值如下：</p>
+<table>
+<thead>
+<tr>
+<th>结构类型</th>
+<th align="left">存储的值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>STRING</code></td>
+<td align="left">字符串、整数或浮点数</td>
+</tr>
+<tr>
+<td><code>LIST</code></td>
+<td align="left">一个链表，上面的每个节点都是一个字符串</td>
+</tr>
+<tr>
+<td><code>SET</code></td>
+<td align="left">包含若干个字符串的无序集合，且集合中的元素都是唯一的</td>
+</tr>
+<tr>
+<td><code>HASH</code></td>
+<td align="left">包含键值对的无序散列表</td>
+</tr>
+<tr>
+<td><code>ZSET</code></td>
+<td align="left">成员中的字符串与分值的有序映射，其排序由分值决定</td>
+</tr>
+</tbody></table>
+<p>在安装完 <code>Redis </code>并启动了 <code>redis-server</code> 后，我们可以使用 <code>redis-cli</code> 控制台与 <code>Redis </code>进行交互，其启动方式是在终端中输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ redis-cli</span><br></pre></td></tr></table></figure>
+
+<p>其会默认连接本机 <code>6379</code> 端口启动的 <code>Redis </code>服务器，接下俩你可以使用它来体验 <code>Redis </code>各种数据结构和其命令的使用。</p>
+<h6 id="Redis中的字符串"><a href="#Redis中的字符串" class="headerlink" title="Redis中的字符串"></a>Redis中的字符串</h6><p><code>STRING</code> 拥有一些和其他键值存储相似的命令，比如 <code>GET</code>（获取值），<code>SET</code>（设置值），<code>DEL</code>（删除值）等，例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ redis<span class="operator">-</span>cli</span><br><span class="line">redis<span class="operator">-</span>cli <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> <span class="keyword">set</span> hello redis</span><br><span class="line">OK</span><br><span class="line">redis<span class="operator">-</span>cli <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> <span class="keyword">get</span> hello</span><br><span class="line">&quot;redis&quot;</span><br><span class="line">redis<span class="operator">-</span>cli <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> del hello</span><br><span class="line">(<span class="type">integer</span>) <span class="number">1</span></span><br><span class="line">redis<span class="operator">-</span>cli <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> <span class="keyword">get</span> hello</span><br><span class="line">(nil)</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li><code>SET</code> 命令的第一个参数是键（<code>Key</code>），第二个参数是值（<code>Value</code>）</li>
+<li>尝试获取不存在的键时会得到一个 <code>nil</code></li>
+</ul>
+<h6 id="Redis中的列表"><a href="#Redis中的列表" class="headerlink" title="Redis中的列表"></a>Redis中的列表</h6><p>就像前面所说的，<code>Redis </code>中的列表是一个“链表”，这和大多数编程语言相似。所以他们的操作也十分相似：</p>
+<ul>
+<li><code>LPUSH</code> 命令可用于将元素推入列表的左侧</li>
+<li><code>RPUSH</code> 命令可将元素推入列表的右侧</li>
+<li><code>LPOP</code> 和 <code>RPOP</code> 就分别从列表的左侧和右侧弹出元素</li>
+<li><code>LINDEX</code> 可以获取<strong>指定位置</strong>上的元素</li>
+<li><code>LRANGE</code> 可以获取<strong>指定范围</strong>的全部元素</li>
+</ul>
+<p>我们通过 <code>redis-cli</code> 来亲自体验：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> rpush testlist item</span><br><span class="line">(<span class="type">integer</span>) <span class="number">1</span></span><br><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> rpush testlist item2</span><br><span class="line">(<span class="type">integer</span>) <span class="number">2</span></span><br><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> rpush testlist item</span><br><span class="line">(<span class="type">integer</span>) <span class="number">3</span></span><br><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> lrange testlist <span class="number">0</span> <span class="number">-1</span></span><br><span class="line"><span class="number">1</span>) &quot;item&quot;</span><br><span class="line"><span class="number">2</span>) &quot;item2&quot;</span><br><span class="line"><span class="number">3</span>) &quot;item&quot;</span><br><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> lindex testlist <span class="number">1</span></span><br><span class="line">&quot;item2&quot;</span><br><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> lpop testlist</span><br><span class="line">&quot;item&quot;</span><br><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> lrange testlist <span class="number">0</span> <span class="number">-1</span></span><br><span class="line"><span class="number">1</span>) &quot;item2&quot;</span><br><span class="line"><span class="number">2</span>) &quot;item&quot;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以看出，在列表中，元素可以重复出现。在后续的实训中，我们还会介绍更多列表命令，现在我们先来了解以下 <code>Redis </code>中的集合。</p>
+<h6 id="Redis中的集合"><a href="#Redis中的集合" class="headerlink" title="Redis中的集合"></a>Redis中的集合</h6><p>集合和列表的区别就在于：列表可以存储多个相同的字符串，而集合通过散列表来保证存储的字符串都是各不相同的（这些散列表只有键，而没有对应的值）。</p>
+<p>由于集合是无序的，所以我们只能通过统一的 <code>SADD</code> 命令将元素添加到集合中，<code>SREM</code> 命令将元素从集合中移除。你还可以通过：</p>
+<ul>
+<li><code>SMEMBERS</code> 命令获取到集合中的所有元素</li>
+<li><code>SISMEMBER</code> 命令来判断一个元素是否已存在在集合中</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> sadd testset item</span><br><span class="line">(<span class="type">integer</span>) <span class="number">1</span></span><br><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> sadd testset item2</span><br><span class="line">(<span class="type">integer</span>) <span class="number">1</span></span><br><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> sadd testset item</span><br><span class="line">(<span class="type">integer</span>) <span class="number">0</span></span><br><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> smembers testset</span><br><span class="line"><span class="number">1</span>) &quot;item&quot;</span><br><span class="line"><span class="number">2</span>) &quot;item2&quot;</span><br><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> sismember testset item3</span><br><span class="line">(<span class="type">integer</span>) <span class="number">0</span></span><br><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> sismember testset item</span><br><span class="line">(<span class="type">integer</span>) <span class="number">1</span></span><br><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> srem testset item2</span><br><span class="line">(<span class="type">integer</span>) <span class="number">1</span></span><br><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> srem testset item2</span><br><span class="line">(<span class="type">integer</span>) <span class="number">0</span></span><br><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> smembers testset</span><br><span class="line"><span class="number">1</span>) &quot;item&quot;</span><br></pre></td></tr></table></figure>
+
+<p>上面示例的集合中包含的元素少，所以执行 <code>SMEMBERS</code> 命令没有问题，一旦集合中包含的元素非常多时，<code>SMEMBERS</code> 命令的执行速度会很慢，所以要!!谨慎的使用这个命令。</p>
+<h6 id="Redis中的哈希"><a href="#Redis中的哈希" class="headerlink" title="Redis中的哈希"></a>Redis中的哈希</h6><p>哈希可以存储多个键值对之间的映射。和字符串一样，哈希存储的值既可以是字符串又可以是数字值，并且可以对数字值进行自增/自减操作。</p>
+<p>哈希就像是一个缩小版的 <code>Redis</code>，有一系列命令对哈希进行插入、获取、删除：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> hset testhash key1 value1(<span class="type">integer</span>) <span class="number">1</span>redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> hset testhash key2 value2(<span class="type">integer</span>) <span class="number">1</span>redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> hset testhash key1 newvalue(<span class="type">integer</span>) <span class="number">0</span>redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> hgetall testhash1) &quot;key1&quot;<span class="number">2</span>) &quot;newvalue&quot;<span class="number">3</span>) &quot;key2&quot;<span class="number">4</span>) &quot;value2&quot;redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> hdel testhash key2(<span class="type">integer</span>) <span class="number">1</span>redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> hget testhash key1&quot;newvalue&quot;redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> hgetall testhash1) &quot;key1&quot;<span class="number">2</span>) &quot;newvalue&quot;</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li><p><code>hset</code></p>
+<p>用于插入元素</p>
+<ul>
+<li><p>第一个参数为该哈希的键名，如果该哈希不存在，则创建一个</p>
+</li>
+<li><p>第二个参数为哈希中的</p>
+<p>域名</p>
+<ul>
+<li>如果不存在，则创建该域，并与第三个参数的值进行映射</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>如果存在，则使用第三个参数更新该域的值</p>
+<ul>
+<li>第三个参数为哈希中的值</li>
+</ul>
+</li>
+<li><p><code>hgetall</code> 会获取到该哈希的所有<strong>域-值对</strong></p>
+</li>
+<li><p><code>hget</code> 用于获取哈希中的某一个域</p>
+</li>
+<li><p><code>hdel</code> 用户<strong>删除</strong>哈希中的某一个域</p>
+</li>
+</ul>
+<h6 id="Redis中的有序集合"><a href="#Redis中的有序集合" class="headerlink" title="Redis中的有序集合"></a>Redis中的有序集合</h6><p>有序集合和哈希一样，也是存储键值对。</p>
+<p>只是有序集合的键被称为成员（<code>member</code>），每个成员都是唯一的，有序集合的值则被称为分值（<code>score</code>），这个分值必须为浮点数。所以有序集合既可以通过成员访问元素，也可以通过分值来排序元素。</p>
+<p>我们可以通过：</p>
+<ul>
+<li><code>ZADD</code> 命令将带有指定分值的成员添加到有序集合中</li>
+<li><code>ZRANGE</code> 命令根据分值有序排列后的集合获取到<strong>指定范围</strong>的元素</li>
+<li><code>ZRANGEBYSCORE</code> 命令获取<strong>指定分值范围</strong>内的元素</li>
+<li><code>ZREM</code> 命令从有序集合中删除<strong>指定成员</strong></li>
+</ul>
+<p>我们也可以在 <code>redis-cli</code> 中验证上述命令的功能：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> zadd testzset <span class="number">100</span> member1(<span class="type">integer</span>) <span class="number">1</span>redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> zadd testzset <span class="number">200</span> member0(<span class="type">integer</span>) <span class="number">1</span>redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> zrange testzset <span class="number">0</span> <span class="number">-1</span> withscores1) &quot;member1&quot;<span class="number">2</span>) &quot;100&quot;<span class="number">3</span>) &quot;member0&quot;<span class="number">4</span>) &quot;200&quot;redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> zrangebyscore testzset <span class="number">0</span> <span class="number">150</span> withscores1) &quot;member1&quot;<span class="number">2</span>) &quot;100&quot;redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> zrem testzset member1(<span class="type">integer</span>) <span class="number">1</span>redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> zrange testzset <span class="number">0</span> <span class="number">-1</span> withscores1) &quot;member0&quot;<span class="number">2</span>) &quot;200&quot;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：Redis</li>
+        <li>本文作者：iSTEP</li>
+        <li>创建时间：2021-08-01 17:15:05</li>
+        <li>
+            本文链接：https://istep.github.io/2021/08/01/Redis/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/08/01/PostgreSQL/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">PostgreSQL</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/08/01/Django-session/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Django-session</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+    <div class="twikoo-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/twikoo@1.0.0/dist/twikoo.all.min.js"
+        ></script>
+        <div id="twikoo-comment"></div>
+        <script data-pjax>
+            function loadTwikoo() {
+                twikoo.init({
+                    el: '#twikoo-comment',
+                    envId: 'hello-cloudbase-6gszkpzn777e377d',
+                    region: '',
+                });
+            }
+
+            if ('true') {
+                const loadTwikooTimeout = setTimeout(() => {
+                    loadTwikoo();
+                    clearTimeout(loadTwikooTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadTwikoo);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">iSTEP</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-text">Redis中的数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Redis%E7%AE%80%E4%BB%8B"><span class="nav-text">Redis简介</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Redis%E4%B8%8E%E5%85%B6%E4%BB%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="nav-text">Redis与其他数据库的对比</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Redis%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-text">Redis的特性</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85-Redis-%E4%B8%8E-Python"><span class="nav-text">快速安装 Redis 与 Python</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%80%E4%BB%8B"><span class="nav-text">Redis数据结构简介</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Redis%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-text">Redis中的字符串</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Redis%E4%B8%AD%E7%9A%84%E5%88%97%E8%A1%A8"><span class="nav-text">Redis中的列表</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Redis%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88"><span class="nav-text">Redis中的集合</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Redis%E4%B8%AD%E7%9A%84%E5%93%88%E5%B8%8C"><span class="nav-text">Redis中的哈希</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Redis%E4%B8%AD%E7%9A%84%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88"><span class="nav-text">Redis中的有序集合</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
