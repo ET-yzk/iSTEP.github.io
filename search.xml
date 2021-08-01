@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Django-session</title>
-    <url>/2021/08/01/Django-session/</url>
+    <url>/iSTEP.github.io/2021/08/01/Django-session/</url>
     <content><![CDATA[<p>cookie: Cookie，有时也用其复数形式 Cookies，指某些网站为了辨别用户身份、进行 session 跟踪而储存在用户本地终端上的键值对数据</p>
 <p>HTTP 协议是<strong>无状态</strong>的。所以服务器无法根据 HTTP 协议来辨别多个 HTTP 请求来自哪个用户。在实际场景中，服务器经常需要追踪客户端的状态。为了解决这个问题， Cookie 技术应运而生。</p>
 <p>cookie 一开始是服务器产生的一段随机字符串。它的主要内容包括：名字，值，过期时间，路径与域等信息。然后服务器将其发送给客户端。在后续的请求中，cookie 会附在请求资源的 HTTP 请求头上，发送给服务器。</p>
@@ -51,59 +51,8 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Environment</title>
-    <url>/2021/08/01/Environment/</url>
-    <content><![CDATA[<h2 id="推荐环境"><a href="#推荐环境" class="headerlink" title="推荐环境"></a>推荐环境</h2><ul>
-<li>OJBackend: Pycharm Profession 最新版</li>
-<li>OJFE: Webstorm 最新版</li>
-</ul>
-<h2 id="申请-JetBrains-学生认证"><a href="#申请-JetBrains-学生认证" class="headerlink" title="申请 JetBrains 学生认证"></a>申请 JetBrains 学生认证</h2><ol>
-<li><p>打开 <a class="link"   href="https://www.jetbrains.com/shop/eform/students" >JetBrains学生申请链接<i class="fas fa-external-link-alt"></i></a></p>
-</li>
-<li><p>依次填入你的信息<br>注意！！邮箱必须是学校账号，如 <a class="link"   href="http://mail.zjgsu.edu.cn/" >浙江工商大学邮箱<i class="fas fa-external-link-alt"></i></a> <strong>学号@pop.zjgsu.edu.cn</strong><br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/jetbrains%E5%AD%A6%E7%94%9F%E7%94%B3%E8%AF%B7.png"
-                      alt="image-20210713124733657"
-                ></p>
-</li>
-<li><p>前往邮箱验证邮件<br>接下来前往学校的邮箱系统验证邮件，如果进去发现收件箱里没有邮件，可能因为被拦截了，因此要到拦截队列里去找。<br>验证成功之后如下<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://img-blog.csdnimg.cn/20200302144057720.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NjU2ODc5,size_16,color_FFFFFF,t_70"
-                      alt="在这里插入图片描述"
-                ></p>
-</li>
-<li><p>确认信件信息并注册jetbrians账号<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/1343525-20180403165217221-912419064.png"
-                      alt="img"
-                ></p>
-<p>然后jetbrians提示已经成功，并发信件给你</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/1343525-20180403165248908-561819286.png"
-                      alt="img"
-                > 打开链接，会出现注册页面，填入你的用户名，密码就注册成功，最后跳转至个人主页<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210713130319829.png"
-                      alt="image-20210713130319829"
-                ><br>最后使用你注册的账号登陆就可以使用了。</p>
-</li>
-<li><p>在JetBrains产品中登录或填写提供的 License ID即可激活使用。</p>
-</li>
-<li><p>账号权限续期</p>
-<p>学生认证权限一年需要续订一次（毕业后失效），在次年即将到期时，JetBrains将会发送邮件询问是否续订，根据邮件内链接操作即可完成续订。</p>
-</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
     <title>Docker</title>
-    <url>/2021/08/01/Docker/</url>
+    <url>/iSTEP.github.io/2021/08/01/Docker/</url>
     <content><![CDATA[<h2 id="Hello-Docker"><a href="#Hello-Docker" class="headerlink" title="Hello Docker"></a>Hello Docker</h2><p><code>Docker</code>是一款轻量级虚拟化容器的管理引擎。</p>
 <h5 id="Docker的两个基本概念"><a href="#Docker的两个基本概念" class="headerlink" title="Docker的两个基本概念"></a>Docker的两个基本概念</h5><p>关于<code>Docker</code>容器，涉及到两个非常重要的概念：镜像和容器。</p>
 <h6 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h6><p><code>镜像</code>可以理解为一个打包了运行环境的特殊文件系统，它包含了容器启动运行所需的所有信息，包括运行程序和配置数据等。镜像不包含任何动态数据，其内容在构建之后也不会改变。</p>
@@ -134,7 +83,7 @@
   </entry>
   <entry>
     <title>Issue</title>
-    <url>/2021/08/01/Issue/</url>
+    <url>/iSTEP.github.io/2021/08/01/Issue/</url>
     <content><![CDATA[<h2 id="backend"><a href="#backend" class="headerlink" title="backend"></a>backend</h2><p><code>docker 可通过 【docker logs name --tail 行数】来查看服务的日志</code></p>
 <h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><h4 id="1-前端页面显示正常，登入用户时报-“server-error”"><a href="#1-前端页面显示正常，登入用户时报-“server-error”" class="headerlink" title="1. 前端页面显示正常，登入用户时报 “server error”"></a>1. 前端页面显示正常，登入用户时报 “server error”</h4><p><strong>错误分析</strong></p>
 <ul>
@@ -275,8 +224,59 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Environment</title>
+    <url>/iSTEP.github.io/2021/08/01/Environment/</url>
+    <content><![CDATA[<h2 id="推荐环境"><a href="#推荐环境" class="headerlink" title="推荐环境"></a>推荐环境</h2><ul>
+<li>OJBackend: Pycharm Profession 最新版</li>
+<li>OJFE: Webstorm 最新版</li>
+</ul>
+<h2 id="申请-JetBrains-学生认证"><a href="#申请-JetBrains-学生认证" class="headerlink" title="申请 JetBrains 学生认证"></a>申请 JetBrains 学生认证</h2><ol>
+<li><p>打开 <a class="link"   href="https://www.jetbrains.com/shop/eform/students" >JetBrains学生申请链接<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+<li><p>依次填入你的信息<br>注意！！邮箱必须是学校账号，如 <a class="link"   href="http://mail.zjgsu.edu.cn/" >浙江工商大学邮箱<i class="fas fa-external-link-alt"></i></a> <strong>学号@pop.zjgsu.edu.cn</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/jetbrains%E5%AD%A6%E7%94%9F%E7%94%B3%E8%AF%B7.png"
+                      alt="image-20210713124733657"
+                ></p>
+</li>
+<li><p>前往邮箱验证邮件<br>接下来前往学校的邮箱系统验证邮件，如果进去发现收件箱里没有邮件，可能因为被拦截了，因此要到拦截队列里去找。<br>验证成功之后如下<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img-blog.csdnimg.cn/20200302144057720.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NjU2ODc5,size_16,color_FFFFFF,t_70"
+                      alt="在这里插入图片描述"
+                ></p>
+</li>
+<li><p>确认信件信息并注册jetbrians账号<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/1343525-20180403165217221-912419064.png"
+                      alt="img"
+                ></p>
+<p>然后jetbrians提示已经成功，并发信件给你</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/1343525-20180403165248908-561819286.png"
+                      alt="img"
+                > 打开链接，会出现注册页面，填入你的用户名，密码就注册成功，最后跳转至个人主页<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210713130319829.png"
+                      alt="image-20210713130319829"
+                ><br>最后使用你注册的账号登陆就可以使用了。</p>
+</li>
+<li><p>在JetBrains产品中登录或填写提供的 License ID即可激活使用。</p>
+</li>
+<li><p>账号权限续期</p>
+<p>学生认证权限一年需要续订一次（毕业后失效），在次年即将到期时，JetBrains将会发送邮件询问是否续订，根据邮件内链接操作即可完成续订。</p>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
     <title>PostgreSQL</title>
-    <url>/2021/08/01/PostgreSQL/</url>
+    <url>/iSTEP.github.io/2021/08/01/PostgreSQL/</url>
     <content><![CDATA[<h5 id="发展历史"><a href="#发展历史" class="headerlink" title="发展历史"></a>发展历史</h5><p>现在称为 PostgreSQL 的对象关系数据库管理系统源自加州大学伯克利分校的 POSTGRES 项目，经过二十多年的发展，现已成为最先进的开源数据库。其发展经历了三个阶段：The Berkeley POSTGRES Project、Postgres95 和 PostgreSQL。</p>
 <h6 id="The-Berkeley-POSTGRES-Project"><a href="#The-Berkeley-POSTGRES-Project" class="headerlink" title="The Berkeley POSTGRES Project"></a>The Berkeley POSTGRES Project</h6><p>POSTGRES 项目开始于1986年，并经历了几次重要的发布。第一个 demo 系统于1987年开始运作；版本1于1989年6月发布给少数外部用户；版本2于1990年6月发布，重新设计了规则系统；版本3出现在1991年，增加了对多个存储管理器的支持，改进了查询执行器，重写了规则系统。</p>
 <p>1993年，POSTGRES 外部用户社区的规模几乎翻了一番，维护源代码占用了大量时间。为了减轻这种支持负担，POSTGRES 项目以版本4.2结束。</p>
@@ -413,7 +413,7 @@
   </entry>
   <entry>
     <title>Redis</title>
-    <url>/2021/08/01/Redis/</url>
+    <url>/iSTEP.github.io/2021/08/01/Redis/</url>
     <content><![CDATA[<p>Redis的index-1中的keys中保存有django.contrib.sessions.cache等数据</p>
 <p>即Django的会话框架将缓存临时保存在次，同时借助restframework搭建认证框架。</p>
 <h3 id="Redis中的数据结构"><a href="#Redis中的数据结构" class="headerlink" title="Redis中的数据结构"></a>Redis中的数据结构</h3><hr>
@@ -629,7 +629,7 @@
   </entry>
   <entry>
     <title>Hello World</title>
-    <url>/2021/08/01/hello-world/</url>
+    <url>/iSTEP.github.io/2021/08/01/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo<i class="fas fa-external-link-alt"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation<i class="fas fa-external-link-alt"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting<i class="fas fa-external-link-alt"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub<i class="fas fa-external-link-alt"></i></a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
@@ -650,7 +650,7 @@
   </entry>
   <entry>
     <title>iSTEP</title>
-    <url>/2021/08/01/iSTEP/</url>
+    <url>/iSTEP.github.io/2021/08/01/iSTEP/</url>
     <content><![CDATA[<h2 id="安装篇"><a href="#安装篇" class="headerlink" title="安装篇"></a>安装篇</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>OJ（OnlineJudge）是在线判题系统，很多学校或者机构打比赛都有自己的OJ系统。iSTEP项目基于QingdaoU开源项目<a class="link"   href="https://github.com/QingdaoU/OnlineJudge" >OnlineJudge<i class="fas fa-external-link-alt"></i></a>。</p>
 <p><strong>项目物理环境</strong>：</p>
 <p>阿里云ECS Intel(R) Xeon(R) Platinum 8269CY CPU @ 2.50GHz</p>
@@ -873,7 +873,7 @@ docker
   </entry>
   <entry>
     <title>提问的智慧</title>
-    <url>/2021/08/01/%E6%8F%90%E9%97%AE%E7%9A%84%E6%99%BA%E6%85%A7/</url>
+    <url>/iSTEP.github.io/2021/08/01/%E6%8F%90%E9%97%AE%E7%9A%84%E6%99%BA%E6%85%A7/</url>
     <content><![CDATA[<p><strong>How To Ask Questions The Smart Way</strong></p>
 <p>Copyright © 2001,2006,2014 Eric S. Raymond, Rick Moen</p>
 <p>本指南英文版版权为 Eric S. Raymond, Rick Moen 所有。</p>
