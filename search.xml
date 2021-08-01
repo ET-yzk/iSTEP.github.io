@@ -82,6 +82,57 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Environment</title>
+    <url>/iSTEP.github.io/2021/08/01/Environment/</url>
+    <content><![CDATA[<h2 id="推荐环境"><a href="#推荐环境" class="headerlink" title="推荐环境"></a>推荐环境</h2><ul>
+<li>OJBackend: Pycharm Profession 最新版</li>
+<li>OJFE: Webstorm 最新版</li>
+</ul>
+<h2 id="申请-JetBrains-学生认证"><a href="#申请-JetBrains-学生认证" class="headerlink" title="申请 JetBrains 学生认证"></a>申请 JetBrains 学生认证</h2><ol>
+<li><p>打开 <a class="link"   href="https://www.jetbrains.com/shop/eform/students" >JetBrains学生申请链接<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+<li><p>依次填入你的信息<br>注意！！邮箱必须是学校账号，如 <a class="link"   href="http://mail.zjgsu.edu.cn/" >浙江工商大学邮箱<i class="fas fa-external-link-alt"></i></a> <strong>学号@pop.zjgsu.edu.cn</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/jetbrains%E5%AD%A6%E7%94%9F%E7%94%B3%E8%AF%B7.png"
+                      alt="image-20210713124733657"
+                ></p>
+</li>
+<li><p>前往邮箱验证邮件<br>接下来前往学校的邮箱系统验证邮件，如果进去发现收件箱里没有邮件，可能因为被拦截了，因此要到拦截队列里去找。<br>验证成功之后如下<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img-blog.csdnimg.cn/20200302144057720.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NjU2ODc5,size_16,color_FFFFFF,t_70"
+                      alt="在这里插入图片描述"
+                ></p>
+</li>
+<li><p>确认信件信息并注册jetbrians账号<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/1343525-20180403165217221-912419064.png"
+                      alt="img"
+                ></p>
+<p>然后jetbrians提示已经成功，并发信件给你</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/1343525-20180403165248908-561819286.png"
+                      alt="img"
+                > 打开链接，会出现注册页面，填入你的用户名，密码就注册成功，最后跳转至个人主页<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210713130319829.png"
+                      alt="image-20210713130319829"
+                ><br>最后使用你注册的账号登陆就可以使用了。</p>
+</li>
+<li><p>在JetBrains产品中登录或填写提供的 License ID即可激活使用。</p>
+</li>
+<li><p>账号权限续期</p>
+<p>学生认证权限一年需要续订一次（毕业后失效），在次年即将到期时，JetBrains将会发送邮件询问是否续订，根据邮件内链接操作即可完成续订。</p>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
     <title>Issue</title>
     <url>/iSTEP.github.io/2021/08/01/Issue/</url>
     <content><![CDATA[<h2 id="backend"><a href="#backend" class="headerlink" title="backend"></a>backend</h2><p><code>docker 可通过 【docker logs name --tail 行数】来查看服务的日志</code></p>
@@ -224,57 +275,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Environment</title>
-    <url>/iSTEP.github.io/2021/08/01/Environment/</url>
-    <content><![CDATA[<h2 id="推荐环境"><a href="#推荐环境" class="headerlink" title="推荐环境"></a>推荐环境</h2><ul>
-<li>OJBackend: Pycharm Profession 最新版</li>
-<li>OJFE: Webstorm 最新版</li>
-</ul>
-<h2 id="申请-JetBrains-学生认证"><a href="#申请-JetBrains-学生认证" class="headerlink" title="申请 JetBrains 学生认证"></a>申请 JetBrains 学生认证</h2><ol>
-<li><p>打开 <a class="link"   href="https://www.jetbrains.com/shop/eform/students" >JetBrains学生申请链接<i class="fas fa-external-link-alt"></i></a></p>
-</li>
-<li><p>依次填入你的信息<br>注意！！邮箱必须是学校账号，如 <a class="link"   href="http://mail.zjgsu.edu.cn/" >浙江工商大学邮箱<i class="fas fa-external-link-alt"></i></a> <strong>学号@pop.zjgsu.edu.cn</strong><br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/jetbrains%E5%AD%A6%E7%94%9F%E7%94%B3%E8%AF%B7.png"
-                      alt="image-20210713124733657"
-                ></p>
-</li>
-<li><p>前往邮箱验证邮件<br>接下来前往学校的邮箱系统验证邮件，如果进去发现收件箱里没有邮件，可能因为被拦截了，因此要到拦截队列里去找。<br>验证成功之后如下<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://img-blog.csdnimg.cn/20200302144057720.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NjU2ODc5,size_16,color_FFFFFF,t_70"
-                      alt="在这里插入图片描述"
-                ></p>
-</li>
-<li><p>确认信件信息并注册jetbrians账号<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/1343525-20180403165217221-912419064.png"
-                      alt="img"
-                ></p>
-<p>然后jetbrians提示已经成功，并发信件给你</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/1343525-20180403165248908-561819286.png"
-                      alt="img"
-                > 打开链接，会出现注册页面，填入你的用户名，密码就注册成功，最后跳转至个人主页<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210713130319829.png"
-                      alt="image-20210713130319829"
-                ><br>最后使用你注册的账号登陆就可以使用了。</p>
-</li>
-<li><p>在JetBrains产品中登录或填写提供的 License ID即可激活使用。</p>
-</li>
-<li><p>账号权限续期</p>
-<p>学生认证权限一年需要续订一次（毕业后失效），在次年即将到期时，JetBrains将会发送邮件询问是否续订，根据邮件内链接操作即可完成续订。</p>
-</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
     <title>PostgreSQL</title>
     <url>/iSTEP.github.io/2021/08/01/PostgreSQL/</url>
     <content><![CDATA[<h5 id="发展历史"><a href="#发展历史" class="headerlink" title="发展历史"></a>发展历史</h5><p>现在称为 PostgreSQL 的对象关系数据库管理系统源自加州大学伯克利分校的 POSTGRES 项目，经过二十多年的发展，现已成为最先进的开源数据库。其发展经历了三个阶段：The Berkeley POSTGRES Project、Postgres95 和 PostgreSQL。</p>
@@ -410,6 +410,27 @@
       <categories>
         <category>DB</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/iSTEP.github.io/2021/08/01/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo<i class="fas fa-external-link-alt"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation<i class="fas fa-external-link-alt"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting<i class="fas fa-external-link-alt"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub<i class="fas fa-external-link-alt"></i></a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment<i class="fas fa-external-link-alt"></i></a></p>
+]]></content>
+      <tags>
+        <tag>tips</tag>
+      </tags>
   </entry>
   <entry>
     <title>Redis</title>
@@ -626,27 +647,6 @@
       <categories>
         <category>DB</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/iSTEP.github.io/2021/08/01/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo<i class="fas fa-external-link-alt"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation<i class="fas fa-external-link-alt"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting<i class="fas fa-external-link-alt"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub<i class="fas fa-external-link-alt"></i></a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment<i class="fas fa-external-link-alt"></i></a></p>
-]]></content>
-      <tags>
-        <tag>tips</tag>
-      </tags>
   </entry>
   <entry>
     <title>iSTEP</title>
