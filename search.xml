@@ -275,6 +275,143 @@
 ]]></content>
   </entry>
   <entry>
+    <title>PostgreSQL</title>
+    <url>/2021/08/01/PostgreSQL/</url>
+    <content><![CDATA[<h5 id="发展历史"><a href="#发展历史" class="headerlink" title="发展历史"></a>发展历史</h5><p>现在称为 PostgreSQL 的对象关系数据库管理系统源自加州大学伯克利分校的 POSTGRES 项目，经过二十多年的发展，现已成为最先进的开源数据库。其发展经历了三个阶段：The Berkeley POSTGRES Project、Postgres95 和 PostgreSQL。</p>
+<h6 id="The-Berkeley-POSTGRES-Project"><a href="#The-Berkeley-POSTGRES-Project" class="headerlink" title="The Berkeley POSTGRES Project"></a>The Berkeley POSTGRES Project</h6><p>POSTGRES 项目开始于1986年，并经历了几次重要的发布。第一个 demo 系统于1987年开始运作；版本1于1989年6月发布给少数外部用户；版本2于1990年6月发布，重新设计了规则系统；版本3出现在1991年，增加了对多个存储管理器的支持，改进了查询执行器，重写了规则系统。</p>
+<p>1993年，POSTGRES 外部用户社区的规模几乎翻了一番，维护源代码占用了大量时间。为了减轻这种支持负担，POSTGRES 项目以版本4.2结束。</p>
+<h6 id="Postgres95"><a href="#Postgres95" class="headerlink" title="Postgres95"></a>Postgres95</h6><p>1994年，Andrew Yu 和 Jolly Chen 在 POSTGRES 中添加了一个 SQL 语言解释器，次年将该项目重命名为 Postgres95 后发布到网络上，从此走上了开放源代码的光明大道。</p>
+<p>Postgres95 完全由 C 语言编写，代码量缩小了25％。许多内部更改提高了性能和可维护性。与 POSTGRES 4.2 版相比，Postgres95 1.0.x 版本的运行速度提高了约30％−50％。</p>
+<h6 id="PostgreSQL"><a href="#PostgreSQL" class="headerlink" title="PostgreSQL"></a>PostgreSQL</h6><p>很明显 Postgres95 这个名字经不起时间的考验，1996年开发者选择了一个新名称 PostgreSQL 来反映原始 POSTGRES 与具有 SQL 功能的更新版本之间的关系。</p>
+<p>Postgres95 开发过程中的重点是识别和理解服务器代码中存在的问题。 PostgreSQL 的重点已转移到增强特性和功能。</p>
+<h5 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h5><p>PostgreSQL 提供了许多功能，旨在帮助开发人员构建应用程序以及管理数据，且无论数据的规模有多大。除了免费和开源之外，PostgreSQL 还具有高度可扩展性。例如，你可以定义自己的数据类型，构建自定义函数，甚至可以编写来自不同编程语言的代码，而无需重新编译数据库！</p>
+<p>PostgreSQL 尽力地遵循 SQL 语言标准，支持 SQL 标准所需的许多功能，但有时语法或功能略有不同。下面是 PostgreSQL 主要的功能特性：</p>
+<h6 id="数据类型（Data-Types）"><a href="#数据类型（Data-Types）" class="headerlink" title="数据类型（Data Types）"></a>数据类型（Data Types）</h6><p>PostgreSQL 支持多种不同类型的数据，主要包括：</p>
+<ul>
+<li>基本数据类型：Integer、Numeric、String、Boolean；</li>
+<li>结构化类型：Date/Time、Array、Range、UUID；</li>
+<li>文档类型：JSON/JSONB、XML、Key-value；</li>
+<li>几何类型：Point、Line、Circle、Polygon。</li>
+<li>……</li>
+</ul>
+<h6 id="数据完整性（Data-Integrity）"><a href="#数据完整性（Data-Integrity）" class="headerlink" title="数据完整性（Data Integrity）"></a>数据完整性（Data Integrity）</h6><p>PostgreSQL 提供了一系列数据完整性检查机制，主要包括：</p>
+<ul>
+<li>UNIQUE、NOT NULL；</li>
+<li>Primary Keys、Foreign Keys；</li>
+<li>Exclusion Constraints。</li>
+<li>……</li>
+</ul>
+<h6 id="并发和性能（Concurrency、Performance）"><a href="#并发和性能（Concurrency、Performance）" class="headerlink" title="并发和性能（Concurrency、Performance）"></a>并发和性能（Concurrency、Performance）</h6><p>PostgreSQL 提供了丰富的性能优化机制和功能，主要包括：</p>
+<ul>
+<li>索引：B-tree、Multicolumn、Expressions、Partial；</li>
+<li>事务、嵌套事务；</li>
+<li>并发读查询、表分区；</li>
+<li>表达式即时编译。</li>
+<li>……</li>
+</ul>
+<h6 id="安全性（Security）"><a href="#安全性（Security）" class="headerlink" title="安全性（Security）"></a>安全性（Security）</h6><p>PostgreSQL 支持多种认证方式以提升安全性，主要包括：</p>
+<ul>
+<li>认证方式：GSSAPI、SSPI、LDAP、SCRAM-SHA-256 and more；</li>
+<li>健壮的访问控制系统。</li>
+<li>……</li>
+</ul>
+<p>事实证明，PostgreSQL 在可管理的数据量和可容纳的并发用户数量方面具有高度可扩展性，生产环境中有管理着数 TB 数据的 PostgreSQL 集群案例。</p>
+<hr>
+<h5 id="安装-PostgreSQL"><a href="#安装-PostgreSQL" class="headerlink" title="安装 PostgreSQL"></a>安装 PostgreSQL</h5><p>安装 PostgreSQL 的方法有很多，这里介绍的方法是使用 apt 安装。默认情况下，PostgreSQL 在所有的 Ubuntu 版本中都可用，也就是说我们不用添加额外的软件源，直接使用下面的命令安装：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install -y postgresql</span><br></pre></td></tr></table></figure>
+
+<p>在9.5版本中主要包含以下软件包：</p>
+<ul>
+<li>postgresql-client-9.5 ：一些客户端库和客户端可执行文件（PostgreSQL 基于 C/S 架构）；</li>
+<li>postgresql-9.5 ：核心的数据库服务；</li>
+<li>postgresql-contrib-9.5 ：一些额外的模块。</li>
+</ul>
+<p>除了安装以上必要的软件包到文件系统，安装程序还执行了很多默认的初始化动作，包括添加 Linux 用户、创建数据库集群、配置 server 自启动服务、启动后台 server 等。</p>
+<h5 id="启动-PostgreSQL-服务"><a href="#启动-PostgreSQL-服务" class="headerlink" title="启动 PostgreSQL 服务"></a>启动 PostgreSQL 服务</h5><p>1.<strong>添加 Linux 用户</strong>。PostgreSQL <strong>不允许</strong> root 用户管理数据库。添加新的 Linux 用户的目的是保护数据，并且在数据库集群中产生一个同名的数据库管理员用户（见第二步）。</p>
+<p>数据库用户和 Linux 用户没有必然的联系（关于数据库用户的详细内容，将在以后的实训中介绍）。这里我们使用安装数据库时自动添加的 postgres 用户即可。</p>
+<p>2.<strong>创建数据库集群</strong>（Database Cluster）。数据库集群位于磁盘上的一个目录，其中包含多个数据库和各种配置文件。数据库集群由 server 管理。执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建一个空目录</span></span><br><span class="line">sudo mkdir -p /usr/<span class="built_in">local</span>/pgsql/test_cluster</span><br><span class="line"><span class="comment"># 更改目录拥有者</span></span><br><span class="line">sudo chown postgres /usr/<span class="built_in">local</span>/pgsql/test_cluster</span><br><span class="line"><span class="comment"># 初始化数据库集群</span></span><br><span class="line">sudo -u postgres /usr/lib/postgresql/9.5/bin/initdb -D /usr/<span class="built_in">local</span>/pgsql/test_cluster</span><br></pre></td></tr></table></figure>
+
+<p>命令说明：</p>
+<ul>
+<li>上述命令的目的是在磁盘目录 /usr/local/pgsql/test_cluster 中创建一个数据库集群；</li>
+<li>前面提到，PostgreSQL 不允许 root 用户管理数据库。所以必须把目录的所有者改为 postgres，也就是说以后 postgres 是这个数据库集群的拥有者；</li>
+<li>创建数据库集群的关键命令是 initdb，命令所在位置为 /usr/lib/postgresql/9.5/bin。-D 选项指明创建集群的目录；</li>
+<li>由于 initdb 命令认为，命令的执行者就是数据库集群的拥有者，所以使用了 sudo -u postgres 语法；</li>
+<li>执行 sudo 命令需要 sudoer 权限；</li>
+<li>数据库集群初始化完成后，该目录下会新增很多内容，包括：两个数据库，分别为 postgres 和 template1；若干配置文件；创建一个和当前 Linux 用户同名的数据库集群管理员，即 postgres。</li>
+</ul>
+<p>3.<strong>启动 server</strong>。键入如下命令，便可以启动一个 server 负责管理上面创建的数据库集群。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 关闭当前后台的server</span></span><br><span class="line">service postgresql stop</span><br><span class="line"><span class="comment"># 启动server</span></span><br><span class="line">sudo -u postgres /usr/lib/postgresql/9.5/bin/pg_ctl -D /usr/<span class="built_in">local</span>/pgsql/test_cluster start</span><br><span class="line"><span class="comment"># 关闭server</span></span><br><span class="line">sudo -u postgres /usr/lib/postgresql/9.5/bin/pg_ctl -D /usr/<span class="built_in">local</span>/pgsql/test_cluster stop</span><br></pre></td></tr></table></figure>
+
+<p>命令说明：</p>
+<ul>
+<li>由于安装软件时，后台自动开启了一个 server，为避免端口冲突，首先应关闭它；</li>
+<li>管理 server 运行状态的关键命令是 pg_ctl。-D 选项指明集群的目录。开启 server 使用 start，关闭 server 使用 stop。</li>
+</ul>
+<p>使用如下命令可以查看 server 是否正在后台运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps -ef | grep postgres</span><br></pre></td></tr></table></figure>
+
+<p>具体效果如图1所示：</p>
+<center><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/241757.png"
+                      alt="图1" style="zoom:80%;" 
+                > 图 1</center>
+
+<hr>
+<h5 id="和-server-交互"><a href="#和-server-交互" class="headerlink" title="和 server 交互"></a>和 server 交互</h5><ul>
+<li>核心是服务进程，即前面一直提到的 server 部分。服务进程管理所有的数据库文件、接受来自客户端应用的连接请求，代表这些客户端完成数据库的操作。这个服务端进程就是 postgres，其执行程序在 /usr/local/postgres/9.5/bin 目录下；</li>
+<li>外围是客户端程序，也称为前端。客户端程序是多种多样的，可以是基于命令行的工具、图形界面程序、web 服务器（向服务进程发送请求以展示动态页面）、或者是特殊的数据库管理工具。PostgreSQL 自带了一些客户端程序，我们也可以自己开发这样的程序。</li>
+</ul>
+<p>主要使用最简单同时也是最强大的命令行交互工具和 server 通信，这个工具称为 psql。它允许你使用 SQL 语言给 server 发送请求（可以是远程 server）。</p>
+<p>启动 psql 的基本语法如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">psql -h &lt;server_ip&gt; -p &lt;port&gt; -U &lt;db_user&gt; -d &lt;database_name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>具体语义说明：</p>
+<ul>
+<li>psql 还有很多选项可用，这里仅列出最常用的几个；</li>
+<li>-h 选项指明 server 所在机器的 ip，可以省略，默认为本机 ip。-p 选项指明 server 的端口号，也可以省略，默认为5432；</li>
+<li>-U 选项指定需要登录的数据库用户，可以省略，默认登录和当前 Linux 用户同名的数据库用户；</li>
+<li>-d 选项指明你想连接的数据库。可以省略，默认连接和数据库用户同名的数据库。</li>
+</ul>
+<p>应用示例：</p>
+<p>由于安装完软件后，系统中会有一个默认的 server 在后台运行，其管理员为 postgres。</p>
+<p>所以如果你要登录到数据库用户 postgres，并连接到数据库 postgres，只需要以 postgres 的身份执行 psql，其他选项都使用默认参数即可。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo -u postgres psql</span><br></pre></td></tr></table></figure>
+
+<p>示例说明：</p>
+<ul>
+<li>默认情况下，数据库管理员登录认证的方式为 peer。其含义是，本地 Linux 用户可以直接登录到同名的数据库用户，无需输入数据库用户的密码；</li>
+</ul>
+<p>示例效果如图2所示：</p>
+<center><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/241924.png"
+                      alt="图2" style="zoom:80%;" 
+                > 图 2</center>
+
+<h5 id="修改数据库用户密码"><a href="#修改数据库用户密码" class="headerlink" title="修改数据库用户密码"></a>修改数据库用户密码</h5><p>修改用户密码的示例如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#首先连接到数据库</span></span><br><span class="line">sudo -u postgres psql postgres</span><br><span class="line"><span class="comment">#然后在交互环境中修改密码，若修改成功则打印出ALTER ROLE字样</span></span><br><span class="line">&gt; postgres=<span class="comment"># ALTER USER postgres WITH PASSWORD &#x27;postgres&#x27;;</span></span><br><span class="line"><span class="comment">#退出交互环境</span></span><br><span class="line">&gt; postgres=<span class="comment"># q</span></span><br></pre></td></tr></table></figure>
+
+<p>具体语义说明：</p>
+<ul>
+<li><p>语法的大写部分，是语法规定的内容。此处使用大写是为了突出语法，实际上 SQL 语言<strong>不区分大小写</strong>；</p>
+</li>
+<li><p>新密码用单引号包起来，注意语句的最后要<strong>加上分号</strong>；</p>
+</li>
+<li><p>使用元命令 q 退出 psql ，元命令不需要分号。</p>
+</li>
+</ul>
+<hr>
+]]></content>
+      <categories>
+        <category>DB</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Redis</title>
     <url>/2021/08/01/Redis/</url>
     <content><![CDATA[<p>Redis的index-1中的keys中保存有django.contrib.sessions.cache等数据</p>
@@ -485,143 +622,6 @@
 </ul>
 <p>我们也可以在 <code>redis-cli</code> 中验证上述命令的功能：</p>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> zadd testzset <span class="number">100</span> member1(<span class="type">integer</span>) <span class="number">1</span>redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> zadd testzset <span class="number">200</span> member0(<span class="type">integer</span>) <span class="number">1</span>redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> zrange testzset <span class="number">0</span> <span class="number">-1</span> withscores1) &quot;member1&quot;<span class="number">2</span>) &quot;100&quot;<span class="number">3</span>) &quot;member0&quot;<span class="number">4</span>) &quot;200&quot;redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> zrangebyscore testzset <span class="number">0</span> <span class="number">150</span> withscores1) &quot;member1&quot;<span class="number">2</span>) &quot;100&quot;redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> zrem testzset member1(<span class="type">integer</span>) <span class="number">1</span>redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span><span class="operator">&gt;</span> zrange testzset <span class="number">0</span> <span class="number">-1</span> withscores1) &quot;member0&quot;<span class="number">2</span>) &quot;200&quot;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>DB</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>PostgreSQL</title>
-    <url>/2021/08/01/PostgreSQL/</url>
-    <content><![CDATA[<h5 id="发展历史"><a href="#发展历史" class="headerlink" title="发展历史"></a>发展历史</h5><p>现在称为 PostgreSQL 的对象关系数据库管理系统源自加州大学伯克利分校的 POSTGRES 项目，经过二十多年的发展，现已成为最先进的开源数据库。其发展经历了三个阶段：The Berkeley POSTGRES Project、Postgres95 和 PostgreSQL。</p>
-<h6 id="The-Berkeley-POSTGRES-Project"><a href="#The-Berkeley-POSTGRES-Project" class="headerlink" title="The Berkeley POSTGRES Project"></a>The Berkeley POSTGRES Project</h6><p>POSTGRES 项目开始于1986年，并经历了几次重要的发布。第一个 demo 系统于1987年开始运作；版本1于1989年6月发布给少数外部用户；版本2于1990年6月发布，重新设计了规则系统；版本3出现在1991年，增加了对多个存储管理器的支持，改进了查询执行器，重写了规则系统。</p>
-<p>1993年，POSTGRES 外部用户社区的规模几乎翻了一番，维护源代码占用了大量时间。为了减轻这种支持负担，POSTGRES 项目以版本4.2结束。</p>
-<h6 id="Postgres95"><a href="#Postgres95" class="headerlink" title="Postgres95"></a>Postgres95</h6><p>1994年，Andrew Yu 和 Jolly Chen 在 POSTGRES 中添加了一个 SQL 语言解释器，次年将该项目重命名为 Postgres95 后发布到网络上，从此走上了开放源代码的光明大道。</p>
-<p>Postgres95 完全由 C 语言编写，代码量缩小了25％。许多内部更改提高了性能和可维护性。与 POSTGRES 4.2 版相比，Postgres95 1.0.x 版本的运行速度提高了约30％−50％。</p>
-<h6 id="PostgreSQL"><a href="#PostgreSQL" class="headerlink" title="PostgreSQL"></a>PostgreSQL</h6><p>很明显 Postgres95 这个名字经不起时间的考验，1996年开发者选择了一个新名称 PostgreSQL 来反映原始 POSTGRES 与具有 SQL 功能的更新版本之间的关系。</p>
-<p>Postgres95 开发过程中的重点是识别和理解服务器代码中存在的问题。 PostgreSQL 的重点已转移到增强特性和功能。</p>
-<h5 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h5><p>PostgreSQL 提供了许多功能，旨在帮助开发人员构建应用程序以及管理数据，且无论数据的规模有多大。除了免费和开源之外，PostgreSQL 还具有高度可扩展性。例如，你可以定义自己的数据类型，构建自定义函数，甚至可以编写来自不同编程语言的代码，而无需重新编译数据库！</p>
-<p>PostgreSQL 尽力地遵循 SQL 语言标准，支持 SQL 标准所需的许多功能，但有时语法或功能略有不同。下面是 PostgreSQL 主要的功能特性：</p>
-<h6 id="数据类型（Data-Types）"><a href="#数据类型（Data-Types）" class="headerlink" title="数据类型（Data Types）"></a>数据类型（Data Types）</h6><p>PostgreSQL 支持多种不同类型的数据，主要包括：</p>
-<ul>
-<li>基本数据类型：Integer、Numeric、String、Boolean；</li>
-<li>结构化类型：Date/Time、Array、Range、UUID；</li>
-<li>文档类型：JSON/JSONB、XML、Key-value；</li>
-<li>几何类型：Point、Line、Circle、Polygon。</li>
-<li>……</li>
-</ul>
-<h6 id="数据完整性（Data-Integrity）"><a href="#数据完整性（Data-Integrity）" class="headerlink" title="数据完整性（Data Integrity）"></a>数据完整性（Data Integrity）</h6><p>PostgreSQL 提供了一系列数据完整性检查机制，主要包括：</p>
-<ul>
-<li>UNIQUE、NOT NULL；</li>
-<li>Primary Keys、Foreign Keys；</li>
-<li>Exclusion Constraints。</li>
-<li>……</li>
-</ul>
-<h6 id="并发和性能（Concurrency、Performance）"><a href="#并发和性能（Concurrency、Performance）" class="headerlink" title="并发和性能（Concurrency、Performance）"></a>并发和性能（Concurrency、Performance）</h6><p>PostgreSQL 提供了丰富的性能优化机制和功能，主要包括：</p>
-<ul>
-<li>索引：B-tree、Multicolumn、Expressions、Partial；</li>
-<li>事务、嵌套事务；</li>
-<li>并发读查询、表分区；</li>
-<li>表达式即时编译。</li>
-<li>……</li>
-</ul>
-<h6 id="安全性（Security）"><a href="#安全性（Security）" class="headerlink" title="安全性（Security）"></a>安全性（Security）</h6><p>PostgreSQL 支持多种认证方式以提升安全性，主要包括：</p>
-<ul>
-<li>认证方式：GSSAPI、SSPI、LDAP、SCRAM-SHA-256 and more；</li>
-<li>健壮的访问控制系统。</li>
-<li>……</li>
-</ul>
-<p>事实证明，PostgreSQL 在可管理的数据量和可容纳的并发用户数量方面具有高度可扩展性，生产环境中有管理着数 TB 数据的 PostgreSQL 集群案例。</p>
-<hr>
-<h5 id="安装-PostgreSQL"><a href="#安装-PostgreSQL" class="headerlink" title="安装 PostgreSQL"></a>安装 PostgreSQL</h5><p>安装 PostgreSQL 的方法有很多，这里介绍的方法是使用 apt 安装。默认情况下，PostgreSQL 在所有的 Ubuntu 版本中都可用，也就是说我们不用添加额外的软件源，直接使用下面的命令安装：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install -y postgresql</span><br></pre></td></tr></table></figure>
-
-<p>在9.5版本中主要包含以下软件包：</p>
-<ul>
-<li>postgresql-client-9.5 ：一些客户端库和客户端可执行文件（PostgreSQL 基于 C/S 架构）；</li>
-<li>postgresql-9.5 ：核心的数据库服务；</li>
-<li>postgresql-contrib-9.5 ：一些额外的模块。</li>
-</ul>
-<p>除了安装以上必要的软件包到文件系统，安装程序还执行了很多默认的初始化动作，包括添加 Linux 用户、创建数据库集群、配置 server 自启动服务、启动后台 server 等。</p>
-<h5 id="启动-PostgreSQL-服务"><a href="#启动-PostgreSQL-服务" class="headerlink" title="启动 PostgreSQL 服务"></a>启动 PostgreSQL 服务</h5><p>1.<strong>添加 Linux 用户</strong>。PostgreSQL <strong>不允许</strong> root 用户管理数据库。添加新的 Linux 用户的目的是保护数据，并且在数据库集群中产生一个同名的数据库管理员用户（见第二步）。</p>
-<p>数据库用户和 Linux 用户没有必然的联系（关于数据库用户的详细内容，将在以后的实训中介绍）。这里我们使用安装数据库时自动添加的 postgres 用户即可。</p>
-<p>2.<strong>创建数据库集群</strong>（Database Cluster）。数据库集群位于磁盘上的一个目录，其中包含多个数据库和各种配置文件。数据库集群由 server 管理。执行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建一个空目录</span></span><br><span class="line">sudo mkdir -p /usr/<span class="built_in">local</span>/pgsql/test_cluster</span><br><span class="line"><span class="comment"># 更改目录拥有者</span></span><br><span class="line">sudo chown postgres /usr/<span class="built_in">local</span>/pgsql/test_cluster</span><br><span class="line"><span class="comment"># 初始化数据库集群</span></span><br><span class="line">sudo -u postgres /usr/lib/postgresql/9.5/bin/initdb -D /usr/<span class="built_in">local</span>/pgsql/test_cluster</span><br></pre></td></tr></table></figure>
-
-<p>命令说明：</p>
-<ul>
-<li>上述命令的目的是在磁盘目录 /usr/local/pgsql/test_cluster 中创建一个数据库集群；</li>
-<li>前面提到，PostgreSQL 不允许 root 用户管理数据库。所以必须把目录的所有者改为 postgres，也就是说以后 postgres 是这个数据库集群的拥有者；</li>
-<li>创建数据库集群的关键命令是 initdb，命令所在位置为 /usr/lib/postgresql/9.5/bin。-D 选项指明创建集群的目录；</li>
-<li>由于 initdb 命令认为，命令的执行者就是数据库集群的拥有者，所以使用了 sudo -u postgres 语法；</li>
-<li>执行 sudo 命令需要 sudoer 权限；</li>
-<li>数据库集群初始化完成后，该目录下会新增很多内容，包括：两个数据库，分别为 postgres 和 template1；若干配置文件；创建一个和当前 Linux 用户同名的数据库集群管理员，即 postgres。</li>
-</ul>
-<p>3.<strong>启动 server</strong>。键入如下命令，便可以启动一个 server 负责管理上面创建的数据库集群。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 关闭当前后台的server</span></span><br><span class="line">service postgresql stop</span><br><span class="line"><span class="comment"># 启动server</span></span><br><span class="line">sudo -u postgres /usr/lib/postgresql/9.5/bin/pg_ctl -D /usr/<span class="built_in">local</span>/pgsql/test_cluster start</span><br><span class="line"><span class="comment"># 关闭server</span></span><br><span class="line">sudo -u postgres /usr/lib/postgresql/9.5/bin/pg_ctl -D /usr/<span class="built_in">local</span>/pgsql/test_cluster stop</span><br></pre></td></tr></table></figure>
-
-<p>命令说明：</p>
-<ul>
-<li>由于安装软件时，后台自动开启了一个 server，为避免端口冲突，首先应关闭它；</li>
-<li>管理 server 运行状态的关键命令是 pg_ctl。-D 选项指明集群的目录。开启 server 使用 start，关闭 server 使用 stop。</li>
-</ul>
-<p>使用如下命令可以查看 server 是否正在后台运行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps -ef | grep postgres</span><br></pre></td></tr></table></figure>
-
-<p>具体效果如图1所示：</p>
-<center><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/241757.png"
-                      alt="图1" style="zoom:80%;" 
-                > 图 1</center>
-
-<hr>
-<h5 id="和-server-交互"><a href="#和-server-交互" class="headerlink" title="和 server 交互"></a>和 server 交互</h5><ul>
-<li>核心是服务进程，即前面一直提到的 server 部分。服务进程管理所有的数据库文件、接受来自客户端应用的连接请求，代表这些客户端完成数据库的操作。这个服务端进程就是 postgres，其执行程序在 /usr/local/postgres/9.5/bin 目录下；</li>
-<li>外围是客户端程序，也称为前端。客户端程序是多种多样的，可以是基于命令行的工具、图形界面程序、web 服务器（向服务进程发送请求以展示动态页面）、或者是特殊的数据库管理工具。PostgreSQL 自带了一些客户端程序，我们也可以自己开发这样的程序。</li>
-</ul>
-<p>主要使用最简单同时也是最强大的命令行交互工具和 server 通信，这个工具称为 psql。它允许你使用 SQL 语言给 server 发送请求（可以是远程 server）。</p>
-<p>启动 psql 的基本语法如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">psql -h &lt;server_ip&gt; -p &lt;port&gt; -U &lt;db_user&gt; -d &lt;database_name&gt;</span><br></pre></td></tr></table></figure>
-
-<p>具体语义说明：</p>
-<ul>
-<li>psql 还有很多选项可用，这里仅列出最常用的几个；</li>
-<li>-h 选项指明 server 所在机器的 ip，可以省略，默认为本机 ip。-p 选项指明 server 的端口号，也可以省略，默认为5432；</li>
-<li>-U 选项指定需要登录的数据库用户，可以省略，默认登录和当前 Linux 用户同名的数据库用户；</li>
-<li>-d 选项指明你想连接的数据库。可以省略，默认连接和数据库用户同名的数据库。</li>
-</ul>
-<p>应用示例：</p>
-<p>由于安装完软件后，系统中会有一个默认的 server 在后台运行，其管理员为 postgres。</p>
-<p>所以如果你要登录到数据库用户 postgres，并连接到数据库 postgres，只需要以 postgres 的身份执行 psql，其他选项都使用默认参数即可。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo -u postgres psql</span><br></pre></td></tr></table></figure>
-
-<p>示例说明：</p>
-<ul>
-<li>默认情况下，数据库管理员登录认证的方式为 peer。其含义是，本地 Linux 用户可以直接登录到同名的数据库用户，无需输入数据库用户的密码；</li>
-</ul>
-<p>示例效果如图2所示：</p>
-<center><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/241924.png"
-                      alt="图2" style="zoom:80%;" 
-                > 图 2</center>
-
-<h5 id="修改数据库用户密码"><a href="#修改数据库用户密码" class="headerlink" title="修改数据库用户密码"></a>修改数据库用户密码</h5><p>修改用户密码的示例如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#首先连接到数据库</span></span><br><span class="line">sudo -u postgres psql postgres</span><br><span class="line"><span class="comment">#然后在交互环境中修改密码，若修改成功则打印出ALTER ROLE字样</span></span><br><span class="line">&gt; postgres=<span class="comment"># ALTER USER postgres WITH PASSWORD &#x27;postgres&#x27;;</span></span><br><span class="line"><span class="comment">#退出交互环境</span></span><br><span class="line">&gt; postgres=<span class="comment"># q</span></span><br></pre></td></tr></table></figure>
-
-<p>具体语义说明：</p>
-<ul>
-<li><p>语法的大写部分，是语法规定的内容。此处使用大写是为了突出语法，实际上 SQL 语言<strong>不区分大小写</strong>；</p>
-</li>
-<li><p>新密码用单引号包起来，注意语句的最后要<strong>加上分号</strong>；</p>
-</li>
-<li><p>使用元命令 q 退出 psql ，元命令不需要分号。</p>
-</li>
-</ul>
-<hr>
 ]]></content>
       <categories>
         <category>DB</category>
