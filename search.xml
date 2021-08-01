@@ -1,37 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Docker</title>
-    <url>/2021/08/01/Docker/</url>
-    <content><![CDATA[<h2 id="Hello-Docker"><a href="#Hello-Docker" class="headerlink" title="Hello Docker"></a>Hello Docker</h2><p><code>Docker</code>是一款轻量级虚拟化容器的管理引擎。</p>
-<h5 id="Docker的两个基本概念"><a href="#Docker的两个基本概念" class="headerlink" title="Docker的两个基本概念"></a>Docker的两个基本概念</h5><p>关于<code>Docker</code>容器，涉及到两个非常重要的概念：镜像和容器。</p>
-<h6 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h6><p><code>镜像</code>可以理解为一个打包了运行环境的特殊文件系统，它包含了容器启动运行所需的所有信息，包括运行程序和配置数据等。镜像不包含任何动态数据，其内容在构建之后也不会改变。</p>
-<p>例如，一个官方的<code>Ubuntu20.04</code>镜像，就包含了一套完整的<code>Ubuntu20.04</code>最小系统的<code>root</code>文件系统。</p>
-<h6 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h6><p><code>镜像</code>和<code>容器</code>的关系，类似于面向对象程序设计中的<code>类</code>和<code>实例</code>一样，<code>镜像</code>是静态的定义，而<code>容器</code>是镜像运行时的实体，可以看成是一个具备某个运行环境的非常轻量的虚拟机。<code>容器</code>可以被创建、启动、停止和删除等。在创建容器时，需要显示地为容器指定镜像。指定镜像之后，容器就具备了镜像中保存的运行环境了。</p>
-<p>例如，可以为容器指定<code>Ubuntu20.04</code>的镜像，然后该容器就具备<code>Ubuntu20.04</code>的运行环境了。</p>
-<h5 id="Docker使用的基本过程"><a href="#Docker使用的基本过程" class="headerlink" title="Docker使用的基本过程"></a>Docker使用的基本过程</h5><p>容器需要基于一个镜像来创建和使用。因此，<code>Docker</code>容器的使用一般有以下三个步骤：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">获取一个镜像；基于该镜像创建并启动一个容器；进入该容器，执行“程序”。</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>第一步：获取镜像； 上面我们提到了“镜像”可以理解为一个打包了运行环境的文件系统。然而在安装完<code>Docker</code>服务之后，本地是没有任何镜像的，所以首先需要获取所需要的镜像。</li>
-<li>第二步：创建并启动容器； 在获取到所需的镜像之后，就可以基于该镜像创建并启动一个容器，该容器就具备了镜像包含的运行环境了。同时，在创建容器时也可以设置容器的启动命令，该命令会在容器启动时执行。</li>
-<li>第三步：进入容器并执行程序； 在容器成功创建并启动之后，该容器就具备了<code>ubuntu</code>的运行环境。我们可以进入该容器内部，并在其内部执行任何在<code>ubuntu</code>系统上的程序了。这里的“程序”可以是“<code>Linux</code>命令”、“<code>shell</code>脚本”、“<code>C++</code>程序”等。</li>
-</ul>
-<p>在本实训的后续关卡，我们将具体而详实的介绍上述各个步骤的命令和后台处理过程。本关主要以一个<code>启动容器并在容器内控制台中输出“Hello Docker”</code>基本案例来介绍这个过程。</p>
-<h5 id="Docker使用基本实例"><a href="#Docker使用基本实例" class="headerlink" title="Docker使用基本实例"></a>Docker使用基本实例</h5><p>本关通过一个<code>启动容器并在容器内控制台中输出“Hello Docker”</code>的基本使用案例粗略介绍<code>Docker</code>的使用及后台处理过程，帮助大家理解<code>Docker</code>的运行机制。</p>
-<p>启动一个容器并输出“<code>Hello Docker</code>”的基本语句如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker pull busybox:latestdocker run --name first_docker_container busybox:latest echo &quot;Hello Docker&quot;</span><br></pre></td></tr></table></figure>
-
-<p>没错，只需要两条命令，就可以完成了在容器中输出“<code>Hello Docker</code>”了，很简单吧！现在我们来介绍一下这两条命令在后台做了什么工作。</p>
-<ul>
-<li>第一条命令：获取一个名为<code>busybox:latest</code>的镜像。这条命令会从<code>Docker Hub</code>官方镜像仓库获取一个名为<code>busybox:latest</code>的镜像(<code>busybox</code>的最新版)，并把它下载到宿主机。其中<code>busybox</code>是最小的<code>Linux</code>系统。</li>
-<li>第二条命令： 创建并启动一个容器，并执行相应命令。首先，<code>--name</code>设置容器的名字为<code>first_docker_container</code>，然后为容器指定了<code>busybox:latest</code>作为启动镜像，最后设置了该容器的启动命令为<code>echo &quot;Hello Docker&quot;</code>。容器启动并输出 “<code>Hello Docker</code>”后，将其停止。</li>
-</ul>
-<p>在这个实例中，我们并不需要进入容器执行“程序”，因为我们设置了容器的启动命令，也就是<code>echo &quot;Hello Docker&quot;</code>。上面我们说过，在容器启动时会在容器中执行“启动命令”，执行完<code>echo &quot;Hello Docker&quot;</code>，输出了“<code>Hello Docker</code>”，已经达到了我们的要求，所以就无需进入容器内部执行了。(后面会具体的介绍如何在容器内部执行“程序”！！)</p>
-<p>其实我们也可以去掉第一条命令，直接使用第二条命令即可完成同样的功能。后台在执行命令时，发现本地没有<code>busybox:latest</code>镜像，会首先自动执行<code>docker pull busybox:latest</code>，将<code>busybox:latest</code>镜像下载到宿主机，然后再以<code>busybox</code>镜像作为基础，创建一个名为<code>first_docker_container</code>的镜像，并执行<code>echo “Hello Docker”</code>命令。</p>
-]]></content>
-  </entry>
-  <entry>
     <title>Django-session</title>
     <url>/2021/08/01/Django-session/</url>
     <content><![CDATA[<p>cookie: Cookie，有时也用其复数形式 Cookies，指某些网站为了辨别用户身份、进行 session 跟踪而储存在用户本地终端上的键值对数据</p>
@@ -130,6 +99,37 @@
 <p>学生认证权限一年需要续订一次（毕业后失效），在次年即将到期时，JetBrains将会发送邮件询问是否续订，根据邮件内链接操作即可完成续订。</p>
 </li>
 </ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>Docker</title>
+    <url>/2021/08/01/Docker/</url>
+    <content><![CDATA[<h2 id="Hello-Docker"><a href="#Hello-Docker" class="headerlink" title="Hello Docker"></a>Hello Docker</h2><p><code>Docker</code>是一款轻量级虚拟化容器的管理引擎。</p>
+<h5 id="Docker的两个基本概念"><a href="#Docker的两个基本概念" class="headerlink" title="Docker的两个基本概念"></a>Docker的两个基本概念</h5><p>关于<code>Docker</code>容器，涉及到两个非常重要的概念：镜像和容器。</p>
+<h6 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h6><p><code>镜像</code>可以理解为一个打包了运行环境的特殊文件系统，它包含了容器启动运行所需的所有信息，包括运行程序和配置数据等。镜像不包含任何动态数据，其内容在构建之后也不会改变。</p>
+<p>例如，一个官方的<code>Ubuntu20.04</code>镜像，就包含了一套完整的<code>Ubuntu20.04</code>最小系统的<code>root</code>文件系统。</p>
+<h6 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h6><p><code>镜像</code>和<code>容器</code>的关系，类似于面向对象程序设计中的<code>类</code>和<code>实例</code>一样，<code>镜像</code>是静态的定义，而<code>容器</code>是镜像运行时的实体，可以看成是一个具备某个运行环境的非常轻量的虚拟机。<code>容器</code>可以被创建、启动、停止和删除等。在创建容器时，需要显示地为容器指定镜像。指定镜像之后，容器就具备了镜像中保存的运行环境了。</p>
+<p>例如，可以为容器指定<code>Ubuntu20.04</code>的镜像，然后该容器就具备<code>Ubuntu20.04</code>的运行环境了。</p>
+<h5 id="Docker使用的基本过程"><a href="#Docker使用的基本过程" class="headerlink" title="Docker使用的基本过程"></a>Docker使用的基本过程</h5><p>容器需要基于一个镜像来创建和使用。因此，<code>Docker</code>容器的使用一般有以下三个步骤：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">获取一个镜像；基于该镜像创建并启动一个容器；进入该容器，执行“程序”。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一步：获取镜像； 上面我们提到了“镜像”可以理解为一个打包了运行环境的文件系统。然而在安装完<code>Docker</code>服务之后，本地是没有任何镜像的，所以首先需要获取所需要的镜像。</li>
+<li>第二步：创建并启动容器； 在获取到所需的镜像之后，就可以基于该镜像创建并启动一个容器，该容器就具备了镜像包含的运行环境了。同时，在创建容器时也可以设置容器的启动命令，该命令会在容器启动时执行。</li>
+<li>第三步：进入容器并执行程序； 在容器成功创建并启动之后，该容器就具备了<code>ubuntu</code>的运行环境。我们可以进入该容器内部，并在其内部执行任何在<code>ubuntu</code>系统上的程序了。这里的“程序”可以是“<code>Linux</code>命令”、“<code>shell</code>脚本”、“<code>C++</code>程序”等。</li>
+</ul>
+<p>在本实训的后续关卡，我们将具体而详实的介绍上述各个步骤的命令和后台处理过程。本关主要以一个<code>启动容器并在容器内控制台中输出“Hello Docker”</code>基本案例来介绍这个过程。</p>
+<h5 id="Docker使用基本实例"><a href="#Docker使用基本实例" class="headerlink" title="Docker使用基本实例"></a>Docker使用基本实例</h5><p>本关通过一个<code>启动容器并在容器内控制台中输出“Hello Docker”</code>的基本使用案例粗略介绍<code>Docker</code>的使用及后台处理过程，帮助大家理解<code>Docker</code>的运行机制。</p>
+<p>启动一个容器并输出“<code>Hello Docker</code>”的基本语句如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker pull busybox:latestdocker run --name first_docker_container busybox:latest echo &quot;Hello Docker&quot;</span><br></pre></td></tr></table></figure>
+
+<p>没错，只需要两条命令，就可以完成了在容器中输出“<code>Hello Docker</code>”了，很简单吧！现在我们来介绍一下这两条命令在后台做了什么工作。</p>
+<ul>
+<li>第一条命令：获取一个名为<code>busybox:latest</code>的镜像。这条命令会从<code>Docker Hub</code>官方镜像仓库获取一个名为<code>busybox:latest</code>的镜像(<code>busybox</code>的最新版)，并把它下载到宿主机。其中<code>busybox</code>是最小的<code>Linux</code>系统。</li>
+<li>第二条命令： 创建并启动一个容器，并执行相应命令。首先，<code>--name</code>设置容器的名字为<code>first_docker_container</code>，然后为容器指定了<code>busybox:latest</code>作为启动镜像，最后设置了该容器的启动命令为<code>echo &quot;Hello Docker&quot;</code>。容器启动并输出 “<code>Hello Docker</code>”后，将其停止。</li>
+</ul>
+<p>在这个实例中，我们并不需要进入容器执行“程序”，因为我们设置了容器的启动命令，也就是<code>echo &quot;Hello Docker&quot;</code>。上面我们说过，在容器启动时会在容器中执行“启动命令”，执行完<code>echo &quot;Hello Docker&quot;</code>，输出了“<code>Hello Docker</code>”，已经达到了我们的要求，所以就无需进入容器内部执行了。(后面会具体的介绍如何在容器内部执行“程序”！！)</p>
+<p>其实我们也可以去掉第一条命令，直接使用第二条命令即可完成同样的功能。后台在执行命令时，发现本地没有<code>busybox:latest</code>镜像，会首先自动执行<code>docker pull busybox:latest</code>，将<code>busybox:latest</code>镜像下载到宿主机，然后再以<code>busybox</code>镜像作为基础，创建一个名为<code>first_docker_container</code>的镜像，并执行<code>echo “Hello Docker”</code>命令。</p>
 ]]></content>
   </entry>
   <entry>
