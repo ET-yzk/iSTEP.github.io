@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="iSTEP">
+    <meta name="description" content="iSTEP Blogs">
+    <meta name="author" content="iSTEP">
+    
+    <title>
+        
+            类 —— Python 的实现 |
+        
+        iSTEP&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/iSTEP.github.io/css/style.css">
+
+    <link rel="shortcut icon" href="/iSTEP.github.io/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"et-yzk.github.io","root":"/iSTEP.github.io/","language":"zh-CN","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"https://gitee.com/yzketx/image-markdown/raw/master/img/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/iSTEP.github.io/atom.xml" title="iSTEP" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                iSTEP&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/iSTEP.github.io/The-craft-of-selfteaching"
+                            >
+                                THE-CRAFT-OF-SELFTEACHING
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/iSTEP.github.io/The-craft-of-selfteaching">THE-CRAFT-OF-SELFTEACHING</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="page-template-container">
+        
+        
+        <div class="page-template-content markdown-body">
+            
+                <h1 id="类-——-Python-的实现"><a href="#类-——-Python-的实现" class="headerlink" title="类 —— Python 的实现"></a>类 —— Python 的实现</h1><p>既然已经在不碰代码的情况下，把 OOP 中的主要概念梳理清楚了，以下的行文中，那些概念就直接用英文罢，省得理解上还得再绕个弯……</p>
+<h2 id="Defining-Class"><a href="#Defining-Class" class="headerlink" title="Defining Class"></a>Defining Class</h2><p>Class 使用 <code>class</code> 关键字进行定义。</p>
+<p>与函数定义不同的地方在于，Class 接收参数不是在 <code>class Classname():</code> 的括号里完成 —— 那个圆括号有另外的用处。</p>
+<p>让我们先看看代码，而后再逐一解释：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Golem</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name=<span class="literal">None</span></span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.built_year = datetime.date.today().year</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hi!&#x27;</span>)</span><br><span class="line"></span><br><span class="line">g = Golem(<span class="string">&#x27;Clay&#x27;</span>)</span><br><span class="line">g.name</span><br><span class="line">g.built_year</span><br><span class="line">g.say_hi</span><br><span class="line">g.say_hi()</span><br><span class="line"><span class="built_in">type</span>(g)</span><br><span class="line"><span class="built_in">type</span>(g.name)</span><br><span class="line"><span class="built_in">type</span>(g.built_year)</span><br><span class="line"><span class="built_in">type</span>(g.__init__)</span><br><span class="line"><span class="built_in">type</span>(g.say_hi)</span><br></pre></td></tr></table></figure>
+
+<pre><code>&#39;Clay&#39;
+2019
+&lt;bound method Golem.say_hi of &lt;__main__.Golem object at 0x10430e7b8&gt;&gt;
+Hi!
+__main__.Golem
+str
+int
+method
+method
+</code></pre>
+<p>以上，我们创建了一个 Class:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Golem</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name=<span class="literal">None</span></span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.built_year = datetime.date.today().year</span><br></pre></td></tr></table></figure>
+
+<p>其中定义了当我们根据这个 Class 创建一个实例的时候，那个 Object 的初始化过程，即 <code>__init__()</code> 函数 —— 又由于这个函数是在 Class 中定义的，我们称它为 Class 的一个 Method。</p>
+<p>这里的 <code>self</code> 就是个变量，跟程序中其它变量的区别在于，它是一个系统默认可以识别的变量，用来指代将来用这个 Class 创建的 Instance。</p>
+<p>比如，我们创建了 Golem 这个 Class 的一个 Instance，<code>g = Golem(&#39;Clay&#39;)</code> 之后，我们写 <code>g.name</code>，那么解析器就去找 <code>g</code> 这个实例所在的 Scope 里有没有 <code>self.name</code>……</p>
+<p>注意：<code>self</code> 这个变量的定义，是在 <code>def __init__(self, ...)</code> 这一句里完成的。对于这个变量的名称取名没有强制要求，你实际上可以随便用什么名字，很多 C 程序员会习惯于将这个变量命名为 <code>this</code> —— 但根据惯例，你最好还是只用 <code>self</code> 这个变量名，省得给别人造成误会。</p>
+<p>在 Class 的代码中，如果定义了 <code>__init__()</code> 函数，那么系统就会将它当作 Instance 在创建后被初始化的函数。这个函数名称是强制指定的，初始化函数必须使用这个名称；注意 <code>init</code> 两端各有两个下划线 <code>_</code>。</p>
+<p>当我们用 <code>g = Golem(&#39;Clay&#39;)</code> 这一句创建了一个 Golem 的 Instance 的时候，以下一连串的事情发生了：</p>
+<blockquote>
+<ul>
+<li><code>g</code> 从此之后就是一个根据 Golem 这个 Class 创建的 Instance，对使用者来说，它就是个 Object；</li>
+<li>因为 Golem 这个 Class 的代码中有 <code>__init__()</code>，所以，当 <code>g</code> 被创建的时候，<code>g</code> 就需要被初始化……</li>
+<li>在 <code>g</code> 所在的变量目录中，出现了一个叫做 <code>self</code> 的用来指代 <code>g</code> 本身的变量；</li>
+<li>self.name 接收了一个参数，<code>&#39;Clay&#39;</code>，并将其保存了下来；</li>
+<li>生成了一个叫做 <code>self.built_year</code> 的变量，其中保存的是 <code>g</code> 这个 Object 被创建时的年份……</li>
+</ul>
+</blockquote>
+<p>对了，Golem 和 Robot 一样，都是机器人的意思；Golem 的本义来自于犹太神话，一个被赋予了生命的泥人……</p>
+<h2 id="Inheritance"><a href="#Inheritance" class="headerlink" title="Inheritance"></a>Inheritance</h2><p>我们刚刚创建了一个 Golem Class，如果我们想用它 Inherite 一个新的 Class，比如，<code>Running_Golem</code>，一个能跑的机器人，那就像以下的代码那样做 —— 注意 <code>class Running_Golem</code> 之后的圆括号：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Golem</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name=<span class="literal">None</span></span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.built_year = datetime.date.today().year</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hi!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Running_Golem</span>(<span class="params">Golem</span>):</span>      <span class="comment"># 刚刚就说，这个圆括号另有用途……</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Can&#x27;t you see? I&#x27;m running...&quot;</span>)</span><br><span class="line"></span><br><span class="line">rg = Running_Golem(<span class="string">&#x27;Clay&#x27;</span>)</span><br><span class="line"></span><br><span class="line">rg.run</span><br><span class="line">rg.run()</span><br><span class="line">rg.name</span><br><span class="line">rg.built_year</span><br><span class="line">rg.say_hi()</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;bound method Running_Golem.run of &lt;__main__.Running_Golem object at 0x1068b37b8&gt;&gt;
+Can&#39;t you see? I&#39;m running...
+&#39;Clay&#39;
+2019
+Hi!
+</code></pre>
+<p>如此这般，我们根据 Golem 这个 Class 创造了一个 Subclass —— <code>Running_Golem</code>，既然它是 Golem 的 Inheritance，那么 Golem 有的 Attributes 和 Methods 它都有，并且还多了一个 Method —— <code>self.run</code>。</p>
+<h2 id="Overrides"><a href="#Overrides" class="headerlink" title="Overrides"></a>Overrides</h2><p>当我们创建一个 Inherited Class 的时候，可以重写（Overriding）Parent Class 中的 Methods。比如这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Golem</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name=<span class="literal">None</span></span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.built_year = datetime.date.today().year</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hi!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">runningGolem</span>(<span class="params">Golem</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Can&#x27;t you see? I&#x27;m running...&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">self</span>):</span>                            <span class="comment"># 不再使用 Parent Class 中的定义，而是新的……</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hey! Nice day, Huh?&#x27;</span>)</span><br><span class="line"></span><br><span class="line">rg = runningGolem(<span class="string">&#x27;Clay&#x27;</span>)</span><br><span class="line">rg.run</span><br><span class="line">rg.run()</span><br><span class="line">rg.name</span><br><span class="line">rg.built_year</span><br><span class="line">rg.say_hi()</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;bound method runningGolem.run of &lt;__main__.runningGolem object at 0x1068c8128&gt;&gt;
+Can&#39;t you see? I&#39;m running...
+&#39;Clay&#39;
+2019
+Hey! Nice day, Huh?
+</code></pre>
+<h2 id="Inspecting-A-Class"><a href="#Inspecting-A-Class" class="headerlink" title="Inspecting A Class"></a>Inspecting A Class</h2><p>当我们作为用户想了解一个 Class 的 Interface，即，它的 Attributes 和 Methods 的时候，常用的有三种方式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="built_in">help</span>(<span class="built_in">object</span>)</span><br><span class="line"><span class="number">2.</span> <span class="built_in">dir</span>(<span class="built_in">object</span>)</span><br><span class="line"><span class="number">3.</span> <span class="built_in">object</span>.__dict__</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Golem</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name=<span class="literal">None</span></span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.built_year = datetime.date.today().year</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hi!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">runningGolem</span>(<span class="params">Golem</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Can\&#x27;t you see? I\&#x27;m running...&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">self</span>):</span>                            <span class="comment"># 不再使用 Parent Class 中的定义，而是新的……</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hey! Nice day, Huh?&#x27;</span>)</span><br><span class="line"></span><br><span class="line">rg = runningGolem(<span class="string">&#x27;Clay&#x27;</span>)</span><br><span class="line"><span class="built_in">help</span>(rg)</span><br><span class="line"><span class="built_in">dir</span>(rg)</span><br><span class="line">rg.__dict__</span><br><span class="line"><span class="built_in">hasattr</span>(rg, <span class="string">&#x27;built_year&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Help on runningGolem in module __main__ object:
+
+class runningGolem(Golem)
+ |  runningGolem(name=None)
+ |
+ |  Method resolution order:
+ |      runningGolem
+ |      Golem
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  run(self)
+ |
+ |  say_hi(self)
+ |
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from Golem:
+ |
+ |  __init__(self, name=None)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from Golem:
+ |
+ |  __dict__
+ |      dictionary for instance variables (if defined)
+ |
+ |  __weakref__
+ |      list of weak references to the object (if defined)
+
+[&#39;__class__&#39;,
+ &#39;__delattr__&#39;,
+ &#39;__dict__&#39;,
+ &#39;__dir__&#39;,
+ &#39;__doc__&#39;,
+ &#39;__eq__&#39;,
+ &#39;__format__&#39;,
+ &#39;__ge__&#39;,
+ &#39;__getattribute__&#39;,
+ &#39;__gt__&#39;,
+ &#39;__hash__&#39;,
+ &#39;__init__&#39;,
+ &#39;__init_subclass__&#39;,
+ &#39;__le__&#39;,
+ &#39;__lt__&#39;,
+ &#39;__module__&#39;,
+ &#39;__ne__&#39;,
+ &#39;__new__&#39;,
+ &#39;__reduce__&#39;,
+ &#39;__reduce_ex__&#39;,
+ &#39;__repr__&#39;,
+ &#39;__setattr__&#39;,
+ &#39;__sizeof__&#39;,
+ &#39;__str__&#39;,
+ &#39;__subclasshook__&#39;,
+ &#39;__weakref__&#39;,
+ &#39;built_year&#39;,
+ &#39;name&#39;,
+ &#39;run&#39;,
+ &#39;say_hi&#39;]
+&#123;&#39;name&#39;: &#39;Clay&#39;, &#39;built_year&#39;: 2019&#125;
+True
+</code></pre>
+<h2 id="Scope"><a href="#Scope" class="headerlink" title="Scope"></a>Scope</h2><p>每个变量都属于某一个 <strong>Scope</strong>（变量的作用域），在同一个 Scope 中，变量可以被引用被操作…… 这么说非常抽象，难以理解 —— 只能通过例子说明。</p>
+<p>我们先给 Golem 这个 Class 增加一点功能 —— 我们需要随时知道究竟有多少个 Golem 处于活跃状态…… 也因此顺带给 Golem 加上一个 Method：<code>cease()</code> —— 哈！机器人么，想关掉它，说关掉它，就能关掉它；</p>
+<p>另外，我们还要给机器人设置个使用年限，比如 10 年；</p>
+<p>…… 而外部会每隔一段时间，用 <code>Golem.is_active()</code> 去检查所有的机器人，所以，不需要外部额外操作，到了年头，它应该能关掉自己。—— 当然，又由于以下代码是简化书写的，核心目的是为了讲解 Scope，所以并没有专门写模拟 10 年后某些机器人自动关闭的情形……</p>
+<p>在运行以下代码之前，需要先介绍三个 Python 的内建函数：</p>
+<blockquote>
+<ul>
+<li><code>hasattr(object, attr)</code> 查询这个 <code>object</code> 中有没有这个 <code>attr</code>，返回布尔值</li>
+<li><code>getattr(object, attr)</code> 获取这个 <code>object</code> 中这个 <code>attr</code> 的值</li>
+<li><code>setattr(object, attr, value)</code> 将这个 <code>object</code> 中的 <code>attr</code> 值设置为 <code>value</code></li>
+</ul>
+</blockquote>
+<p>现在的你，应该一眼望过去，就已经能掌握这三个内建函数的用法 —— 还记得之前的你吗？眼睁睁看着，那些字母放在那里对你来说没任何意义…… 这才多久啊！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Golem</span>:</span></span><br><span class="line">    population = <span class="number">0</span></span><br><span class="line">    __life_span = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name=<span class="literal">None</span></span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.built_year = datetime.date.today().year</span><br><span class="line">        self.__active = <span class="literal">True</span></span><br><span class="line">        Golem.population += <span class="number">1</span>          <span class="comment"># 执行一遍之后，试试把这句改成 population += 1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hi!&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cease</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.__active = <span class="literal">False</span></span><br><span class="line">        Golem.population -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_active</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">if</span> datetime.date.today().year - self.built_year &gt;= Golem.__life_span:</span><br><span class="line">            self.cease()</span><br><span class="line">        <span class="keyword">return</span> self.__active</span><br><span class="line"></span><br><span class="line">g = Golem()</span><br><span class="line"><span class="built_in">hasattr</span>(Golem, <span class="string">&#x27;population&#x27;</span>)      <span class="comment"># True</span></span><br><span class="line"><span class="built_in">hasattr</span>(g, <span class="string">&#x27;population&#x27;</span>)          <span class="comment"># True</span></span><br><span class="line"><span class="built_in">hasattr</span>(Golem, <span class="string">&#x27;__life_span&#x27;</span>)     <span class="comment"># False</span></span><br><span class="line"><span class="built_in">hasattr</span>(g, <span class="string">&#x27;__life_span&#x27;</span>)         <span class="comment"># False</span></span><br><span class="line"><span class="built_in">hasattr</span>(g, <span class="string">&#x27;__active&#x27;</span>)            <span class="comment"># False</span></span><br><span class="line">Golem.population                  <span class="comment"># 1</span></span><br><span class="line"><span class="built_in">setattr</span>(Golem, <span class="string">&#x27;population&#x27;</span>, <span class="number">10</span>)</span><br><span class="line">Golem.population                  <span class="comment"># 10</span></span><br><span class="line">x = Golem()</span><br><span class="line">Golem.population                  <span class="comment"># 11</span></span><br><span class="line">x.cease()</span><br><span class="line">Golem.population                  <span class="comment"># 10</span></span><br><span class="line"><span class="built_in">getattr</span>(g, <span class="string">&#x27;population&#x27;</span>)          <span class="comment"># 10</span></span><br><span class="line">g.is_active()</span><br></pre></td></tr></table></figure>
+
+<pre><code>True
+True
+False
+False
+False
+1
+10
+11
+10
+10
+True
+</code></pre>
+<p>如果你试过把第 13 行的 <code>Golem.population += 1</code> 改成 <code>population += 1</code>，你会被如下信息提醒：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">     <span class="number">12</span>         self.__active = <span class="literal">True</span></span><br><span class="line">---&gt; <span class="number">13</span>         population += <span class="number">1</span></span><br><span class="line">UnboundLocalError: local variable <span class="string">&#x27;population&#x27;</span> referenced before assignment</span><br></pre></td></tr></table></figure>
+<p>—— 本地变量 <code>population</code> 尚未赋值，就已经提前被引用…… 为什么会这样呢？因为在你所创建 <code>g</code> 之后，马上执行的是 <code>__init()__</code> 这个初始化函数，而 <code>population</code> 是在这个函数之外定义的……</p>
+<p>如果你足够细心，你会发现这个版本中，有些变量前面有两个下划线 <code>__</code>，比如，<code>__life_span</code> 和 <code>self.__active</code>。这是 Python 的定义，变量名前面加上一个以上下划线（Underscore）<code>_</code> 的话，那么该变量是 “私有变量”（Private Variables），不能被外部引用。而按照 Python 的惯例，我们会使用两个下划线起始，去命名私有变量，如：<code>__life_span</code>。你可以回去试试，把所有的 <code>__life_span</code> 改成 <code>_life_span</code>（即，变量名开头只有一个 <code>_</code>，那么，<code>hasattr(Golem, &#39;_life_span&#39;)</code> 和 <code>hasattr(g, &#39;_life_span&#39;)</code> 的返回值就都变成了 <code>True</code>。</p>
+<p>看看下面的图示，理解起来更为直观一些，其中每个方框代表一个 Scope：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/class-variables-scope.png?raw=true"
+                     
+                ></p>
+<p>整个代码启动之后，总计有 4 个 Scopes 如图所示：</p>
+<blockquote>
+<ul>
+<li>① <code>class Golem</code> 之外；</li>
+<li>② <code>class Golem</code> 之内；</li>
+<li>③ <code>__init__(self, name=None)</code> 之内；</li>
+<li>④ <code>cease(self)</code> 之内；</li>
+</ul>
+</blockquote>
+<p>在 Scope ① 中，可以引用 <code>Golem.population</code>，在生成一个 Golem 的实例 <code>g</code> 之后，也可以引用 <code>g.population</code>；但 <code>Golem.__life_span</code> 和 <code>g.__active</code> 在 Scope ① 是不存在的；</p>
+<p>在 Scope ② 中，存在两个变量，<code>population</code> 和 <code>__life_span</code>；而 <code>__life_span</code> 是 Private（私有变量，因为它的变量名中前两个字符是下划线 <code>__</code>；于是，在 Scope ① 中，不存在 <code>Golem.__life_span</code> —— <code>hasattr(Golem, &#39;__life_span&#39;)</code> 的值为 <code>False</code>；</p>
+<p>在 Scope ③ 中和 Scope ④ 中，由于都给它们传递了 <code>self</code> 这个参数，于是，在这两个 Scope 里，都可以引用 <code>self.xxx</code>，比如 <code>self.population</code>，比如 <code>self.__life_span</code>；</p>
+<p>在 Scope ③ 中，<code>population</code> 是不存在的，如果需要引用这个值，可以用 <code>Golem.population</code>，也可以用 <code>self.population</code>。同样的道理，在 Scope ③ 中 <code>__life_span</code> 也不存在，如果想用这个值，可以用 <code>Golem.__life_span</code> 或者 <code>self.__life_span</code>；</p>
+<p>Scope ④ 与 Scope ③ 平行存在。所以在这里，<code>population</code> 和 <code>__life_span</code> 也同样并不存在。</p>
+<p><strong>补充</strong></p>
+<p>在本例子中，在 <code>__init__(self, name=None)</code> 函数中 <code>self.population</code> 和 <code>Golem.population</code> 都可以使用，但使用效果是不一样的：</p>
+<blockquote>
+<ul>
+<li><code>self.population</code> 总是去读取 <code>Golem</code> 类中 <code>population</code> 的初始值，即使后面通过 <code>setattr(Golem, &#39;population&#39;, 10)</code> 更改 <code>population</code> 的值后，<code>self.population</code> 的值仍为 <code>0</code>，但 <code>Golem.population</code> 值则为 <code>10</code>，你可以自己动手尝试一下。</li>
+</ul>
+</blockquote>
+<h2 id="Encapsulation"><a href="#Encapsulation" class="headerlink" title="Encapsulation"></a>Encapsulation</h2><p>到目前为止，Golem 这个 Class 看起来不错，但有个问题，它里面的数据，外面是可以随便改的 —— 虽然，我们已经通过给变量 life_span 前面加上两个下划线，变成 <code>__life_span</code>，使其成为私有变量，外部不能触达（你不能引用 <code>Golem.__life_span</code>），可 Golem.population 就不一样，外面随时可以引用，还可以随时修改它，只需要写上一句：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Golem.population = <span class="number">1000000</span></span><br></pre></td></tr></table></figure>
+
+<p>我们干脆把 <code>population</code> 这个变量也改成私有的罢：<code>__population</code>，而后需要从外界查看这个变量的话，就在 Class 里面写个函数，返回那个值好了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Golem</span>:</span></span><br><span class="line">    __population = <span class="number">0</span></span><br><span class="line">    __life_span = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name=<span class="literal">None</span></span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.built_year = datetime.date.today().year</span><br><span class="line">        self.__active = <span class="literal">True</span></span><br><span class="line">        Golem.__population += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hi!&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cease</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.__active = <span class="literal">False</span></span><br><span class="line">        Golem.__population -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_active</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">if</span> datetime.date.today().year - self.built_year &gt;= Golem.__life_span:</span><br><span class="line">            self.cease</span><br><span class="line">        <span class="keyword">return</span> self.__active</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">population</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> Golem.__population</span><br><span class="line"></span><br><span class="line">g = Golem(<span class="string">&#x27;Clay&#x27;</span>)</span><br><span class="line">g.population</span><br><span class="line">g.population()</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;bound method Golem.population of &lt;__main__.Golem object at 0x1068da160&gt;&gt;
+1
+</code></pre>
+<p>如果，你希望外部能够像获得 Class 的属性那样，直接写 <code>g.population</code>，而不是必须加上一个括号 <code>g.population()</code> 传递参数（实际上传递了一个隐含的 <code>self</code> 参数），那么可以在 <code>def population(self):</code> 之前的一行加上一句 <code>@property</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Golem</span>:</span></span><br><span class="line">    __population = <span class="number">0</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">population</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> Golem.__population</span><br></pre></td></tr></table></figure>
+
+<p>如此这般之后，你就可以用 <code>g.population</code> 了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Golem</span>:</span></span><br><span class="line">    __population = <span class="number">0</span></span><br><span class="line">    __life_span = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name=<span class="literal">None</span></span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.built_year = datetime.date.today().year</span><br><span class="line">        self.__active = <span class="literal">True</span></span><br><span class="line">        Golem.__population += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hi!&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cease</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.__active = <span class="literal">False</span></span><br><span class="line">        Golem.__population -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_active</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">if</span> datetime.date.today().year - self.built_year &gt;= Golem.__life_span:</span><br><span class="line">            self.cease</span><br><span class="line">        <span class="keyword">return</span> self.__active</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">population</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> Golem.__population</span><br><span class="line"></span><br><span class="line">g = Golem(<span class="string">&#x27;Clay&#x27;</span>)</span><br><span class="line">g.population</span><br><span class="line"><span class="comment"># g.population = 100</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>1
+</code></pre>
+<p>如此这般之后，不仅你可以直接引用 <code>g.population</code>，并且，在外部不能再直接给 <code>g.population</code> 赋值了，否则会报错：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---------------------------------------------------------------------------</span><br><span class="line">AttributeError                            Traceback (most recent call last)</span><br><span class="line">&lt;ipython-<span class="built_in">input</span>-<span class="number">16</span>-5d8c475304d3&gt; <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">     <span class="number">26</span> g = Golem(<span class="string">&#x27;Clay&#x27;</span>)</span><br><span class="line">     <span class="number">27</span> g.population</span><br><span class="line">---&gt; <span class="number">28</span> g.population = <span class="number">100</span></span><br><span class="line"></span><br><span class="line">AttributeError: can<span class="string">&#x27;t set attribute</span></span><br></pre></td></tr></table></figure>
+
+<p>到此为止，Encapsulation 就做得不错了。</p>
+<p>如果你非得希望从外部可以设置这个值，那么，你就得再写个函数，并且在函数之前加上一句：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">population</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> Golem.__population</span><br><span class="line"></span><br><span class="line"><span class="meta">@population.setter</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">population</span>(<span class="params">self, value</span>):</span></span><br><span class="line">    Golem.__population = value</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这样之后，<code>.population</code> 这个 Attribute 就可以从外部被设定其值了（虽然在当前的例子中显得没必要让外部设定 <code>__population</code> 这个值…… 以下仅仅是为了举例）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Golem</span>:</span></span><br><span class="line">    __population = <span class="number">0</span></span><br><span class="line">    __life_span = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name=<span class="literal">None</span></span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.built_year = datetime.date.today().year</span><br><span class="line">        self.__active = <span class="literal">True</span></span><br><span class="line">        Golem.__population += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hi!&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cease</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.__active = <span class="literal">False</span></span><br><span class="line">        Golem.__population -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_active</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">if</span> datetime.date.today().year - self.built_year &gt;= Golem.__life_span:</span><br><span class="line">            self.cease</span><br><span class="line">        <span class="keyword">return</span> self.__active</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">population</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> Golem.__population</span><br><span class="line"></span><br><span class="line"><span class="meta">    @population.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">population</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        Golem.__population = value</span><br><span class="line"></span><br><span class="line">g = Golem(<span class="string">&#x27;Clay&#x27;</span>)</span><br><span class="line">g.population</span><br><span class="line">g.population = <span class="number">100</span></span><br><span class="line">ga = Golem(<span class="string">&#x27;New&#x27;</span>)</span><br><span class="line">g.population</span><br><span class="line">ga.population</span><br><span class="line"><span class="built_in">help</span>(Golem)</span><br><span class="line">Golem.__dict__</span><br><span class="line">g.__dict__</span><br><span class="line"><span class="built_in">hasattr</span>(Golem, <span class="string">&#x27;population&#x27;</span>)</span><br><span class="line"><span class="built_in">getattr</span>(Golem, <span class="string">&#x27;population&#x27;</span>)</span><br><span class="line"><span class="built_in">setattr</span>(Golem, <span class="string">&#x27;population&#x27;</span>, <span class="number">10000</span>)</span><br><span class="line">g.population    <span class="comment"># 所以，在很多的情况下，不把数据封装在 Class 内部的话，后面会有很多麻烦。</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>1
+101
+101
+Help on class Golem in module __main__:
+class Golem(builtins.object)
+ |  Golem(name=None)
+ |
+ |  Methods defined here:
+ |
+ |  __init__(self, name=None)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  cease(self)
+ |
+ |  is_active(self)
+ |
+ |  say_hi(self)
+ |
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |
+ |  __dict__
+ |      dictionary for instance variables (if defined)
+ |
+ |  __weakref__
+ |      list of weak references to the object (if defined)
+ |
+ |  population
+mappingproxy(&#123;&#39;__module__&#39;: &#39;__main__&#39;,
+              &#39;_Golem__population&#39;: 101,
+              &#39;_Golem__life_span&#39;: 10,
+              &#39;__init__&#39;: &lt;function __main__.Golem.__init__(self, name=None)&gt;,
+              &#39;say_hi&#39;: &lt;function __main__.Golem.say_hi(self)&gt;,
+              &#39;cease&#39;: &lt;function __main__.Golem.cease(self)&gt;,
+              &#39;is_active&#39;: &lt;function __main__.Golem.is_active(self)&gt;,
+              &#39;population&#39;: &lt;property at 0x1068f9d68&gt;,
+              &#39;__dict__&#39;: &lt;attribute &#39;__dict__&#39; of &#39;Golem&#39; objects&gt;,
+              &#39;__weakref__&#39;: &lt;attribute &#39;__weakref__&#39; of &#39;Golem&#39; objects&gt;,
+              &#39;__doc__&#39;: None&#125;)
+&#123;&#39;name&#39;: &#39;Clay&#39;, &#39;built_year&#39;: 2019, &#39;_Golem__active&#39;: True&#125;
+True
+&lt;property at 0x1068f9d68&gt;
+10000
+</code></pre>
+
+            
+        </div>
+        <div class="page-template-comments">
+            
+        </div>
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">iSTEP</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

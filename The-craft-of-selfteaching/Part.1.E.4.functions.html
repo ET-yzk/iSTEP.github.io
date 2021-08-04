@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="iSTEP">
+    <meta name="description" content="iSTEP Blogs">
+    <meta name="author" content="iSTEP">
+    
+    <title>
+        
+            函数 |
+        
+        iSTEP&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/iSTEP.github.io/css/style.css">
+
+    <link rel="shortcut icon" href="/iSTEP.github.io/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"et-yzk.github.io","root":"/iSTEP.github.io/","language":"zh-CN","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"https://gitee.com/yzketx/image-markdown/raw/master/img/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/iSTEP.github.io/atom.xml" title="iSTEP" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                iSTEP&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/iSTEP.github.io/The-craft-of-selfteaching"
+                            >
+                                THE-CRAFT-OF-SELFTEACHING
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/iSTEP.github.io/The-craft-of-selfteaching">THE-CRAFT-OF-SELFTEACHING</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="page-template-container">
+        
+        
+        <div class="page-template-content markdown-body">
+            
+                <h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><p>函数，实际上是可被调用的完整的程序。它具备输入、处理、输出的功能。又因为它经常在主程序里被调用，所以它总是更像是个子程序。</p>
+<p>了解一个函数，无非是要了解它的两个方面：</p>
+<blockquote>
+<ul>
+<li>它的<strong>输入</strong>是怎么构成的（都有哪些参数？如何指定？）；</li>
+<li>以及它的<strong>输出</strong>是什么（返回值究竟是什么？）……</li>
+</ul>
+</blockquote>
+<p>从这个角度看，牛，对人类来说就是个函数，它吃的是<em>草</em>，挤出来的是<em>奶</em>…… 开玩笑了。</p>
+<p>在我们使用函数的过程中，我们常常<em>有意忽略</em>它的内部如何完成从输入到输出之间的<em>处理过程</em> —— 这就好像我们平日里用灯泡一样，大多数情况下，我们只要知道开关的使用方法就够了 —— 至于为什么按到这个方向上灯会亮，为什么按到另外一个方向上灯会灭，并不是我们作为用户必须关心的事情……</p>
+<p>当然，如果你是设计开关的人就不一样了，你必须知道其中的运作原理；但是，最终，你还是希望你的用户用最简单方便的操作界面，而不是必须搞懂所有原理才能够使用你所设计的产品……</p>
+<p>当我们用 Python 编程的时候，更多的情况下，我们只不过是在使用别人已经写好的函数，或者用更专业一点的词藻，叫做 “已完好封装的函数”。而我们所需要做的事情（所谓的 “学习使用函数”），其实只不过是 “通过阅读产品说明书了解如何使用产品” 而已，真的没多神秘……</p>
+<p><strong>注意</strong></p>
+<blockquote>
+<p>这一章的核心目的，不是让你学会如何写函数；而是通过一些例子，让你大抵上学会 “<em>如何阅读官方文档中关于函数的使用说明</em>”。也请注意之前的那个词：“<em>大抵上</em>”，所以<strong>千万别怕自己最初的时候理解不全面</strong>。</p>
+</blockquote>
+<p>另外，这一章中用来举例的函数，全部来自于同一个官方文档页面，<a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html" >Built-in Functions<i class="fas fa-external-link-alt"></i></a>：</p>
+<blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html" >https://docs.python.org/3/library/functions.html<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<h2 id="示例-print"><a href="#示例-print" class="headerlink" title="示例 print()"></a>示例 print()</h2><h3 id="基本的使用方法"><a href="#基本的使用方法" class="headerlink" title="基本的使用方法"></a>基本的使用方法</h3><p><code>print()</code> 是初学者最常遇到的函数 —— 姑且不说是不是最常用到的。</p>
+<p>它最基本的作用就是把传递给它的值输出到屏幕上，如果不给它任何参数，那么它就输出一个空行：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;line 1st&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;line 2nd&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;line 4th&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>line 1st
+line 2nd
+
+line 4th
+</code></pre>
+<p>你也可以向它传递多个参数，参数之间用 <code>,</code> 分开，它就会把那些值逐个输出到屏幕，每个值之间默认用空格分开。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hello,&#x27;</span>, <span class="string">&#x27;jack&#x27;</span>, <span class="string">&#x27;mike&#x27;</span>, <span class="string">&#x27;...&#x27;</span>, <span class="string">&#x27;and all you guys!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hello, jack mike ... and all you guys!
+</code></pre>
+<p>当我们想把变量或者表达式的值插入字符串中的时候，可以用 f-string：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">&#x27;Ann&#x27;</span></span><br><span class="line">age = <span class="string">&#x27;22&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;name&#125;</span> is <span class="subst">&#123;age&#125;</span> years old.&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Ann is 22 years old.
+</code></pre>
+<p>但这并不是 <code>print()</code> 这个函数的功能，这实际上是 <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting"><code>f-string</code></a> 的功能，<code>f-string</code> 中用花括号 <code>&#123;&#125;</code> 括起来的部分是表达式，最终转换成字符串的时候，那些表达式的值（而不是变量或者表达式本身）会被插入相应的位置……</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">&#x27;Ann&#x27;</span></span><br><span class="line">age = <span class="string">&#x27;22&#x27;</span></span><br><span class="line"><span class="string">f&#x27;<span class="subst">&#123;name&#125;</span> is <span class="subst">&#123;age&#125;</span> years old.&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>&#39;Ann is 22 years old.&#39;
+</code></pre>
+<p>所以，<code>print(f&#39;&#123;name&#125; is &#123;age&#125; years old.&#39;)</code> 这一句中，函数 <code>print()</code> 完成的还是它最基本的功能：给它什么，它就把什么输出到屏幕上。</p>
+<h3 id="print-的官方文档说明"><a href="#print-的官方文档说明" class="headerlink" title="print() 的官方文档说明"></a>print() 的官方文档说明</h3><p>以下，是 print() 这个函数的<a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#print" >官方文档<i class="fas fa-external-link-alt"></i></a>：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/doc-print.png?raw=true"
+                     
+                ></p>
+<p>最必须读懂的部分，就是这一行：</p>
+<blockquote>
+<p><code>print(*object, sep=&#39; &#39;, end=&#39;\n&#39;, file=sys.stdout, flush=False)</code> <a href='#fn1' name='fn1b'><sup>[1]</sup></a></p>
+</blockquote>
+<p>先只注意那些有着 <code>=</code> 的参数，<code>sep=&#39; &#39;</code>、<code>end=&#39;\n&#39;</code>、<code>file=sys.stdout</code>，和 <code>flush=False</code>。</p>
+<p>这其中，先关注这三个 <code>sep=&#39; &#39;</code>、<code>end=&#39;\n&#39;</code>、<code>file=sys.stdout</code>：</p>
+<blockquote>
+<ul>
+<li><code>sep=&#39; &#39;</code>：接收多个参数之后，输出时，分隔符号默认为空格，<code>&#39; &#39;</code>；</li>
+<li><code>end=&#39;\n&#39;</code>：输出行的末尾默认是换行符号 <code>&#39;\n&#39;</code>；</li>
+<li><code>file=sys.stdout</code>：默认的输出对象是 <code>sys.stdout</code>（即，用户正在使用的屏幕）……</li>
+</ul>
+</blockquote>
+<p>也就是说，这个函数中有若干个具有默认值的参数，即便我们在调用这个函数的时候，就算没有指定它们，它们也存在于此。</p>
+<p>即，当我们调用 <code>print(&#39;Hello&#39;, &#39;world!&#39;)</code> 的时候，相当于我们调用的是 <code>print(&#39;Hello&#39;, &#39;world!&#39;, sep=&#39; &#39;, end=&#39;\n&#39;, file=sys.stdout, flush=False)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys                                  <span class="comment"># 如果没有这一行，代码会报错</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;world!&#x27;</span>)                    <span class="comment"># 下一行的输出和这一行相同</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;world!&#x27;</span>, sep=<span class="string">&#x27; &#x27;</span>, end=<span class="string">&#x27;\n&#x27;</span>, file=sys.stdout, flush=<span class="literal">False</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;world!&#x27;</span>, sep=<span class="string">&#x27;-&#x27;</span>, end=<span class="string">&#x27;\t&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;world!&#x27;</span>, sep=<span class="string">&#x27;~&#x27;</span>)           <span class="comment"># 上一行的末尾是 \t，所以，这一行并没有换行显示</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;world!&#x27;</span>, sep=<span class="string">&#x27;\n&#x27;</span>)          <span class="comment"># 参数之间用换行 \n 分隔</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>Hello world!
+Hello world!
+Hello-world!    Hello~world!
+Hello
+world!
+</code></pre>
+<p>很多人只看各种教材、教程，却从来不去翻阅官方文档 —— 到最后非常吃亏。只不过是多花一点点的功夫而已，看过之后，就会知道：原来 <code>print()</code> 这个函数是可以往文件里写数据的，只要指定 <code>file</code> 这个参数为一个已经打开的文件对象就可以了（真的有很多人完全不知道）……</p>
+<p>另外，现在可以说清楚了：</p>
+<blockquote>
+<p><code>print()</code> 这个函数的返回值是 <code>None</code> —— 注意，它向屏幕输出的内容，与 <code>print()</code> 这个函数的返回值不是一回事。</p>
+</blockquote>
+<p>做为例子，看看 <code>print(print(1))</code> 这个语句 —— <code>print()</code> 这个函数被调用了两次，第一次是 <code>print(1)</code>，它向屏幕输出了一次，完整的输出值实际上是 <code>str(1) + &#39;\n&#39;</code>，而后返回一个值，<code>None</code>；而第二次调用 print()，这相当于是向屏幕输出这个 <code>None</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">print</span>(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>1
+None
+</code></pre>
+<p>“<strong>看说明书</strong>” 就是这样，全都看了，真不一定全部看懂，但看总是比不看强，因为总是有能看懂的部分……</p>
+<h2 id="关键字参数"><a href="#关键字参数" class="headerlink" title="关键字参数"></a>关键字参数</h2><p>在 Python 中，函数的参数，有两种：</p>
+<blockquote>
+<ul>
+<li><strong>位置参数</strong>（Positional Arguments，在官方文档里常被缩写为 <em>arg</em>）</li>
+<li><strong>关键字参数</strong>（Keyword Arguments，在官方文档里常被缩写为 <em>kwarg</em>）</li>
+</ul>
+</blockquote>
+<p>在函数定义中，带有 <code>=</code> 的，即，已为其设定了默认值的参数，叫做 Keyword Arguments，其它的是 Positional Arguments。</p>
+<p>在调用有 Keyword Arguments 的函数之时，如若不提供这些参数，那么参数在执行时，启用的是它在定义的时候为那些 Keyword Arguments 所设定的默认值；如若提供了这些参数的值，那么参数在执行的时候，启用的是接收到的相应值。</p>
+<p>比如，<code>sorted()</code> 函数，它的定义如下：</p>
+<blockquote>
+<p><code>sorted(iterable, *, key=None, reverse=False)</code></p>
+</blockquote>
+<p>现在先只关注它的 Keyword Arguments，<code>reverse</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">sorted</span>(<span class="string">&#x27;abdc&#x27;</span>)</span><br><span class="line"><span class="built_in">sorted</span>(<span class="string">&#x27;abdc&#x27;</span>, reverse=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
+[&#39;d&#39;, &#39;c&#39;, &#39;b&#39;, &#39;a&#39;]
+</code></pre>
+<h2 id="位置参数"><a href="#位置参数" class="headerlink" title="位置参数"></a>位置参数</h2><p>位置参数，顾名思义，是 “由位置决定其值的参数”。拿 <code>divmod()</code> 为例，它的<a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#divmod" >官方文档<i class="fas fa-external-link-alt"></i></a>是这样写的：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/doc-divmod.png?raw=true"
+                     
+                ></p>
+<p>它接收且必须接收两个参数。</p>
+<blockquote>
+<ul>
+<li>当你调用这个函数的时候，括号里写的第一个参数，是被除数，第二个参数是除数 —— 此为该函数的输入；</li>
+<li>而它的返回值，是一个元组（Tuple，至于这是什么东西，后面讲清楚），其中包括两个值，第一个是商，第二个是余 —— 此为该函数的输出。</li>
+</ul>
+</blockquote>
+<p>作为 “这个函数的用户”，你不能（事实上也没必要）调换这两个参数的意义。因为，根据定义，被传递的值的意义就是由参数的位置决定的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">divmod</span>(<span class="number">11</span>, <span class="number">3</span>)</span><br><span class="line">a, b = <span class="built_in">divmod</span>(<span class="number">11</span>, <span class="number">3</span>)</span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line"></span><br><span class="line"><span class="built_in">divmod</span>(<span class="number">3</span>, <span class="number">11</span>)</span><br><span class="line">a, b = <span class="built_in">divmod</span>(<span class="number">3</span>, <span class="number">11</span>)</span><br><span class="line">a</span><br><span class="line">b</span><br></pre></td></tr></table></figure>
+
+<pre><code>(3, 2)
+3
+2
+(0, 3)
+0
+3
+</code></pre>
+<h2 id="可选位置参数"><a href="#可选位置参数" class="headerlink" title="可选位置参数"></a>可选位置参数</h2><p>有些函数，如 <code>pow()</code>，有<strong>可选的位置参数</strong>（Optional Positional Arguments）。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/doc-pow.png?raw=true"
+                     
+                ></p>
+<p>于是，<code>pow()</code> 有两种用法，各有不同的结果：</p>
+<blockquote>
+<ul>
+<li><code>pow(x, y)</code> —— 返回值是 <code>x ** y</code></li>
+<li><code>pow(x, y, z)</code> —— 返回值是 <code>x ** y % z</code></li>
+</ul>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">pow</span>(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="built_in">pow</span>(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>8
+0
+</code></pre>
+<p>注意 <code>pow()</code> 函数定义部分中，圆括号内的方括号 <code>[, z]</code> —— 这是非常严谨的标注，如果没有 <code>z</code>，那么那个逗号 <code>,</code> 就是没必要的。</p>
+<p>看看 <code>exec()</code> 的官方文档（先别管这个函数干嘛用的），注意函数定义中的两个嵌套的方括号：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/doc-exec.png?raw=true"
+                     
+                ></p>
+<p>这些方括号的意思是说：</p>
+<blockquote>
+<ul>
+<li>没在方括号里的 <code>object</code> 是不可或缺的参数，调用时必须提供；</li>
+<li>可以有第二个参数，第二个参数会被接收为 <code>globals</code>；</li>
+<li>在有第二个参数的情况下，第三个参数会被接收为 <code>locals</code>；</li>
+<li><em>但是，你没办法在不指定 <code>globals</code> 这个位置参数的情况下指定 <code>locals</code>……</em></li>
+</ul>
+</blockquote>
+<h2 id="可接收很多值的位置参数"><a href="#可接收很多值的位置参数" class="headerlink" title="可接收很多值的位置参数"></a>可接收很多值的位置参数</h2><p>再回头看看 <code>print()</code>，它的第一个位置参数，<code>object</code> 前面是有个星号的：<code>*object, ...</code>。</p>
+<p>对函数的用户来说，这说明，这个位置可以接收很多个参数（或者说，这个位置可以接收一个列表或者元组）。</p>
+<p>再仔细看看 <code>print()</code>，它只有一个位置参数：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/doc-print-def.png?raw=true"
+                     
+                ></p>
+<p>因为位置决定了值的定义，一般来说，一个函数里最多只有一个这种可以接收很多值的位置参数 —— 否则如何获知谁是谁呢？</p>
+<p>如果与此同时，还有若干个位置参数，那么，<em>能够接收很多值的位置参数</em>只能放置最后，就好像 <code>max()</code> 函数那样：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/doc-max.png?raw=true"
+                     
+                ></p>
+<h2 id="Class-也是函数"><a href="#Class-也是函数" class="headerlink" title="Class 也是函数"></a>Class 也是函数</h2><p>虽然你现在还不一定知道 Class 究竟是什么，但在阅读官方文档的时候，遇到一些内建函数前面写着 Class，比如 <code>Class bool([x])</code>，千万别奇怪，因为 Class 本质上来看就是一种特殊类型的函数，也就是说，它也是函数：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/doc-class.png?raw=true"
+                     
+                ></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">bool</span>()</span><br><span class="line"><span class="built_in">bool</span>(<span class="number">3.1415926</span>)</span><br><span class="line"><span class="built_in">bool</span>(-<span class="number">3.1415926</span>)</span><br><span class="line"><span class="built_in">bool</span>(<span class="number">1</span> == <span class="number">2</span>)</span><br><span class="line"><span class="built_in">bool</span>(<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>False
+True
+True
+False
+False
+</code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本章需要（大致）了解的重点如下，其实很简单：</p>
+<blockquote>
+<ul>
+<li>你可以把函数当作一个产品，而你自己是这个产品的用户；</li>
+<li>既然你是产品的用户，你要养成好习惯，一定要亲自阅读产品说明书；</li>
+<li>调用函数的时候，注意<em>可选位置参数的使用方法</em>和<em>关键字参数的默认值</em>；</li>
+<li>函数定义部分，注意两个符号就行了，<code>[]</code> 和 <code>=</code>；</li>
+<li>所有的函数都有返回值，即便它内部不指定返回值，也有一个默认返回值：<code>None</code>；</li>
+<li>另外，一定要耐心阅读该函数在使用的时候需要注意什么 —— 产品说明书的主要作用就在这里……</li>
+</ul>
+</blockquote>
+<p>知道这些就很好了！</p>
+<p>这就好像你拿着一张地图，不可能一下子掌握其中所有的细节，但花几分钟搞清楚 “图例”（Legend）部分总是可以的，知道什么样的线标示的是公交车，什么样的线标示的是地铁，什么样的线标示的是桥梁，然后知道上北下南左西右东 —— 这之后，就可以开始慢慢研究地图了……</p>
+<p>为了学会使用 Python，你以后最常访问的页面一定是这个：</p>
+<blockquote>
+<ul>
+<li><p><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/index.html" >https://docs.python.org/3/library/index.html<i class="fas fa-external-link-alt"></i></a></p>
+<p>而最早反复阅读查询的页面肯定是其中的这两个：</p>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html" >https://docs.python.org/3/library/functions.html<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html" >https://docs.python.org/3/library/stdtypes.html<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>对了，还有就是，在这一章之后，你已经基本上 “<strong>精通</strong>” 了 <code>print()</code> 这个函数的用法。</p>
+<hr>
+<p><strong>脚注</strong></p>
+<p>（2019.02.14）<a name='fn1'>[1]</a>：<code>print()</code> 函数的<a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#print" >官方文档<i class="fas fa-external-link-alt"></i></a>里，<code>sep=&#39;&#39;</code> 肯定是 <code>sep=&#39; &#39;</code> 的笔误 —— 可以用以下代码验证：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, sep=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>（2019.03.16）有读者提醒：<a class="link"   target="_blank" rel="noopener" href="https://github.com/selfteaching/the-craft-of-selfteaching/issues/111" >https://github.com/selfteaching/the-craft-of-selfteaching/issues/111<i class="fas fa-external-link-alt"></i></a></p>
+<blockquote>
+<p>而现在（2019.03.16）复制粘贴文档中的 <code>sep=&#39; &#39;</code>，会发现是有空格的。</p>
+<p>这是改了么？</p>
+</blockquote>
+<p>我回去查看了一下 2019.02.13 我提交的 bug track：<a class="link"   target="_blank" rel="noopener" href="https://bugs.python.org/issue35986" >https://bugs.python.org/issue35986<i class="fas fa-external-link-alt"></i></a>，结论是 “人家没问题，是我自己的浏览器字体设置有问题”……</p>
+<p>然而，我决定将这段文字保留在此书里，以便人们看到 “平日里软件维护是什么样的” —— 作为一个实例放在这里，很好。</p>
+<p><a href='#fn1b'><small>↑Back to Content↑</small></a></p>
+
+            
+        </div>
+        <div class="page-template-comments">
+            
+        </div>
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">iSTEP</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

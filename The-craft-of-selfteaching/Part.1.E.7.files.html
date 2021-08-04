@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="iSTEP">
+    <meta name="description" content="iSTEP Blogs">
+    <meta name="author" content="iSTEP">
+    
+    <title>
+        
+            文件 |
+        
+        iSTEP&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/iSTEP.github.io/css/style.css">
+
+    <link rel="shortcut icon" href="/iSTEP.github.io/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"et-yzk.github.io","root":"/iSTEP.github.io/","language":"zh-CN","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"https://gitee.com/yzketx/image-markdown/raw/master/img/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/iSTEP.github.io/atom.xml" title="iSTEP" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                iSTEP&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/iSTEP.github.io/The-craft-of-selfteaching"
+                            >
+                                THE-CRAFT-OF-SELFTEACHING
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/iSTEP.github.io/The-craft-of-selfteaching">THE-CRAFT-OF-SELFTEACHING</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="page-template-container">
+        
+        
+        <div class="page-template-content markdown-body">
+            
+                <h1 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h1><p>我们需要处理的数据，一定是很多，所以才必须由计算机帮我们处理 —— 大量的数据保存、读取、写入，需要的就是文件（Files）。在这一章里，我们只介绍最简单的文本文件。</p>
+<h2 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h2><p>创建一个文件，最简单的方式就是用 Python 的内建函数 <code>open()</code>。</p>
+<p><code>open()</code> 函数的<a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#open" >官方文档<i class="fas fa-external-link-alt"></i></a>很长，以下是个简化版：</p>
+<blockquote>
+<p><code>open(file, mode=&#39;r&#39;)</code></p>
+</blockquote>
+<p>第二个参数，<code>mode</code>，默认值是 <code>&#39;r&#39;</code>，可用的 <code>mode</code> 有以下几种：</p>
+<table>
+<thead>
+<tr>
+<th>参数字符</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&#39;r&#39;</code></td>
+<td>只读模式</td>
+</tr>
+<tr>
+<td><code>&#39;w&#39;</code></td>
+<td>写入模式（重建）</td>
+</tr>
+<tr>
+<td><code>&#39;x&#39;</code></td>
+<td>排他模式 —— 如果文件已存在则打开失败</td>
+</tr>
+<tr>
+<td><code>&#39;a&#39;</code></td>
+<td>追加模式 —— 在已有文件末尾追加</td>
+</tr>
+<tr>
+<td><code>&#39;b&#39;</code></td>
+<td>二进制文件模式</td>
+</tr>
+<tr>
+<td><code>&#39;t&#39;</code></td>
+<td>文本文件模式（默认）</td>
+</tr>
+<tr>
+<td><code>&#39;+&#39;</code></td>
+<td>读写模式（更新）</td>
+</tr>
+</tbody></table>
+<p>创建一个新文件，用这样一个语句就可以：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">open</span>(<span class="string">&#x27;/tmp/test-file.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;_io.TextIOWrapper name=&#39;/tmp/test-file.txt&#39; mode=&#39;w&#39; encoding=&#39;UTF-8&#39;&gt;
+</code></pre>
+<p>当然，更多的时候，我们会把这个函数的返回值，一个所谓的 <a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/glossary.html#term-file-object" >file object<i class="fas fa-external-link-alt"></i></a>，保存到一个变量中，以便后面调用这个 file object 的各种 Methods，比如获取文件名 <code>file.name</code>，比如关闭文件 <code>file.close()</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;/tmp/test-file.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(f.name)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<pre><code>/tmp/test-file.txt
+</code></pre>
+<h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h2><p>删除文件，就得调用 <code>os</code> 模块了。删除文件之前，要先确认文件是否存在，否则删除命令会失败。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;/tmp/test-file1.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(f.name)</span><br><span class="line">f.close() <span class="comment">#关闭文件，否则无法删除文件</span></span><br><span class="line"><span class="keyword">if</span> os.path.exists(f.name):</span><br><span class="line">    os.remove(f.name)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;f.name&#125;</span> deleted.&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;f.name&#125;</span> does not exist.&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>/tmp/test-file1.txt
+/tmp/test-file1.txt deleted.
+</code></pre>
+<h2 id="读写文件"><a href="#读写文件" class="headerlink" title="读写文件"></a>读写文件</h2><p>创建文件之后，我们可以用 <code>f.write()</code> 把数据写入文件，也可以用 <code>f.read()</code> 读取文件。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;/tmp/test-file.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">f.write(<span class="string">&#x27;first line\nsecond line\nthird line\n&#x27;</span>)</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;/tmp/test-file.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">s = f.read()</span><br><span class="line"><span class="built_in">print</span>(s)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<pre><code>first line
+second line
+third line
+</code></pre>
+<p>文件有很多行的时候，我们可以用 <code>file.readline()</code> 操作，这个 Method 每次调用，都会返回文件中的新一行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;/tmp/test-file.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">f.write(<span class="string">&#x27;first line\nsecond line\nthird line\n&#x27;</span>)</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;/tmp/test-file.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">s = f.readline()    <span class="comment"># 返回的是 &#x27;first line\n&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(s)</span><br><span class="line">s = f.readline()    <span class="comment"># 返回的是 &#x27;second line\n&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(s)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<pre><code>first line
+second line
+</code></pre>
+<p><strong>注意</strong>，返回结果好像跟你想的不太一样。这时候，之前见过的 <code>str.strip()</code> 就派上用场了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;/tmp/test-file.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">f.write(<span class="string">&#x27;first line\nsecond line\nthird line\n&#x27;</span>)</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;/tmp/test-file.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">s = f.readline().strip()    <span class="comment"># 返回的是 &#x27;first line&#x27;，&#x27;\n&#x27; 被去掉了……</span></span><br><span class="line"><span class="built_in">print</span>(s)</span><br><span class="line">s = f.readline().strip()    <span class="comment"># 返回的是 &#x27;second line&#x27;，&#x27;\n&#x27; 被去掉了……</span></span><br><span class="line"><span class="built_in">print</span>(s)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<pre><code>first line
+second line
+</code></pre>
+<p>与之相对的，我们可以使用 <code>file.readlines()</code> 这个 Method，将文件作为一个列表返回，列表中的每个元素对应着文件中的每一行：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;/tmp/test-file.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">f.write(<span class="string">&#x27;first line\nsecond line\nthird line\n&#x27;</span>)</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;/tmp/test-file.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">s = f.readlines()    <span class="comment"># 返回的是一个列表，注意，readlines，最后的 &#x27;s&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(s)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<pre><code>[&#39;first line\n&#39;, &#39;second line\n&#39;, &#39;third line\n&#39;]
+</code></pre>
+<p>既然返回的是列表，那么就可以被迭代，逐一访问每一行：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;/tmp/test-file.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">f.write(<span class="string">&#x27;first line\nsecond line\nthird line\n&#x27;</span>)</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;/tmp/test-file.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">    <span class="built_in">print</span>(line)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<pre><code>first line
+second line
+third line
+</code></pre>
+<p>与之相对的，我们也可以用 <code>file.writelines()</code> 把一个列表写入到一个文件中，按索引顺序（从 0 开始）逐行写入列表的对应元素：：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a_list = [<span class="string">&#x27;first line\n&#x27;</span>, <span class="string">&#x27;second line\n&#x27;</span>, <span class="string">&#x27;third line\n&#x27;</span>]</span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;/tmp/test-file.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">f.writelines(a_list)</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;/tmp/test-file.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">    <span class="built_in">print</span>(line)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<pre><code>first line
+second line
+third line
+</code></pre>
+<h2 id="with-语句块"><a href="#with-语句块" class="headerlink" title="with 语句块"></a>with 语句块</h2><p>针对文件操作，Python 有个另外的语句块写法，更便于阅读：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(...) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(...)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>这样，就可以把针对当前以特定模式打开的某个文件的各种操作都写入同一个语句块了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;/tmp/test-file.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">&#x27;first line\nsecond line\nthird line\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;/tmp/test-file.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">        <span class="built_in">print</span>(line)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> os.path.exists(f.name):</span><br><span class="line">    os.remove(f.name)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;f.name&#125;</span> deleted.&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;f.name&#125;</span> does not exist.&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>first line
+second line
+third line
+test-file.txt deleted.
+</code></pre>
+<p>另外，用 <code>with</code> 语句块的另外一个附加好处就是不用写 <code>file.close()</code> 了……</p>
+<h2 id="另一个完整的程序"><a href="#另一个完整的程序" class="headerlink" title="另一个完整的程序"></a>另一个完整的程序</h2><p>若干年前，我在写某本书的时候，需要一个例子 —— 用来说明 “<strong>即便是结论正确，论证过程乱七八糟也不行！</strong>”</p>
+<p>作者就是这样，主要任务之一就是给论点找例子找论据。找得到不仅<em>恰当</em>且又<em>精彩</em>的例子和论据的，就是好作者。后面这个 “<em>精彩</em>” 二字要耗费很多时间精力，因为它意味着说 “要找到<em>很多</em>例子而后在里面选出<em>最精彩</em>的那个！” —— 根本不像很多人以为的那样，是所谓的 “信手拈来”。</p>
+<p>找了很多例子都不满意…… 终于有一天，我看到这么个说法：</p>
+<blockquote>
+<p>如果把字母 <code>a</code> 计为 <code>1</code>、<code>b</code> 计为 <code>2</code>、<code>c</code> 计为 <code>3</code> …… <code>z</code> 计为 <code>26</code>，那么：</p>
+<ul>
+<li>knowledge = 96</li>
+<li>hardwork = 98</li>
+<li>attitude = 100</li>
+</ul>
+<p>所以结论是：</p>
+<ul>
+<li>知识（<em>knowledge</em>）与勤奋（<em>hardwork</em>）固然都很重要；</li>
+<li>但是，决定成败的却是态度（<strong>attitude</strong>）！</li>
+</ul>
+</blockquote>
+<p>结论虽然有道理 —— 可这论证过程实在是太过分了罢……</p>
+<p>我很高兴，觉得这就是个<em>好例子</em>！并且，加工一下，会让读者觉得很精彩 —— 如果能找到一些按照同样的计算方式能得到 100 的单词，并且还是那种一看就是 “反例” 的单词……</p>
+<p>凭直觉，英文单词几十万，如此这般等于 100 的单词岂不是数不胜数？并且，一定会有很多负面意义的单词如此计算也等于 100 罢？然而，这种事情凭直觉是不够的，手工计算又会被累死…… 于是，面对如此荒谬的论证过程，我们竟然 “无话可说”。</p>
+<p>幸亏我是会写程序的人。所以，不会 “干着急没办法”，我有能力让计算机帮我把活干了。</p>
+<p>很快就搞定了，找到很多很多个如此计算加起来等于 100 的英文单词，其中包括：</p>
+<blockquote>
+<ul>
+<li>connivance（纵容）</li>
+<li>coyness（羞怯）</li>
+<li>flurry（慌张）</li>
+<li>impotence（阳痿）</li>
+<li>stress（压力）</li>
+<li>tuppence（微不足道的东西）</li>
+<li>……</li>
+</ul>
+</blockquote>
+<p>所以，决定成败的可以是 “慌张”（flurry），甚至是 “阳痿”（impotence）？这不明显是胡说八道嘛！</p>
+<p>—— 精彩例子制作完毕，我把它放进了书里。</p>
+<p>那，具体的过程是什么样的呢？</p>
+<p>首先我得找到一个英文单词列表，很全的那种。这事用不着写程序，Google 一下就可以了。我搜索的关键字是 “<a class="link"   target="_blank" rel="noopener" href="https://www.google.com/search?q=english+word+list" >english word list<i class="fas fa-external-link-alt"></i></a>”，很直观吧？然后就找到一个：<a class="link"   target="_blank" rel="noopener" href="https://github.com/dwyl/english-words" >https://github.com/dwyl/english-words<i class="fas fa-external-link-alt"></i></a>；这个链接里有一个 <a class="link"   target="_blank" rel="noopener" href="https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt" >words-alpha.txt<i class="fas fa-external-link-alt"></i></a> 文件，其中包含接近 37,0101 个单词，应该够用了！下载下来用程序处理就可以了！</p>
+<p>因为文件里每行一个单词，所以，就让程序打开文件，将文件读入一个列表，而后迭代这个列表，逐一计算那个单词每个字母所代表的数字，并加起来看看是否等于 100？如果是，就将它们输出到屏幕…… 好像不是很难。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;words_alpha.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> file.readlines():</span><br><span class="line">        <span class="keyword">pass</span> <span class="comment"># 先用 pass 占个位，一会儿再写计算过程</span></span><br></pre></td></tr></table></figure>
+
+<p>按照上面那说法，把 <code>a</code> 记为 <code>1</code>，直至把 <code>z</code> 记为 <code>26</code>，这事并不难，因为有 <code>ord()</code> 函数啊 —— 这个函数返回字符的 Unicode 编码：<code>ord(&#39;a&#39;)</code> 的值是 <code>97</code>，那按上面的说法，用 <code>ord(&#39;a&#39;) - 96</code> 就相当于得到了 <code>1</code> 这个数值…… 而 <code>ord(&#39;z&#39;) - 96</code> 就会得到 <code>26</code> 这个数值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>97
+</code></pre>
+<p>那么，计算 <code>&#39;knowledge&#39;</code> 这个字符串的代码很简单：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">word = <span class="string">&#x27;knowledge&#x27;</span></span><br><span class="line"><span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> char <span class="keyword">in</span> word:</span><br><span class="line">    <span class="built_in">sum</span> += <span class="built_in">ord</span>(char) - <span class="number">96</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">sum</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>96
+</code></pre>
+<p>果然，得到的数值等于 <code>96</code> —— 不错。把它写成一个函数罢：<code>sum_of_word(word)</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum_of_word</span>(<span class="params">word</span>):</span></span><br><span class="line">    <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> word:</span><br><span class="line">        <span class="built_in">sum</span> += <span class="built_in">ord</span>(char) - <span class="number">96</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line"></span><br><span class="line">sum_of_word(<span class="string">&#x27;attitude&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>100
+</code></pre>
+<p>那让程序就算把几十万行都算一遍也好像很简单了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum_of_word</span>(<span class="params">word</span>):</span></span><br><span class="line">    <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> word:</span><br><span class="line">        <span class="built_in">sum</span> += <span class="built_in">ord</span>(char) - <span class="number">96</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;words_alpha.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> file.readlines():</span><br><span class="line">        <span class="keyword">if</span> sum_of_word(word) == <span class="number">100</span>:</span><br><span class="line">            <span class="built_in">print</span>(word)</span><br></pre></td></tr></table></figure>
+
+<pre><code>abstrusenesses
+acupuncturist
+adenochondrosarcoma
+...
+worshipability
+zeuctocoelomatic
+zygapophysis
+</code></pre>
+<p>嗯？怎么输出结果跟想得不一样？找到的词怎么都 “奇形怪状” 的…… 而且，输出结果中也没有 <code>attitude</code> 这个词。</p>
+<p>插入个中止语句，<code>break</code>，把找到的第一个词中的每个字符和它所对应的值都拿出来看看？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum_of_word</span>(<span class="params">word</span>):</span></span><br><span class="line">    <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> word:</span><br><span class="line">        <span class="built_in">sum</span> += <span class="built_in">ord</span>(char) - <span class="number">96</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;words_alpha.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> file.readlines():</span><br><span class="line">        <span class="keyword">if</span> sum_of_word(word) == <span class="number">100</span>:</span><br><span class="line">            <span class="built_in">print</span>(word)</span><br><span class="line">            <span class="keyword">for</span> c <span class="keyword">in</span> word:        <span class="comment"># 把字母和值都打出来，看看对不对？</span></span><br><span class="line">                <span class="built_in">print</span>(c, <span class="built_in">ord</span>(c) - <span class="number">96</span>)</span><br><span class="line">            <span class="keyword">break</span>                 <span class="comment"># 找到一个之后就停下来。</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>abstrusenesses
+
+a 1
+b 2
+s 19
+t 20
+r 18
+u 21
+s 19
+e 5
+n 14
+e 5
+s 19
+s 19
+e 5
+s 19
+
+ -86
+</code></pre>
+<p>怎么有个 <code>-86</code>？！仔细看看输出结果，看到每一行之间都被插入了一个空行，想到应该是从文件里读出的行中，包含 <code>\n</code> 这种换行符…… 如果是那样的话，那么 <code>ord(&#39;\n&#39;) -96</code> 返回的结果是 <code>-86</code> 呢，怪不得找到的词都 “奇形怪状” 的……</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ord</span>(<span class="string">&#x27;\n&#x27;</span>) -<span class="number">96</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>-86
+</code></pre>
+<p>改进一下呗 —— 倒也简单，在计算前把读入字符串前后的空白字符都给删掉就好了，用 <code>str.strip()</code> 就可以了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum_of_word</span>(<span class="params">word</span>):</span></span><br><span class="line">    <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> word:</span><br><span class="line">        <span class="built_in">sum</span> += <span class="built_in">ord</span>(char) - <span class="number">96</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;words_alpha.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> file.readlines():</span><br><span class="line">        <span class="keyword">if</span> sum_of_word(word.strip()) == <span class="number">100</span>:</span><br><span class="line">            <span class="built_in">print</span>(word)</span><br></pre></td></tr></table></figure>
+
+<pre><code>abactinally
+abatements
+abbreviatable
+...
+zithern
+zoogleas
+zorgite
+</code></pre>
+<p>如果想把符合条件的词保存到一个文件 <code>results.txt</code> 里的话，那么：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum_of_word</span>(<span class="params">word</span>):</span></span><br><span class="line">    <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> word:</span><br><span class="line">        <span class="built_in">sum</span> += <span class="built_in">ord</span>(char) - <span class="number">96</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;results.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> result:</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;words_alpha.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> file.readlines():</span><br><span class="line">            <span class="keyword">if</span> sum_of_word(word.strip()) == <span class="number">100</span>:</span><br><span class="line">                result.write(word)</span><br></pre></td></tr></table></figure>
+
+<p>竟然这么简单就搞定了？！</p>
+<p>这 10 行的代码，在几秒钟内从 370,101 个英文单词中找到 3,771 个如此计算等于 100 的词汇。</p>
+<p>喝着咖啡翻一翻 <code>results.txt</code>，很快就找到了那些用来做反例格外恰当的词汇。</p>
+<p>真无法想象当年的自己若是不懂编程的话现在会是什么样子……</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这一章我们介绍了文本文件的基本操作：</p>
+<blockquote>
+<ul>
+<li>打开文件，直接用内建函数，<code>open()</code>，基本模式有 <code>r</code> 和 <code>w</code>；</li>
+<li>删除文件，得调用 <code>os</code> 模块，使用 <code>os.remove()</code>，删除文件前最好确认文件确实存在……</li>
+<li>读写文件分别有 <code>file.read()</code>、<code>file.write()</code>、<code>file.readline()</code>、<code>file.readlines()</code>、<code>file.writelines()</code>；</li>
+<li>可以用 <code>with</code> 把相关操作都放入同一个语句块……</li>
+</ul>
+</blockquote>
+
+            
+        </div>
+        <div class="page-template-comments">
+            
+        </div>
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">iSTEP</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

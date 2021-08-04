@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="iSTEP">
+    <meta name="description" content="iSTEP Blogs">
+    <meta name="author" content="iSTEP">
+    
+    <title>
+        
+            关于参数（下） |
+        
+        iSTEP&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/iSTEP.github.io/css/style.css">
+
+    <link rel="shortcut icon" href="/iSTEP.github.io/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"et-yzk.github.io","root":"/iSTEP.github.io/","language":"zh-CN","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"https://gitee.com/yzketx/image-markdown/raw/master/img/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/iSTEP.github.io/atom.xml" title="iSTEP" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                iSTEP&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/iSTEP.github.io/The-craft-of-selfteaching"
+                            >
+                                THE-CRAFT-OF-SELFTEACHING
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/iSTEP.github.io/The-craft-of-selfteaching">THE-CRAFT-OF-SELFTEACHING</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="page-template-container">
+        
+        
+        <div class="page-template-content markdown-body">
+            
+                <h1 id="关于参数（下）"><a href="#关于参数（下）" class="headerlink" title="关于参数（下）"></a>关于参数（下）</h1><h2 id="可以接收一系列值的位置参数"><a href="#可以接收一系列值的位置参数" class="headerlink" title="可以接收一系列值的位置参数"></a>可以接收一系列值的位置参数</h2><p>如果你在定义参数的时候，在一个<em>位置参数</em>（Positional Arguments）前面标注了星号，<code>*</code>，那么，这个位置参数可以接收一系列值，在函数内部可以对这一系列值用 <code>for ... in ...</code> 循环进行逐一的处理。</p>
+<p>带一个星号的参数，英文名称是 “Arbitrary Positional Arguments”，姑且翻译为 “随意的位置参数”。</p>
+<p>还有带两个星号的参数，一会儿会讲到，英文名称是 “Arbitrary Keyword Arguments”，姑且翻译为 “随意的关键字参数”。</p>
+<blockquote>
+<p>有些中文书籍把 “Arbitrary Positional Arguments” 翻译成 “可变位置参数”。事实上，在这样的地方，无论怎样的中文翻译都是令人觉得非常吃力的。前面的这个翻译还好了，我还见过把 “Arbitrary Keyword Arguments” 翻译成 “武断的关键字参数” 的 —— 我觉得这样的翻译肯定会使读者产生说不明道不白的疑惑。</p>
+<p>所以，<strong>入门之后就尽量只用英文</strong>是个好策略。虽然刚开始有点吃力，但后面会很省心，很长寿 —— 是呀，少浪费时间、少浪费生命，其实就相当于更长寿了呀！</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">*names</span>):</span></span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;Hi, <span class="subst">&#123;name&#125;</span>!&#x27;</span>)</span><br><span class="line">say_hi()</span><br><span class="line">say_hi(<span class="string">&#x27;ann&#x27;</span>)</span><br><span class="line">say_hi(<span class="string">&#x27;mike&#x27;</span>, <span class="string">&#x27;john&#x27;</span>, <span class="string">&#x27;zeo&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hi, ann!
+Hi, mike!
+Hi, john!
+Hi, zeo!
+</code></pre>
+<p><code>say_hi()</code> 这一行没有任何输出。因为你在调用函数的时候，没有给它传递任何值，于是，在函数内部代码执行的时候，<code>name in names</code> 的值是 <code>False</code>，所以，<code>for</code> 循环内部的代码没有被执行。</p>
+<p>在函数内部，是把 <code>names</code> 这个参数当作容器处理的 —— 否则也没办法用 <code>for ... in ...</code> 来处理。而在调用函数的时候，我们是可以将一个容器传递给函数的 Arbitrary Positional Arguments 的 —— 做法是，在调用函数的时候，在参数前面加上星号 <code>*</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">*names</span>):</span></span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;Hi, <span class="subst">&#123;name&#125;</span>!&#x27;</span>)</span><br><span class="line"></span><br><span class="line">names = (<span class="string">&#x27;mike&#x27;</span>, <span class="string">&#x27;john&#x27;</span>, <span class="string">&#x27;zeo&#x27;</span>)</span><br><span class="line">say_hi(*names)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hi, mike!
+Hi, john!
+Hi, zeo!
+</code></pre>
+<p>实际上，因为以上的 <code>say_hi(*names)</code> 函数内部就是把接收到的参数当作容器处理的，于是，在调用这个函数的时候，向它传递任何容器都会被同样处理：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">*names</span>):</span></span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;Hi, <span class="subst">&#123;name&#125;</span>!&#x27;</span>)</span><br><span class="line"></span><br><span class="line">a_string = <span class="string">&#x27;Python&#x27;</span></span><br><span class="line">say_hi(*a_string)</span><br><span class="line"></span><br><span class="line">a_range = <span class="built_in">range</span>(<span class="number">10</span>)</span><br><span class="line">say_hi(*a_range)</span><br><span class="line"></span><br><span class="line">a_list = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">10</span>, <span class="number">0</span>, -<span class="number">1</span>))</span><br><span class="line">say_hi(*a_list)</span><br><span class="line"></span><br><span class="line">a_dictionary = &#123;<span class="string">&#x27;ann&#x27;</span>:<span class="number">2321</span>, <span class="string">&#x27;mike&#x27;</span>:<span class="number">8712</span>, <span class="string">&#x27;joe&#x27;</span>: <span class="number">7610</span>&#125;</span><br><span class="line">say_hi(*a_dictionary)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hi, P!
+Hi, y!
+Hi, t!
+Hi, h!
+Hi, o!
+Hi, n!
+Hi, 0!
+Hi, 1!
+Hi, 2!
+Hi, 3!
+Hi, 4!
+Hi, 5!
+Hi, 6!
+Hi, 7!
+Hi, 8!
+Hi, 9!
+Hi, 10!
+Hi, 9!
+Hi, 8!
+Hi, 7!
+Hi, 6!
+Hi, 5!
+Hi, 4!
+Hi, 3!
+Hi, 2!
+Hi, 1!
+Hi, ann!
+Hi, mike!
+Hi, joe!
+</code></pre>
+<p>_在定义可以接收一系列值的位置参数时，建议在函数内部为该变量命名时总是用<strong>复数</strong>_，因为函数内部，总是需要 <code>for</code> 循环去迭代元组中的元素，这样的时候，名称的复数形式对代码的可读性很有帮助 —— 注意以上程序第二行。以中文为母语的人，在这个细节上常常感觉 “不堪重负” —— 因为中文的名词没有复数 —— 但必须习惯。（同样的道理，若是用拼音命名变量，就肯定是为将来挖坑……）</p>
+<p><strong>注意</strong>：一个函数中，可以接收一系列值的位置参数只能有一个；并且若是还有其它位置参数存在，那就必须把这个可以接收一系列值的位置参数排在所有其它位置参数之后。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">greeting, *names</span>):</span></span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;greeting&#125;</span>, <span class="subst">&#123;name.capitalize()&#125;</span>!&#x27;</span>)</span><br><span class="line"></span><br><span class="line">say_hi(<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;mike&#x27;</span>, <span class="string">&#x27;john&#x27;</span>, <span class="string">&#x27;zeo&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hello, Mike!
+Hello, John!
+Hello, Zeo!
+</code></pre>
+<h2 id="为函数的某些参数设定默认值"><a href="#为函数的某些参数设定默认值" class="headerlink" title="为函数的某些参数设定默认值"></a>为函数的某些参数设定默认值</h2><p>可以在定义函数的时候，为某些参数设定默认值，这些有默认值的参数，又被称作关键字参数（Keyword Arguments）。从这个函数的 “用户” 角度来看，这些设定了默认值的参数，就成了 “可选参数”。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">greeting, *names, capitalized=<span class="literal">False</span></span>):</span></span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">        <span class="keyword">if</span> capitalized:</span><br><span class="line">            name = name.capitalize()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;greeting&#125;</span>, <span class="subst">&#123;name&#125;</span>!&#x27;</span>)</span><br><span class="line"></span><br><span class="line">say_hi(<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;mike&#x27;</span>, <span class="string">&#x27;john&#x27;</span>, <span class="string">&#x27;zeo&#x27;</span>)</span><br><span class="line">say_hi(<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;mike&#x27;</span>, <span class="string">&#x27;john&#x27;</span>, <span class="string">&#x27;zeo&#x27;</span>, capitalized=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hello, mike!
+Hello, john!
+Hello, zeo!
+Hello, Mike!
+Hello, John!
+Hello, Zeo!
+</code></pre>
+<h2 id="可以接收一系列值的关键字参数"><a href="#可以接收一系列值的关键字参数" class="headerlink" title="可以接收一系列值的关键字参数"></a>可以接收一系列值的关键字参数</h2><p>之前我们看到，可以设定一个位置参数（Positional Argument），接收一系列的值，被称作 “Arbitrary Positional Argument”；</p>
+<p>同样地，我们也可以设定一个可以接收很多值的关键字参数（Arbitrary Keyword Argument）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">**names_greetings</span>):</span></span><br><span class="line">    <span class="keyword">for</span> name, greeting <span class="keyword">in</span> names_greetings.items():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;greeting&#125;</span>, <span class="subst">&#123;name&#125;</span>!&#x27;</span>)</span><br><span class="line"></span><br><span class="line">say_hi(mike=<span class="string">&#x27;Hello&#x27;</span>, ann=<span class="string">&#x27;Oh, my darling&#x27;</span>, john=<span class="string">&#x27;Hi&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hello, mike!
+Oh, my darling, ann!
+Hi, john!
+</code></pre>
+<p>既然在函数内部，我们在处理接收到的 Arbitrary Keyword Argument 时，用的是对字典的迭代方式，那么，在调用函数的时候，也可以直接使用字典的形式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">**names_greetings</span>):</span></span><br><span class="line">    <span class="keyword">for</span> name, greeting <span class="keyword">in</span> names_greetings.items():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;greeting&#125;</span>, <span class="subst">&#123;name&#125;</span>!&#x27;</span>)</span><br><span class="line"></span><br><span class="line">a_dictionary = &#123;<span class="string">&#x27;mike&#x27;</span>:<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;ann&#x27;</span>:<span class="string">&#x27;Oh, my darling&#x27;</span>, <span class="string">&#x27;john&#x27;</span>:<span class="string">&#x27;Hi&#x27;</span>&#125;</span><br><span class="line">say_hi(**a_dictionary)</span><br><span class="line"></span><br><span class="line">say_hi(**&#123;<span class="string">&#x27;mike&#x27;</span>:<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;ann&#x27;</span>:<span class="string">&#x27;Oh, my darling&#x27;</span>, <span class="string">&#x27;john&#x27;</span>:<span class="string">&#x27;Hi&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hello, mike!
+Oh, my darling, ann!
+Hi, john!
+Hello, mike!
+Oh, my darling, ann!
+Hi, john!
+</code></pre>
+<p>至于在函数内部，你用什么样的迭代方式去处理这个字典，是你自己的选择：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_hi_2</span>(<span class="params">**names_greetings</span>):</span></span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> names_greetings:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;names_greetings[name]&#125;</span>, <span class="subst">&#123;name&#125;</span>!&#x27;</span>)</span><br><span class="line">say_hi_2(mike=<span class="string">&#x27;Hello&#x27;</span>, ann=<span class="string">&#x27;Oh, my darling&#x27;</span>, john=<span class="string">&#x27;Hi&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hello, mike!
+Oh, my darling, ann!
+Hi, john!
+</code></pre>
+<h2 id="函数定义时各种参数的排列顺序"><a href="#函数定义时各种参数的排列顺序" class="headerlink" title="函数定义时各种参数的排列顺序"></a>函数定义时各种参数的排列顺序</h2><p>在定义函数的时候，各种不同类型的参数应该按什么顺序摆放呢？对于之前写过的 <code>say_hi()</code> 这个函数，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">greeting, *names, capitalized=<span class="literal">False</span></span>):</span></span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">        <span class="keyword">if</span> capitalized:</span><br><span class="line">            name = name.capitalize()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;greeting&#125;</span>, <span class="subst">&#123;name&#125;</span>!&#x27;</span>)</span><br><span class="line"></span><br><span class="line">say_hi(<span class="string">&#x27;Hi&#x27;</span>, <span class="string">&#x27;mike&#x27;</span>, <span class="string">&#x27;john&#x27;</span>, <span class="string">&#x27;zeo&#x27;</span>)</span><br><span class="line">say_hi(<span class="string">&#x27;Welcome&#x27;</span>, <span class="string">&#x27;mike&#x27;</span>, <span class="string">&#x27;john&#x27;</span>, <span class="string">&#x27;zeo&#x27;</span>, capitalized=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hi, mike!
+Hi, john!
+Hi, zeo!
+Welcome, Mike!
+Welcome, John!
+Welcome, Zeo!
+</code></pre>
+<p>如果，你想给其中的 <code>greeting</code> 参数也设定个默认值怎么办？写成这样好像可以：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">greeting=<span class="string">&#x27;Hello&#x27;</span>, *names, capitalized=<span class="literal">False</span></span>):</span></span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">        <span class="keyword">if</span> capitalized:</span><br><span class="line">            name = name.capitalize()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;greeting&#125;</span>, <span class="subst">&#123;name&#125;</span>!&#x27;</span>)</span><br><span class="line"></span><br><span class="line">say_hi(<span class="string">&#x27;Hi&#x27;</span>, <span class="string">&#x27;mike&#x27;</span>, <span class="string">&#x27;john&#x27;</span>, <span class="string">&#x27;zeo&#x27;</span>)</span><br><span class="line">say_hi(<span class="string">&#x27;Welcome&#x27;</span>, <span class="string">&#x27;mike&#x27;</span>, <span class="string">&#x27;john&#x27;</span>, <span class="string">&#x27;zeo&#x27;</span>, capitalized=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hi, mike!
+Hi, john!
+Hi, zeo!
+
+Welcome, Mike!
+Welcome, John!
+Welcome, Zeo!
+</code></pre>
+<p>但 <code>greeting</code> 这个参数虽然有默认值，可这个函数在被调用的时候，还是必须要给出这个参数，否则输出结果出乎你的想象：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">greeting=<span class="string">&#x27;Hello&#x27;</span>, *names, capitalized=<span class="literal">False</span></span>):</span></span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">        <span class="keyword">if</span> capitalized:</span><br><span class="line">            name = name.capitalize()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;greeting&#125;</span>, <span class="subst">&#123;name&#125;</span>!&#x27;</span>)</span><br><span class="line"></span><br><span class="line">say_hi(<span class="string">&#x27;mike&#x27;</span>, <span class="string">&#x27;john&#x27;</span>, <span class="string">&#x27;zeo&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>mike, john!
+mike, zeo!
+</code></pre>
+<p>设定了默认值的 <code>greeting</code>，竟然不像你想象的那样是 “可选参数”！所以，你得这样写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">*names, greeting=<span class="string">&#x27;Hello&#x27;</span>, capitalized=<span class="literal">False</span></span>):</span></span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">        <span class="keyword">if</span> capitalized:</span><br><span class="line">            name = name.capitalize()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;greeting&#125;</span>, <span class="subst">&#123;name&#125;</span>!&#x27;</span>)</span><br><span class="line"></span><br><span class="line">say_hi(<span class="string">&#x27;mike&#x27;</span>, <span class="string">&#x27;john&#x27;</span>, <span class="string">&#x27;zeo&#x27;</span>)</span><br><span class="line">say_hi(<span class="string">&#x27;mike&#x27;</span>, <span class="string">&#x27;john&#x27;</span>, <span class="string">&#x27;zeo&#x27;</span>, greeting=<span class="string">&#x27;Hi&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hello, mike!
+Hello, john!
+Hello, zeo!
+Hi, mike!
+Hi, john!
+Hi, zeo!
+</code></pre>
+<p>这是因为函数被调用时，面对许多参数，Python 需要按照既定的规则（即，顺序）判定每个参数究竟是哪一类型的参数：</p>
+<blockquote>
+<p><strong>Order of Arguments</strong></p>
+<ol>
+<li>Positional</li>
+<li>Arbitrary Positional</li>
+<li>Keyword</li>
+<li>Arbitrary Keyword</li>
+</ol>
+</blockquote>
+<p>所以，即便你在定义里写成</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">greeting=<span class="string">&#x27;Hello&#x27;</span>, *names, capitalized=<span class="literal">False</span></span>):</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>在调用该函数的时候，无论你写的是</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">say_hi(<span class="string">&#x27;Hi&#x27;</span>, <span class="string">&#x27;mike&#x27;</span>, <span class="string">&#x27;john&#x27;</span>, <span class="string">&#x27;zeo&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>还是</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">say_hi(<span class="string">&#x27;mike&#x27;</span>, <span class="string">&#x27;john&#x27;</span>, <span class="string">&#x27;zeo&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>Python 都会认为接收到的第一个值是 Positional Argument —— 因为在定义中，<code>greeting</code> 被放到了 Arbitrary Positional Arguments 之前。</p>
+
+            
+        </div>
+        <div class="page-template-comments">
+            
+        </div>
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">iSTEP</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

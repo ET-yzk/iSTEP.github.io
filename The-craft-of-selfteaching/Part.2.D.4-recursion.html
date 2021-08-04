@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="iSTEP">
+    <meta name="description" content="iSTEP Blogs">
+    <meta name="author" content="iSTEP">
+    
+    <title>
+        
+            递归函数 |
+        
+        iSTEP&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/iSTEP.github.io/css/style.css">
+
+    <link rel="shortcut icon" href="/iSTEP.github.io/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"et-yzk.github.io","root":"/iSTEP.github.io/","language":"zh-CN","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"https://gitee.com/yzketx/image-markdown/raw/master/img/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/iSTEP.github.io/atom.xml" title="iSTEP" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                iSTEP&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/iSTEP.github.io/The-craft-of-selfteaching"
+                            >
+                                THE-CRAFT-OF-SELFTEACHING
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/iSTEP.github.io/The-craft-of-selfteaching">THE-CRAFT-OF-SELFTEACHING</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="page-template-container">
+        
+        
+        <div class="page-template-content markdown-body">
+            
+                <h1 id="递归函数"><a href="#递归函数" class="headerlink" title="递归函数"></a>递归函数</h1><h2 id="递归（Recursion）"><a href="#递归（Recursion）" class="headerlink" title="递归（Recursion）"></a>递归（Recursion）</h2><p>在函数中有个理解门槛比较高的概念：<strong>递归函数</strong>（Recursive Functions）—— 那些<strong>在自身内部调用自身的函数</strong>。说起来都比较拗口。</p>
+<p>先看一个例子，我们想要有个能够计算 <code>n</code> 的<em>阶乘</em>（factorial）<code>n!</code> 的函数，<code>f()</code>，规则如下：</p>
+<blockquote>
+<ul>
+<li><code>n! = n × (n-1) × (n-2)... × 1</code></li>
+<li>即，<code>n! = n × (n-1)!</code></li>
+<li>且，<code>n &gt;= 1</code></li>
+</ul>
+<p><strong>注意</strong>：以上是数学表达，不是程序，所以，<code>=</code> 在这一小段中是 “<em>等于</em>” 的意思，<strong>不是程序语言中的赋值符号</strong>。</p>
+</blockquote>
+<p>于是，计算 <code>f(n)</code> 的 Python 程序如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> n * f(n-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">5</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>120
+</code></pre>
+<h2 id="递归函数的执行过程"><a href="#递归函数的执行过程" class="headerlink" title="递归函数的执行过程"></a>递归函数的执行过程</h2><p>以 factorial(5) 为例，让我们看看程序的流程：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/recursive-function-call.png?raw=true"
+                     
+                ></p>
+<p>当 f(5) 被调用之后，函数开始运行……</p>
+<ul>
+<li>因为 <code>5 &gt; 1</code>，所以，在计算 <code>n * f(n-1)</code> 的时候要再次调用自己 <code>f(4)</code>；所以必须等待 <code>f(4)</code> 的值返回；</li>
+<li>因为 <code>4 &gt; 1</code>，所以，在计算 <code>n * f(n-1)</code> 的时候要再次调用自己 <code>f(3)</code>；所以必须等待 <code>f(3)</code> 的值返回；</li>
+<li>因为 <code>3 &gt; 1</code>，所以，在计算 <code>n * f(n-1)</code> 的时候要再次调用自己 <code>f(2)</code>；所以必须等待 <code>f(2)</code> 的值返回；</li>
+<li>因为 <code>2 &gt; 1</code>，所以，在计算 <code>n * f(n-1)</code> 的时候要再次调用自己 <code>f(1)</code>；所以必须等待 <code>f(1)</code> 的值返回；</li>
+<li>因为 <code>1 == 1</code>，所以，这时候不会再次调用 <code>f()</code> 了，于是递归结束，开始返回，这次返回的是 <code>1</code>；</li>
+<li>下一步返回的是 <code>2 * 1</code>；</li>
+<li>下一步返回的是 <code>3 * 2</code>；</li>
+<li>下一步返回的是 <code>4 * 6</code>；</li>
+<li>下一步返回的是 <code>5 * 24</code> —— 至此，外部调用 <code>f(5)</code> 的最终返回值是 <code>120</code>……</li>
+</ul>
+<p>加上一些输出语句之后，能更清楚地看到大概的执行流程：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;\tn =&#x27;</span>, n)</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Returning...&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;\tn =&#x27;</span>, n, <span class="string">&#x27;return:&#x27;</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        r = n * f(n-<span class="number">1</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;\tn =&#x27;</span>, n, <span class="string">&#x27;return:&#x27;</span>, r)</span><br><span class="line">        <span class="keyword">return</span> r</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Call f(5)...&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Get out of f(n), and f(5) =&#x27;</span>, f(<span class="number">5</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Call f(5)...
+    n = 5
+    n = 4
+    n = 3
+    n = 2
+    n = 1
+Returning...
+    n = 1 return: 1
+    n = 2 return: 2
+    n = 3 return: 6
+    n = 4 return: 24
+    n = 5 return: 120
+Get out of f(n), and f(5) = 120
+</code></pre>
+<p>有点烧脑…… 不过，分为几个层面去逐个突破，你会发现它真的很好玩。</p>
+<h2 id="递归的终点"><a href="#递归的终点" class="headerlink" title="递归的终点"></a>递归的终点</h2><p>递归函数在内部必须有一个能够让自己停止调用自己的方式，否则永远循环下去了……</p>
+<p>其实，我们所有人很小就见过递归应用，只不过，那时候不知道那就是递归而已。听过那个无聊的故事罢？</p>
+<blockquote>
+<p>山上有座庙，庙里有个和尚，和尚讲故事，说……</p>
+<blockquote>
+<p>山上有座庙，庙里有个和尚，和尚讲故事，说……</p>
+<blockquote>
+<p>山上有座庙，庙里有个和尚，和尚讲故事，说……</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>写成 Python 程序大概是这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_monk_telling_story</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;山上有座庙，庙里有个和尚，和尚讲故事，他说…… &#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> a_monk_telling_story()</span><br><span class="line"></span><br><span class="line">a_monk_telling_story()</span><br></pre></td></tr></table></figure>
+
+<p>这是个<em>无限循环</em>的递归，因为这个函数里<em>没有设置中止自我调用的条件</em>。无限循环还有个不好听的名字，叫做 “死循环”。</p>
+<p>在著名的电影<strong>盗梦空间</strong>（_2010_）里，从整体结构上来看，“入梦” 也是个 “递归函数”。只不过，这个函数和 <code>a_monk_telling_story()</code> 不一样，它并不是死循环 —— 因为它设定了<em>中止自我调用的条件</em>：</p>
+<blockquote>
+<p>在电影里，醒过来的条件有两个</p>
+<blockquote>
+<ul>
+<li>一个是在梦里死掉；</li>
+<li>一个是在梦里被 kicked 到……</li>
+</ul>
+</blockquote>
+<p>如果这两个条件一直不被满足，那就进入 limbo 状态 —— 其实就跟死循环一样，出不来了……</p>
+</blockquote>
+<p>为了演示，我把故事情节改变成这样：</p>
+<blockquote>
+<ul>
+<li>入梦，<code>in_dream()</code>，是个递归函数；</li>
+<li>入梦之后醒过来的条件有两个：<blockquote>
+<ul>
+<li>一个是在梦里死掉，<code>dead is True</code>；</li>
+<li>一个是在梦里被 kicked，<code>kicked is True</code>……</li>
+</ul>
+<p>以上两个条件中任意一个被满足，就苏醒……</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<p>至于为什么会死掉，如何被 kick，我偷懒了一下：管它怎样，管它如何，反正，每个条件被满足的概率是 1/10……（也只有这样，我才能写出一个简短的，能够运行的 “<em>盗梦空间程序</em>”。）</p>
+<p>把这个很抽象的故事写成 Python 程序，看看一次入梦之后能睡多少天，大概是这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">in_dream</span>(<span class="params">day=<span class="number">0</span>, dead=<span class="literal">False</span>, kicked=<span class="literal">False</span></span>):</span></span><br><span class="line">    dead = <span class="keyword">not</span> random.randrange(<span class="number">0</span>,<span class="number">10</span>) <span class="comment"># 1/10 probability to be dead</span></span><br><span class="line">    kicked = <span class="keyword">not</span> random.randrange(<span class="number">0</span>,<span class="number">10</span>) <span class="comment"># 1/10 probability to be kicked</span></span><br><span class="line">    day += <span class="number">1</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;dead:&#x27;</span>, dead, <span class="string">&#x27;kicked:&#x27;</span>, kicked)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> dead:</span><br><span class="line">        <span class="built_in">print</span>((<span class="string">f&quot;I slept <span class="subst">&#123;day&#125;</span> days, and was dead to wake up...&quot;</span>))</span><br><span class="line">        <span class="keyword">return</span> day</span><br><span class="line">    <span class="keyword">elif</span> kicked:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;I slept <span class="subst">&#123;day&#125;</span> days, and was kicked to wake up...&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> day</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> in_dream(day)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;The in_dream() function returns:&#x27;</span>, in_dream())</span><br></pre></td></tr></table></figure>
+
+<pre><code>dead: False kicked: False
+dead: False kicked: False
+dead: False kicked: False
+dead: False kicked: False
+dead: False kicked: False
+dead: False kicked: False
+dead: False kicked: False
+dead: True kicked: True
+I slept 8 days, and was dead to wake up...
+The in_dream() function returns: 8
+</code></pre>
+<p>如果疑惑为什么 <code>random.randrange(0,10)</code> 能表示 1/10 的概率，请返回去重新阅读<a href="Part.1.E.2.values-and-their-operators.md">第一部分中关于布尔值的内容</a>。</p>
+<p>另外，在 Python 中，若是需要将某个值与 True 或者 False 进行比较，尤其是在条件语句中，推荐写法是（参见 <a class="link"   target="_blank" rel="noopener" href="https://www.python.org/dev/peps/pep-0008/" >PEP8<i class="fas fa-external-link-alt"></i></a>）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> condition:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>就好像上面代码中的 <code>if dead:</code> 一样。</p>
+<p>而不是（虽然这么写通常也并不妨碍程序正常运行<a href='#fn1' name='fn1b'><sup>[1]</sup></a>）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> condition <span class="keyword">is</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>抑或：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> condition == <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>让我们再返回来接着讲递归函数。正常的<strong>递归函数一定有个退出条件</strong>。否则的话，就<em>无限循环</em>下去了…… 下面的程序在执行一会儿之后就会告诉你：<code>RecursionError: maximum recursion depth exceeded</code>（上面那个 “山上庙里讲故事的和尚说” 的程序，真要跑起来，也是这样）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">x</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">return</span> n * x(n-<span class="number">1</span>)</span><br><span class="line">x(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>---------------------------------------------------------------------------
+
+RecursionError                            Traceback (most recent call last)
+
+&lt;ipython-input-3-daa4d33fb39b&gt; in &lt;module&gt;
+      1 def x(n):
+      2     return n * x(n-1)
+----&gt; 3 x(5)
+
+&lt;ipython-input-3-daa4d33fb39b&gt; in x(n)
+      1 def x(n):
+----&gt; 2     return n * x(n-1)
+      3 x(5)
+
+... last 1 frames repeated, from the frame below ...
+
+&lt;ipython-input-3-daa4d33fb39b&gt; in x(n)
+      1 def x(n):
+----&gt; 2     return n * x(n-1)
+      3 x(5)
+
+RecursionError: maximum recursion depth exceeded
+</code></pre>
+<p>不用深究上面盗梦空间这个程序的其它细节，不过，通过以上三个递归程序 —— 两个很扯淡的例子，一个正经例子 —— 你已经看到了递归函数的共同特征：</p>
+<blockquote>
+<ol>
+<li>在 <code>return</code> 语句中返回的是<em>自身的调用</em>（或者是<em>含有自身的表达式</em>）</li>
+<li>为了避免死循环，<em>一定要有至少一个条件</em>下返回的不再是自身调用……</li>
+</ol>
+</blockquote>
+<h2 id="变量的作用域"><a href="#变量的作用域" class="headerlink" title="变量的作用域"></a>变量的作用域</h2><p>再回来看计算阶乘的程序 —— 这是正经程序。这次我们把程序名写完整，<code>factorial()</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> n * factorial(n-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(factorial(<span class="number">5</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>120
+</code></pre>
+<p>最初的时候，这个函数的执行流程之所以令人迷惑，是因为初学者对<em>变量</em>的<strong>作用域</strong>把握得不够充分。</p>
+<p>变量根据作用域，可以分为两种：全局变量（Global Variables）和局部变量（Local Variables）。</p>
+<p>可以这样简化理解：</p>
+<blockquote>
+<ul>
+<li>在函数内部被赋值而后使用的，都是<em>局部变量</em>，它们的作用域是<em>局部</em>，无法被函数外的代码调用；</li>
+<li>在所有函数之外被赋值而后开始使用的，是<em>全局变量</em>，它们的作用域是<em>全局</em>，在函数内外都可以被调用。</li>
+</ul>
+</blockquote>
+<p>定义如此，但通常程序员们会严格地遵守一条原则：</p>
+<blockquote>
+<p>在函数内部绝对不调用全局变量。即便是必须改变全局变量，也只能通过函数的返回值在函数外改变全局变量。</p>
+</blockquote>
+<p>你也必须遵守同样的原则。而这个原则同样可以在日常的工作生活中 “调用”：</p>
+<blockquote>
+<p>做事的原则：自己的事自己做，别人的事，最多通过自己的产出让他们自己去搞……</p>
+</blockquote>
+<p>再仔细观察一下以下代码。当一个变量被当做参数传递给一个函数的时候，这个变量本身并不会被函数所改变。比如，<code>a = 5</code>，而后，再把 <code>a</code> 当作参数传递给 <code>f(a)</code> 的时候，这个函数当然应该返回它内部任务完成之后应该传递回来的值，但 <code>a</code> 本身不会被改变。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> n * factorial(n-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">a = <span class="number">5</span></span><br><span class="line">b = factorial(a)   <span class="comment"># a 并不会因此改变；</span></span><br><span class="line"><span class="built_in">print</span>(a, b)</span><br><span class="line">a = factorial(a)   <span class="comment"># 这是你主动为 a 再一次赋值……</span></span><br><span class="line"><span class="built_in">print</span>(a, b)</span><br></pre></td></tr></table></figure>
+
+<pre><code>5 120
+120 120
+</code></pre>
+<p>理解了这一点之后，再看 <code>factorial()</code> 这个递归函数的递归执行过程，你就能明白这个事实：</p>
+<blockquote>
+<p>在每一次 factorial(n) 被调用的时候，它都会形成一个作用域，<code>n</code> 这个变量作为参数把它的值传递给了函数，<em>但是</em>，<code>n</code> 这个变量本身并不会被改变。</p>
+</blockquote>
+<p>我们再修改一下上面的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> n * factorial(n-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">n = <span class="number">5</span>              <span class="comment"># 这一次，这个变量名称是 n</span></span><br><span class="line">m = factorial(n)   <span class="comment"># n 并不会因此改变；</span></span><br><span class="line"><span class="built_in">print</span>(n, m)</span><br></pre></td></tr></table></figure>
+
+<pre><code>5 120
+</code></pre>
+<p>在 <code>m = factorial(n)</code> 这一句中，<code>n</code> 被 <code>factorial()</code> 当做参数调用了，但无论函数内部如何操作，并不会改变变量 <code>n</code> 的值。</p>
+<p>关键的地方在这里：在函数内部出现的变量 <code>n</code>，和函数外部的变量 <code>n</code> 不是一回事 —— <strong>它们只是名称恰好相同而已</strong>，函数参数定义的时候，用别的名称也没什么区别：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial</span>(<span class="params">x</span>):</span> <span class="comment"># 在这个语句块中出现的变量，都是局部变量</span></span><br><span class="line">    <span class="keyword">if</span> x == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> x * factorial(x-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">n = <span class="number">5</span>           <span class="comment"># 这一次，这个变量名称是 n</span></span><br><span class="line">m = factorial(n)   <span class="comment"># n 并不会因此改变；</span></span><br><span class="line"><span class="built_in">print</span>(n, m)</span><br><span class="line"><span class="comment"># 这个例子和之前再之前的示例代码有什么区别吗？</span></span><br><span class="line"><span class="comment"># 本质上没区别，就是变量名称换了而已……</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>5 120
+</code></pre>
+<p>函数开始执行的时候，<code>x</code> 的值，是由外部代码（即，函数被调用的那一句）传递进来的。即便函数内部的变量名称与外部的变量名称相同，它们也不是同一个变量。</p>
+<h2 id="递归函数三原则"><a href="#递归函数三原则" class="headerlink" title="递归函数三原则"></a>递归函数三原则</h2><p>现在可以小小总结一下了。</p>
+<p>一个递归函数，之所以是一个有用、有效的递归函数，是因为它要遵守递归三原则。正如，一个机器人之所以是个合格的机器人，是因为它遵循<a class="link"   target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%89%E5%AE%9A%E5%BE%8B" >阿西莫夫三铁律<i class="fas fa-external-link-alt"></i></a>（Three Laws of Robotics）一样<a href='#fn2' name='fn2b'><sup>[2]</sup></a>。</p>
+<blockquote>
+<ol>
+<li>根据定义，递归函数必须在内部调用自己；</li>
+<li>必须设定一个退出条件；</li>
+<li>递归过程中必须能够逐步达到退出条件……</li>
+</ol>
+</blockquote>
+<p>从这个三原则望过去，<code>factorial()</code> 是个合格有效的递归函数，满足第一条，满足第二条，尤其还满足第三条中的 “<em>逐步达到</em>”！</p>
+<p>而那个扯淡的盗梦空间递归程序，说实话，不太合格，虽然它满足第一条，也满足第二条，第三条差点蒙混过关：它不是<em>逐步达到</em>，而是<em>不管怎样肯定能达到</em> —— 这明显是两回事…… 原谅它罢，它的作用就是当例子，一次正面的，一次负面的，作为例子算是功成圆满了！</p>
+<p>刚开始的时候，初学者好不容易搞明白递归函数究竟是怎么回事之后，就不由自主地想 “我如何才能学会递归式思考呢？” —— 其实吧，这种想法本身可能并不是太正确或者准确。</p>
+<p>准确地讲，递归是一种解决问题的方式。当我们需要解决的问题，可以被逐步拆分成很多越来越小的模块，然后每个小模块还都能用同一种算法处理的时候，用递归函数最简洁有效。所以，只不过是在遇到可以用递归函数解决问题的时候，才需要去写递归函数。</p>
+<p>从这个意义上来看，递归函数是程序员为了自己方便而使用的，并不是为了计算机方便而使用 —— 计算机么，你给它的任务多一点或者少一点，对它来讲无所谓，反正有电就能运转，它自己又不付电费……</p>
+<p>理论上来讲，所有用递归函数能完成的任务，不用递归函数也能完成，只不过代码多一点，啰嗦一点，看起来没有那么优美而已。</p>
+<p>还有，递归，不像 “序列类型” 那样，是某个编程语言的特有属性。它其实是一种特殊算法，也是一种编程技巧，任何编程语言，都可以使用递归算法，都可以通过编写递归函数巧妙地解决问题。</p>
+<p>但是，学习递归函数本身就很烧脑啊！这才是最大的好事。从迷惑，到不太迷惑，到清楚，到很清楚，再到特别清楚 —— 这是个非常有趣，非常有成就感的过程。</p>
+<p>这种过程锻炼的是脑力 —— 在此之后，再遇到大多数人难以理解的东西，你就可以使用这一次积累的经验，应用你已经磨炼过的脑力。有意思。</p>
+<p>至此，封面上的那个 “伪代码” 应该很好理解了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">teach_yourself</span>(<span class="params">anything</span>):</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> create():</span><br><span class="line">        learn()</span><br><span class="line">        practice()</span><br><span class="line">    <span class="keyword">return</span> teach_yourself(another)</span><br><span class="line"></span><br><span class="line">teach_yourself(coding)</span><br></pre></td></tr></table></figure>
+
+<p>自学还真的就是递归函数呢……</p>
+<h2 id="思考与练习"><a href="#思考与练习" class="headerlink" title="思考与练习"></a>思考与练习</h2><p>普林斯顿大学的一个网页，有很多递归的例子</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://introcs.cs.princeton.edu/java/23recursion/" >https://introcs.cs.princeton.edu/java/23recursion/<i class="fas fa-external-link-alt"></i></a></p>
+<hr>
+<p><strong>脚注</strong></p>
+<p><a name='fn1'>[1]</a>：参见 Stackoverflow 上的讨论：<a class="link"   target="_blank" rel="noopener" href="https://stackoverflow.com/questions/27276610/boolean-identity-true-vs-is-true" >Boolean identity == True vs is True<i class="fas fa-external-link-alt"></i></a></p>
+<p><a href='#fn1b'><small>↑Back to Content↑</small></a></p>
+<p><a name='fn2'>[2]</a>：关于<a class="link"   target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%89%E5%AE%9A%E5%BE%8B" >阿西莫夫三铁律<i class="fas fa-external-link-alt"></i></a>（Three Laws of Robotics）的类比，来自著名的 Python 教程，<a class="link"   target="_blank" rel="noopener" href="http://greenteapress.com/thinkpython2/html/index.html" >Think Python: How to Think Like a Computer Scientist<i class="fas fa-external-link-alt"></i></a></p>
+<p><a href='#fn2b'><small>↑Back to Content↑</small></p>
+
+            
+        </div>
+        <div class="page-template-comments">
+            
+        </div>
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">iSTEP</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="iSTEP">
+    <meta name="description" content="iSTEP Blogs">
+    <meta name="author" content="iSTEP">
+    
+    <title>
+        
+            为什么从函数开始？ |
+        
+        iSTEP&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/iSTEP.github.io/css/style.css">
+
+    <link rel="shortcut icon" href="/iSTEP.github.io/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"et-yzk.github.io","root":"/iSTEP.github.io/","language":"zh-CN","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"https://gitee.com/yzketx/image-markdown/raw/master/img/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/iSTEP.github.io/atom.xml" title="iSTEP" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                iSTEP&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/iSTEP.github.io/The-craft-of-selfteaching"
+                            >
+                                THE-CRAFT-OF-SELFTEACHING
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/iSTEP.github.io/The-craft-of-selfteaching">THE-CRAFT-OF-SELFTEACHING</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="page-template-container">
+        
+        
+        <div class="page-template-content markdown-body">
+            
+                <h1 id="为什么从函数开始？"><a href="#为什么从函数开始？" class="headerlink" title="为什么从函数开始？"></a>为什么从函数开始？</h1><p>读完第一部分之后，你多多少少已经 “写” 了一些程序，虽然我们总是说，“这就是让你脱盲”；也就是说，从此之后，你多多少少能够读懂程序，这就已经很好了。</p>
+<p>可是你无论如何都避免不了已经写了一些，虽然，那所谓的 “写”，不过是 “改” 而已 —— 但毕竟也是一大步。</p>
+<p>绝大多数编程书籍并不区分学习者的 “读” 与 “写” 这两个实际上应该分离的阶段 —— 虽然现实中这两个阶段总是多多少少重叠一部分。</p>
+<p>在一个比较自然的过程中，我们总是先学会阅读，而后才开始练习写作；并且，最终，阅读的量一定远远大于写作的量 —— 即，输入远远大于输出。当然，貌似也有例外。据说，香港作家倪匡，他自己后来很少读书，每天咣当咣当地像是打扫陈年旧物倒垃圾一样写作 —— 他几乎是全球最具产量的畅销小说作家，貌似地球另外一端的史蒂芬・金都不如他多。又当然，他的主要输入来自于他早年丰富的人生经历，人家读书，他阅世，所以，实际上并不是输入很少，恰恰相反，是输入太多……</p>
+<p>所以，正常情况下，输入多于输出，或者，输入远远多于输出，不仅是自然现象，也是无法改变的规则。</p>
+<p>于是，我在安排内容的时候，也刻意如此安排。</p>
+<p>第一部分，主要在于启动读者在编程领域中的 “阅读能力”，到第二部分，才开始逐步启动读者在编程领域中的 “写作能力”。</p>
+<p>在第二部分启动之前，有时间有耐心的读者可以多做一件事情。</p>
+<p>Python 的代码是开源的，它的代码仓库在 Github 上：</p>
+<blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/python/" >https://github.com/python/<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>在这个代码仓库中，有一个目录下，保存着若干 Python Demo 程序：</p>
+<blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/python/cpython/tree/master/Tools/demo" >https://github.com/python/cpython/tree/master/Tools/demo<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>这个目录下的 README 中有说明：</p>
+<blockquote>
+<p>This directory contains a collection of demonstration scripts for<br>various aspects of Python programming.</p>
+<ul>
+<li><code>beer.py</code>        Well-known programming example: Bottles of beer.</li>
+<li><code>eiffel.py</code>      Python advanced magic: A metaclass for Eiffel post/preconditions.</li>
+<li><code>hanoi.py</code>       Well-known programming example: Towers of Hanoi.</li>
+<li><code>life.py</code>        Curses programming: Simple game-of-life.</li>
+<li><code>markov.py</code>      Algorithms: Markov chain simulation.</li>
+<li><code>mcast.py</code>       Network programming: Send and receive UDP multicast packets.</li>
+<li><code>queens.py</code>      Well-known programming example: N-Queens problem.</li>
+<li><code>redemo.py</code>      Regular Expressions: GUI script to test regexes.</li>
+<li><code>rpython.py</code>     Network programming: Small client for remote code execution.</li>
+<li><code>rpythond.py</code>    Network programming: Small server for remote code execution.</li>
+<li><code>sortvisu.py</code>    GUI programming: Visualization of different sort algorithms.</li>
+<li><code>ss1.py</code>         GUI/Application programming: A simple spreadsheet application.</li>
+<li><code>vector.py</code>      Python basics: A vector class with demonstrating special methods.</li>
+</ul>
+</blockquote>
+<p>最起码把这其中的以下几个程序都精读一下，看看自己的理解能力：</p>
+<blockquote>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/python/cpython/blob/master/Tools/demo/beer.py" >beer.py<i class="fas fa-external-link-alt"></i></a>        Well-known programming example: Bottles of beer.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/python/cpython/blob/master/Tools/demo/eiffel.py" >eiffel.py<i class="fas fa-external-link-alt"></i></a>      Python advanced magic: A metaclass for Eiffel post/preconditions.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/python/cpython/blob/master/Tools/demo/hanoi.py" >hanoi.py<i class="fas fa-external-link-alt"></i></a>       Well-known programming example: Towers of Hanoi.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/python/cpython/blob/master/Tools/demo/life.py" >life.py<i class="fas fa-external-link-alt"></i></a>        Curses programming: Simple game-of-life.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/python/cpython/blob/master/Tools/demo/markov.py" >markov.py<i class="fas fa-external-link-alt"></i></a>      Algorithms: Markov chain simulation.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/python/cpython/blob/master/Tools/demo/queens.py" >queens.py<i class="fas fa-external-link-alt"></i></a>      Well-known programming example: N-Queens problem.</li>
+</ul>
+</blockquote>
+<p>就算读不懂也没关系，把读不懂的部分标记下来，接下来就可以 “带着问题学习”……</p>
+<p>在未来的时间里，一个好的习惯就是，有空了去读读别人写的代码 —— 理解能力的提高，就靠这个了。你会发现这事跟其他领域的学习没什么区别。你学英语也一样，读多了，自然就读得快了，理解得快了，并且在那过程中自然而然地习得了很多 “句式”，甚至很多 “说理的方法”、“讲故事的策略”…… 然后就自然而然地会写了，从能写一点开始，慢慢到 “很能写”！</p>
+<p>为了顺利启动第一部分的 “阅读”，特意找了个不一样的入口，“布尔运算”；第二部分，从 “阅读” 过渡到 “写作”，我也同样特意寻找了一个不一样的入口：<strong>从函数开始写起</strong>。</p>
+<p>从小入手，从来都是自学的好方法。我们没有想着一上来就写程序，而是写 “子程序”、“小程序”、“短程序”。从结构化编程的角度来看，写函数的一个基本要求就是：</p>
+<blockquote>
+<ul>
+<li>完成一个功能；</li>
+<li>只完成一个功能；</li>
+<li>没有任何错误地只完成一个功能……</li>
+</ul>
+</blockquote>
+<p>然而，即便是从小入手，任务也没有变得过分简单。其中涉及的话题理解起来并不容易，尽管我们尽量用最简单的例子。涉及的话题有：</p>
+<blockquote>
+<ul>
+<li>参数的传递</li>
+<li>多参数的传递</li>
+<li>匿名函数以及函数的别称</li>
+<li>递归函数</li>
+<li>函数文档</li>
+<li>模块</li>
+<li>测试驱动编程</li>
+<li>可执行程序</li>
+</ul>
+</blockquote>
+<p>这些都是你未来写自己的工程时所必须仰仗的基础，马虎不得，疏漏不得。</p>
+<p>另外，这一部分与第一部分有一个刻意不同的编排，这一部分的每一章之后，<strong>没有写总结</strong> —— 那个总结需要读者自己动手完成。你需要做的不仅仅是每一个章节的总结，整个第二部分读完之后，还要做针对整个 “深入了解函数”（甚至应该包括第一部分已经读过的关于函数的内容）的总结…… 并且，关于函数，这一章并未完全讲完呢，第三部分还有生成器、迭代器、以及装饰器要补充 —— 因为它们多多少少都涉及到下一部分才能深入的内容，所以，在这一部分就暂时没有涉及。</p>
+<p>你要习惯，归纳、总结、整理的工作，从来都不是一次就能完成的，都需要反复多次之后才能彻底完成。必须习惯这种流程 —— 而不是像那些从未自学过的人一样，对这种东西想当然地全不了解。</p>
+<p>另外，从现代编程方法论来看，“写作” 部分一上来就从函数入手也的确是 “更正确” 的，因为结构化编程的核心就是拆分任务，把任务拆分到不能再拆分为止 —— 什么时候不能再拆分了呢？就是当一个函数只完成一个功能的时候……</p>
+
+            
+        </div>
+        <div class="page-template-comments">
+            
+        </div>
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">iSTEP</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

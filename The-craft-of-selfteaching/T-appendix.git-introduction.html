@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="iSTEP">
+    <meta name="description" content="iSTEP Blogs">
+    <meta name="author" content="iSTEP">
+    
+    <title>
+        
+            Git 简介 |
+        
+        iSTEP&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/iSTEP.github.io/css/style.css">
+
+    <link rel="shortcut icon" href="/iSTEP.github.io/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"et-yzk.github.io","root":"/iSTEP.github.io/","language":"zh-CN","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"https://gitee.com/yzketx/image-markdown/raw/master/img/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/iSTEP.github.io/atom.xml" title="iSTEP" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                iSTEP&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/iSTEP.github.io/The-craft-of-selfteaching"
+                            >
+                                THE-CRAFT-OF-SELFTEACHING
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/iSTEP.github.io/The-craft-of-selfteaching">THE-CRAFT-OF-SELFTEACHING</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="page-template-container">
+        
+        
+        <div class="page-template-content markdown-body">
+            
+                <h1 id="Git-简介"><a href="#Git-简介" class="headerlink" title="Git 简介"></a>Git 简介</h1><p>— You should’ve learned Git yesterday.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/git-time-machine-cover.png"
+                      alt="git-time-machine-cover"
+                ></p>
+<h2 id="内容目标"><a href="#内容目标" class="headerlink" title="内容目标"></a>内容目标</h2><p>再一次，这一篇内容的目标，依然不是 “教程”，而是 “教程” 的 “图例” —— 如果我们把真正的教程比喻成 “地图” 的话。最全面的 Git 教程在网上，<strong>Pro Git</strong>，是免费的 —— 把它反复阅读若干遍，理解完整：</p>
+<blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2" >https://git-scm.com/book/en/v2<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>并且还有各种语言的翻译版本 —— 也包括中文。</p>
+<h2 id="为什么你必须学会使用-Git？"><a href="#为什么你必须学会使用-Git？" class="headerlink" title="为什么你必须学会使用 Git？"></a>为什么你必须学会使用 Git？</h2><p>Git 是一个分布式版本控制软件 —— 听起来也许跟你没关系，但<strong>无论是谁</strong>，都会因为能够使用 Git 而节约时间、提高效率。进而，如果你居然没有一个活跃的 <a class="link"   target="_blank" rel="noopener" href="https://github.com/" >Github<i class="fas fa-external-link-alt"></i></a> 账户，那么你正在错过人类史上前所未有的共同协作时代 —— 半点都没有夸张。同样提供 Git 工具云服务的还有 <a class="link"   target="_blank" rel="noopener" href="https://gitlab.com/" >Gitlab<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://bitbucket.org/" >Bitbucket<i class="fas fa-external-link-alt"></i></a> 等等。</p>
+<p>并且，<a class="link"   target="_blank" rel="noopener" href="https://github.com/" >Github<i class="fas fa-external-link-alt"></i></a> 很可能是地球上第一个给人们提供 “<a href="Part.3.F.social-selfteaching.md">用作品社交</a>” 方式的平台，你若是不能参与其中，实在是太可惜了！</p>
+<h2 id="从逻辑上理顺-Git-基本命令"><a href="#从逻辑上理顺-Git-基本命令" class="headerlink" title="从逻辑上理顺 Git 基本命令"></a>从逻辑上理顺 Git 基本命令</h2><p>Git 的作用，基本上可以被划分为三部分：</p>
+<blockquote>
+<ul>
+<li>备份文件</li>
+<li>跟踪文件变化</li>
+<li>与他人协作共同操作文件</li>
+</ul>
+</blockquote>
+<p>在一个 git 仓库中，总计有四个 “抽象层”，它们分别是：</p>
+<blockquote>
+<ul>
+<li>upstream repository 保存在云端的仓库</li>
+<li>local repository 本地仓库</li>
+<li>staging area 缓存区</li>
+<li>working directory 工作区</li>
+</ul>
+</blockquote>
+<p>其中，<code>local repository</code> 和 <code>staging area</code> 这两个抽象层的数据，保存在 <code>working directory</code> 根目录下的一个隐藏目录 <code>.git/</code> 下；需要使用 <code>ls -a</code> 才能看到。</p>
+<p>当你使用 <code>git init</code> 命令将一个本地文件夹 <code>working directory</code> 初始化为 <code>local repository</code> 的之后，该文件夹内部的结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">└── .git</span><br><span class="line">    ├── HEAD</span><br><span class="line">    ├── config</span><br><span class="line">    ├── description</span><br><span class="line">    ├── hooks</span><br><span class="line">    │   ├── applypatch-msg.sample</span><br><span class="line">    │   ├── commit-msg.sample</span><br><span class="line">    │   ├── fsmonitor-watchman.sample</span><br><span class="line">    │   ├── post-update.sample</span><br><span class="line">    │   ├── pre-applypatch.sample</span><br><span class="line">    │   ├── pre-commit.sample</span><br><span class="line">    │   ├── pre-push.sample</span><br><span class="line">    │   ├── pre-rebase.sample</span><br><span class="line">    │   ├── pre-receive.sample</span><br><span class="line">    │   ├── prepare-commit-msg.sample</span><br><span class="line">    │   └── update.sample</span><br><span class="line">    ├── info</span><br><span class="line">    │   └── exclude</span><br><span class="line">    ├── objects</span><br><span class="line">    │   ├── info</span><br><span class="line">    │   └── pack</span><br><span class="line">    └── refs</span><br><span class="line">        ├── heads</span><br><span class="line">        └── tags</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>以下示意图中仅包含最基本的 Git 命令 —— 并且基本上都是独自使用 Git 时的常用命令。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/git-command-relationships.png?raw=true"
+                     
+                ></p>
+<p>在工作区 <code>working directory</code> 这个抽象层中，你完成各种日常工作，创建、编辑、删除…… 你可能需要用某个编辑器去修改文件，你也可能频繁使用各种 Bash 命令，如，<code>rm</code> <code>mkdir</code> <code>cp</code> <code>mv</code> 等等。</p>
+<p>时不时，你可能会把一些处理完的文件 “加入缓存区”；等一个阶段的工作完成之后，你可能会把那些已经放入缓存区的文件<strong>提交</strong>到（commit）本地仓库；而后继续工作…… 根据情况，你也会将本地仓库的文件<strong>推到</strong>（push）云端，即，远端仓库。如果，你正在与他人协作，你也可能经常需要从云端<strong>下拉</strong>（pull）最新版本到本地。</p>
+<h2 id="Git-的安装"><a href="#Git-的安装" class="headerlink" title="Git 的安装"></a>Git 的安装</h2><h3 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h3><p>Mac 的操作系统 Mavericks (10.9) 以上版本中都内建有 Git，你可以在 Terminal 中通过以下命令查看是否有 Git：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br><span class="line"><span class="built_in">which</span> git</span><br></pre></td></tr></table></figure>
+
+<p>也可以通过 Homebrew 安装最新版本的 Git：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ruby -e <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>&quot;</span></span><br><span class="line">brew doctor</span><br><span class="line">brew install git</span><br></pre></td></tr></table></figure>
+
+<p>还可以通过 Conda 安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -c anaconda git</span><br></pre></td></tr></table></figure>
+
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>前往 <a class="link"   target="_blank" rel="noopener" href="https://gitforwindows.org/" >https://gitforwindows.org<i class="fas fa-external-link-alt"></i></a> 下载并安装 Git for Windows。</p>
+<p>此外，它还会提供 Git Bash —— 在 Windows 操作系统中使用与 *Nix 操作系统一样的 Bash 命令行工具。</p>
+<p>另外，在 Windows 操作系统中推荐使用 Git Bash 或者 PowerShell，而非 CMD 作为命令行工具。</p>
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p>大多数 Linux 操作系统要么基于 Debain，要么基于 Red-Hat —— 请自行查看 <a class="link"   target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/List_of_Linux_distributions" >List of Linux distributions<i class="fas fa-external-link-alt"></i></a>，确定自己的 Linux 发行版究竟基于哪一个。</p>
+<p>基于 Debian 的 Linux 发行版：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
+
+<p>基于 Red-Hat 的 Linux 发行版：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum upgrade</span><br><span class="line">sudo yum install git</span><br></pre></td></tr></table></figure>
+
+<h3 id="Git-本地配置"><a href="#Git-本地配置" class="headerlink" title="Git 本地配置"></a>Git 本地配置</h3><p>在命令行工具中执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;&lt;your_name&gt;&quot;</span></span><br><span class="line">git config --global user.email &lt;your_email_address&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Git-GUI"><a href="#Git-GUI" class="headerlink" title="Git GUI"></a>Git GUI</h3><p>Git 的图形化版本客户端，有很多种选择，以下几个跨平台的客户端最受欢迎：</p>
+<blockquote>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://desktop.github.com/" >Github Desktop<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://gitahead.github.io/gitahead.com/" >GitAhead<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://git-fork.com/" >Fork<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.gitkraken.com/" >GitKraken<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+</blockquote>
+<p>更多选择，请移步查看 <a class="link"   target="_blank" rel="noopener" href="https://git-scm.com/downloads/guis/" >git-scm.com 上的 Git GUI Clients 列表<i class="fas fa-external-link-alt"></i></a>。</p>
+<h3 id="需要了解的-Bash-基本命令"><a href="#需要了解的-Bash-基本命令" class="headerlink" title="需要了解的 Bash 基本命令"></a>需要了解的 Bash 基本命令</h3><p>虽然 Git 也有图形化版本，但无论如何你都会接触到命令行工具。并且，谁都一样，早晚会遇到非使用命令行不可的情况。</p>
+<p>以下是常用 Bash 命令的简要说明：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>简要说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cd</code></td>
+<td>Change Directory 的缩写；转到指定目录</td>
+</tr>
+<tr>
+<td><code>ls</code></td>
+<td>List 的缩写；列出当前目录中的内容</td>
+</tr>
+<tr>
+<td><code>mkdir</code></td>
+<td>Make Directory 的缩写；在当前目录中创建一个新的目录</td>
+</tr>
+<tr>
+<td><code>pwd</code></td>
+<td>Present Working Directory 的缩写；显示当前工作目录</td>
+</tr>
+<tr>
+<td><code>touch</code></td>
+<td>创建一个指定名称的空新文件</td>
+</tr>
+<tr>
+<td><code>rm</code></td>
+<td>Remove 的缩写；删除指定文件</td>
+</tr>
+<tr>
+<td><code>rmdir</code></td>
+<td>Remove Directory 的缩写；删除指定目录</td>
+</tr>
+<tr>
+<td><code>cp</code></td>
+<td>Copy 的缩写；拷贝指定文件</td>
+</tr>
+<tr>
+<td><code>mv</code></td>
+<td>Move 的缩写；移动指定文件</td>
+</tr>
+<tr>
+<td><code>cat</code></td>
+<td>Concatenate 的缩写；在屏幕中显示文件内容</td>
+</tr>
+<tr>
+<td><code>chmod</code></td>
+<td>Change Mode 的缩写；改变文件的权限</td>
+</tr>
+<tr>
+<td><code>man</code></td>
+<td>Manual 的缩写；显示指定命令的使用说明</td>
+</tr>
+</tbody></table>
+<p>其中，<code>chmod</code> 最常用的 4 个权限分别是：</p>
+<table>
+<thead>
+<tr>
+<th>文件权限模式</th>
+<th>简要说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>777</code></td>
+<td>任何人都可以读、写、执行该文件</td>
+</tr>
+<tr>
+<td><code>755</code></td>
+<td>任何人都可以读、执行该文件，但只有所有者可以修改</td>
+</tr>
+<tr>
+<td><code>700</code></td>
+<td>只有所有者才能进行读、写、执行操作</td>
+</tr>
+<tr>
+<td><code>+x</code></td>
+<td>将文件设置为可执行</td>
+</tr>
+</tbody></table>
+<p>在使用 <code>man</code> 命令时，系统会使用 vim 文本编辑工具以只读模式打开帮助文件，常用键盘命令如下：</p>
+<table>
+<thead>
+<tr>
+<th>键盘命令</th>
+<th>简要说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>f</code></td>
+<td>向后翻屏</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>向前翻屏</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td>向后翻半屏</td>
+</tr>
+<tr>
+<td><code>u</code></td>
+<td>向前翻半屏</td>
+</tr>
+<tr>
+<td><code>j</code></td>
+<td>向后翻一行</td>
+</tr>
+<tr>
+<td><code>k</code></td>
+<td>向前翻一行</td>
+</tr>
+<tr>
+<td><code>h</code></td>
+<td>查看 vim 帮助</td>
+</tr>
+<tr>
+<td><code>q</code></td>
+<td>退出</td>
+</tr>
+</tbody></table>
+<h2 id="一些不错的-Git-教程"><a href="#一些不错的-Git-教程" class="headerlink" title="一些不错的 Git 教程"></a>一些不错的 Git 教程</h2><p>除了 Pro Git 这本书之外，还有很多值得去看：</p>
+<blockquote>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="http://ndpsoftware.com/git-cheatsheet.html" >GIT CHEATSHEET – an interaction from nop software<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://learngitbranching.js.org/" >Learn Git Branching<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://livebook.manning.com/#!/book/learn-git-in-a-month-of-lunches/about-this-book/" >Learn Git in a Month of Lunches<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://githowto.com/" >Git How To<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="http://justinhileman.info/article/git-pretty/" >Git pretty - Solve Git Mess<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="http://onlywei.github.io/explain-git-with-d3/" >Visualizing Git Concepts with D3<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+</blockquote>
+<p>当然，你肯定早晚会去 Github 上找 “Awesome Git”：</p>
+<blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/dictcp/awesome-git" >https://github.com/dictcp/awesome-git<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+
+            
+        </div>
+        <div class="page-template-comments">
+            
+        </div>
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">iSTEP</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

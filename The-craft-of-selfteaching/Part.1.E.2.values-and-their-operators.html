@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="iSTEP">
+    <meta name="description" content="iSTEP Blogs">
+    <meta name="author" content="iSTEP">
+    
+    <title>
+        
+            值及其相应的运算 |
+        
+        iSTEP&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/iSTEP.github.io/css/style.css">
+
+    <link rel="shortcut icon" href="/iSTEP.github.io/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"et-yzk.github.io","root":"/iSTEP.github.io/","language":"zh-CN","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"https://gitee.com/yzketx/image-markdown/raw/master/img/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/iSTEP.github.io/atom.xml" title="iSTEP" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                iSTEP&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/iSTEP.github.io/The-craft-of-selfteaching"
+                            >
+                                THE-CRAFT-OF-SELFTEACHING
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/iSTEP.github.io/The-craft-of-selfteaching">THE-CRAFT-OF-SELFTEACHING</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="page-template-container">
+        
+        
+        <div class="page-template-content markdown-body">
+            
+                <h1 id="值及其相应的运算"><a href="#值及其相应的运算" class="headerlink" title="值及其相应的运算"></a>值及其相应的运算</h1><p>从结构上来看，一切的计算机程序，都由且只由两个最基本的成分构成：</p>
+<blockquote>
+<ul>
+<li><strong>运算</strong>（Evaluation）</li>
+<li><strong>流程控制</strong>（Control Flow）</li>
+</ul>
+</blockquote>
+<p>没有流程控制的是计算器而已；有流程控制的才是可编程设备。</p>
+<p>看看之前我们见过的计算质数的程序：（按一下 <code>⎋</code>，即 <code>ESC</code>，确保已经进入命令模式，<code>⇧ L</code> 可以切换是否显示代码行号）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_prime</span>(<span class="params">n</span>):</span>            <span class="comment"># 定义 is_prime()，接收一个参数</span></span><br><span class="line">    <span class="keyword">if</span> n &lt; <span class="number">2</span>:              <span class="comment"># 开始使用接收到的那个参数（值）开始计算……</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span>       <span class="comment"># 不再是返回给人，而是返回给调用它的代码……</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> m <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="built_in">int</span>(n**<span class="number">0.5</span>)+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> (n % m) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">80</span>, <span class="number">110</span>):</span><br><span class="line">    <span class="keyword">if</span> is_prime(i):          <span class="comment"># 调用 is_prime() 函数，</span></span><br><span class="line">        <span class="built_in">print</span>(i)            <span class="comment"># 如果返回值为 True，则向屏幕输出 i</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>83
+89
+97
+101
+103
+107
+109
+</code></pre>
+<p><code>if...</code>，<code>for...</code> 在控制流程：在什么情况下运算什么，在什么情况下重复运算什么；</p>
+<p>第 13 行 <code>is_prime()</code> 这个函数的调用，也是在控制流程 —— 所以我们可以<strong>把函数看作是 “子程序”</strong>；</p>
+<p>一旦这个函数被调用，流程就转向开始执行在第 1 行中定义的 <code>is_prime()</code> 函数内部的代码，而这段代码内部还是<em>计算</em>和<em>流程控制</em>，决定一个返回值 —— 返回值是布尔值；再回到第 13 行，将返回值交给 <code>if</code> 判断，决定是否执行第 14 行……</p>
+<p>而计算机这种可编程设备之所以可以做流程控制，是因为它可以做<strong>布尔运算</strong>，即，它可以<em>对布尔值</em>进行<em>操作</em>，而后将布尔值交给<em>分支</em>和<em>循环</em>语句，构成了程序中的流程控制。</p>
+<h2 id="值"><a href="#值" class="headerlink" title="值"></a>值</h2><p>从本质上看，程序里的绝大多数语句包含着<strong>运算</strong>（Evaluation），即，在对某个值进行<strong>评价</strong>。这里的 “评价”，不是 “判断某人某事的好坏”，而是 “<em>计算出某个值究竟是什么</em>” —— 所以，我们用中文的 “<strong>运算</strong>” 翻译这个 “_Evaluation_” 可能表达得更准确一些。</p>
+<p>在程序中，被运算的可分为<strong>常量</strong>（Literals）和<strong>变量</strong>（Variables）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">1</span> + <span class="number">2</span> * <span class="number">3</span></span><br><span class="line">a += <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(a)</span><br></pre></td></tr></table></figure>
+
+<p>在以上代码中，</p>
+<p><code>1</code>、<code>2</code>、<code>3</code>，都是<strong>常量</strong>。<em>Literal</em> 的意思是 “字面的”，顾名思义，常量的<em>值</em>就是它字面上的值。<code>1</code> 的值，就是 <code>1</code>。</p>
+<p><code>a</code> 是<strong>变量</strong>。顾名思义，它的值将来是可变的。比如，在第 2 句中，这个变量的<em>值</em>发生了改变，之前是 <code>7</code>，之后变成了 <code>8</code>。</p>
+<p>第 1 句中的 <code>+</code>、<code>*</code>，是<strong>操作符</strong>（Operators），它用来对其左右的值进行相应的<em>运算</em>而后得到一个值。先是由操作符 <code>*</code> 对 <code>2</code> 和 <code>3</code> 进行运算，<br>生成一个值，<code>6</code>；然后再由操作符 <code>+</code> 对 <code>1</code> 和 <code>6</code> 进行运算，生成一个值 <code>7</code>。先算乘除后算加减，这是操作符的<strong>优先级</strong>决定的。</p>
+<p><code>=</code> 是赋值符号，它的作用是将它右边的值保存到左边的变量中。</p>
+<p><em>值</em>是程序的基础成分（Building blocks），它就好像盖房子用的砖块一样，无论什么样的房子，到最后都主要是由砖块构成。</p>
+<p><em>常量</em>，当然有个<em>值</em> —— 就是它们字面所表达的值。</p>
+<p><em>变量</em>必须先<em>赋值</em>才能使用，也就是说，要先把一个<em>值</em>保存到变量中，它才能在其后被运算。</p>
+<p>在 Python 中每个函数都有<em>返回值</em>，即便你在定义一个函数的时候没有设定返回值，它也会加上默认的返回值 <code>None</code>……（请注意 <code>None</code> 的大小写！）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>():</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="built_in">print</span>(f())        <span class="comment"># 输出 f() 这个函数被调用后的返回值，None</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">print</span>(f())) <span class="comment"># 这一行最外围的 print() 调用了一次 print(f())，所以输出一个 None，</span></span><br><span class="line">                  <span class="comment"># 而后再输出这次调用的返回值，所以又输出一次 None</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>None
+None
+None
+</code></pre>
+<p>当我们调用一个函数的时候，本质上来看，就相当于：</p>
+<blockquote>
+<p>我们把一个值交给某个函数，请函数根据它内部的运算和流程控制对其进行操作而后返回另外一个值。</p>
+</blockquote>
+<p>比如，<code>abs()</code> 函数，就会返回传递给它的<em>值</em>的<em>绝对值</em>；<code>int()</code> 函数，会将传递给它的值的小数部分砍掉；<code>float()</code> 接到整数参数之后，会返回这个整数的浮点数形式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">abs</span>(-<span class="number">3.14159</span>)</span><br><span class="line"><span class="built_in">int</span>(<span class="built_in">abs</span>(-<span class="number">3.14159</span>))</span><br><span class="line"><span class="built_in">float</span>(<span class="built_in">int</span>(<span class="built_in">abs</span>(-<span class="number">3.14159</span>)))</span><br></pre></td></tr></table></figure>
+
+<pre><code>3.14159
+3
+3.0
+</code></pre>
+<h2 id="值的类型"><a href="#值的类型" class="headerlink" title="值的类型"></a>值的类型</h2><p>在编程语言中，总是包含最基本的三种数据类型：</p>
+<blockquote>
+<ul>
+<li>布尔值（Boolean Value)</li>
+<li>数字（Numbers）：整数（Int）、浮点数（Float）、复数（Complex Numbers）</li>
+<li>字符串（Strings）</li>
+</ul>
+</blockquote>
+<p>既然有不同类型的数据，它们就分别对应着不同类型的值。</p>
+<p>运算的一个默认法则就是，通常情况下应该是<em>相同类型的值才能相互运算</em>。</p>
+<p>显然，数字与数字之间的运算是合理的，但你让 <code>+</code> 这个操作符对一个字符串和一个数字进行运算就不行：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="number">11</span> + <span class="number">10</span> - <span class="number">9</span> * <span class="number">8</span> / <span class="number">7</span> // <span class="number">6</span> % <span class="number">5</span></span><br><span class="line"><span class="string">&#x27;3.14&#x27;</span> + <span class="number">3</span>                  <span class="comment"># 这一句会报错</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>20.0
+
+---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-18-e922b7565e53&gt; in &lt;module&gt;
+      3
+      4 11 + 10 - 9 * 8 / 7 // 6 % 5
+----&gt; 5 &#39;3.14&#39; + 3                  # 这一句会报错
+
+TypeError: can only concatenate str (not &quot;int&quot;) to str
+</code></pre>
+<p>所以，在不得不对不同类型的值进行运算之前，总是要事先做 <strong>Type Casting</strong>（类型转换）。比如，</p>
+<blockquote>
+<ul>
+<li>将字符串转换为数字用 <code>int()</code>、<code>float()</code>；</li>
+<li>将数字转换成字符串用 <code>str()</code>；</li>
+</ul>
+</blockquote>
+<p>另外，即便是在数字之间进行计算的时候，有时也需要将整数转换成浮点数字，或者反之：</p>
+<blockquote>
+<ul>
+<li>将整数转换成浮点数字用 <code>float()</code>；</li>
+<li>将浮点数字转换成整数用 <code>int()</code>；</li>
+</ul>
+</blockquote>
+<p>有个函数，<code>type()</code>，可以用来查看某个值属于什么类型：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">type</span>(<span class="number">3</span>)</span><br><span class="line"><span class="built_in">type</span>(<span class="number">3.0</span>)</span><br><span class="line"><span class="built_in">type</span>(<span class="string">&#x27;3.14&#x27;</span>)</span><br><span class="line"><span class="built_in">type</span>(<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">type</span>(<span class="built_in">range</span>(<span class="number">10</span>))</span><br><span class="line"><span class="built_in">type</span>([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"><span class="built_in">type</span>((<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">type</span>(&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;)</span><br><span class="line"><span class="built_in">type</span>(&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>:<span class="number">2</span>, <span class="string">&#x27;c&#x27;</span>:<span class="number">3</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<pre><code>int
+float
+str
+bool
+range
+list
+tuple
+set
+dict
+</code></pre>
+<h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><p>针对不同类型的数据，有各自专用的<strong>操作符</strong>。</p>
+<h3 id="数值操作符"><a href="#数值操作符" class="headerlink" title="数值操作符"></a>数值操作符</h3><p>针对数字进行计算的操作符有加减乘除商余幂：<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>、<code>//</code>、<code>%</code>、<code>**</code>。</p>
+<p>其中 <code>+</code> 和 <code>-</code> 可以对单个值进行操作，<code>-3</code>；其它的操作符需要有两个值才能操作。</p>
+<p>从优先级来看，这些操作符中：</p>
+<blockquote>
+<ul>
+<li>对两个值进行操作的 <code>+</code>、<code>-</code> 的优先级最低；</li>
+<li>稍高的是 <code>*</code>、<code>/</code>、<code>//</code>、<code>%</code>；</li>
+<li>更高的是对单个值进行操作的 <code>+</code>、<code>-</code>；</li>
+<li>优先级最高的是 <code>**</code>。</li>
+</ul>
+</blockquote>
+<p>完整的操作符优先级列表，参见官方文档：</p>
+<blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/reference/expressions.html#operator-precedence" >https://docs.python.org/3/reference/expressions.html#operator-precedence<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<h3 id="布尔值操作符"><a href="#布尔值操作符" class="headerlink" title="布尔值操作符"></a>布尔值操作符</h3><p>针对布尔值，操作符有<code>与</code>、<code>或</code>、<code>非</code>：<code>and</code>、<code>or</code>、<code>not</code>。</p>
+<p>它们之中，优先级最低的是或 <code>or</code>，然后是与 <code>and</code>, 优先级最高的是非 <code>not</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">True</span> <span class="keyword">and</span> <span class="literal">False</span> <span class="keyword">or</span> <span class="keyword">not</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>False
+</code></pre>
+<p>最先操作的是 <code>not</code>，因为它优先级最高。所以，上面的表达式相当于 <code>True and False or (not True)</code>，即相当于 <code>True and False or False</code>；</p>
+<p>然后是 <code>and</code>，所以，<code>True and False or False</code> 相当于是 <code>(True and False) or False</code>，即相当于 <code>False or False</code>；</p>
+<p>于是，最终的值是 <code>False</code>。</p>
+<h3 id="逻辑操作符"><a href="#逻辑操作符" class="headerlink" title="逻辑操作符"></a>逻辑操作符</h3><p>数值之间还可以使用逻辑操作符，<code>1 &gt; 2</code> 返回布尔值 <code>False</code>。逻辑操作符有：<code>&lt;</code>（小于）、<code>&lt;=</code>（小于等于）、<code>&gt;</code>（大于）、<code>&gt;=</code>（大于等于）、<code>!=</code>（不等于）、<code>==</code>（等于）。</p>
+<p>逻辑操作符的优先级，高于布尔值的操作符，低于数值计算的操作符。<br>即：数值计算的操作符优先级最高，其次是逻辑操作符，布尔值的操作符优先级最低。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">n = -<span class="number">95</span></span><br><span class="line">n &lt; <span class="number">0</span> <span class="keyword">and</span> (n + <span class="number">1</span>) % <span class="number">2</span> == <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>True
+</code></pre>
+<h3 id="字符串操作符"><a href="#字符串操作符" class="headerlink" title="字符串操作符"></a>字符串操作符</h3><p>针对字符串，有三种操作：</p>
+<blockquote>
+<ul>
+<li>拼接：<code>+</code> 和 <code>&#39; &#39;</code>（后者是空格）</li>
+<li>拷贝：<code>*</code></li>
+<li>逻辑运算：<code>in</code>、<code>not in</code>；以及，<code>&lt;</code>、<code>&lt;=</code>、<code>&gt;</code>、<code>&gt;=</code>、<code>!=</code>、<code>==</code></li>
+</ul>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;Awesome&#x27;</span> + <span class="string">&#x27;Python&#x27;</span></span><br><span class="line"><span class="string">&#x27;Awesome&#x27;</span> <span class="string">&#x27;Python&#x27;</span></span><br><span class="line"><span class="string">&#x27;Python, &#x27;</span> + <span class="string">&#x27;Awesome! &#x27;</span> * <span class="number">3</span></span><br><span class="line"><span class="string">&#x27;o&#x27;</span> <span class="keyword">in</span> <span class="string">&#x27;Awesome&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;o&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> <span class="string">&#x27;Python&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>&#39;AwesomePython&#39;
+&#39;AwesomePython&#39;
+&#39;Python, Awesome! Awesome! Awesome! &#39;
+False
+</code></pre>
+<p>字符之间，字符串之间，除了 <code>==</code> 和 <code>!=</code> 之外，也都可以被逻辑操作符 <code>&lt;</code>、<code>&lt;=</code>、<code>&gt;</code>、<code>&gt;=</code> 运算：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;a&#x27;</span> &lt; <span class="string">&#x27;b&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>True
+</code></pre>
+<p>这是因为字符对应着 Unicode 码，字符在被比较的时候，被比较的是对应的 Unicode 码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;A&#x27;</span> &gt; <span class="string">&#x27;a&#x27;</span></span><br><span class="line"><span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>)</span><br><span class="line"><span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>False
+65
+97
+</code></pre>
+<p>当字符串被比较的时候，将从两个字符串各自的第一个字符开始逐个比较，“一旦决出胜负马上停止”：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;PYTHON&#x27;</span> &gt; <span class="string">&#x27;Python 3&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>False
+</code></pre>
+<h3 id="列表的操作符"><a href="#列表的操作符" class="headerlink" title="列表的操作符"></a>列表的操作符</h3><p>数字和字符串（由字符构成的序列）是最基本的数据类型，而我们往往需要批量处理数字和字符串，这样的时候，我们需要<strong>数组</strong>（Array）。不过，在 Python 语言中，它提供了一个<strong>容器</strong>（Container）的概念，用来容纳批量的数据。</p>
+<p>Python 的容器有很多种 —— 字符串，其实也是容器的一种，它的里面容纳着批量的字符。</p>
+<p>我们先简单接触一下另外一种容器：<strong>列表</strong>（List）。</p>
+<p>列表的标示，用方括号 <code>[]</code>；举例来说，<code>[1, 2, 3, 4, 5]</code> 和 <code>[&#39;ann&#39;, &#39;bob&#39;, &#39;cindy&#39;, &#39;dude&#39;, &#39;eric&#39;]</code>，或者 <code>[&#39;a&#39;, 2, &#39;b&#39;, 32, 22, 12]</code> 都是一个列表。</p>
+<p>因为列表和字符串一样，都是<em>有序容器</em>（容器还有另外一种是无序容器），所以，它们可用的操作符其实相同：</p>
+<blockquote>
+<ul>
+<li>拼接：<code>+</code> 和 <code>&#39; &#39;</code>（后者是空格）</li>
+<li>拷贝：<code>*</code></li>
+<li>逻辑运算：<code>in</code>、<code>not in</code>；以及，<code>&lt;</code>、<code>&lt;=</code>、<code>&gt;</code>、<code>&gt;=</code>、<code>!=</code>、<code>==</code></li>
+</ul>
+</blockquote>
+<p>两个列表在比较时（前提是两个列表中的数据元素类型相同），遵循的还是跟字符串比较相同的规则：“一旦决出胜负马上停止”。但实际上，由于列表中可以包含不同类型的元素，所以，通常情况下没有实际需求对他们进行 “大于、小于” 的比较。（比较时，类型不同会引发 <code>TypeError</code>……）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"></span><br><span class="line">a_list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">b_list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>]</span><br><span class="line">c_list = [<span class="string">&#x27;ann&#x27;</span>, <span class="string">&#x27;bob&#x27;</span>, <span class="string">&#x27;cindy&#x27;</span>, <span class="string">&#x27;dude&#x27;</span>, <span class="string">&#x27;eric&#x27;</span>]</span><br><span class="line">a_list &gt; b_list</span><br><span class="line"><span class="number">10</span> <span class="keyword">not</span> <span class="keyword">in</span> a_list</span><br><span class="line"><span class="string">&#x27;ann&#x27;</span> <span class="keyword">in</span> c_list</span><br></pre></td></tr></table></figure>
+
+<pre><code>False
+True
+True
+</code></pre>
+<h2 id="更复杂的运算"><a href="#更复杂的运算" class="headerlink" title="更复杂的运算"></a>更复杂的运算</h2><p>对于数字进行加、减、乘、除、商、余、幂的操作，对于字符串进行拼接、拷贝、属于的操作，对布尔值进行或、与、非的操作，这些都是相对简单的运算。</p>
+<p>更为复杂一点的，我们要通过调用函数来完成 —— 因为在函数内部，我们可以用比 “单个表达式” 更为复杂的程序针对传递进来的参数进行运算。换言之，函数就相当于各种事先写好的子程序，给它传递一个值，它会对其进行运算，而后返回一个值（最起码返回一个 <code>None</code>）。</p>
+<p>以下是 Python 语言所有的内建函数（<a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html" >Built-in Functions<i class="fas fa-external-link-alt"></i></a>）：</p>
+<table>
+<thead>
+<tr>
+<th>(</th>
+<th>Python</th>
+<th>Built-in</th>
+<th>Functions</th>
+<th>)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#abs" >abs()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#delattr" >delattr()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#hash" >hash()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#func-memoryview" >memoryview()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#func-set" >set()<i class="fas fa-external-link-alt"></i></a></td>
+</tr>
+<tr>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#all" >all()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#func-dict" >dict()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#help" >help()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#min" >min()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#setattr" >setattr()<i class="fas fa-external-link-alt"></i></a></td>
+</tr>
+<tr>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#any" >any()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#dir" >dir()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#hex" >hex()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#next" >next()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#slice" >slice()<i class="fas fa-external-link-alt"></i></a></td>
+</tr>
+<tr>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#ascii" >ascii()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#divmod" >divmod()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#id" >id()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#object" >object()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#sorted" >sorted()<i class="fas fa-external-link-alt"></i></a></td>
+</tr>
+<tr>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#bin" >bin()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#enumerate" >enumerate()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#input" >input()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#oct" >oct()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#staticmethod" >staticmethod()<i class="fas fa-external-link-alt"></i></a></td>
+</tr>
+<tr>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#bool" >bool()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#eval" >eval()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#int" >int()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#open" >open()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#func-str" >str()<i class="fas fa-external-link-alt"></i></a></td>
+</tr>
+<tr>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#breakpoint" >breakpoint()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#exec" >exec()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#isinstance" >isinstance()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#ord" >ord()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#sum" >sum()<i class="fas fa-external-link-alt"></i></a></td>
+</tr>
+<tr>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#func-bytearray" >bytearray()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#filter" >filter()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#issubclass" >issubclass()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#pow" >pow()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#super" >super()<i class="fas fa-external-link-alt"></i></a></td>
+</tr>
+<tr>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#func-bytes" >bytes()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#float" >float()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#iter" >iter()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#print" >print()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#func-tuple" >tuple()<i class="fas fa-external-link-alt"></i></a></td>
+</tr>
+<tr>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#callable" >callable()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#format" >format()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#len" >len()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#property" >property()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#type" >type()<i class="fas fa-external-link-alt"></i></a></td>
+</tr>
+<tr>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#chr" >chr()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#func-frozenset" >frozenset()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#func-list" >list()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#func-range" >range()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#vars" >vars()<i class="fas fa-external-link-alt"></i></a></td>
+</tr>
+<tr>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#classmethod" >classmethod()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#getattr" >getattr()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#locals" >locals()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#repr" >repr()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#zip" >zip()<i class="fas fa-external-link-alt"></i></a></td>
+</tr>
+<tr>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#compile" >compile()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#globals" >globals()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#map" >map()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#reversed" >reversed()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#__import__"><strong>import</strong>()</a></td>
+</tr>
+<tr>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#complex" >complex()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#hasattr" >hasattr()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#max" >max()<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#round" >round()<i class="fas fa-external-link-alt"></i></a></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>现在倒不用着急一下子全部了解它们 —— 反正早晚都会的。</p>
+<p>这其中，针对数字，有计算绝对值的函数 <code>abs()</code>，有计算商余的函数 <code>divmod()</code> 等等。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">abs</span>(-<span class="number">3.1415926</span>)</span><br><span class="line"><span class="built_in">divmod</span>(<span class="number">11</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>3.1415926
+(3, 2)
+</code></pre>
+<p>这些内建函数也依然只能完成 “基本操作”，比如，对于数字，我们想计算三角函数的话，内建函数就帮不上忙了，于是，我们需要调用标准库（Standard Library）中的 math 模块（Module）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line">math.sin(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>-0.9589242746631385
+</code></pre>
+<p>代码 <code>math.sin(5)</code> 这里的 <code>.</code>，也可以被理解为 “操作符”，它的作用是：</p>
+<blockquote>
+<p>从其它模块中调用函数。</p>
+</blockquote>
+<p>代码 <code>math.sin(5)</code> 的作用是：</p>
+<blockquote>
+<p>把 <code>5</code> 这个值，传递给 <code>math</code> 这个模块里的 <code>sin()</code> 函数，让 <code>sin()</code> 根据它内部的代码对这个值进行运算，而后返回一个值（即，计算结果）。</p>
+</blockquote>
+<p>类（Class）中定义的函数，也可以这样被调用 —— 虽然你还不明白类（Class）究竟是什么，但从结构上很容易理解，它实际上也是保存在其他文件中的一段代码，于是，那段代码内部定义的函数，也可以这样调用。</p>
+<p>比如，数字，其实属于一个类，所以，我们可以调用那个类里所定义的函数，比如，<code>float.as_integer_ratio()</code>，它将返回两个值，第一个值除以第二个值，恰好等于传递给它的那个浮点数字参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3.1415926</span>.as_integer_ratio()</span><br></pre></td></tr></table></figure>
+
+<pre><code>(3537118815677477, 1125899906842624)
+</code></pre>
+<h2 id="关于布尔值的补充"><a href="#关于布尔值的补充" class="headerlink" title="关于布尔值的补充"></a>关于布尔值的补充</h2><p>当你看到以下这样的表达式，而后再看看它的结果，你可能会多少有点迷惑：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">True</span> <span class="keyword">or</span> <span class="string">&#x27;Python&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>True
+</code></pre>
+<p>这是因为 Python 将 <code>True</code> 定义为：</p>
+<blockquote>
+<p>By default, an object is considered true unless its class defines either a __bool__() method that returns <code>False</code> or a __len__() method that returns zero, when called with the object.</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#truth-value-testing" >https://docs.python.org/3/library/stdtypes.html#truth-value-testing<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>这一段文字，初学者是看不懂的。但下一段就好理解了：</p>
+<blockquote>
+<p>Here are most of the built-in objects considered <code>False</code>:</p>
+<blockquote>
+<ul>
+<li>constants defined to be false: <code>None</code> and <code>False</code>.</li>
+<li>zero of any numeric type: <code>0</code>, <code>0.0</code>, <code>0j</code>, <code>Decimal(0)</code>, <code>Fraction(0, 1)</code></li>
+<li>empty sequences and collections: <code>&#39;&#39;</code>, <code>()</code>, <code>[]</code>, <code>&#123;&#125;</code>, <code>set()</code>, <code>range(0)</code></li>
+</ul>
+</blockquote>
+</blockquote>
+<p>所以，<code>&#39;Python&#39;</code> 是个非空的字符串，即，不属于是 <code>empty sequences</code>，所以它不被认为是 <code>False</code>，即，它的布尔值是 <code>True</code></p>
+<p>于是，这么理解就轻松了：</p>
+<blockquote>
+<p>每个变量或者常量，除了它们的值之外，同时还相当于有一个对应的布尔值。</p>
+</blockquote>
+<h2 id="关于值的类型的补充"><a href="#关于值的类型的补充" class="headerlink" title="关于值的类型的补充"></a>关于值的类型的补充</h2><p>除了数字、布尔值、字符串，以及上一小节介绍的列表之外，还有若干数据类型，比如 <code>range()</code>（等差数列）、<code>tuple</code>（元组）、<code>set</code>（集合）、<code>dictionary</code>（字典），再比如 <code>Date Type</code>（日期）等等。</p>
+<p>它们都是基础数据类型的各种组合 —— 现实生活中，更多需要的是把基础类型组合起来构成的数据。比如，一个通讯簿，里面是一系列字符串分别对应着若干字符串和数字。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">entry[<span class="number">3662</span>] = &#123;</span><br><span class="line">    <span class="string">&#x27;first_name&#x27;</span>: <span class="string">&#x27;Michael&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;last_name&#x27;</span>: <span class="string">&#x27;Willington&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;birth_day&#x27;</span>: <span class="string">&#x27;12/07/1992&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;mobile&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;+714612234&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;+716253923&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="string">&#x27;id&#x27;</span>: <span class="number">3662</span>,</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>针对不同的类型，都有相对应的操作符，可以对其进行运算。</p>
+<p>这些类型之间有时也有不得不相互运算的需求，于是，在相互运算之前同样要 _Type Casting_，比如将 List 转换为 Set，或者反之：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"></span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>]</span><br><span class="line">b = <span class="built_in">set</span>(a)</span><br><span class="line">c = <span class="built_in">list</span>(b)</span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line">c</span><br></pre></td></tr></table></figure>
+
+<pre><code>[1, 2, 3, 4, 5, 6, 7]
+&#123;1, 2, 3, 4, 5, 6, 7&#125;
+[1, 2, 3, 4, 5, 6, 7]
+</code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>回到最开始：从结构上来看，一切的计算机程序，都由且只由两个最基本的成分构成：</p>
+<blockquote>
+<ul>
+<li><strong>运算</strong>（Evaluation）</li>
+<li><strong>流程控制</strong>（Control Flow）</li>
+</ul>
+</blockquote>
+<p>这一章主要介绍了基础数据类型的运算细节。而除了基础数据类型，我们需要由它们组合起来的更多复杂数据类型。但无论数据的类型是什么，被操作符操作的总是该数据的<strong>值</strong>。所以，虽然绝大多数编程书籍按照惯例会讲解 “数据类型”，但为了究其本质，我们在这里关注的是 “值的类型”。虽然只是关注焦点上的一点点转换，但实践证明，这一点点的不同，对初学者更清楚地把握知识点有巨大的帮助。</p>
+<p>针对每一种<em>值</em>的类型，无论简单复杂，都有相应的操作方式：</p>
+<blockquote>
+<ul>
+<li><strong>操作符</strong><ul>
+<li>值运算</li>
+<li>逻辑运算</li>
+</ul>
+</li>
+<li> <strong>函数</strong></li>
+<li>内建函数</li>
+<li>其他模块里的函数</li>
+<li>其本身所属类之中所定义的函数</li>
+</ul>
+</blockquote>
+<p>所以，接下来要学习的，无非就是熟悉各种<em>数据类型</em>，及其相应的操作，包括能对它们的<em>值</em>进行操作的操作符和函数；无论是操作符还是函数，最终都会返回一个相应的<strong>值</strong>，及其相应的<em>布尔值</em> —— 这么看来，编程知识结构没多复杂。因为换句话讲，</p>
+<blockquote>
+<p>接下来你要学习的无非是各种<em>数据类型</em>的<em>运算</em>而已。</p>
+</blockquote>
+<p>另外，虽然现在尚未来得及对<strong>函数</strong>进行深入讲解，但最终你会发现它跟操作符一样，在程序里无所不在。</p>
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p>另外，以下几个链接先放在这里，未来你会返回来参考它们，还是不断地参考它们：</p>
+<blockquote>
+<ul>
+<li>关于表达式：<a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/reference/expressions.html" >https://docs.python.org/3/reference/expressions.html<i class="fas fa-external-link-alt"></i></a></li>
+<li>关于所有操作的优先级：<a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/reference/expressions.html#operator-precedence" >https://docs.python.org/3/reference/expressions.html#operator-precedence<i class="fas fa-external-link-alt"></i></a></li>
+<li>上一条链接不懂 BNF 的话根本读不懂：<a class="link"   target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Backus-Naur_form" >https://en.wikipedia.org/wiki/Backus-Naur_form<i class="fas fa-external-link-alt"></i></a></li>
+<li>Python 的内建函数：<a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html" >https://docs.python.org/3/library/functions.html<i class="fas fa-external-link-alt"></i></a></li>
+<li>Python 的标准数据类型：<a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html" >https://docs.python.org/3/library/stdtypes.html<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+</blockquote>
+<p>另外，其实所有的操作符，在 Python 内部也是调用函数完成的……</p>
+<blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3.7/library/operator.html" >https://docs.python.org/3.7/library/operator.html<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+
+            
+        </div>
+        <div class="page-template-comments">
+            
+        </div>
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">iSTEP</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

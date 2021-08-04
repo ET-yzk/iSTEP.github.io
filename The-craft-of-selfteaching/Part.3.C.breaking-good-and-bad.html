@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="iSTEP">
+    <meta name="description" content="iSTEP Blogs">
+    <meta name="author" content="iSTEP">
+    
+    <title>
+        
+            拆解 |
+        
+        iSTEP&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/iSTEP.github.io/css/style.css">
+
+    <link rel="shortcut icon" href="/iSTEP.github.io/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"et-yzk.github.io","root":"/iSTEP.github.io/","language":"zh-CN","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"https://gitee.com/yzketx/image-markdown/raw/master/img/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/iSTEP.github.io/atom.xml" title="iSTEP" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                iSTEP&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/iSTEP.github.io/The-craft-of-selfteaching"
+                            >
+                                THE-CRAFT-OF-SELFTEACHING
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/iSTEP.github.io/The-craft-of-selfteaching">THE-CRAFT-OF-SELFTEACHING</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="page-template-container">
+        
+        
+        <div class="page-template-content markdown-body">
+            
+                <h1 id="拆解"><a href="#拆解" class="headerlink" title="拆解"></a>拆解</h1><p>在学习编程的过程中，你会不由自主地学会一个重要技能：</p>
+<blockquote>
+<p><strong>拆解</strong></p>
+</blockquote>
+<p>这么简单的两个字，在人生中的作用重大到不可想像…… 而且它也的确是自学能力中最重要的底层能力之一。</p>
+<h2 id="横向拆解"><a href="#横向拆解" class="headerlink" title="横向拆解"></a>横向拆解</h2><p>我很幸运，12 岁的时候有机会学习编程（习得了最基本的概念，那时候学的编程语言是 BASIC），所以，相对其他人在 “拆解任务” 方面有更强的初始意识。</p>
+<p>后来，15 岁开始学着玩吉他的时候，发现道理其实是一样的。</p>
+<p>有个曲子很难（当然也非常好听），曲名是 <a class="link"   target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=OOsRMECWKAE" >Recrerdes Da La Alhambra<i class="fas fa-external-link-alt"></i></a> 阿罕布拉宫的回忆。你看看曲谱就知道它多难了：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/guitar-tab.gif?raw=true"
+                     
+                ></p>
+<p>那怎么办？怎么办？！—— 我的办法听起来看起来都很笨：</p>
+<blockquote>
+<ul>
+<li>每次只弹一个小节；<ul>
+<li>而且还是放慢速度弹，刚开始很慢很慢；</li>
+<li>等熟悉了之后逐渐快起来，直到正常速度；</li>
+</ul>
+</li>
+<li>再开始弹下一个小节；<ul>
+<li>同样是放慢速度弹，刚开始很慢很慢；</li>
+<li>等熟悉了之后逐渐快起来，直到正常速度；</li>
+</ul>
+</li>
+<li>再把两个小节拼起来；<ul>
+<li>有些小节拼起来相对容易，另外一些需要挣扎很久才顺畅；</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>如此这般，最终就把这个很难的曲子弹出来了 —— 其实所有的初学者都是这么干的。</p>
+<p>可以听听这个曲子放松一下（当然肯定不是我弹的哈哈）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.display <span class="keyword">import</span> IFrame</span><br><span class="line"></span><br><span class="line">IFrame(<span class="string">&#x27;https://www.youtube.com/embed/OOsRMECWKAE?&#x27;</span>, width=<span class="string">&#x27;800&#x27;</span>, height=<span class="string">&#x27;450&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>    &lt;iframe
+        width=&quot;800&quot;
+        height=&quot;450&quot;
+        src=&quot;https://www.youtube.com/embed/OOsRMECWKAE?&quot;
+        frameborder=&quot;0&quot;
+        allowfullscreen
+    &gt;&lt;/iframe&gt;
+</code></pre>
+<p>提起这事，总是会不由自主地叹口气 —— 因为在这事上我运气太差，刚把这个曲子练完没多久，还没来得及找人显摆，就摔断了掌骨和指骨，给我的手指灵活性造成了不可修复的损伤，于是，后来只能用拨片玩玩吉他了……</p>
+<p>话说回来，自学的一个重要技巧就是，</p>
+<blockquote>
+<p>把那些很难的任务无限拆分 —— 直至每个子任务都很小，小到都<strong>可操作</strong>为止。</p>
+</blockquote>
+<p>比如，正则表达式，这个你必须学会的东西，学会学好真的不那么容易。一切的技能都一样，没学会之前都是很难很难的，可学会之后用熟了，你就会 “发现” 那东西其实也没多难……</p>
+<p>那刚开始的时候怎么办？你其实需要运用拆分的本领：</p>
+<blockquote>
+<ul>
+<li>先囫囵吞枣至少读一遍教程；</li>
+<li>给自己搭好测试的环境（或许在 Regex101.com 上，或许用一个编辑器，比如 VS Code）；</li>
+<li>先不管什么意思，找一些 Regex 自己试试；</li>
+<li>正式进入 “精度” 状态，每一小节每一小节地突破；</li>
+<li>搞定一小节之后，就把它与之前的小节再反复翻两三遍；</li>
+<li>把学习任务拆分成若干块，再重新逐个突破，比如，匹配，替换，在编辑器中使用，在 Python 代码中使用；</li>
+<li>把各种操作符与特殊字符拆分成若干个组，而后，熟悉到牢记（而不用将来反复回来查询）；<br>……</li>
+</ul>
+</blockquote>
+<p>事实上，当你习惯这么做了之后，就会 “发现” 一切的自学任务，其实都不是 “难”，不过是 “繁杂程度不一” 而已。</p>
+<p>很多人最终自学失败，要么是不懂拆分任务，要么就仅仅是<strong>怕麻烦</strong>而已 —— 还是那句话，人活着就挺麻烦的……</p>
+<h2 id="纵向拆解"><a href="#纵向拆解" class="headerlink" title="纵向拆解"></a>纵向拆解</h2><p>拆解的第一种方法是把某个任务拆分成若干个小任务，正如上面的讲解那样，我称它为 “横向拆解”。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/decompose-x.png?raw=true"
+                     
+                ></p>
+<p>另外一种方法，我称它为 “纵向拆解”（有时，我也会用 “分层拆解” 这个说法）。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/decompose-y.png?raw=true"
+                     
+                ></p>
+<p>这种方式在自学复杂的概念体系时特别管用。</p>
+<p>编程这种东西，之所以刚开始觉得难学，是因为其中涉及的概念除了之前我们强调的 “<a href="Part.1.F.deal-with-forward-references">过早引用</a>” 之外，还有个特征：</p>
+<blockquote>
+<p>有的概念虽然并不同属一个层面，却常常纠缠在一起，没有明确的提示……</p>
+</blockquote>
+<p>比如，常量、变量、字符串、函数、文件等等的概念，其实并不是某个特定的编程语言的专有概念，它们是所有编程语言都会涉及到的概念，因为计算机处理的就是这些东西，而无论哪个编程语言最终都要通过计算机去处理这些东西。</p>
+<p>又比如说，分支与循环，每个编程语言都有对应的语句，所以，分支循环在逻辑判断、流程管理这个层面，而分支循环的 “<strong>实现</strong>” 应该划分到另外一个层面中去；而每个语言实现分支循环语句的语法多少有点差异 —— 这些细节属于那个编程语言本身：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python 这么写：</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JavaScript 这么写：</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> i;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">  ...;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自学正则表达式的时候也如此。最基本的规则是属于 Regex 自己的；而后各种语言的实现各不相同，那是各个编程语言层面的；在各种编辑器中，除了基础的规则之外，也有它们自己的定制…… 看起来细节很多，但分层分类之后，就会变得很容易理解、很容易记住。</p>
+<p>遇到 “面向对象编程” 也是如此。类、实例、对象、继承、多态…… 这些其实并不属于某一个编程语言，但它们也确实在几乎所有编程语言中被实现、被应用 —— 所谓的难，无非是因为属于两个层面甚至多个层面的概念被拧在一起教、学、练……</p>
+<p>再比如说，在我把这个用编程当作习得自学能力的第一个 “实战项目” 之时，甚至要把 “读” 和 “写” 分成两个层面，先照顾 “读”，至于 “写”，要等到有了基本的 “读” 的能力之后再说；即便是到了 “写”，还要划分至少两个层面，首先是从 “简单的函数” 开始，而非上来就要写个 “大程序”…… 这种拆分层面的技能好像可以用在方方面面呢！</p>
+<p>所以，要在自学的过程中，不停地想办法把它们从层面上区分开来 —— 不能总是把它们混在一块儿 “大锅烩”。</p>
+<p>日常生活中，我们会遇到被评价为 “理解能力强” 的人，而另外那些不被如此评价的人就很不理解，很迷惑：</p>
+<blockquote>
+<p>我到底差在哪儿了，你不说我理解能力强？难道我的理解能力很差吗？</p>
+</blockquote>
+<p>当老师当久了，经常被这种现象震惊：</p>
+<blockquote>
+<p>原来很简单的东西竟然可能成为很多人一生的障碍。</p>
+</blockquote>
+<p>—— 并且，这话重复多少遍都不过分。</p>
+<p>大多数人不太在意自己脑中的概念之间的关系，因为平日里这也不怎么耽误事。但一旦遇到复杂一点的知识体系，就完全搞不定了…… 而所谓知识体系的复杂，无非就是新的概念多一些，概念之间的关联更复杂一些…… 而概念之间的关联更复杂一些，无非是各个概念之间不仅只有一种联系，最后会形成网状连接……</p>
+<p>—— 在《通往财富自由之路》那本书里，我几乎用了整本书的篇幅去讲解、厘清概念及其之间关系的重要性。</p>
+<p>复杂吗？其实并不复杂 —— 在横向纵向分别逐步分清之后。</p>
+<p>可问题在于，脑子里概念关联一团糟的人，自己并不觉得，甚至无法知道 —— 他们是那种<a href="Part.1.C.must.learn.sth.only.by.reading.md">跟你一块去看一场电影却能看到另外一部电影的人</a>。说他们理解能力差过分吗？他们不能理解被评价为理解能力差，难道不是很自然吗？</p>
+<p>分清概念的方法是什么？其实也不难，就是不断拆解，不断主动整理。每次用图表整理那些概念的时候，就会发现比原来更清晰一些，多次整理，最终就谙熟于心了。</p>
+<p>想要再举更恰当更惊人的例子很难，勉为其难再举个例子。</p>
+<p>当我在 2011 年遇到比特币的时候，现在回头看，在当时的情况下，我平日里习惯对概念及其关联进行各种纵向横向的拆解这件事给我 “创造” 了巨大的好运。后来我在《<a class="link"   target="_blank" rel="noopener" href="https://github.com/xiaolai/INB-Principles/blob/master/Chinese.md" >INBlockchain 的开源区块链投资原则<i class="fas fa-external-link-alt"></i></a>》里提过这事：</p>
+<blockquote>
+<p>“比特币” 这个概念，可以有多重的理解 —— 这也是为什么人们感到迷惑，或者相互之间很难达成一致理解的根本原因。</p>
+<p>首先，比特币是世界上第一个，也是迄今为止最成功的区块链应用。</p>
+<p>其次，比特币是一家世界银行，只不过它不属于任何权威管辖，它是由一个去中心化网络构成的。</p>
+<p>另外，这家叫做比特币的，去中心化的世界银行，发行了一个货币，恰好也叫 “比特币”。有些人更喜欢使用相对小心的说法，把这个货币指称为 BTC，而不是 “比特币”（Bitcoin）。</p>
+<p>最后，即便在比特币横空出世的七年后（2017），也很少有人意识到比特币（或者 BTC）其实也可以被理解为这家叫做比特币的去中心化的世界银行的股票。</p>
+</blockquote>
+<p>—— 这无非就是把一个概念拆分成若干个层面再对每个层面准确理解而已。</p>
+<p>但毫无疑问，这点靠很简单很简单的方法练就的理解能力，帮了我大忙。</p>
+<h2 id="触类旁通"><a href="#触类旁通" class="headerlink" title="触类旁通"></a>触类旁通</h2><p>无论听起来多么简单的任务，落实成代码肯定没那么简单，没那么容易。</p>
+<p>以后你会越来越清楚的：写程序的主要工作量，往往并非来自于在编辑器里敲代码那个阶段。</p>
+<blockquote>
+<p>更多的工作量，其实在于如何才能在脑子里把整个流程拆解清楚，考虑到各个方面……</p>
+</blockquote>
+<p>所以，编程，更多是拿着纸笔梳理细节的工作。一旦所有的细节都想明白了，落实成代码其实是飞快的 —— 越是工程量大的项目越是如此。</p>
+<p>这个道理在哪里都是相同、相通的。不说编程，说写书，也是一样的。</p>
+<p>随着时间的推移，你花在 “拆解” 上的时间会越来越多，因为所有大的工程，都可以被拆解成小工程 —— 于是，也为了做出大工程，拆解的工作首先是必须，其次是最耗时费力但最值得的。</p>
+<p>我身边很多人，包括出版社的专业编辑，都慨叹过我的 “写书速度”。我猜，实际上把他们惊到甚至惊倒的，并不是他们以为的 “李笑来写书的速度”，而是 “李笑来打字的速度” 而已。</p>
+<p>当我告诉他们我要写一本什么书了的时候，实际上，有个工作早就完成了：“系统梳理要写的那本书的所有细节”，剩下的只是落笔把那些东西写出来而已 —— 当然，我是敲出来，用我那几乎无以伦比的输入速度敲出来 —— 那当然 “显得” 很快了！</p>
+<p>创业也好，投资也罢，还是一样的。因为我这个人脸皮厚，不怕人们笑话，所以我可以平静地说这事：</p>
+<blockquote>
+<p>我参与（或投资）过<strong>很多</strong>失败的创业项目……</p>
+</blockquote>
+<p>对所有复盘的结果，无一例外，根源都是当初立项的时候，很多重要细节还没搞清楚，甚至没想到要去搞清楚，就已经开始行动…… 于是，在成本不断积累的情况下，没完没了地处理各种 “意外”，没完没了地重新制定目标，没完没了地拖延，没完没了地 “重新启动”…… 直至开始苟延残喘，最后不了了之。</p>
+<p>拆解得不够，就容易导致想不清楚，想错，想歪……</p>
+<p>也许，有人可能会理直气壮地反问，“怎么可能从一开始就把所有情况都想清楚么！” 唉，是呀，以前我也是这么想的…… 直到吃了很多亏，很多很多亏，很多很多很大很大的亏，才 “发现” 且不得不痛下决心去接受：事先想不清楚的，就不要去做。</p>
+<p>这是一种特殊、且重要、又极有价值的能力。现实生活中，后来我也见过若干有这种能力的高人，比如，你可以到网上搜一个人名，<a class="link"   target="_blank" rel="noopener" href="https://www.google.com/search?q=%E5%BA%84%E8%BE%B0%E8%B6%85" >庄辰超<i class="fas fa-external-link-alt"></i></a>，他就是我见过的能做到干什么事之前都能全都想清楚的真人活人之一。</p>
+<p>自学的时候，拆解任务的重要性更是如此。</p>
+<p>这本 “书” 的一个特点，就是把 “自学”（或者平日里称为 “学习”）这个流程，拆解为 “学”、“练”、“用”、后面还会讲到 “造” 总计四个环节来处理 —— 从内容编排本身就这么干，甚至，在开头相当一部分，就明确说明，“根本不指望你读过一遍就会了”，还反复提醒，“要重复读很多遍，虽然第一遍必须囫囵吞枣”……</p>
+<p>对于初学者常面临的尴尬，我们也从一开始就提醒，编程语言，和你之前在学校里学的语文，本质上没什么区别，先学会读，而后在多读多读再多读的同时，开始练习写 —— 这才真的很自然。</p>
+<p>即便是开始讲如何写，我们的做法也是从 “写函数” 开始，而不是 “来，让我们写个程序……” —— 这一点点看起来不起眼的差异，作用是很大的，因为从 “小而完整” 的东西开始做（任何事）非常重要。</p>
+<p><a href="Part.3.F.social-selfteaching.md"> “小” 无所谓，“完整” 才是关键</a>。</p>
+
+            
+        </div>
+        <div class="page-template-comments">
+            
+        </div>
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">iSTEP</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

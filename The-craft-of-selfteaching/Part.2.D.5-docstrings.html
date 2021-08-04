@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="iSTEP">
+    <meta name="description" content="iSTEP Blogs">
+    <meta name="author" content="iSTEP">
+    
+    <title>
+        
+            递归函数 |
+        
+        iSTEP&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/iSTEP.github.io/css/style.css">
+
+    <link rel="shortcut icon" href="/iSTEP.github.io/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"et-yzk.github.io","root":"/iSTEP.github.io/","language":"zh-CN","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"https://gitee.com/yzketx/image-markdown/raw/master/img/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/iSTEP.github.io/atom.xml" title="iSTEP" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                iSTEP&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/iSTEP.github.io/The-craft-of-selfteaching"
+                            >
+                                THE-CRAFT-OF-SELFTEACHING
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/iSTEP.github.io/The-craft-of-selfteaching">THE-CRAFT-OF-SELFTEACHING</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="page-template-container">
+        
+        
+        <div class="page-template-content markdown-body">
+            
+                <h1 id="函数的文档"><a href="#函数的文档" class="headerlink" title="函数的文档"></a>函数的文档</h1><p>你在调用函数的时候，你像是函数这个产品的用户。</p>
+<p>而你写一个函数，像是做一个产品，这个产品将来可能会被很多用户使用 —— 包括你自己。</p>
+<p>产品，就应该有产品说明书，别人用得着，你自己也用得着 —— 很久之后的你，很可能把当初的各种来龙去脉忘得一干二净，所以也同样需要产品说明书，别看那产品曾经是你自己设计的。</p>
+<p>Python 在这方面很用功，把函数的 “产品说明书” 当作语言内部的功能，这也是为什么 Python 有 <a class="link"   target="_blank" rel="noopener" href="http://www.sphinx-doc.org/" >Sphinx<i class="fas fa-external-link-alt"></i></a> 这种工具，而绝大多数其他语言没有的原因之一罢。</p>
+<h2 id="Docstring"><a href="#Docstring" class="headerlink" title="Docstring"></a>Docstring</h2><p>在函数定义内部，我们可以加上 <strong>Docstring</strong>；将来函数的 “用户” 就可以通过 <code>help()</code> 这个内建函数，或者 <code>.__doc__</code> 这个 Method 去查看这个 Docstring，即，该函数的 “产品说明书”。</p>
+<p>先看一个 Docstring 以及如何查看某个函数的 Docstring 的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_prime</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Return a boolean value based upon</span></span><br><span class="line"><span class="string">    whether the argument n is a prime number.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> n &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> m <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="built_in">int</span>(n**<span class="number">0.5</span>)+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> (n % m) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">help</span>(is_prime)</span><br><span class="line"><span class="built_in">print</span>(is_prime.__doc__)</span><br><span class="line">is_prime.__doc__</span><br></pre></td></tr></table></figure>
+
+<pre><code>Help on function is_prime in module __main__:
+
+is_prime(n)
+    Return a boolean value based upon
+    whether the argument n is a prime number.
+
+    Return a boolean value based upon
+    whether the argument n is a prime number.
+
+&#39;\n    Return a boolean value based upon\n    whether the argument n is a prime number.\n    &#39;
+</code></pre>
+<p>Docstring 可以是多行字符串，也可以是单行字符串：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_prime</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return a boolean value based upon whether the argument n is a prime number.&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> n &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> m <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="built_in">int</span>(n**<span class="number">0.5</span>)+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> (n % m) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">help</span>(is_prime)</span><br><span class="line"><span class="built_in">print</span>(is_prime.__doc__)</span><br><span class="line">is_prime.__doc__</span><br></pre></td></tr></table></figure>
+
+<pre><code>Help on function is_prime in module __main__:
+
+is_prime(n)
+    Return a boolean value based upon whether the argument n is a prime number.
+
+Return a boolean value based upon whether the argument n is a prime number.
+
+&#39;Return a boolean value based upon whether the argument n is a prime number.&#39;
+</code></pre>
+<p>Docstring 如若存在，必须在函数定义的内部语句块的开头，也必须与其它语句一样保持相应的缩进（Indention）。Docstring 放在其它地方不起作用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_prime</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> m <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="built_in">int</span>(n**<span class="number">0.5</span>)+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> (n % m) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Return a boolean value based upon</span></span><br><span class="line"><span class="string">    whether the argument n is a prime number.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">help</span>(is_prime)</span><br><span class="line"><span class="built_in">print</span>(is_prime.__doc__)</span><br><span class="line">is_prime.__doc__</span><br></pre></td></tr></table></figure>
+
+<pre><code>Help on function is_prime in module __main__:
+
+is_prime(n)
+
+None
+</code></pre>
+<h2 id="书写-Docstring-的规范"><a href="#书写-Docstring-的规范" class="headerlink" title="书写 Docstring 的规范"></a>书写 Docstring 的规范</h2><p>规范，虽然是人们最好遵守的，但其实通常是很多人并不遵守的东西。</p>
+<p>既然学，就要<strong>像样</strong> —— 这真的很重要。所以，非常有必要认真阅读 Python <a class="link"   target="_blank" rel="noopener" href="https://www.python.org/dev/peps/pep-0257/" >PEP 257<i class="fas fa-external-link-alt"></i></a> 关于 Docstring 的规范。</p>
+<p>简要总结一下 PEP 257 中必须掌握的规范：</p>
+<blockquote>
+<ol>
+<li>无论是单行还是多行的 Docstring，一概使用三个双引号扩起；</li>
+<li>在 Docstring 内部，文字开始之前，以及文字结束之后，都不要有空行；</li>
+<li>多行 Docstring，第一行是概要，随后空一行，再写其它部分；</li>
+<li>完善的 Docstring，应该概括清楚以下内容：参数、返回值、可能触发的错误类型、可能的副作用，以及函数的使用限制等等；</li>
+<li>每个参数的说明都使用单独的一行……</li>
+</ol>
+</blockquote>
+<p>由于我们还没有开始研究 Class，所以，关于 Class 的 Docstring 应该遵守什么样的规范就暂时略过了。然而，这种规范你总是要反复去阅读参照的。关于 Docstring，有两个规范文件：</p>
+<blockquote>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.python.org/dev/peps/pep-0257/" >PEP 257: Docstring Convensions<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.python.org/dev/peps/pep-0258/" >PEP 258: Docutils Design Specification<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+</blockquote>
+<p>需要<strong>格外注意</strong>的是：</p>
+<blockquote>
+<p>Docstring 是<strong>写给人看的</strong>，所以，在复杂代码的 Docstring 中，写 <strong>Why</strong> 要远比写 <em>What</em> 更重要 —— 你先记住这点，以后的体会自然会不断加深。</p>
+</blockquote>
+<h2 id="Sphinx-版本的-Docstring-规范"><a href="#Sphinx-版本的-Docstring-规范" class="headerlink" title="Sphinx 版本的 Docstring 规范"></a>Sphinx 版本的 Docstring 规范</h2><p>Sphinx 可以从 <code>.py</code> 文件里提取所有 Docstring，而后生成完整的 Documentation。将来若是你写大型的项目，需要生成完善的文档的时候，你就会发现 Sphinx 是个 “救命” 的家伙，省时、省力、省心、省命……</p>
+<p>在这里，没办法一下子讲清楚 Sphinx 的使用，尤其是它还用它自己的一种标记语言，reStructureText，文件尾缀使用 <code>.rst</code>……</p>
+<p>但是，可以看一个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vehicle</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    The Vehicle object contains lots of vehicles</span></span><br><span class="line"><span class="string">    :param arg: The arg is used for ...</span></span><br><span class="line"><span class="string">    :type arg: str</span></span><br><span class="line"><span class="string">    :param `*args`: The variable arguments are used for ...</span></span><br><span class="line"><span class="string">    :param `**kwargs`: The keyword arguments are used for ...</span></span><br><span class="line"><span class="string">    :ivar arg: This is where we store arg</span></span><br><span class="line"><span class="string">    :vartype arg: str</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, arg, *args, **kwargs</span>):</span></span><br><span class="line">        self.arg = arg</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cars</span>(<span class="params">self, distance, destination</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;We can&#x27;t travel a certain distance in vehicles without fuels, so here&#x27;s the fuels</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :param distance: The amount of distance traveled</span></span><br><span class="line"><span class="string">        :type amount: int</span></span><br><span class="line"><span class="string">        :param bool destinationReached: Should the fuels be refilled to cover required distance?</span></span><br><span class="line"><span class="string">        :raises: :class:`RuntimeError`: Out of fuel</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :returns: A Car mileage</span></span><br><span class="line"><span class="string">        :rtype: Cars</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">help</span>(Vehicle)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Help on class Vehicle in module __main__:
+
+class Vehicle(builtins.object)
+ |  Vehicle(arg, *args, **kwargs)
+ |
+ |  The Vehicle object contains lots of vehicles
+ |  :param arg: The arg is used for ...
+ |  :type arg: str
+ |  :param `*args`: The variable arguments are used for ...
+ |  :param `**kwargs`: The keyword arguments are used for ...
+ |  :ivar arg: This is where we store arg
+ |  :vartype arg: str
+ |
+ |  Methods defined here:
+ |
+ |  __init__(self, arg, *args, **kwargs)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  cars(self, distance, destination)
+ |      We can&#39;t travel a certain distance in vehicles without fuels, so here&#39;s the fuels
+ |
+ |      :param distance: The amount of distance traveled
+ |      :type amount: int
+ |      :param bool destinationReached: Should the fuels be refilled to cover required distance?
+ |      :raises: :class:`RuntimeError`: Out of fuel
+ |
+ |      :returns: A Car mileage
+ |      :rtype: Cars
+ |
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |
+ |  __dict__
+ |      dictionary for instance variables (if defined)
+ |
+ |  __weakref__
+ |      list of weak references to the object (if defined)
+</code></pre>
+<p>通过插件，Sphinx 也能支持 Google Style Docstring 和 Numpy Style Docstring。</p>
+<p>以下两个链接，放在这里，以便你将来查询：</p>
+<blockquote>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="http://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html" >sphinx.ext.napoleon – Support for NumPy and Google style docstrings<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html" >sphinx.ext.autodoc – Include documentation from docstrings<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+</blockquote>
+
+            
+        </div>
+        <div class="page-template-comments">
+            
+        </div>
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">iSTEP</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="iSTEP">
+    <meta name="description" content="iSTEP Blogs">
+    <meta name="author" content="iSTEP">
+    
+    <title>
+        
+            关于参数（上） |
+        
+        iSTEP&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/iSTEP.github.io/css/style.css">
+
+    <link rel="shortcut icon" href="/iSTEP.github.io/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"et-yzk.github.io","root":"/iSTEP.github.io/","language":"zh-CN","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"https://gitee.com/yzketx/image-markdown/raw/master/img/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/iSTEP.github.io/atom.xml" title="iSTEP" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                iSTEP&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/iSTEP.github.io/The-craft-of-selfteaching"
+                            >
+                                THE-CRAFT-OF-SELFTEACHING
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/iSTEP.github.io/The-craft-of-selfteaching">THE-CRAFT-OF-SELFTEACHING</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="page-template-container">
+        
+        
+        <div class="page-template-content markdown-body">
+            
+                <h1 id="关于参数（上）"><a href="#关于参数（上）" class="headerlink" title="关于参数（上）"></a>关于参数（上）</h1><p>之前就提到过，从结构上来看，每个函数都是一个完整的程序，因为一个程序，核心构成部分就是输入、处理、输出：</p>
+<blockquote>
+<ul>
+<li>它可以有<strong>输入</strong> —— 即，它能接收外部通过参数传递的值；</li>
+<li>它可以有<strong>处理</strong> —— 即，内部有能够完成某一特定任务的代码；尤其是，它可以根据 “输入” 得到 “输出”；</li>
+<li>它可以有<strong>输出</strong> —— 即，它能向外部输送返回值……</li>
+</ul>
+</blockquote>
+<p>所以，在我看来，有了一点基础知识之后，最早应该学习的是 “如何写函数” —— 这个起点会更好一些。</p>
+<p>这一章的内容，看起来会感觉与 <a href="Part.1.E.4.functions.md">Part1.E.4 函数那一章</a>部分重合。但这两章的出发点不一样：</p>
+<blockquote>
+<ul>
+<li><a href="Part.1.E.4.functions.md">Part1.E.4 函数那一章</a>，只是为了让读者有 “阅读” 函数说明文档的能力；</li>
+<li>这一章，是为了让读者能够开始动手写函数给自己或别人用……</li>
+</ul>
+</blockquote>
+<h2 id="为函数取名"><a href="#为函数取名" class="headerlink" title="为函数取名"></a>为函数取名</h2><p>哪怕一个函数内部什么都不干，它也得有个名字，然后名字后面要加上圆括号 <code>()</code>，以明示它是个函数，而不是某个变量。</p>
+<p>定义一个函数的关键字是 <code>def</code>，以下代码定义了一个什么都不干的函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_nothing</span>():</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">do_nothing()</span><br></pre></td></tr></table></figure>
+
+<p>为函数取名（为变量取名也一样）有些基本的注意事项：</p>
+<blockquote>
+<ul>
+<li><p>首先，名称不能以数字开头。能用在名称开头的有，大小写字母和下划线 <code>_</code>；</p>
+</li>
+<li><p>其次，名称中不能有空格，要么使用下划线连接词汇，如，<code>do_nothing</code>，要么使用 <a class="link"   target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Camel_case" >Camel Case<i class="fas fa-external-link-alt"></i></a>，如 <code>doNothing</code> —— 更推荐使用下划线；</p>
+</li>
+<li><p>再次，名称不能与关键字重合 —— 以下是 Python 的 Keyword List：</p>
+</li>
+</ul>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>-</th>
+<th>Python</th>
+<th>Keyword</th>
+<th>List</th>
+<th>-</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>and</code></td>
+<td><code>as</code></td>
+<td><code>assert</code></td>
+<td><code>async</code></td>
+<td><code>await</code></td>
+</tr>
+<tr>
+<td><code>break</code></td>
+<td><code>class</code></td>
+<td><code>continue</code></td>
+<td><code>def</code></td>
+<td><code>del</code></td>
+</tr>
+<tr>
+<td><code>elif</code></td>
+<td><code>else</code></td>
+<td><code>except</code></td>
+<td><code>False</code></td>
+<td><code>finally</code></td>
+</tr>
+<tr>
+<td><code>for</code></td>
+<td><code>from</code></td>
+<td><code>global</code></td>
+<td><code>if</code></td>
+<td><code>import</code></td>
+</tr>
+<tr>
+<td><code>in</code></td>
+<td><code>is</code></td>
+<td><code>lambda</code></td>
+<td><code>None</code></td>
+<td><code>nonlocal</code></td>
+</tr>
+<tr>
+<td><code>not</code></td>
+<td><code>or</code></td>
+<td><code>pass</code></td>
+<td><code>raise</code></td>
+<td><code>return</code></td>
+</tr>
+<tr>
+<td><code>True</code></td>
+<td><code>try</code></td>
+<td><code>while</code></td>
+<td><code>with</code></td>
+<td><code>yield</code></td>
+</tr>
+</tbody></table>
+<p>你随时可以用以下代码查询关键字列表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> keyword</span><br><span class="line">keyword.kwlist               <span class="comment"># 列出所有关键字</span></span><br><span class="line">keyword.iskeyword(<span class="string">&#x27;if&#x27;</span>)      <span class="comment"># 查询某个词是不是关键字</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>[&#39;False&#39;,
+ &#39;None&#39;,
+ &#39;True&#39;,
+ &#39;and&#39;,
+ &#39;as&#39;,
+ &#39;assert&#39;,
+ &#39;async&#39;,
+ &#39;await&#39;,
+ &#39;break&#39;,
+ &#39;class&#39;,
+ &#39;continue&#39;,
+ &#39;def&#39;,
+ &#39;del&#39;,
+ &#39;elif&#39;,
+ &#39;else&#39;,
+ &#39;except&#39;,
+ &#39;finally&#39;,
+ &#39;for&#39;,
+ &#39;from&#39;,
+ &#39;global&#39;,
+ &#39;if&#39;,
+ &#39;import&#39;,
+ &#39;in&#39;,
+ &#39;is&#39;,
+ &#39;lambda&#39;,
+ &#39;nonlocal&#39;,
+ &#39;not&#39;,
+ &#39;or&#39;,
+ &#39;pass&#39;,
+ &#39;raise&#39;,
+ &#39;return&#39;,
+ &#39;try&#39;,
+ &#39;while&#39;,
+ &#39;with&#39;,
+ &#39;yield&#39;]
+
+True
+</code></pre>
+<p>关于更多为函数、变量取名所需要的注意事项，请参阅：</p>
+<blockquote>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.python.org/dev/peps/pep-0008/#naming-conventions" >PEP 8 – Style Guide for Python Code: Naming Conventions<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.python.org/dev/peps/pep-0526/" >PEP 526 – Syntax for Variable Annotations<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<p>注：PEPs，是 Python Enhancement Proposals 的缩写：<a class="link"   target="_blank" rel="noopener" href="https://www.python.org/dev/peps/" >https://www.python.org/dev/peps/<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<h2 id="不接收任何参数的函数"><a href="#不接收任何参数的函数" class="headerlink" title="不接收任何参数的函数"></a>不接收任何参数的函数</h2><p>在定义函数的时候，可以定义成不接收任何参数；但调用函数的时候，依然需要写上函数名后面的圆括号 <code>()</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_something</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;This is a hello message from do_something().&#x27;</span>)</span><br><span class="line"></span><br><span class="line">do_something()</span><br></pre></td></tr></table></figure>
+
+<pre><code>This is a hello message from do_something().
+</code></pre>
+<h2 id="没有-return-语句的函数"><a href="#没有-return-语句的函数" class="headerlink" title="没有 return 语句的函数"></a>没有 return 语句的函数</h2><p>函数内部，不一定非要有 <code>return</code> 语句 —— 上面 <code>do_somthing()</code> 函数就没有 <code>return</code> 语句。但如果函数内部并未定义返回值，那么，该函数的返回值是 <code>None</code>，当 <code>None</code> 被当作布尔值对待的时候，相当于是 <code>False</code>。</p>
+<p>这样的设定，使得函数调用总是可以在条件语句中被当作判断依据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_something</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;This is a hello message from do_something().&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> do_something():                <span class="comment"># 由于该函数名称的缘故，这一句代码的可读性很差……</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;The return value of &#x27;do_something()&#x27; is None.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>This is a hello message from do_something().
+The return value of &#39;do_something()&#39; is None.
+</code></pre>
+<p><code>if not do_something(): </code> 翻译成自然语言，应该是，“如果 <code>do_something()</code> 的返回值是 ‘非真’，那么：……”</p>
+<h2 id="接收外部传递进来的值"><a href="#接收外部传递进来的值" class="headerlink" title="接收外部传递进来的值"></a>接收外部传递进来的值</h2><p>让我们写个判断闰年年份的函数，取名为 <code>is_leap()</code>，它接收一个年份为参数，若是闰年，则返回 <code>True</code>，否则返回 <code>False</code>。</p>
+<p>根据闰年的定义：</p>
+<blockquote>
+<ul>
+<li>年份应该是 4 的倍数；</li>
+<li>年份能被 100 整除但不能被 400 整除的，不是闰年。</li>
+</ul>
+</blockquote>
+<p>所以，相当于要在能被 4 整除的年份中，排除那些能被 100 整除却不能被 400 整除的年份。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_leap</span>(<span class="params">year</span>):</span></span><br><span class="line">    leap = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> year % <span class="number">4</span> == <span class="number">0</span>:</span><br><span class="line">        leap = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">if</span> year % <span class="number">100</span> == <span class="number">0</span> <span class="keyword">and</span> year % <span class="number">400</span> != <span class="number">0</span>:</span><br><span class="line">            leap = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> leap</span><br><span class="line"></span><br><span class="line">is_leap(<span class="number">7</span>)</span><br><span class="line">is_leap(<span class="number">12</span>)</span><br><span class="line">is_leap(<span class="number">100</span>)</span><br><span class="line">is_leap(<span class="number">400</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>False
+True
+False
+True
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 另外一个更为简洁的版本，理解它还挺练脑子的</span></span><br><span class="line"><span class="comment"># cpython/Lib/datetime.py</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_is_leap</span>(<span class="params">year</span>):</span></span><br><span class="line">    <span class="keyword">return</span> year % <span class="number">4</span> == <span class="number">0</span> <span class="keyword">and</span> (year % <span class="number">100</span> != <span class="number">0</span> <span class="keyword">or</span> year % <span class="number">400</span> == <span class="number">0</span>)</span><br><span class="line">_is_leap(<span class="number">300</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>False
+</code></pre>
+<p>函数可以同时接收多个参数。比如，我们可以写个函数，让它输出从大于某个数字到小于另外一个数字的斐波那契数列；那就需要定义两个参数，调用它的时候也需要传递两个参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib_between</span>(<span class="params">start, end</span>):</span></span><br><span class="line">    a, b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> a &lt; end:</span><br><span class="line">        <span class="keyword">if</span> a &gt;= start:</span><br><span class="line">            <span class="built_in">print</span>(a, end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        a, b = b, a + b</span><br><span class="line"></span><br><span class="line">fib_between(<span class="number">100</span>, <span class="number">10000</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>144 233 377 610 987 1597 2584 4181 6765
+</code></pre>
+<p>当然可以把这个函数写成返回值是一个列表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib_between</span>(<span class="params">start, end</span>):</span></span><br><span class="line">    r = []</span><br><span class="line">    a, b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> a &lt; end:</span><br><span class="line">        <span class="keyword">if</span> a &gt;= start:</span><br><span class="line">            r.append(a)</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">    <span class="keyword">return</span> r</span><br><span class="line"></span><br><span class="line">fib_between(<span class="number">100</span>, <span class="number">10000</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[144, 233, 377, 610, 987, 1597, 2584, 4181, 6765]
+</code></pre>
+<h2 id="变量的作用域"><a href="#变量的作用域" class="headerlink" title="变量的作用域"></a>变量的作用域</h2><p>下面的代码，经常会让初学者迷惑：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">increase_one</span>(<span class="params">n</span>):</span></span><br><span class="line">    n += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> n</span><br><span class="line"></span><br><span class="line">n = <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(increase_one(n))</span><br><span class="line"><span class="comment"># print(n)</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>2
+</code></pre>
+<p>当 <code>increase_one(n)</code> 被调用之后，<code>n</code> 的值究竟是多少呢？或者更准确点问，随后的 <code>print(n)</code> 的输出结果应该是什么呢？</p>
+<p>输出结果是 <code>1</code>。</p>
+<p>在程序执行过程中，变量有<strong>全局变量</strong>（Global Variables）和<strong>局域变量</strong>（Local Variables）之分。</p>
+<blockquote>
+<p>首先，每次某个函数被调用的时候，这个函数会开辟一个新的区域，这个函数内部所有的变量，都是局域变量。也就是说，即便那个函数内部某个变量的名称与它外部的某个全局变量名称相同，它们也不是同一个变量 —— 只是名称相同而已。</p>
+<p>其次，更为重要的是，当外部调用一个函数的时候，准确地讲，传递的不是变量，而是那个变量的<em>值</em>。也就是说，当 <code>increase_one(n)</code> 被调用的时候，被传递给那个恰好名称也叫 <code>n</code> 的局域变量的，是全局变量 <code>n</code> 的值，<code>1</code>。</p>
+<p>而后，<code>increase_one()</code> 函数的代码开始执行，局域变量 <code>n</code> 经过 <code>n += 1</code> 之后，其中存储的值是 <code>2</code>，而后这个值被 <code>return</code> 语句返回，所以，<code>print(increase(n))</code> 所输出的值是函数被调用之后的返回值，即，<code>2</code>。</p>
+<p>然而，全局变量 <code>n</code> 的值并没有被改变，因为局部变量 <code>n</code>（它的值是 <code>2</code>）和全局变量 <code>n</code>（它的值还是 <code>1</code>）只不过是名字相同而已，但它们并不是同一个变量。</p>
+</blockquote>
+<p>以上的文字，可能需要反复阅读若干遍；几遍下来，消除了疑惑，以后就彻底没问题了；若是这个疑惑并未消除，或者关键点并未消化，以后则会反复被这个疑惑所坑害，浪费无数时间。</p>
+<p>不过，有一种情况要格外注意 —— 在函数内部处理被传递进来的值是可变容器（比如，列表）的时候：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">be_careful</span>(<span class="params">a, b</span>):</span></span><br><span class="line">    a = <span class="number">2</span></span><br><span class="line">    b[<span class="number">0</span>] = <span class="string">&#x27;What?!&#x27;</span></span><br><span class="line"></span><br><span class="line">a = <span class="number">1</span></span><br><span class="line">b = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">be_careful(a, b)</span><br><span class="line">a, b</span><br></pre></td></tr></table></figure>
+
+<pre><code>(1, [&#39;What?!&#39;, 2, 3])
+</code></pre>
+<p>所以，一个比较好的习惯是，如果传递进来的值是列表，那么在函数内部对其操作之前，先创建一个它的拷贝：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">be_careful</span>(<span class="params">a, b</span>):</span></span><br><span class="line">    a = <span class="number">2</span></span><br><span class="line">    b_copy = b.copy()</span><br><span class="line">    b_copy[<span class="number">0</span>] = <span class="string">&#x27;What?!&#x27;</span></span><br><span class="line"></span><br><span class="line">a = <span class="number">1</span></span><br><span class="line">b = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">be_careful(a, b)</span><br><span class="line">a, b</span><br></pre></td></tr></table></figure>
+
+<pre><code>(1, [1, 2, 3])
+</code></pre>
+
+            
+        </div>
+        <div class="page-template-comments">
+            
+        </div>
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">iSTEP</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

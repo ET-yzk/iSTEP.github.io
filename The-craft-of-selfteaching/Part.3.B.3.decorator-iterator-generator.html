@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="iSTEP">
+    <meta name="description" content="iSTEP Blogs">
+    <meta name="author" content="iSTEP">
+    
+    <title>
+        
+            函数工具 |
+        
+        iSTEP&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/iSTEP.github.io/css/style.css">
+
+    <link rel="shortcut icon" href="/iSTEP.github.io/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"et-yzk.github.io","root":"/iSTEP.github.io/","language":"zh-CN","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"https://gitee.com/yzketx/image-markdown/raw/master/img/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/iSTEP.github.io/atom.xml" title="iSTEP" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                iSTEP&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/iSTEP.github.io/The-craft-of-selfteaching"
+                            >
+                                THE-CRAFT-OF-SELFTEACHING
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/iSTEP.github.io/The-craft-of-selfteaching">THE-CRAFT-OF-SELFTEACHING</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="page-template-container">
+        
+        
+        <div class="page-template-content markdown-body">
+            
+                <h1 id="函数工具"><a href="#函数工具" class="headerlink" title="函数工具"></a>函数工具</h1><p>这一章要讲的是迭代器、生成器和装饰器，这些都是函数工具。有人把它们称为 <strong>DIG</strong>（Decorator，Iterator，Generator）—— 它们都是真正掌握 Python 的关键。</p>
+<h2 id="迭代器（Iterator）"><a href="#迭代器（Iterator）" class="headerlink" title="迭代器（Iterator）"></a>迭代器（Iterator）</h2><p>我们已经见过 Python 中的所有容器，都是可迭代的 —— 准确地讲，是可以通过迭代遍历每一个元素：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">string = <span class="string">&quot;this is a string.&quot;</span></span><br><span class="line"><span class="built_in">list</span> = [<span class="string">&#x27;item 1&#x27;</span>, <span class="string">&#x27;item 2&#x27;</span>, <span class="number">3</span>, <span class="number">5</span>]</span><br><span class="line"><span class="built_in">set</span> = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> string:</span><br><span class="line">    <span class="built_in">print</span>(c, end=<span class="string">&#x27;, &#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>()</span><br><span class="line"><span class="keyword">for</span> L <span class="keyword">in</span> <span class="built_in">list</span>:</span><br><span class="line">    <span class="built_in">print</span>(L, end=<span class="string">&#x27;, &#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>()</span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> <span class="built_in">set</span>:</span><br><span class="line">    <span class="built_in">print</span>(s, end=<span class="string">&#x27;, &#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>()</span><br></pre></td></tr></table></figure>
+
+<pre><code>t, h, i, s,  , i, s,  , a,  , s, t, r, i, n, g, .,
+item 1, item 2, 3, 5,
+1, 2, 3, 4, 5,
+</code></pre>
+<p>有个内建函数，就是用来把一个 “可迭代对象”（Iterable）转换成 “迭代器”（Iterator）的 —— <code>iter()</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"></span><br><span class="line">i = <span class="built_in">iter</span>(<span class="string">&quot;Python&quot;</span>)</span><br><span class="line"><span class="built_in">type</span>(i)</span><br><span class="line">s = <span class="built_in">iter</span>((<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>))</span><br><span class="line"><span class="built_in">type</span>(s)</span><br><span class="line">L = <span class="built_in">iter</span>([<span class="string">&#x27;item 1&#x27;</span>, <span class="string">&#x27;item 2&#x27;</span>, <span class="number">3</span>, <span class="number">5</span>])</span><br><span class="line"><span class="built_in">type</span>(L)</span><br></pre></td></tr></table></figure>
+
+<pre><code>str_iterator
+
+tuple_iterator
+
+list_iterator
+</code></pre>
+<p>迭代器如何使用呢？有个 <code>next()</code> 函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"></span><br><span class="line">i = <span class="built_in">iter</span>(<span class="string">&quot;Python&quot;</span>)</span><br><span class="line"><span class="built_in">next</span>(i)</span><br><span class="line"><span class="built_in">next</span>(i)</span><br><span class="line"><span class="built_in">next</span>(i)</span><br><span class="line"><span class="built_in">next</span>(i)</span><br><span class="line"><span class="built_in">next</span>(i)</span><br><span class="line"><span class="built_in">next</span>(i)</span><br><span class="line"><span class="comment"># next(i) 前面已经到 &#x27;n&#x27; 了，再调用就会有 StopIteration 错误提示。</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>&#39;P&#39;
+&#39;y&#39;
+&#39;t&#39;
+&#39;h&#39;
+&#39;o&#39;
+&#39;n&#39;
+</code></pre>
+<p>在 <code>i</code> 这个迭代器里一共有 6 个元素，所以，<code>next(i)</code> 在被调用 6 次之后，就不能再被调用了，一旦再被调用，就会触发 StopIteration 错误。</p>
+<p>那我们怎么自己写一个迭代器呢？</p>
+<p>迭代器是个 Object，所以，写迭代器的时候写的是 Class，比如，我们写一个数数的迭代器，Counter：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, start, stop</span>):</span></span><br><span class="line">        self.current = start</span><br><span class="line">        self.stop = stop</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">if</span> self.current &gt; self.stop:</span><br><span class="line">            <span class="keyword">raise</span> StopIteration</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            c = self.current</span><br><span class="line">            self.current += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> c</span><br><span class="line"></span><br><span class="line">c = Counter(<span class="number">11</span>, <span class="number">20</span>)</span><br><span class="line"><span class="built_in">next</span>(c)</span><br><span class="line"><span class="built_in">next</span>(c)</span><br><span class="line"><span class="built_in">next</span>(c)</span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> Counter(<span class="number">101</span>, <span class="number">105</span>):</span><br><span class="line">    <span class="built_in">print</span>(c, end=<span class="string">&#x27;, &#x27;</span>)</span><br><span class="line"><span class="built_in">type</span>(Counter)</span><br></pre></td></tr></table></figure>
+
+<pre><code>11
+12
+13
+101
+102
+103
+104
+105
+
+type
+</code></pre>
+<p>这里的重点在于两个函数的存在，<code>__iter__(self)</code> 和 <code>__next__(self)</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__iter__</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> self</span><br></pre></td></tr></table></figure>
+
+<p>这两句是约定俗成的写法，写上它们，<code>Counter</code> 这个类就被会被识别为 Iterator 类型。而后再有 <code>__next__(self)</code> 的话，它就是个完整的迭代器了。除了可以用 <code>for loop</code> 之外，也可以用 <code>while loop</code> 去遍历迭代器中的所有元素：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, start, stop</span>):</span></span><br><span class="line">        self.current = start</span><br><span class="line">        self.stop = stop</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">if</span> self.current &gt; self.stop:</span><br><span class="line">            <span class="keyword">raise</span> StopIteration</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            c = self.current</span><br><span class="line">            self.current += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> c</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> Counter(<span class="number">101</span>, <span class="number">103</span>):</span><br><span class="line">    <span class="built_in">print</span>(c, sep=<span class="string">&#x27;, &#x27;</span>)</span><br><span class="line"></span><br><span class="line">c = Counter(<span class="number">201</span>, <span class="number">203</span>)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">next</span>(c), sep=<span class="string">&#x27;, &#x27;</span>)</span><br><span class="line">    <span class="keyword">except</span> StopIteration:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>101
+102
+103
+201
+202
+203
+</code></pre>
+<h2 id="生成器（Generator）"><a href="#生成器（Generator）" class="headerlink" title="生成器（Generator）"></a>生成器（Generator）</h2><p>那用函数（而不是 Class）能不能写一个 Counter 呢？答案是能，用生成器（Generator）就行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">counter</span>(<span class="params">start, stop</span>):</span></span><br><span class="line">    <span class="keyword">while</span> start &lt;= stop:</span><br><span class="line">        <span class="keyword">yield</span> start</span><br><span class="line">        start += <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> counter(<span class="number">101</span>, <span class="number">105</span>):</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br></pre></td></tr></table></figure>
+
+<pre><code>101
+102
+103
+104
+105
+</code></pre>
+<p>哎呀！怎么感觉这个简洁很多呢？</p>
+<p>不过，是否简洁并不是问题，这次看起来用生成器更简单，无非是因为当前的例子更适合用生成器而已。在不同的情况下，用迭代器和用生成器各有各的优势。</p>
+<p>这里的关键在于 <code>yield</code> 这个语句。它和 <code>return</code> 最明显的不同在于，在它之后的语句依然会被执行 —— 而 <code>return</code> 之后的语句就被忽略了。</p>
+<p>但正因为这个不同，在写生成器的时候，只能用 <code>yield</code>，而没办法使用 <code>return</code> —— 你现在可以回去把上面代码中的 <code>yield</code> 改成 <code>return</code> 看看，然后体会一下它们之间的不同。</p>
+<p>生成器函数被 <code>next()</code> 调用后，执行到 <code>yield</code> 生成一个值返回（然后继续执行 <code>next()</code> 外部剩余的语句）；下次再被 <code>next()</code> 调用的时候，从上次生成返回值的 <code>yield</code> 语句处继续执行…… 如果感觉费解，就多读几遍 —— 而后再想想若是生成器中有多个 <code>yield</code> 语句会是什么情况？</p>
+<p>还有一种东西，叫做生成器表达式。先看个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">even = (e <span class="keyword">for</span> e <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>) <span class="keyword">if</span> <span class="keyword">not</span> e % <span class="number">2</span>)</span><br><span class="line"><span class="comment"># odd = (o for o in range(10) if o % 2)</span></span><br><span class="line"><span class="built_in">print</span>(even)</span><br><span class="line"><span class="keyword">for</span> e <span class="keyword">in</span> even:</span><br><span class="line">    <span class="built_in">print</span>(e)</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;generator object &lt;genexpr&gt; at 0x107cc0048&gt;
+0
+2
+4
+6
+8
+</code></pre>
+<p>其实，这种表达式我们早就在 List Comprehension 里见过 —— 那就是通过生成器表达式完成的。</p>
+<p><strong>注意</strong></p>
+<p>仔细看 <code>even = (e for e in range(10) if not e % 2)</code> 中最外面那层括号，用了圆括号，<code>even</code> 就是用生成器创造的迭代器（Iterator），若是用了方括号，那就是用生成器创造的列表（List）—— 当然用花括号 <code>&#123;&#125;</code> 生成的就是集合（Set）……</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># even = (e for e in range(10) if not e % 2)</span></span><br><span class="line">odd = [o <span class="keyword">for</span> o <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>) <span class="keyword">if</span> o % <span class="number">2</span>]</span><br><span class="line"><span class="built_in">print</span>(odd)</span><br><span class="line"><span class="keyword">for</span> o <span class="keyword">in</span> odd:</span><br><span class="line">    <span class="built_in">print</span>(o)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[1, 3, 5, 7, 9]
+1
+3
+5
+7
+9
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># even = (e for e in range(10) if not e % 2)</span></span><br><span class="line">odd = &#123;o <span class="keyword">for</span> o <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>) <span class="keyword">if</span> o % <span class="number">2</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(odd)</span><br><span class="line"><span class="keyword">for</span> o <span class="keyword">in</span> odd:</span><br><span class="line">    <span class="built_in">print</span>(o)</span><br></pre></td></tr></table></figure>
+
+<pre><code>&#123;1, 3, 5, 7, 9&#125;
+1
+3
+5
+7
+9
+</code></pre>
+<p><strong>生成器表达式必须在括号内使用</strong>（参见官方 <a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/howto/functional.html#generator-expressions-and-list-comprehensions" >HOWTOS<i class="fas fa-external-link-alt"></i></a>），包括函数的参数括号，比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sum_of_even = <span class="built_in">sum</span>(e <span class="keyword">for</span> e <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>) <span class="keyword">if</span> <span class="keyword">not</span> e % <span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(sum_of_even)</span><br></pre></td></tr></table></figure>
+
+<pre><code>20
+</code></pre>
+<p>函数内部当然可以包含其它的函数，以下就是一个函数中包含着其它函数的结构示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_func</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">b_func</span>():</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">c_func</span>():</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">d_func</span>():</span></span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        b_func()</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<p>想象一下，如果，我们让一个函数返回的是另外一个函数呢？我们一步一步来：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_func</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">b_func</span>():</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Hi, I&#x27;m b_func!&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hi, I&#x27;m a_func!&quot;</span>)</span><br><span class="line">a_func()</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hi, I&#39;m a_func!
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_func</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">b_func</span>():</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Hi, I&#x27;m b_func!&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hi, I&#x27;m a_func!&quot;</span>)</span><br><span class="line">    b_func()</span><br><span class="line">a_func()</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hi, I&#39;m a_func!
+Hi, I&#39;m b_func!
+</code></pre>
+<p>上一个代码，我们可以写成这样 —— 让 <code>a_func()</code> 将它内部的 <code>b_func()</code> 作为它的返回值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_func</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">b_func</span>():</span></span><br><span class="line">       <span class="built_in">print</span>(<span class="string">&quot;Hi, I&#x27;m b_func!&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hi, I&#x27;m a_func!&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> b_func()</span><br><span class="line">a_func()</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hi, I&#39;m a_func!
+Hi, I&#39;m b_func!
+</code></pre>
+<p>如果我们在 <code>return</code> 语句里只写函数名呢？好像这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_func</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">b_func</span>():</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Hi, I&#x27;m b_func!&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hi, I&#x27;m a_func!&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> b_func</span><br><span class="line">a_func()</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hi, I&#39;m a_func!
+&lt;function __main__.a_func.&lt;locals&gt;.b_func()&gt;
+</code></pre>
+<p>这次返回的不是调用 <code>b_func()</code> 这个函数的执行结果，返回的是 <code>b_func</code> 这个<em>函数本身</em>。</p>
+<h2 id="装饰器（Decorator）"><a href="#装饰器（Decorator）" class="headerlink" title="装饰器（Decorator）"></a>装饰器（Decorator）</h2><h3 id="函数也是对象"><a href="#函数也是对象" class="headerlink" title="函数也是对象"></a>函数也是对象</h3><p>这是关键：</p>
+<blockquote>
+<p>函数本身也是对象（即，Python 定义的某个 Class 的一个 Instance）。</p>
+</blockquote>
+<p>于是，函数本身其实可以与其它的数据类型一样，作为其它函数的参数或者返回值。</p>
+<p>让我们分步走 —— 注意，在以下代码中，<code>a_decorator</code> 返回的一个函数的调用 <code>wrapper()</code> 而不是 <code>wrapper</code> 这个函数本身：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_decorator</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>():</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;We can do sth. before a func is called...&#x27;</span>)</span><br><span class="line">        func()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;... and we can do sth. after it is called...&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> wrapper()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_func</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hi, I&#x27;m a_func!&quot;</span>)</span><br><span class="line"></span><br><span class="line">a_func()</span><br><span class="line">a_decorator(a_func)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hi, I&#39;m a_func!
+We can do sth. before a func is called...
+Hi, I&#39;m a_func!
+... and we can do sth. after it is called...
+</code></pre>
+<p>如果返回的是函数本身，<code>wrapper</code>，输出结果跟你想的并不一样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_decorator</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>():</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;We can do sth. before a func is called...&#x27;</span>)</span><br><span class="line">        func()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;... and we can do sth. after it is called...&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> wrapper  <span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_func</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hi, I&#x27;m a_func!&quot;</span>)</span><br><span class="line"></span><br><span class="line">a_func()</span><br><span class="line">a_decorator(a_func)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hi, I&#39;m a_func!
+&lt;function __main__.a_decorator.&lt;locals&gt;.wrapper()&gt;
+</code></pre>
+<h3 id="装饰器操作符"><a href="#装饰器操作符" class="headerlink" title="装饰器操作符"></a>装饰器操作符</h3><p>不过，Python 提供了一个针对函数的操作符 <code>@</code>，它的作用是…… 很难一下子说清楚，先看看以下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_decorator</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>():</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;We can do sth. before calling a_func...&#x27;</span>)</span><br><span class="line">        func()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;... and we can do sth. after it was called...&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@a_decorator</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_func</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hi, I&#x27;m a_func!&quot;</span>)</span><br><span class="line"></span><br><span class="line">a_func()</span><br></pre></td></tr></table></figure>
+
+<pre><code>We can do sth. before calling a_func...
+Hi, I&#39;m a_func!
+... and we can do sth. after it was called...
+</code></pre>
+<p>注意：以上的代码中，<code>a_decorator(func)</code> 返回的是 <code>wrapper</code> 这个函数本身。</p>
+<p>在我们定义 <code>a_func()</code> 的时候，在它之前，加上了一句 <code>@a_decorator</code>；这么做的结果是：</p>
+<blockquote>
+<p>每次 <code>a_func()</code> 在被调用的时候，因为它之前有一句 <code>@a_decorator</code>，所以它会先被当作参数传递到 <code>a_decorator(func)</code> 这个函数中…… 而后，真正的执行，是在 <code>a_decorator()</code> 里被完成的。</p>
+</blockquote>
+<p>—— 被 <code>@</code> 调用的函数，叫做 “装饰器”（Decorator），比如，以上代码中的 <code>a_decorator(func)</code>。</p>
+<p>现在可以很简单直接地说清楚装饰器的作用了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@a_decorator</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_func</span>():</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>等价于</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_func</span>():</span></span><br><span class="line">    ...</span><br><span class="line">a_func = a_decorator(a_func)</span><br></pre></td></tr></table></figure>
+
+<p>就是用 <code>a_decorator</code> 的调用结果替换掉原来的函数。<code>a_decorator</code> 返回值是什么，以后调用 <code>a_func</code> 时就是在调用这个返回值，而 <code>a_decorator</code> 本身此时已经执行完毕了。</p>
+<h3 id="装饰器的用途"><a href="#装饰器的用途" class="headerlink" title="装饰器的用途"></a>装饰器的用途</h3><p>Decorator 最常用的场景是什么呢？最常用的场景就是用来改变其它函数的行为。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">an_output</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;The quick brown fox jumps over the lazy dog.&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(an_output())</span><br></pre></td></tr></table></figure>
+
+<pre><code>The quick brown fox jumps over the lazy dog.
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">uppercase</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>():</span></span><br><span class="line">        original_result = func()</span><br><span class="line">        modified_restult = original_result.upper()</span><br><span class="line">        <span class="keyword">return</span> modified_restult</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@uppercase</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">an_output</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;The quick brown fox jumps over the lazy dog.&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(an_output())</span><br></pre></td></tr></table></figure>
+
+<pre><code>THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG.
+</code></pre>
+<p>你还可以给一个函数加上一个以上的装饰器：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">uppercase</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>():</span></span><br><span class="line">        original_result = func()</span><br><span class="line">        modified_restult = original_result.upper()</span><br><span class="line">        <span class="keyword">return</span> modified_restult</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">strong</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>():</span></span><br><span class="line">        original_result = func()</span><br><span class="line">        modified_restult = <span class="string">&#x27;&lt;strong&gt;&#x27;</span>+original_result+<span class="string">&#x27;&lt;/strong&gt;&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> modified_restult</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@strong</span></span><br><span class="line"><span class="meta">@uppercase</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">an_output</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;The quick brown fox jumps over the lazy dog.&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(an_output())</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;strong&gt;THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG.&lt;/strong&gt;
+</code></pre>
+<p>你把两个装饰器的顺序调换一下写成下面这样试试：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@uppercase</span></span><br><span class="line"><span class="meta">@strong</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">an_output</span>():</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>装饰器的执行顺序是 “自下而上” —— 其实是 “由里到外” 更为准确。体会一下。</p>
+<h3 id="装饰带有参数的函数"><a href="#装饰带有参数的函数" class="headerlink" title="装饰带有参数的函数"></a>装饰带有参数的函数</h3><p>到现在我们见到的使用装饰器的函数都是没有参数的：<code>an_output</code> 以及之前的 <code>a_func</code>。</p>
+<p>如果被装饰的函数有参数怎么办？装饰器自身内部又应该怎么写？</p>
+<p>这时候，Python 的 <code>*args</code> and <code>**kwargs</code> 的威力就显现出来了 —— 之前怕麻烦没有通过仔细反复阅读搞定这 “一个星号、两个星号、直接晕倒” 的知识点的人，现在恐怕要吃亏了……</p>
+<p>装饰器函数本身这么写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_decorator</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">        <span class="keyword">return</span> original_result</span><br><span class="line">    <span class="comment"># ...</span></span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
+
+<p>在这里，<code>(*args, **kwargs)</code> 非常强大，它可以匹配所有函数传进来的所有参数…… 准确地讲，<code>*args</code> 接收并处理所有传递进来的位置参数，<code>**kwargs</code> 接收并处理所有传递进来的关键字参数。</p>
+<p>假设我们有这么个函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">greeting, name=<span class="literal">None</span></span>):</span></span><br><span class="line">    <span class="keyword">return</span> greeting + <span class="string">&#x27;! &#x27;</span> + name + <span class="string">&#x27;.&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(say_hi(<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;Jack&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Hello! Jack.
+</code></pre>
+<p>如果我们想在装饰器里对函数名、参数，都做些事情 —— 比如，我们写个 <code>@trace</code> 用来告诉用户调用一个函数的时候都发生了什么……</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">trace</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Trace: You&#x27;ve called a function: <span class="subst">&#123;func.__name__&#125;</span>(),&quot;</span>,</span><br><span class="line">              <span class="string">f&quot;with args: <span class="subst">&#123;args&#125;</span>; kwargs: <span class="subst">&#123;kwargs&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        original_result = func(*args, **kwargs)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Trace: <span class="subst">&#123;func.__name__&#125;</span><span class="subst">&#123;args&#125;</span> returned: <span class="subst">&#123;original_result&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> original_result</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@trace</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_hi</span>(<span class="params">greeting, name=<span class="literal">None</span></span>):</span></span><br><span class="line">    <span class="keyword">return</span> greeting + <span class="string">&#x27;! &#x27;</span> + name + <span class="string">&#x27;.&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(say_hi(<span class="string">&#x27;Hello&#x27;</span>, name = <span class="string">&#x27;Jack&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Trace: You&#39;ve called a function: say_hi(), with args: (&#39;Hello&#39;,); kwargs: &#123;&#39;name&#39;: &#39;Jack&#39;&#125;
+Trace: say_hi(&#39;Hello&#39;,) returned: Hello! Jack.
+Hello! Jack.
+</code></pre>
+<p>有了以上的基础知识之后，再去阅读 Python Decorator Library 的 Wiki 页面就会轻松许多：</p>
+<blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://wiki.python.org/moin/PythonDecoratorLibrary" >https://wiki.python.org/moin/PythonDecoratorLibrary<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<h3 id="学会装饰器究竟有多重要？"><a href="#学会装饰器究竟有多重要？" class="headerlink" title="学会装饰器究竟有多重要？"></a>学会装饰器究竟有多重要？</h3><p>装饰器一定要学会 —— 因为很多人就是不会。</p>
+<p>Oreilly.com 上有篇文章，《5 reasons you need to learn to write Python decorators》中，其中的第五条竟然是：<strong>Boosting your career</strong>!</p>
+<blockquote>
+<p>Writing decorators isn’t easy at first. It’s not rocket science, but takes enough effort to learn, and to grok the nuances involved, that many developers will never go to the trouble to master it. And that works to your advantage. When you become the person on your team who learns to write decorators well, and write decorators that solve real problems, other developers will use them. Because once the hard work of writing them is done, decorators are so easy to use. This can massively magnify the positive impact of the code you write. And it just might make you a hero, too.</p>
+<p>As I’ve traveled far and wide, training hundreds of working software engineers to use Python more effectively, teams have consistently reported writing decorators to be one of the most valuable and important tools they’ve learned in my advanced Python programming workshops.</p>
+</blockquote>
+<p>为什么有那么多人就是学不会呢？—— 只不过是因为在此之前，遇到 <code>*args</code> <code>**kwargs</code> 的时候，“一个星号、两个星号、直接晕倒”…… 而后并未再多挣扎一下。</p>
+
+            
+        </div>
+        <div class="page-template-comments">
+            
+        </div>
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">iSTEP</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

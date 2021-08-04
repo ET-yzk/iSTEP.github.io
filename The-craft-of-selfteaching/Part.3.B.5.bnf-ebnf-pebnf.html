@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="iSTEP">
+    <meta name="description" content="iSTEP Blogs">
+    <meta name="author" content="iSTEP">
+    
+    <title>
+        
+            BNF 以及 EBNF |
+        
+        iSTEP&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/iSTEP.github.io/css/style.css">
+
+    <link rel="shortcut icon" href="/iSTEP.github.io/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"et-yzk.github.io","root":"/iSTEP.github.io/","language":"zh-CN","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"https://gitee.com/yzketx/image-markdown/raw/master/img/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/iSTEP.github.io/atom.xml" title="iSTEP" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                iSTEP&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/iSTEP.github.io/The-craft-of-selfteaching"
+                            >
+                                THE-CRAFT-OF-SELFTEACHING
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/iSTEP.github.io/The-craft-of-selfteaching">THE-CRAFT-OF-SELFTEACHING</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="page-template-container">
+        
+        
+        <div class="page-template-content markdown-body">
+            
+                <h1 id="BNF-以及-EBNF"><a href="#BNF-以及-EBNF" class="headerlink" title="BNF 以及 EBNF"></a>BNF 以及 EBNF</h1><p>通常情况下，你很少会在入门书籍里读到关于 Backus-Naur Form（BNF，巴科斯-诺尔范式）和 Extended Backus-Naur Form（EBNF）的话题 —— 它们都被普遍认为是 “非专业人士无需了解的话题”，隐含的另外一层含义是 “反正就算给他们讲他们也无论如何看不懂”……</p>
+<p>然而，在我眼里，这事非讲不可 —— 这是这本 “书” 的设计目标决定的。</p>
+<p>严格意义上来讲，在《自学是门手艺》中，以自学编程为例，我完全没必要自己动手耗时费力写那么多东西 —— 如果仅仅是为了让读者 “入门” 的话。编程入门书籍，或者 Python 编程入门书籍，都已经太多太多了，其中质量过硬的书籍也多得去了 —— 并且，如果你没有英文阅读障碍，那你就会发现网上有太多非常优质的免费教程…… 真的轮不到李笑来同学再写一次。</p>
+<p>我写这本书的目标是：</p>
+<blockquote>
+<p>让读者从认知自学能力开始，通过自学编程作为第一个实践，逐步完整掌握自学能力，进而在随后漫长的人生中，需要什么就去学什么，</p>
+</blockquote>
+<p>…… 不用非得找人教、找人带 —— 只有这样，<strong>前途</strong>这两个字才会变得实在。</p>
+<p>于是，我最希望能做到的是，从这里了解了自学方法论，也了解了编程以及 Python 编程的基础概念之后，《自学是门手艺》的读者能够<strong>自顾自地踏上征程，一路走下去</strong> —— 至于走到哪里，能走到哪里，不是我一个作者一厢情愿能够决定的，是吧？</p>
+<p>当然，会自学的人运气一定不会差。</p>
+<p>于是，这本 “书” 的核心目标之一，换个说法就是：</p>
+<blockquote>
+<p>我希望读者在读完《自学是门手艺》之后，有能力独立地去全面研读<a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/" >官方文档<i class="fas fa-external-link-alt"></i></a> —— 甚至是各种编程语言、各种软件的相关的文档（包括它们的官方文档）。</p>
+</blockquote>
+<p>自学编程，很像独自一人冲入了一个丛林，里面什么动物都有…… 而且那个丛林很大很大，虽然丛林里有的地方很美，可若是没有地图和指南针，你就会迷失方向。</p>
+<p>其实吧，地图也不是没有 —— 别说 Python 了，无论什么编程语言（包括无论什么软件）都有很翔实的官方文档…… 可是吧，绝大多数人无论买多少书、上多少课，就是不去用官方 “地图”，就不！</p>
+<p>—— 其实倒不是说 “第三方地图” 更好，实际的原因很不好意思说出来：</p>
+<blockquote>
+<ul>
+<li>这首先吧，觉得官方文档阅读量太大了……（嗯？那地图不是越详细越好吗？）</li>
+<li>那还有吧…… 也不是没去看过，<strong>看不懂</strong>……（嗯…… 这对初学者倒是个问题！）</li>
+</ul>
+</blockquote>
+<p>所以，我要认为这本 “书” 的最重要工作是：</p>
+<blockquote>
+<p>为读者解读清楚地图上的 “图例”，从此之后读者在任何需要的时候能够彻底读懂地图。</p>
+</blockquote>
+<p>在阅读官方文档的时候，很多人在 <a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/tutorial/index.html" >The Python Tutorial<i class="fas fa-external-link-alt"></i></a> 上就已经觉得吃力了…… 如果到了 <a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/index.html" >Standard Libraries<i class="fas fa-external-link-alt"></i></a> 和 <a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/reference/index.html" >Language References<i class="fas fa-external-link-alt"></i></a> 的部分，就基本上完全放弃了，比如，以下这段摘自 <a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/string.html" >string —— Common string operations<i class="fas fa-external-link-alt"></i></a>：</p>
+<blockquote>
+<p>Format Specification Mini-Language<br>…<br>The general form of a standard format specifier is:</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">format_spec     ::=  [[fill]align][sign][#][0][width][grouping_option][.precision][type]</span><br><span class="line">fill            ::=  &lt;any character&gt;</span><br><span class="line">align           ::=  &quot;&lt;&quot; | &quot;&gt;&quot; | &quot;=&quot; | &quot;^&quot;</span><br><span class="line">sign            ::=  &quot;+&quot; | &quot;-&quot; | &quot; &quot;</span><br><span class="line">width           ::=  digit+</span><br><span class="line">grouping_option ::=  &quot;_&quot; | &quot;,&quot;</span><br><span class="line">precision       ::=  digit+</span><br><span class="line">type            ::=  &quot;b&quot; | &quot;c&quot; | &quot;d&quot; | &quot;e&quot; | &quot;E&quot; | &quot;f&quot; | &quot;F&quot; | &quot;g&quot; | &quot;G&quot; |</span><br><span class="line">                     &quot;n&quot; | &quot;o&quot; | &quot;s&quot; | &quot;x&quot; | &quot;X&quot; | &quot;%&quot;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>…</p>
+</blockquote>
+<p>读到这，看着一大堆的 <code>::=</code> <code>[]</code> <code>|</code> 当场傻眼了……</p>
+<p>这是 BNF 描述，还是 Python 自己定制的 EBNF…… 为了理解它们，以后当然最好有空研究一下 “上下文无关文法”（<a class="link"   target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Context-free_grammar" >Context-free Grammar<i class="fas fa-external-link-alt"></i></a>），没准未来你一高兴就会去玩一般人不敢玩的各种 Parser，甚至干脆自己写门编程语言啥的…… 不过，完全可以跳过那些复杂的东西的 —— 因为你当前的目标只不过是 “能够读懂那些符号的含义”。</p>
+<p>其实吧，真的不难的 —— 它就是语法描述的方法。</p>
+<p>比如，什么是符合语法的整数（Integer）呢？符合以下语法描述的是整数（使用 Python 的 EBNF）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">integer ::= [sign] digit +</span><br><span class="line">sign    ::= &quot;+&quot; | &quot;-&quot;</span><br><span class="line">digit   ::=  &quot;0&quot; | &quot;1&quot; | &quot;2&quot; | &quot;3&quot; | &quot;4&quot; | &quot;5&quot; | &quot;6&quot; | &quot;7&quot; | &quot;8&quot; | &quot;9&quot;</span><br></pre></td></tr></table></figure>
+<p>以上的描述中，基本符号没几个，它们各自的含义是：</p>
+<blockquote>
+<ul>
+<li><code>::=</code> 表示定义；</li>
+<li><code>&lt; &gt;</code> 尖括号里的内容表示必选内容；</li>
+<li><code>[ ]</code> 中是可选项；</li>
+<li><code>&quot; &quot;</code> 双引号里的内容表示字符；</li>
+<li><code>|</code> 竖线两边的是可选内容，相当于or；</li>
+<li><code>*</code> 表示零个或者多个……</li>
+<li><code>+</code> 表示一个或者多个……</li>
+</ul>
+</blockquote>
+<p>于是：</p>
+<blockquote>
+<ol>
+<li><code>interger</code> 定义是：由 “可选的 <code>sign</code>” 和 “一个或者多个 <code>digit</code> 的集合” 构成 —— 第一行末尾那个 <code>+</code> 的作用和正则表达式里的 <code>+</code> 一样；</li>
+<li><code>sign</code> 的定义是什么呢？要么是 <code>+</code> 要么是 <code>-；</code></li>
+<li><code>digit</code> 的定义是什么呢？从 <code>&quot;0&quot;</code> 到 <code>&quot;9&quot;</code> 中的任何一个值……</li>
+</ol>
+</blockquote>
+<p>于是，<code>99</code>、<code>+99</code>、<code>-99</code>，都是符合以上语法描述的 <code>integer</code>；但 <code>99+</code> 和 <code>99-</code> 肯定不符合以上语法描述的 <code>integer</code>。</p>
+<p>很简单吧？反正就是在 <code>::=</code> 左边逐行列出一个语法构成的所有要素，而后在右边逐行逐一定义，直至全部要素定义完毕。</p>
+<p>也许那些在此之前已经熟悉 BNF 范式的人会有点惊讶，“你怎么连 ‘<em>终结符</em>’ 和 ‘<em>非终结符</em>’ 这种最基本的概念都跳过了？” —— 是呀，即便不讲那俩概念也能把这事讲清楚到 “能马上开始用” 了的地步…… 这就是我经常说的，“人类有这个神奇的本领，擅长使用自己并不懂的东西……”</p>
+<p>Python 对 BNF 的拓展，借鉴了正则表达式<a href='#fn1' name='fn1b'><sup>[1]</sup></a> —— 从最后两个符号的使用（<code>*</code> <code>+</code>）你可以看得出来。顺带说，这也是为什么这本 “书” 里非要讲其他入门书籍里不讲的正则表达式的原因之一。</p>
+<p>又由于 Python 的社区文档是二十来年长期积累的，有时标注方法并不一致。比如，在描述 <a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/reference/grammar.html" >Python Full Grammar specification<i class="fas fa-external-link-alt"></i></a> 的时候，他们用的语法标注符号体系就跟上面描述 String 的语法不一样了，是这样的：</p>
+<blockquote>
+<ul>
+<li><code>:</code> 表示定义；</li>
+<li><code>[ ]</code> 中是可选项；</li>
+<li><code>&#39; &#39;</code> 引号里的内容表示字符；</li>
+<li><code>|</code> 竖线两边的是可选内容，相当于or；</li>
+<li><code>*</code> 表示零个或者多个……</li>
+<li><code>+</code> 表示一个或者多个……</li>
+</ul>
+</blockquote>
+<p>—— 用冒号 <code>:</code> 替代了 <code>::=</code>，用单引号 <code>&#39;&#39;</code> 替代了双引号 <code>&quot;&quot;</code>，而尖括号 <code>&lt;&gt;</code> 干脆不用了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Grammar for Python</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># NOTE WELL: You should also follow all the steps listed at</span></span><br><span class="line"><span class="comment"># https://devguide.python.org/grammar/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Start symbols for the grammar:</span></span><br><span class="line"><span class="comment">#       single_input is a single interactive statement;</span></span><br><span class="line"><span class="comment">#       file_input is a module or sequence of commands read from an input file;</span></span><br><span class="line"><span class="comment">#       eval_input is the input for the eval() functions.</span></span><br><span class="line"><span class="comment"># NB: compound_stmt in single_input is followed by extra NEWLINE!</span></span><br><span class="line">single_input: NEWLINE | simple_stmt | compound_stmt NEWLINE</span><br><span class="line">file_input: (NEWLINE | stmt)* ENDMARKER</span><br><span class="line">eval_input: testlist NEWLINE* ENDMARKER</span><br><span class="line"></span><br><span class="line">decorator: <span class="string">&#x27;@&#x27;</span> dotted_name [ <span class="string">&#x27;(&#x27;</span> [arglist] <span class="string">&#x27;)&#x27;</span> ] NEWLINE</span><br><span class="line">decorators: decorator+</span><br><span class="line">decorated: decorators (classdef | funcdef | async_funcdef)</span><br><span class="line"></span><br><span class="line">async_funcdef: <span class="string">&#x27;async&#x27;</span> funcdef</span><br><span class="line">funcdef: <span class="string">&#x27;def&#x27;</span> NAME parameters [<span class="string">&#x27;-&gt;&#x27;</span> test] <span class="string">&#x27;:&#x27;</span> suite</span><br><span class="line"></span><br><span class="line">parameters: <span class="string">&#x27;(&#x27;</span> [typedargslist] <span class="string">&#x27;)&#x27;</span></span><br><span class="line">typedargslist: (tfpdef [<span class="string">&#x27;=&#x27;</span> test] (<span class="string">&#x27;,&#x27;</span> tfpdef [<span class="string">&#x27;=&#x27;</span> test])* [<span class="string">&#x27;,&#x27;</span> [</span><br><span class="line">        <span class="string">&#x27;*&#x27;</span> [tfpdef] (<span class="string">&#x27;,&#x27;</span> tfpdef [<span class="string">&#x27;=&#x27;</span> test])* [<span class="string">&#x27;,&#x27;</span> [<span class="string">&#x27;**&#x27;</span> tfpdef [<span class="string">&#x27;,&#x27;</span>]]]</span><br><span class="line">      | <span class="string">&#x27;**&#x27;</span> tfpdef [<span class="string">&#x27;,&#x27;</span>]]]</span><br><span class="line">  | <span class="string">&#x27;*&#x27;</span> [tfpdef] (<span class="string">&#x27;,&#x27;</span> tfpdef [<span class="string">&#x27;=&#x27;</span> test])* [<span class="string">&#x27;,&#x27;</span> [<span class="string">&#x27;**&#x27;</span> tfpdef [<span class="string">&#x27;,&#x27;</span>]]]</span><br><span class="line">  | <span class="string">&#x27;**&#x27;</span> tfpdef [<span class="string">&#x27;,&#x27;</span>])</span><br><span class="line">tfpdef: NAME [<span class="string">&#x27;:&#x27;</span> test]</span><br><span class="line">varargslist: (vfpdef [<span class="string">&#x27;=&#x27;</span> test] (<span class="string">&#x27;,&#x27;</span> vfpdef [<span class="string">&#x27;=&#x27;</span> test])* [<span class="string">&#x27;,&#x27;</span> [</span><br><span class="line">        <span class="string">&#x27;*&#x27;</span> [vfpdef] (<span class="string">&#x27;,&#x27;</span> vfpdef [<span class="string">&#x27;=&#x27;</span> test])* [<span class="string">&#x27;,&#x27;</span> [<span class="string">&#x27;**&#x27;</span> vfpdef [<span class="string">&#x27;,&#x27;</span>]]]</span><br><span class="line">      | <span class="string">&#x27;**&#x27;</span> vfpdef [<span class="string">&#x27;,&#x27;</span>]]]</span><br><span class="line">  | <span class="string">&#x27;*&#x27;</span> [vfpdef] (<span class="string">&#x27;,&#x27;</span> vfpdef [<span class="string">&#x27;=&#x27;</span> test])* [<span class="string">&#x27;,&#x27;</span> [<span class="string">&#x27;**&#x27;</span> vfpdef [<span class="string">&#x27;,&#x27;</span>]]]</span><br><span class="line">  | <span class="string">&#x27;**&#x27;</span> vfpdef [<span class="string">&#x27;,&#x27;</span>]</span><br><span class="line">)</span><br><span class="line">vfpdef: NAME</span><br><span class="line"></span><br><span class="line">stmt: simple_stmt | compound_stmt</span><br><span class="line">simple_stmt: small_stmt (<span class="string">&#x27;;&#x27;</span> small_stmt)* [<span class="string">&#x27;;&#x27;</span>] NEWLINE</span><br><span class="line">small_stmt: (expr_stmt | del_stmt | pass_stmt | flow_stmt |</span><br><span class="line">             import_stmt | global_stmt | nonlocal_stmt | assert_stmt)</span><br><span class="line">expr_stmt: testlist_star_expr (annassign | augassign (yield_expr|testlist) |</span><br><span class="line">                     (<span class="string">&#x27;=&#x27;</span> (yield_expr|testlist_star_expr))*)</span><br><span class="line">annassign: <span class="string">&#x27;:&#x27;</span> test [<span class="string">&#x27;=&#x27;</span> test]</span><br><span class="line">testlist_star_expr: (test|star_expr) (<span class="string">&#x27;,&#x27;</span> (test|star_expr))* [<span class="string">&#x27;,&#x27;</span>]</span><br><span class="line">augassign: (<span class="string">&#x27;+=&#x27;</span> | <span class="string">&#x27;-=&#x27;</span> | <span class="string">&#x27;*=&#x27;</span> | <span class="string">&#x27;@=&#x27;</span> | <span class="string">&#x27;/=&#x27;</span> | <span class="string">&#x27;%=&#x27;</span> | <span class="string">&#x27;&amp;=&#x27;</span> | <span class="string">&#x27;|=&#x27;</span> | <span class="string">&#x27;^=&#x27;</span> |</span><br><span class="line">            <span class="string">&#x27;&lt;&lt;=&#x27;</span> | <span class="string">&#x27;&gt;&gt;=&#x27;</span> | <span class="string">&#x27;**=&#x27;</span> | <span class="string">&#x27;//=&#x27;</span>)</span><br><span class="line"><span class="comment"># For normal and annotated assignments, additional restrictions enforced by the interpreter</span></span><br><span class="line">del_stmt: <span class="string">&#x27;del&#x27;</span> exprlist</span><br><span class="line">pass_stmt: <span class="string">&#x27;pass&#x27;</span></span><br><span class="line">flow_stmt: break_stmt | continue_stmt | return_stmt | raise_stmt | yield_stmt</span><br><span class="line">break_stmt: <span class="string">&#x27;break&#x27;</span></span><br><span class="line">continue_stmt: <span class="string">&#x27;continue&#x27;</span></span><br><span class="line">return_stmt: <span class="string">&#x27;return&#x27;</span> [testlist]</span><br><span class="line">yield_stmt: yield_expr</span><br><span class="line">raise_stmt: <span class="string">&#x27;raise&#x27;</span> [test [<span class="string">&#x27;from&#x27;</span> test]]</span><br><span class="line">import_stmt: import_name | import_from</span><br><span class="line">import_name: <span class="string">&#x27;import&#x27;</span> dotted_as_names</span><br><span class="line"><span class="comment"># note below: the (&#x27;.&#x27; | &#x27;...&#x27;) is necessary because &#x27;...&#x27; is tokenized as ELLIPSIS</span></span><br><span class="line">import_from: (<span class="string">&#x27;from&#x27;</span> ((<span class="string">&#x27;.&#x27;</span> | <span class="string">&#x27;...&#x27;</span>)* dotted_name | (<span class="string">&#x27;.&#x27;</span> | <span class="string">&#x27;...&#x27;</span>)+)</span><br><span class="line">              <span class="string">&#x27;import&#x27;</span> (<span class="string">&#x27;*&#x27;</span> | <span class="string">&#x27;(&#x27;</span> import_as_names <span class="string">&#x27;)&#x27;</span> | import_as_names))</span><br><span class="line">import_as_name: NAME [<span class="string">&#x27;as&#x27;</span> NAME]</span><br><span class="line">dotted_as_name: dotted_name [<span class="string">&#x27;as&#x27;</span> NAME]</span><br><span class="line">import_as_names: import_as_name (<span class="string">&#x27;,&#x27;</span> import_as_name)* [<span class="string">&#x27;,&#x27;</span>]</span><br><span class="line">dotted_as_names: dotted_as_name (<span class="string">&#x27;,&#x27;</span> dotted_as_name)*</span><br><span class="line">dotted_name: NAME (<span class="string">&#x27;.&#x27;</span> NAME)*</span><br><span class="line">global_stmt: <span class="string">&#x27;global&#x27;</span> NAME (<span class="string">&#x27;,&#x27;</span> NAME)*</span><br><span class="line">nonlocal_stmt: <span class="string">&#x27;nonlocal&#x27;</span> NAME (<span class="string">&#x27;,&#x27;</span> NAME)*</span><br><span class="line">assert_stmt: <span class="string">&#x27;assert&#x27;</span> test [<span class="string">&#x27;,&#x27;</span> test]</span><br><span class="line"></span><br><span class="line">compound_stmt: if_stmt | while_stmt | for_stmt | try_stmt | with_stmt | funcdef | classdef | decorated | async_stmt</span><br><span class="line">async_stmt: <span class="string">&#x27;async&#x27;</span> (funcdef | with_stmt | for_stmt)</span><br><span class="line">if_stmt: <span class="string">&#x27;if&#x27;</span> test <span class="string">&#x27;:&#x27;</span> suite (<span class="string">&#x27;elif&#x27;</span> test <span class="string">&#x27;:&#x27;</span> suite)* [<span class="string">&#x27;else&#x27;</span> <span class="string">&#x27;:&#x27;</span> suite]</span><br><span class="line">while_stmt: <span class="string">&#x27;while&#x27;</span> test <span class="string">&#x27;:&#x27;</span> suite [<span class="string">&#x27;else&#x27;</span> <span class="string">&#x27;:&#x27;</span> suite]</span><br><span class="line">for_stmt: <span class="string">&#x27;for&#x27;</span> exprlist <span class="string">&#x27;in&#x27;</span> testlist <span class="string">&#x27;:&#x27;</span> suite [<span class="string">&#x27;else&#x27;</span> <span class="string">&#x27;:&#x27;</span> suite]</span><br><span class="line">try_stmt: (<span class="string">&#x27;try&#x27;</span> <span class="string">&#x27;:&#x27;</span> suite</span><br><span class="line">           ((except_clause <span class="string">&#x27;:&#x27;</span> suite)+</span><br><span class="line">            [<span class="string">&#x27;else&#x27;</span> <span class="string">&#x27;:&#x27;</span> suite]</span><br><span class="line">            [<span class="string">&#x27;finally&#x27;</span> <span class="string">&#x27;:&#x27;</span> suite] |</span><br><span class="line">           <span class="string">&#x27;finally&#x27;</span> <span class="string">&#x27;:&#x27;</span> suite))</span><br><span class="line">with_stmt: <span class="string">&#x27;with&#x27;</span> with_item (<span class="string">&#x27;,&#x27;</span> with_item)*  <span class="string">&#x27;:&#x27;</span> suite</span><br><span class="line">with_item: test [<span class="string">&#x27;as&#x27;</span> expr]</span><br><span class="line"><span class="comment"># NB compile.c makes sure that the default except clause is last</span></span><br><span class="line">except_clause: <span class="string">&#x27;except&#x27;</span> [test [<span class="string">&#x27;as&#x27;</span> NAME]]</span><br><span class="line">suite: simple_stmt | NEWLINE INDENT stmt+ DEDENT</span><br><span class="line"></span><br><span class="line">test: or_test [<span class="string">&#x27;if&#x27;</span> or_test <span class="string">&#x27;else&#x27;</span> test] | lambdef</span><br><span class="line">test_nocond: or_test | lambdef_nocond</span><br><span class="line">lambdef: <span class="string">&#x27;lambda&#x27;</span> [varargslist] <span class="string">&#x27;:&#x27;</span> test</span><br><span class="line">lambdef_nocond: <span class="string">&#x27;lambda&#x27;</span> [varargslist] <span class="string">&#x27;:&#x27;</span> test_nocond</span><br><span class="line">or_test: and_test (<span class="string">&#x27;or&#x27;</span> and_test)*</span><br><span class="line">and_test: not_test (<span class="string">&#x27;and&#x27;</span> not_test)*</span><br><span class="line">not_test: <span class="string">&#x27;not&#x27;</span> not_test | comparison</span><br><span class="line">comparison: expr (comp_op expr)*</span><br><span class="line"><span class="comment"># &lt;&gt; isn&#x27;t actually a valid comparison operator in Python. It&#x27;s here for the</span></span><br><span class="line"><span class="comment"># sake of a __future__ import described in PEP 401 (which really works :-)</span></span><br><span class="line">comp_op: <span class="string">&#x27;&lt;&#x27;</span>|<span class="string">&#x27;&gt;&#x27;</span>|<span class="string">&#x27;==&#x27;</span>|<span class="string">&#x27;&gt;=&#x27;</span>|<span class="string">&#x27;&lt;=&#x27;</span>|<span class="string">&#x27;&lt;&gt;&#x27;</span>|<span class="string">&#x27;!=&#x27;</span>|<span class="string">&#x27;in&#x27;</span>|<span class="string">&#x27;not&#x27;</span> <span class="string">&#x27;in&#x27;</span>|<span class="string">&#x27;is&#x27;</span>|<span class="string">&#x27;is&#x27;</span> <span class="string">&#x27;not&#x27;</span></span><br><span class="line">star_expr: <span class="string">&#x27;*&#x27;</span> expr</span><br><span class="line">expr: xor_expr (<span class="string">&#x27;|&#x27;</span> xor_expr)*</span><br><span class="line">xor_expr: and_expr (<span class="string">&#x27;^&#x27;</span> and_expr)*</span><br><span class="line">and_expr: shift_expr (<span class="string">&#x27;&amp;&#x27;</span> shift_expr)*</span><br><span class="line">shift_expr: arith_expr ((<span class="string">&#x27;&lt;&lt;&#x27;</span>|<span class="string">&#x27;&gt;&gt;&#x27;</span>) arith_expr)*</span><br><span class="line">arith_expr: term ((<span class="string">&#x27;+&#x27;</span>|<span class="string">&#x27;-&#x27;</span>) term)*</span><br><span class="line">term: factor ((<span class="string">&#x27;*&#x27;</span>|<span class="string">&#x27;@&#x27;</span>|<span class="string">&#x27;/&#x27;</span>|<span class="string">&#x27;%&#x27;</span>|<span class="string">&#x27;//&#x27;</span>) factor)*</span><br><span class="line">factor: (<span class="string">&#x27;+&#x27;</span>|<span class="string">&#x27;-&#x27;</span>|<span class="string">&#x27;~&#x27;</span>) factor | power</span><br><span class="line">power: atom_expr [<span class="string">&#x27;**&#x27;</span> factor]</span><br><span class="line">atom_expr: [<span class="string">&#x27;await&#x27;</span>] atom trailer*</span><br><span class="line">atom: (<span class="string">&#x27;(&#x27;</span> [yield_expr|testlist_comp] <span class="string">&#x27;)&#x27;</span> |</span><br><span class="line">       <span class="string">&#x27;[&#x27;</span> [testlist_comp] <span class="string">&#x27;]&#x27;</span> |</span><br><span class="line">       <span class="string">&#x27;&#123;&#x27;</span> [dictorsetmaker] <span class="string">&#x27;&#125;&#x27;</span> |</span><br><span class="line">       NAME | NUMBER | STRING+ | <span class="string">&#x27;...&#x27;</span> | <span class="string">&#x27;None&#x27;</span> | <span class="string">&#x27;True&#x27;</span> | <span class="string">&#x27;False&#x27;</span>)</span><br><span class="line">testlist_comp: (test|star_expr) ( comp_for | (<span class="string">&#x27;,&#x27;</span> (test|star_expr))* [<span class="string">&#x27;,&#x27;</span>] )</span><br><span class="line">trailer: <span class="string">&#x27;(&#x27;</span> [arglist] <span class="string">&#x27;)&#x27;</span> | <span class="string">&#x27;[&#x27;</span> subscriptlist <span class="string">&#x27;]&#x27;</span> | <span class="string">&#x27;.&#x27;</span> NAME</span><br><span class="line">subscriptlist: subscript (<span class="string">&#x27;,&#x27;</span> subscript)* [<span class="string">&#x27;,&#x27;</span>]</span><br><span class="line">subscript: test | [test] <span class="string">&#x27;:&#x27;</span> [test] [sliceop]</span><br><span class="line">sliceop: <span class="string">&#x27;:&#x27;</span> [test]</span><br><span class="line">exprlist: (expr|star_expr) (<span class="string">&#x27;,&#x27;</span> (expr|star_expr))* [<span class="string">&#x27;,&#x27;</span>]</span><br><span class="line">testlist: test (<span class="string">&#x27;,&#x27;</span> test)* [<span class="string">&#x27;,&#x27;</span>]</span><br><span class="line">dictorsetmaker: ( ((test <span class="string">&#x27;:&#x27;</span> test | <span class="string">&#x27;**&#x27;</span> expr)</span><br><span class="line">                   (comp_for | (<span class="string">&#x27;,&#x27;</span> (test <span class="string">&#x27;:&#x27;</span> test | <span class="string">&#x27;**&#x27;</span> expr))* [<span class="string">&#x27;,&#x27;</span>])) |</span><br><span class="line">                  ((test | star_expr)</span><br><span class="line">                   (comp_for | (<span class="string">&#x27;,&#x27;</span> (test | star_expr))* [<span class="string">&#x27;,&#x27;</span>])) )</span><br><span class="line"></span><br><span class="line">classdef: <span class="string">&#x27;class&#x27;</span> NAME [<span class="string">&#x27;(&#x27;</span> [arglist] <span class="string">&#x27;)&#x27;</span>] <span class="string">&#x27;:&#x27;</span> suite</span><br><span class="line"></span><br><span class="line">arglist: argument (<span class="string">&#x27;,&#x27;</span> argument)*  [<span class="string">&#x27;,&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># The reason that keywords are test nodes instead of NAME is that using NAME</span></span><br><span class="line"><span class="comment"># results in an ambiguity. ast.c makes sure it&#x27;s a NAME.</span></span><br><span class="line"><span class="comment"># &quot;test &#x27;=&#x27; test&quot; is really &quot;keyword &#x27;=&#x27; test&quot;, but we have no such token.</span></span><br><span class="line"><span class="comment"># These need to be in a single rule to avoid grammar that is ambiguous</span></span><br><span class="line"><span class="comment"># to our LL(1) parser. Even though &#x27;test&#x27; includes &#x27;*expr&#x27; in star_expr,</span></span><br><span class="line"><span class="comment"># we explicitly match &#x27;*&#x27; here, too, to give it proper precedence.</span></span><br><span class="line"><span class="comment"># Illegal combinations and orderings are blocked in ast.c:</span></span><br><span class="line"><span class="comment"># multiple (test comp_for) arguments are blocked; keyword unpackings</span></span><br><span class="line"><span class="comment"># that precede iterable unpackings are blocked; etc.</span></span><br><span class="line">argument: ( test [comp_for] |</span><br><span class="line">            test <span class="string">&#x27;=&#x27;</span> test |</span><br><span class="line">            <span class="string">&#x27;**&#x27;</span> test |</span><br><span class="line">            <span class="string">&#x27;*&#x27;</span> test )</span><br><span class="line"></span><br><span class="line">comp_iter: comp_for | comp_if</span><br><span class="line">sync_comp_for: <span class="string">&#x27;for&#x27;</span> exprlist <span class="string">&#x27;in&#x27;</span> or_test [comp_iter]</span><br><span class="line">comp_for: [<span class="string">&#x27;async&#x27;</span>] sync_comp_for</span><br><span class="line">comp_if: <span class="string">&#x27;if&#x27;</span> test_nocond [comp_iter]</span><br><span class="line"></span><br><span class="line"><span class="comment"># not used in grammar, but may appear in &quot;node&quot; passed from Parser to Compiler</span></span><br><span class="line">encoding_decl: NAME</span><br><span class="line"></span><br><span class="line">yield_expr: <span class="string">&#x27;yield&#x27;</span> [yield_arg]</span><br><span class="line">yield_arg: <span class="string">&#x27;from&#x27;</span> test | testlist</span><br></pre></td></tr></table></figure>
+
+<p>现在你已经能读懂 BNF 了，那么，可以再读读用 BNF 描述的 Regex 语法<a href='#fn2' name='fn2b'><sup>[2]</sup></a>，就当复习了 —— 很短的：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">BNF grammar for Perl-style regular expressions</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">RE</span>&gt;</span>             ::=  <span class="tag">&lt;<span class="name">union</span>&gt;</span> | <span class="tag">&lt;<span class="name">simple-RE</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">union</span>&gt;</span>          ::=  <span class="tag">&lt;<span class="name">RE</span>&gt;</span> &quot;|&quot; <span class="tag">&lt;<span class="name">simple-RE</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">simple-RE</span>&gt;</span>      ::=  <span class="tag">&lt;<span class="name">concatenation</span>&gt;</span> | <span class="tag">&lt;<span class="name">basic-RE</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">concatenation</span>&gt;</span>  ::=  <span class="tag">&lt;<span class="name">simple-RE</span>&gt;</span> <span class="tag">&lt;<span class="name">basic-RE</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">basic-RE</span>&gt;</span>       ::=  <span class="tag">&lt;<span class="name">star</span>&gt;</span> | <span class="tag">&lt;<span class="name">plus</span>&gt;</span> | <span class="tag">&lt;<span class="name">elementary-RE</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">star</span>&gt;</span>           ::=  <span class="tag">&lt;<span class="name">elementary-RE</span>&gt;</span> &quot;*&quot;</span><br><span class="line"><span class="tag">&lt;<span class="name">plus</span>&gt;</span>           ::=  <span class="tag">&lt;<span class="name">elementary-RE</span>&gt;</span> &quot;+&quot;</span><br><span class="line"><span class="tag">&lt;<span class="name">elementary-RE</span>&gt;</span>  ::=  <span class="tag">&lt;<span class="name">group</span>&gt;</span> | <span class="tag">&lt;<span class="name">any</span>&gt;</span> | <span class="tag">&lt;<span class="name">eos</span>&gt;</span> | <span class="tag">&lt;<span class="name">char</span>&gt;</span> | <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">group</span>&gt;</span>          ::=  &quot;(&quot; <span class="tag">&lt;<span class="name">RE</span>&gt;</span> &quot;)&quot;</span><br><span class="line"><span class="tag">&lt;<span class="name">any</span>&gt;</span>            ::=  &quot;.&quot;</span><br><span class="line"><span class="tag">&lt;<span class="name">eos</span>&gt;</span>            ::=  &quot;$&quot;</span><br><span class="line"><span class="tag">&lt;<span class="name">char</span>&gt;</span>           ::=  any non metacharacter | &quot;\&quot; metacharacter</span><br><span class="line"><span class="tag">&lt;<span class="name">set</span>&gt;</span>            ::=  <span class="tag">&lt;<span class="name">positive-set</span>&gt;</span> | <span class="tag">&lt;<span class="name">negative-set</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">positive-set</span>&gt;</span>   ::=  &quot;[&quot; <span class="tag">&lt;<span class="name">set-items</span>&gt;</span> &quot;]&quot;</span><br><span class="line"><span class="tag">&lt;<span class="name">negative-set</span>&gt;</span>   ::=  &quot;[^&quot; <span class="tag">&lt;<span class="name">set-items</span>&gt;</span> &quot;]&quot;</span><br><span class="line"><span class="tag">&lt;<span class="name">set-items</span>&gt;</span>      ::=  <span class="tag">&lt;<span class="name">set-item</span>&gt;</span> | <span class="tag">&lt;<span class="name">set-item</span>&gt;</span> <span class="tag">&lt;<span class="name">set-items</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">set-item</span>&gt;</span>       ::=  <span class="tag">&lt;<span class="name">range</span>&gt;</span> | <span class="tag">&lt;<span class="name">char</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">range</span>&gt;</span>          ::=  <span class="tag">&lt;<span class="name">char</span>&gt;</span> &quot;-&quot; <span class="tag">&lt;<span class="name">char</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>真的没原来以为得那么神秘，是不？<a href='#fn3' name='fn3b'><sup>[3]</sup></a></p>
+<p>都学到这儿了…… 顺带再自学个东西吧。</p>
+<p>这个东西叫 <code>glob</code>，是 Global 的缩写。你可以把它理解为 “超级简化版正则表达式” —— 它最初是 Unix/Posix 操作系统中用来匹配文件名的 “通配符”。</p>
+<p>先看一张 1971 的 Unix 操作系统中关于 glob 的截图：<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/Unix_Glob_Reference.png?raw=true"
+                     
+                ></p>
+<blockquote>
+<p>A screenshot of the original 1971 Unix reference page for glob – note the owner is dmr, short for Dennis Ritchie.</p>
+</blockquote>
+<p>glob 的主要符号只有这么几个：</p>
+<blockquote>
+<ul>
+<li><code>*</code></li>
+<li><code>?</code></li>
+<li><code>[abc]</code></li>
+<li><code>[^abc]</code></li>
+</ul>
+</blockquote>
+<p>现在的你，打开 Wikipedia 上的关于 glob 和 Wildcard character 的页面，肯定能做到 “无障碍” 理解：</p>
+<blockquote>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Glob_(programming)" >https://en.wikipedia.org/wiki/Glob_(programming)<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Wildcard_character" >https://en.wikipedia.org/wiki/Wildcard_character<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+</blockquote>
+<p>顺带说，现在你再去读关于 Format String 的官方文档，就不会再觉得 “根本看不懂” 了，恰恰相反，你会觉得 “我怎么之前连这个都看不懂呢？”</p>
+<blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/string.html#format-string-syntax" >https://docs.python.org/3/library/string.html#format-string-syntax<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>在自学这件事上，失败者的死法看起来千变万化，但其实都是一样的…… 只不过是因为怕麻烦或者基础知识不够而不去读最重要的文档。</p>
+<p>比如，学英语的时候死活不读语法书。其实英文语法书也没多难啊？再厚，不也是用来 “查” 的吗？不就是多记几个标记就可以读懂的吗？比如，词性标记，<code>v.</code>, <code>n.</code>, <code>adj.</code>, <code>adv.</code>, <code>prep.</code>… 不就是相当于地图上的图例吗？那语法书，和现在这里提到的官方文档，不都是 “自学者地图” 吗？</p>
+<p>但就是这么一点点简单的东西，挡住了几乎所有人，真是可怕。</p>
+<hr>
+<p><strong>脚注</strong></p>
+<p><a name='fn1'>[1]</a>：<a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/reference/introduction.html#notation" >The Python Language Reference » 1.2 Notation<i class="fas fa-external-link-alt"></i></a> —— 这个链接必须去看一看……</p>
+<p><a href='#fn1b'><small>↑Back to Content↑</small></a></p>
+<p><a name='fn2'>[2]</a>：<a class="link"   target="_blank" rel="noopener" href="http://www.cs.sfu.ca/~cameron/Teaching/384/99-3/regexp-plg.html" >Perl Style Regular Expressions in Prolog<i class="fas fa-external-link-alt"></i></a> CMPT 384 Lecture Notes<br>Robert D. Cameron November 29 - December 1, 1999</p>
+<p><a href='#fn2b'><small>↑Back to Content↑</small></a></p>
+<p><a name='fn3'>[3]</a>：很少有人注意到：在很多编程语言的文法文档中，<code>&quot;$&quot;</code> 被称为 <code>&lt;eos&gt;</code> —— 2017 年 5 月我投资了一个初创公司，听说他们的资产名称叫做 <code>eos</code>…… 我当场就被这个梗逗乐了。</p>
+<p><a href='#fn3b'><small>↑Back to Content↑</small></a></p>
+
+            
+        </div>
+        <div class="page-template-comments">
+            
+        </div>
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">iSTEP</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

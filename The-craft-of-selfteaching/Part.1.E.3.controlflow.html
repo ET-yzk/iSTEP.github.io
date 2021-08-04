@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="iSTEP">
+    <meta name="description" content="iSTEP Blogs">
+    <meta name="author" content="iSTEP">
+    
+    <title>
+        
+            流程控制 |
+        
+        iSTEP&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/iSTEP.github.io/css/style.css">
+
+    <link rel="shortcut icon" href="/iSTEP.github.io/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"et-yzk.github.io","root":"/iSTEP.github.io/","language":"zh-CN","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"https://gitee.com/yzketx/image-markdown/raw/master/img/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/iSTEP.github.io/atom.xml" title="iSTEP" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                iSTEP&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/iSTEP.github.io/The-craft-of-selfteaching"
+                            >
+                                THE-CRAFT-OF-SELFTEACHING
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/iSTEP.github.io/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/iSTEP.github.io/The-craft-of-selfteaching">THE-CRAFT-OF-SELFTEACHING</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/iSTEP.github.io/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="page-template-container">
+        
+        
+        <div class="page-template-content markdown-body">
+            
+                <h1 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h1><p>在相对深入了解了值的基本操作之后，我们需要再返回来对流程控制做更深入的了解。</p>
+<p>之前我们看过这个寻找质数的程序：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="number">100</span>):</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">        <span class="built_in">print</span>(n)</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n):</span><br><span class="line">        <span class="keyword">if</span> (n % i) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(n)</span><br></pre></td></tr></table></figure>
+
+<p>这其中，包含了<em>分支</em>与<em>循环</em> —— 无论多复杂的流程控制用这两个东西就够了，就好像无论多复杂的电路最终都是由通路和开路仅仅两个状态构成的一样。</p>
+<blockquote>
+<p>今天的人们觉得这是 “天经地义” 的事情，可实际上并非如此。这是 1966 年的一篇论文所带来的巨大改变 —— <em>Flow diagrams, turing machines and languages with only two formation rules</em> by Böhm and Jacopini (1966)。实际上，直到上个世纪末，<code>GOTO</code> 语句才从各种语言里近乎 “灭绝”……</p>
+<p>任何进步，无论大小，其实都相当不容易，都非常耗时费力 —— 在哪儿都一样。有兴趣、有时间，可以去浏览 Wikipedia 上的简要说明 —— <a class="link"   target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Control_flow#Goto" >Wikipedia: Minimal structured control flow<i class="fas fa-external-link-alt"></i></a>。</p>
+</blockquote>
+<h2 id="if-语句"><a href="#if-语句" class="headerlink" title="if 语句"></a>if 语句</h2><p><code>if</code> 语句的最简单构成是这样 —— 注意第 1 行末尾的冒号 <code>:</code> 和第 2 行的缩进：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> expression:</span><br><span class="line">    statements</span><br></pre></td></tr></table></figure>
+
+<p>如果表达式 <code>expression</code> 返回值为真，执行 <code>if</code> 语句块内部的 <code>statements</code>，否则，什么都不做，执行 <code>if</code> 之后的下一个语句。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">r = random.randrange(<span class="number">1</span>, <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> r % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;r&#125;</span> is even.&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>372 is even.
+</code></pre>
+<p>如果，表达式 <code>expression</code> 返回值无论真假，我们都需要做一点相应的事情，那么我们这么写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> expression:</span><br><span class="line">    statements_for_True</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    statements_for_False</span><br></pre></td></tr></table></figure>
+
+<p>如果表达式 <code>expression</code> 返回值为真，执行 <code>if</code> 语句块内部的 <code>statements_for_True</code>，否则，就执行 <code>else</code> 语句块内部的 <code>statements_for_False</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">r = random.randrange(<span class="number">1</span>, <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> r % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;r&#125;</span> is even.&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;r&#125;</span> is odd.&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>945 is odd.
+</code></pre>
+<p>有时，表达式 <code>&lt;expression&gt;</code> 返回的值有多种情况，并且针对不同的情况我们都要做相应的事情，那么可以这么写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> expression_1:</span><br><span class="line">    statements_for_expression_1_True</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> expression_2:</span><br><span class="line">    statements_for_expression_2_True</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> expression_3:</span><br><span class="line">    statements_for_expression_3_True</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> expression_...:</span><br><span class="line">    statements_for_expression_..._<span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<p>Python 用 <code>elif</code> 处理这种多情况分支，相当于其它编程语言中使用 <code>switch</code> 或者 <code>case</code>……</p>
+<p><code>elif</code> 是 <code>else if</code> 的缩写，作用相同。</p>
+<p>以下程序模拟投两个骰子的结果 —— 两个骰子数字加起来，等于 <code>7</code> 算平，大于 <code>7</code> 算大，小于 <code>7</code> 算小：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">r = random.randrange(<span class="number">2</span>, <span class="number">13</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> r == <span class="number">7</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Draw!&#x27;</span>)</span><br><span class="line"><span class="keyword">elif</span> r &lt; <span class="number">7</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Small!&#x27;</span>)</span><br><span class="line"><span class="keyword">elif</span> r &gt; <span class="number">7</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Big!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Big!
+</code></pre>
+<p>当然你还可以模拟投飞了的情况，即，最终的骰子数是 <code>0</code> 或者 <code>1</code>，即，<code>&lt; 2</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">r = random.randrange(<span class="number">0</span>, <span class="number">13</span>) <span class="comment"># 生成的随机数应该从 0 开始了；</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> r == <span class="number">7</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Draw!&#x27;</span>)</span><br><span class="line"><span class="keyword">elif</span> r &gt;= <span class="number">2</span> <span class="keyword">and</span> r &lt; <span class="number">7</span>:      <span class="comment"># 如果这里直接写 elif r &lt; 7:，那么，else: 那一部分永远不会被执行……</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Small!&#x27;</span>)</span><br><span class="line"><span class="keyword">elif</span> r &gt; <span class="number">7</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Big!&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Not valid!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Small!
+</code></pre>
+<h2 id="for-循环"><a href="#for-循环" class="headerlink" title="for 循环"></a>for 循环</h2><p>Python 语言中，<code>for</code> 循环不使用其它语言中那样的计数器，取而代之的是 <code>range()</code> 这个我称其为 “整数等差数列生成器” 的函数。</p>
+<p>用 C 语言写循环是这样的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>( a = <span class="number">0</span>; a &lt; <span class="number">10</span>; a = a + <span class="number">1</span> )&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;value of a: %d\n&quot;</span>, a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用 Python 写同样的东西，是这样的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;value of a: <span class="subst">&#123;a&#125;</span>&#x27;</span>) <span class="comment">#每次 a 的值都不同，从 0 递增至 9</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>value of a: 0
+value of a: 1
+value of a: 2
+value of a: 3
+value of a: 4
+value of a: 5
+value of a: 6
+value of a: 7
+value of a: 8
+value of a: 9
+</code></pre>
+<h3 id="range-函数"><a href="#range-函数" class="headerlink" title="range() 函数"></a>range() 函数</h3><p><code>range()</code> 是个内建函数，<a class="link"   target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#func-range" >它的文档<i class="fas fa-external-link-alt"></i></a>是这样写的：</p>
+<blockquote>
+<p><strong>range</strong>(<em>stop</em>)</p>
+<p><strong>range</strong>(<em>start, stop[, step]</em>)</p>
+</blockquote>
+<p>只有一个参数的时候，这个参数被理解为 <code>stop</code>，生成一个从 <code>0</code> 开始，到 <code>stop - 1</code> 的整数数列。</p>
+<p>这就解释了为什么有的时候我们会在 <code>for ... in range(...):</code> 这种循环内的语句块里进行计算的时候，经常会在变量之后写上 <code>+ 1</code>，因为我们 range(n) 的返回数列中不包含 <code>n</code>，但我们有时候却需要 <code>n</code>。<a href="Part.1.E.1.entrance.ipynb#plusone">点击这里返回看看第一章里提到的例子：所谓算法那一小节</a>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.interactiveshell <span class="keyword">import</span> InteractiveShell</span><br><span class="line">InteractiveShell.ast_node_interactivity = <span class="string">&quot;all&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">range</span>(<span class="number">10</span>)</span><br><span class="line"><span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">10</span>)) <span class="comment"># 将 range(10) 转换成 list，以便清楚看到其内容。</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>range(0, 10)
+
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</code></pre>
+<p><code>start</code> 参数的默认值是 <code>0</code>。如需指定起点，那么得给 <code>range()</code> 传递两个参数，比如，<code>range(2, 13)</code>……</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">2</span>, <span class="number">13</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+</code></pre>
+<p>第三个参数可选；<code>step</code>，步长，就相当于是 “等差数列” 当中的 “差”，默认值是 <code>1</code>。例如，<code>range(1, 10, 2)</code> 生成的是这样一个数列 <code>[1, 3, 5, 7, 9]</code>。所以，打印 <code>0 ～ 10</code> 之间的所有奇数，可以这样写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>, <span class="number">2</span>):</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br></pre></td></tr></table></figure>
+
+<pre><code>1
+3
+5
+7
+9
+</code></pre>
+<p>我们也可以生成负数的数列：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">0</span>, -<span class="number">10</span>, -<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>[0, -1, -2, -3, -4, -5, -6, -7, -8, -9]
+</code></pre>
+<h3 id="Continue、Break-和-Pass"><a href="#Continue、Break-和-Pass" class="headerlink" title="Continue、Break 和 Pass"></a>Continue、Break 和 Pass</h3><p>在循环的过程中，还可以用 <code>continue</code> 和 <code>break</code> 控制流程走向，通常是在某条件判断发生的情况下 —— 正如你早就见过的那样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="number">100</span>):</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">        <span class="built_in">print</span>(n)</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n):</span><br><span class="line">        <span class="keyword">if</span> (n % i) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(n)</span><br></pre></td></tr></table></figure>
+
+<p><code>continue</code> 语句将忽略其后的语句开始下次循环，而 <code>break</code> 语句将从此结束当前循环，开始执行循环之后的语句：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/continue-break.png?raw=true"
+                     
+                ></p>
+<p><code>for</code> 语句块还可以附加一个 <code>else</code> —— 这是 Python 的一个比较有个性的地方。附加在 <code>for</code> 结尾的 <code>else</code> 语句块，_在没有 <code>break</code> 发生的情况下会运行_。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="number">100</span>):</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">        <span class="built_in">print</span>(n)</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n):</span><br><span class="line">        <span class="keyword">if</span> (n % i) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:               <span class="comment"># 下一行的 print(n) 事实上属于语句块 for i in range(2, n):</span></span><br><span class="line">        <span class="built_in">print</span>(n)        <span class="comment"># 整个循环结束，都没有发生 break 的情况下，才执行一次 print(n)</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>2
+3
+5
+7
+11
+13
+17
+19
+23
+29
+31
+37
+41
+43
+47
+53
+59
+61
+67
+71
+73
+79
+83
+89
+97
+</code></pre>
+<p>试比较以下两段代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="number">100</span>):</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">        <span class="built_in">print</span>(n)</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n):</span><br><span class="line">        <span class="keyword">if</span> (n % i) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="built_in">print</span>(n)            <span class="comment"># 事实上相当于针对 range(2, 100) 中每个 n 都执行了一次 print(n)</span></span><br><span class="line">                        <span class="comment"># 这个 print(n) 属于语句块 for n in range(2, 100):</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="number">100</span>):</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">        <span class="built_in">print</span>(n)</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n):</span><br><span class="line">        <span class="keyword">if</span> (n % i) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="built_in">print</span>(n)            <span class="comment"># 事实上相当于针对 range(2, n) 中每个 i 都执行了一次 print(n)</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>2
+3
+5
+5
+5
+7
+7
+7
+7
+7
+9
+11
+11
+11
+...
+97
+97
+97
+97
+99
+</code></pre>
+<p><code>pass</code> 语句什么都不干：</p>
+<p>再比如，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">someFunction</span>():</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>又或者：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>换个角度去理解的话可能更清楚：<code>pass</code> 这个语句更多是给写程序的人用的。当你写程序的时候，你可以用 <code>pass</code> 占位，而后先写别的部分，过后再回来补充本来应该写在 <code>pass</code> 所在位置的那一段代码。</p>
+<p>写嵌套的判断语句或循环语句的时候，最常用 <code>pass</code>，因为写嵌套挺费脑子的，一不小心就弄乱了。所以，经常需要先用 <code>pass</code> 占位，而后逐一突破。</p>
+<h2 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a>while 循环</h2><p>今天，在绝大多数编程语言中，都提供两种循环结构：</p>
+<blockquote>
+<ul>
+<li>Collection-controlled loops（以集合为基础的循环）</li>
+<li>Condition-controlled loops（以条件为基础的循环）</li>
+</ul>
+</blockquote>
+<p>之前的 <code>for ... in ...</code> 就是 Collection-controlled loops；而在 Python 中提供的 Condition-controlled loops 是 <code>while</code> 循环。</p>
+<p><code>while</code> 循环的格式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> expression:</span><br><span class="line">    statements</span><br></pre></td></tr></table></figure>
+
+<p>输出 1000 以内的斐波那契数列的程序如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="number">1000</span></span><br><span class="line">a, b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> a &lt; n:</span><br><span class="line">    <span class="built_in">print</span>(a, end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    a, b = b, a+b</span><br><span class="line"><span class="built_in">print</span>()</span><br></pre></td></tr></table></figure>
+
+<pre><code>0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987
+</code></pre>
+<p><code>for</code> 和 <code>while</code> 的区别在哪里？什么时候应该用哪个？</p>
+<p><code>for</code> 更适合处理序列类型的数据（Sequence Type）的迭代，比如处理字符串中的每一个字符，比如把 <code>range()</code> 返回的数列当作某种序列类型的索引。</p>
+<p><code>while</code> 更为灵活，因为它后面只需要接上一个逻辑表达式即可。</p>
+<h2 id="一个投骰子赌大小的游戏"><a href="#一个投骰子赌大小的游戏" class="headerlink" title="一个投骰子赌大小的游戏"></a>一个投骰子赌大小的游戏</h2><p>虽然还不可能随心所欲写程序，但是，你现在具备了起码的 “阅读能力”。有了以上大概的介绍，你也许可以读懂一些代码了 —— 它们在你眼里再也不是天书了……</p>
+<p>以下是一个让用户和程序玩掷骰子赌大小的程序。规则如下：</p>
+<blockquote>
+<ul>
+<li>每次计算机随机生成一个 <code>2... 12</code> 之间的整数，用来模拟机器人投两个骰子的情况；</li>
+</ul>
+</blockquote>
+<ul>
+<li>机器人和用户的起始资金都是 10 个硬币</li>
+<li>要求用户猜大小：<ul>
+<li>用户输入 <code>b</code> 代表 “大”；</li>
+<li>用户输入 <code>s</code> 代表 “小”；</li>
+<li>用户输入 <code>q</code> 代表 “退出”；</li>
+</ul>
+</li>
+<li>用户的输入和随机产生的数字比较有以下几种情况：<ul>
+<li>随机数小于 <code>7</code>，用户猜小，用户赢；</li>
+<li>随机数小于 <code>7</code>，用户猜大，用户输；</li>
+<li>随机数等于 <code>7</code>，用户无论猜大还是猜小，结局平，不输不赢；</li>
+<li>随机数大于 <code>7</code>，用户猜小，用户输；</li>
+<li>随机数大于 <code>7</code>，用户猜大，用户赢；</li>
+</ul>
+</li>
+<li>游戏结束条件：<ul>
+<li>机器人和用户，若任意一方硬币数量为 <code>0</code>，则游戏结束；</li>
+<li>用户输入了 <code>q</code> 主动终止游戏。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randrange</span><br><span class="line"></span><br><span class="line">coin_user, coin_bot = <span class="number">10</span>, <span class="number">10</span> <span class="comment"># 可以用一个赋值符号分别为多个变量赋值</span></span><br><span class="line">rounds_of_game = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bet</span>(<span class="params">dice, wager</span>):</span>    <span class="comment"># 接收两个参数，一个是骰子点数，另一个用户的输入</span></span><br><span class="line">    <span class="keyword">if</span> dice == <span class="number">7</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;The dice is <span class="subst">&#123;dice&#125;</span>;\nDRAW!\n&#x27;</span>) <span class="comment"># \n 是换行符号</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">elif</span> dice &lt; <span class="number">7</span>:</span><br><span class="line">        <span class="keyword">if</span> wager == <span class="string">&#x27;s&#x27;</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;The dice is <span class="subst">&#123;dice&#125;</span>;\nYou WIN!\n&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;The dice is <span class="subst">&#123;dice&#125;</span>;\nYou LOST!\n&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> dice &gt; <span class="number">7</span>:</span><br><span class="line">        <span class="keyword">if</span> wager == <span class="string">&#x27;s&#x27;</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;The dice is <span class="subst">&#123;dice&#125;</span>;\nYou LOST!\n&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;The dice is <span class="subst">&#123;dice&#125;</span>;\nYou WIN!\n&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:         <span class="comment">#  除 for 之外的另外一个循环语句</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;You: <span class="subst">&#123;coin_user&#125;</span>\t Bot: <span class="subst">&#123;coin_bot&#125;</span>&#x27;</span>)</span><br><span class="line">    dice = randrange(<span class="number">2</span>, <span class="number">13</span>)   <span class="comment"># 生成一个 2 到 12 的随机数</span></span><br><span class="line">    wager = <span class="built_in">input</span>(<span class="string">&quot;What&#x27;s your bet? &quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> wager == <span class="string">&#x27;q&#x27;</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">elif</span> wager <span class="keyword">in</span> <span class="string">&#x27;bs&#x27;</span>:  <span class="comment"># 只有当用户输入的是 b 或者 s 得时候，才 “掷骰子”……</span></span><br><span class="line">        result = bet(dice, wager)</span><br><span class="line">        coin_user += result    <span class="comment"># coin_user += result 相当于 coin_user = coin_user + result</span></span><br><span class="line">        coin_bot -= result</span><br><span class="line">        rounds_of_game += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> coin_user == <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Woops, you&#x27;ve LOST ALL, and game over!&quot;</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">elif</span> coin_bot == <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Woops, the robot&#x27;s LOST ALL, and game over!&quot;</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;You&#x27;ve played <span class="subst">&#123;rounds_of_game&#125;</span> rounds.\n&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;You have <span class="subst">&#123;coin_user&#125;</span> coins now.\nBye!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>有控制流，才能算得上是程序。</p>
+<blockquote>
+<ul>
+<li>只处理一种情况，用 <code>if ... </code></li>
+<li>处理 <code>True</code>/<code>False</code> 两种情况，用 <code>if ... else ...</code></li>
+<li>处理多种情况，用 <code>if ... elif ... elif ... else ...</code></li>
+<li>迭代有序数据类型，用 <code>for ... in ...</code>，如果需要处理没有 <code>break</code> 发生的情况，用 <code>for ... else ...</code></li>
+<li>其它循环，用 <code>while ...</code></li>
+<li>与循环相关的语句还有 <code>continue</code>、<code>break</code>、<code>pass</code></li>
+<li>函数从控制流角度去看其实就是子程序</li>
+</ul>
+</blockquote>
+
+            
+        </div>
+        <div class="page-template-comments">
+            
+        </div>
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">iSTEP</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
