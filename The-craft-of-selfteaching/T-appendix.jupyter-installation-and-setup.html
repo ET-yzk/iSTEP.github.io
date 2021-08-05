@@ -197,7 +197,7 @@
 
 <p>这会在 <code>~/.jupyter/</code> 目录下生成一个 <code>jupyter_notebook_config.py</code> 文件。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.jupyter</span><br><span class="line">code jupyter_notebook_config.py</span><br></pre></td></tr></table></figure>
-<p>上面的 code 命令，需要你已经安装 Visual Studio Code，并且在已经在其中设置了 <code>Install &#39;code&#39; command in PATH</code>。参见附录 <a href="T-appendix.editor.vscode.md">Visual Studio Code 的安装与配置</a></p>
+<p>上面的 code 命令，需要你已经安装 Visual Studio Code，并且在已经在其中设置了 <code>Install &#39;code&#39; command in PATH</code>。参见附录 <a href="T-appendix.editor.vscode">Visual Studio Code 的安装与配置</a></p>
 <p>事实上，你可以用你喜欢的任何编辑器打开 <code>~/.jupyter/jupyter_notebook_config.py</code> 文件。</p>
 <p>文件内容很长，有空可以仔细看。可以直接将以下内容拷贝粘贴到文件底部，根据需求修改：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#c.NotebookApp.token = &#x27;&#x27;</span><br><span class="line">#c.NotebookApp.open_browser = False</span><br><span class="line">#c.NotebookApp.notebook_dir = &#x27;~/&#x27;</span><br><span class="line">#c.NotebookApp.default_url = &#x27;/tree&#x27;</span><br></pre></td></tr></table></figure>
