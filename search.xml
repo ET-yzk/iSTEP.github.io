@@ -680,29 +680,24 @@
       </categories>
   </entry>
   <entry>
-    <title>Speed test: `exists()` vs. `get() + try/except</title>
-    <url>/iSTEP.github.io/2021/08/07/Speed-test-exists-vs-get-try-except/</url>
-    <content><![CDATA[<blockquote>
-<p>From <a class="link"   href="https://try2explore.com/questions/11203372" >Try2Explore.com<i class="fas fa-external-link-alt"></i></a> by <a class="link"   href="https://stackoverflow.com/users/2208811" >Abraham<i class="fas fa-external-link-alt"></i></a></p>
-</blockquote>
-<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>I’m writing tests for a django application and I want to check if an object has been saved to the database. Which is the most efficient/correct way to do it?</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">User.objects.<span class="built_in">filter</span>(username=testusername).exists()</span><br></pre></td></tr></table></figure>
+    <title>Hello World</title>
+    <url>/iSTEP.github.io/2021/08/01/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo<i class="fas fa-external-link-alt"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation<i class="fas fa-external-link-alt"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting<i class="fas fa-external-link-alt"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub<i class="fas fa-external-link-alt"></i></a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p>or</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    User.objects.get(username=testusername)</span><br><span class="line"><span class="keyword">except</span> User.DoesNotExist:</span><br></pre></td></tr></table></figure>
+<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>解决方案</p>
-<h2 id="Speed-test-exists-vs-get-try-except"><a href="#Speed-test-exists-vs-get-try-except" class="headerlink" title="Speed test: exists() vs get() + try/except"></a>Speed test: exists() vs get() + try/except</h2><p>Test functions in <strong>test.py</strong>:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> testapp.models <span class="keyword">import</span> User</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exists</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> User.objects.<span class="built_in">filter</span>(pk=x).exists()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        User.objects.get(pk=x)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">except</span> User.DoesNotExist:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<p>Using <strong>timeit</strong> in shell:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">from</span> testapp <span class="keyword">import</span> test</span><br><span class="line">In [<span class="number">2</span>]: %timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>): test.exists(x)</span><br><span class="line"><span class="number">10</span> loops, best of <span class="number">3</span>: <span class="number">88.4</span> ms per loop</span><br><span class="line">In [<span class="number">3</span>]: %timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>): test.get(x)</span><br><span class="line"><span class="number">10</span> loops, best of <span class="number">3</span>: <span class="number">105</span> ms per loop</span><br><span class="line">In [<span class="number">4</span>]: timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>): test.exists(x)</span><br><span class="line"><span class="number">1</span> loops, best of <span class="number">3</span>: <span class="number">880</span> ms per loop</span><br><span class="line">In [<span class="number">5</span>]: timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>): test.get(x)</span><br><span class="line"><span class="number">1</span> loops, best of <span class="number">3</span>: <span class="number">1.02</span> s per loop</span><br></pre></td></tr></table></figure>
+<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p><strong>Conclusion</strong>: exists() is <strong>over 10% faster</strong> for checking if an object has been saved in the database.</p>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>这仅仅是在单单判断某数据是否存在时的情况下，使用 <code>exists() </code>更好，而<code>get() + try/except</code>有更广的应用场景。</p>
+<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment<i class="fas fa-external-link-alt"></i></a></p>
 ]]></content>
       <tags>
-        <tag>Django</tag>
+        <tag>tips</tag>
       </tags>
   </entry>
   <entry>
@@ -929,24 +924,29 @@ docker
 ]]></content>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/iSTEP.github.io/2021/08/01/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo<i class="fas fa-external-link-alt"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation<i class="fas fa-external-link-alt"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting<i class="fas fa-external-link-alt"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub<i class="fas fa-external-link-alt"></i></a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+    <title>Speed test: `exists()` vs. `get() + try/except</title>
+    <url>/iSTEP.github.io/2021/08/07/Speed-test-exists-vs-get-try-except/</url>
+    <content><![CDATA[<blockquote>
+<p>From <a class="link"   href="https://try2explore.com/questions/11203372" >Try2Explore.com<i class="fas fa-external-link-alt"></i></a> by <a class="link"   href="https://stackoverflow.com/users/2208811" >Abraham<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>I’m writing tests for a django application and I want to check if an object has been saved to the database. Which is the most efficient/correct way to do it?</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">User.objects.<span class="built_in">filter</span>(username=testusername).exists()</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    User.objects.get(username=testusername)</span><br><span class="line"><span class="keyword">except</span> User.DoesNotExist:</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>解决方案</p>
+<h2 id="Speed-test-exists-vs-get-try-except"><a href="#Speed-test-exists-vs-get-try-except" class="headerlink" title="Speed test: exists() vs get() + try/except"></a>Speed test: exists() vs get() + try/except</h2><p>Test functions in <strong>test.py</strong>:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> testapp.models <span class="keyword">import</span> User</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exists</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> User.objects.<span class="built_in">filter</span>(pk=x).exists()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        User.objects.get(pk=x)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">except</span> User.DoesNotExist:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>Using <strong>timeit</strong> in shell:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">from</span> testapp <span class="keyword">import</span> test</span><br><span class="line">In [<span class="number">2</span>]: %timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>): test.exists(x)</span><br><span class="line"><span class="number">10</span> loops, best of <span class="number">3</span>: <span class="number">88.4</span> ms per loop</span><br><span class="line">In [<span class="number">3</span>]: %timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>): test.get(x)</span><br><span class="line"><span class="number">10</span> loops, best of <span class="number">3</span>: <span class="number">105</span> ms per loop</span><br><span class="line">In [<span class="number">4</span>]: timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>): test.exists(x)</span><br><span class="line"><span class="number">1</span> loops, best of <span class="number">3</span>: <span class="number">880</span> ms per loop</span><br><span class="line">In [<span class="number">5</span>]: timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>): test.get(x)</span><br><span class="line"><span class="number">1</span> loops, best of <span class="number">3</span>: <span class="number">1.02</span> s per loop</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>Conclusion</strong>: exists() is <strong>over 10% faster</strong> for checking if an object has been saved in the database.</p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>这仅仅是在单单判断某数据是否存在时的情况下，使用 <code>exists() </code>更好，而<code>get() + try/except</code>有更广的应用场景。</p>
 ]]></content>
       <tags>
-        <tag>tips</tag>
+        <tag>Django</tag>
       </tags>
   </entry>
   <entry>
