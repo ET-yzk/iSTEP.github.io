@@ -9,7 +9,7 @@
     
     <title>
         
-            归档: 2021/8 |
+            Speed test: `exists()` vs. `get() + try/except |
         
         iSTEP&#39;s Blog
     </title>
@@ -89,7 +89,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class="active"
+                            <a class=""
                                href="/iSTEP.github.io/archives"
                             >
                                 归档
@@ -141,7 +141,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class="active"
+                    <a class=""
                        href="/iSTEP.github.io/archives">归档</a>
                 </li>
             
@@ -166,101 +166,175 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="archive-container ">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Speed test: `exists()` vs. `get() + try/except</span>
+        </div>
+
         
-<div class="archive-list-container">
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/iSTEP.github.io/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">iSTEP</span>
+                        
+                            <span class="author-label">Lv2</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2021-08-07 21:54:53
+    </span>
     
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2021</span>
-                <span class="archive-year-post-count">[11]</span>
-            </div>
-            <ul class="article-list">
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
                 
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/iSTEP.github.io/2021/08/07/Speed-test-exists-vs-get-try-except/"
-                        >Speed test: `exists()` vs. `get() + try/except</a>
-                        <span class="article-date">08-07</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/iSTEP.github.io/2021/08/04/Python/"
-                        >Python @classmethod 与 @staticmethod</a>
-                        <span class="article-date">08-04</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/iSTEP.github.io/2021/08/01/%E6%8F%90%E9%97%AE%E7%9A%84%E6%99%BA%E6%85%A7/"
-                        >提问的智慧</a>
-                        <span class="article-date">08-01</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/iSTEP.github.io/2021/08/01/Environment/"
-                        >Environment</a>
-                        <span class="article-date">08-01</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/iSTEP.github.io/2021/08/01/Docker/"
-                        >Docker</a>
-                        <span class="article-date">08-01</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/iSTEP.github.io/2021/08/01/Issue/"
-                        >Issue</a>
-                        <span class="article-date">08-01</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/iSTEP.github.io/2021/08/01/PostgreSQL/"
-                        >PostgreSQL</a>
-                        <span class="article-date">08-01</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/iSTEP.github.io/2021/08/01/Redis/"
-                        >Redis</a>
-                        <span class="article-date">08-01</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/iSTEP.github.io/2021/08/01/Django-session/"
-                        >Django-session</a>
-                        <span class="article-date">08-01</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/iSTEP.github.io/2021/08/01/iSTEP/"
-                        >iSTEP</a>
-                        <span class="article-date">08-01</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/iSTEP.github.io/2021/08/01/hello-world/"
-                        >Hello World</a>
-                        <span class="article-date">08-01</span>
+                    <li>
+                        <a href="/iSTEP.github.io/tags/Django/">Django</a>&nbsp;
                     </li>
                 
             </ul>
-        </section>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>208 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>1 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
     
 </div>
 
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <blockquote>
+<p>From <a class="link"   target="_blank" rel="noopener" href="https://try2explore.com/questions/11203372" >Try2Explore.com<i class="fas fa-external-link-alt"></i></a> by <a class="link"   target="_blank" rel="noopener" href="https://stackoverflow.com/users/2208811" >Abraham<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>I’m writing tests for a django application and I want to check if an object has been saved to the database. Which is the most efficient/correct way to do it?</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">User.objects.<span class="built_in">filter</span>(username=testusername).exists()</span><br></pre></td></tr></table></figure>
+
+<p>or</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    User.objects.get(username=testusername)</span><br><span class="line"><span class="keyword">except</span> User.DoesNotExist:</span><br></pre></td></tr></table></figure>
+
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a><strong>解决方案</strong></h2><p><strong>Speed test: exists() vs. get() + try/except</strong></p>
+<p>Test functions in <strong>test.py</strong>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> testapp.models <span class="keyword">import</span> User</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exists</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> User.objects.<span class="built_in">filter</span>(pk=x).exists()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        User.objects.get(pk=x)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">except</span> User.DoesNotExist:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>Using <strong>timeit</strong> in shell:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">from</span> testapp <span class="keyword">import</span> test</span><br><span class="line">In [<span class="number">2</span>]: %timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>): test.exists(x)</span><br><span class="line"><span class="number">10</span> loops, best of <span class="number">3</span>: <span class="number">88.4</span> ms per loop</span><br><span class="line">In [<span class="number">3</span>]: %timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>): test.get(x)</span><br><span class="line"><span class="number">10</span> loops, best of <span class="number">3</span>: <span class="number">105</span> ms per loop</span><br><span class="line">In [<span class="number">4</span>]: timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>): test.exists(x)</span><br><span class="line"><span class="number">1</span> loops, best of <span class="number">3</span>: <span class="number">880</span> ms per loop</span><br><span class="line">In [<span class="number">5</span>]: timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>): test.get(x)</span><br><span class="line"><span class="number">1</span> loops, best of <span class="number">3</span>: <span class="number">1.02</span> s per loop</span><br></pre></td></tr></table></figure>
+
+<p><strong>Conclusion</strong>: exists() is <strong>over 10% faster</strong> for checking if an object has been saved in the database.</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：Speed test: `exists()` vs. `get() + try/except</li>
+        <li>本文作者：iSTEP</li>
+        <li>创建时间：2021-08-07 21:54:53</li>
+        <li>
+            本文链接：https://istep.github.io/2021/08/07/Speed-test-exists-vs-get-try-except/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/iSTEP.github.io/2021/08/04/Python/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Python @classmethod 与 @staticmethod</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+    <div class="twikoo-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/twikoo@1.0.0/dist/twikoo.all.min.js"
+        ></script>
+        <div id="twikoo-comment"></div>
+        <script data-pjax>
+            function loadTwikoo() {
+                twikoo.init({
+                    el: '#twikoo-comment',
+                    envId: 'hello-cloudbase-6gszkpzn777e377d',
+                    region: '',
+                });
+            }
+
+            if ('true') {
+                const loadTwikooTimeout = setTimeout(() => {
+                    loadTwikoo();
+                    clearTimeout(loadTwikooTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadTwikoo);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
     </div>
 </div>
+
 
                 
             </div>
@@ -294,6 +368,27 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -349,6 +444,14 @@
 
     </div>
 
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">解决方案</span></a></li></ol>
+    </div>
+</div>
+        </aside>
     
 
     <div class="image-viewer-container">
@@ -406,6 +509,8 @@
 
 
 <div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/toc.js"></script>
     
 </div>
 
