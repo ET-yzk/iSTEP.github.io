@@ -275,58 +275,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Python @classmethod 与 @staticmethod</title>
-    <url>/iSTEP.github.io/2021/08/04/Python/</url>
-    <content><![CDATA[<h2 id="classmethod"><a href="#classmethod" class="headerlink" title="@classmethod"></a>@classmethod</h2><p><strong>转载自</strong> <a class="link"   href="http://30daydo.com/article/89" >python @classmethod 的使用场合<i class="fas fa-external-link-alt"></i></a></p>
-<p>这里解释的不错。 至于staticmethod用法和classmethod在继承的时候有点区别。</p>
-<p>官方的说法：</p>
-<p><em><strong>classmethod(function)</strong></em></p>
-<ul>
-<li><p>是用来指定一个类的方法为类方法，没有此参数指定的类的方法为实例方法，使用方法如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">cls, arg1, arg2, ...</span>):</span> ...</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>看后之后真是一头雾水。说的啥子东西呢？？？</p>
-<p>自己到国外的论坛看其他的例子和解释，顿时就很明朗。 下面自己用例子来说明。</p>
-<p>看下面的定义的一个时间类：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data_test</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    day=<span class="number">0</span></span><br><span class="line">    month=<span class="number">0</span></span><br><span class="line">    year=<span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,year=<span class="number">0</span>,month=<span class="number">0</span>,day=<span class="number">0</span></span>):</span></span><br><span class="line">        self.day=day</span><br><span class="line">        self.month=month</span><br><span class="line">        self.year=year</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">out_date</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;year :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.year</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;month :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.month</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;day :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.day</span><br><span class="line"></span><br><span class="line">t=Data_test(<span class="number">2016</span>,<span class="number">8</span>,<span class="number">1</span>)</span><br><span class="line">t.out_date()</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">year :</span><br><span class="line">2016</span><br><span class="line">month :</span><br><span class="line">8</span><br><span class="line">day :</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
-
-<p>符合期望。</p>
-<p>如果用户输入的是 “2016-8-1” 这样的字符格式，那么就需要调用Date_test 类前做一下处理：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string_date=<span class="string">&#x27;2016-8-1&#x27;</span></span><br><span class="line">year,month,day=<span class="built_in">map</span>(<span class="built_in">int</span>,string_date.split(<span class="string">&#x27;-&#x27;</span>))</span><br><span class="line">s=Data_test(year,month,day)</span><br></pre></td></tr></table></figure>
-
-<p>先把‘2016-8-1’ 分解成 year，month，day 三个变量，然后转成int，再调用Date_test(year,month,day)函数。 也很符合期望。</p>
-<p>那我可不可以把这个字符串处理的函数放到 Date_test 类当中呢？</p>
-<p>那么@classmethod 就开始出场了</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data_test2</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    day=<span class="number">0</span></span><br><span class="line">    month=<span class="number">0</span></span><br><span class="line">    year=<span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,year=<span class="number">0</span>,month=<span class="number">0</span>,day=<span class="number">0</span></span>):</span></span><br><span class="line">        self.day=day</span><br><span class="line">        self.month=month</span><br><span class="line">        self.year=year</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_date</span>(<span class="params">cls,string_date</span>):</span></span><br><span class="line">        <span class="comment">#这里第一个参数是cls， 表示调用当前的类名</span></span><br><span class="line">        year,month,day=<span class="built_in">map</span>(<span class="built_in">int</span>,string_date.split(<span class="string">&#x27;-&#x27;</span>))</span><br><span class="line">        date1=cls(year,month,day)</span><br><span class="line">        <span class="comment">#返回的是一个初始化后的类</span></span><br><span class="line">        <span class="keyword">return</span> date1</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">out_date</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;year :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.year</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;month :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.month</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;day :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.day</span><br></pre></td></tr></table></figure>
-
-<p>在Date_test类里面创建一个成员函数， 前面用了@classmethod装饰。 它的作用就是有点像静态类，比静态类不一样的就是它可以传进来一个当前类作为第一个参数。</p>
-<p>那么如何调用呢？</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">r=Data_test2.get_date(<span class="string">&quot;2016-8-6&quot;</span>)</span><br><span class="line">r.out_date()</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">year :</span><br><span class="line">2016</span><br><span class="line">month :</span><br><span class="line">8</span><br><span class="line">day :</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
-
-<p>这样子等于先调用get_date（）对字符串进行出来，然后才使用Data_test的构造函数初始化。</p>
-<p>这样的好处就是你以后重构类的时候不必要修改构造函数，只需要额外添加你要处理的函数，然后使用装饰符 @classmethod 就可以了。</p>
-<p>示例：【***@classmethod*** 与 <em><strong>@staticmethod</strong></em>】</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Kls</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, data</span>):</span></span><br><span class="line">        self.data = data</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">printd</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(self.data)</span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">smethod</span>(<span class="params">*arg</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Static:&#x27;</span>, arg)</span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cmethod</span>(<span class="params">*arg</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Class:&#x27;</span>, arg)</span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ik = Kls(<span class="number">23</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ik.printd()</span><br><span class="line"><span class="number">23</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ik.smethod()</span><br><span class="line">Static: ()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ik.cmethod()</span><br><span class="line">Class: (&lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">__main__</span>.<span class="title">Kls</span>&#x27;&gt;,)</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">Kls</span>.<span class="title">printd</span>()</span></span><br><span class="line"><span class="class"><span class="title">TypeError</span>:</span> unbound method printd() must be called <span class="keyword">with</span> Kls instance <span class="keyword">as</span> first argument (got nothing instead)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Kls.smethod()</span><br><span class="line">Static: ()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Kls.cmethod()</span><br><span class="line">Class: (&lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">__main__</span>.<span class="title">Kls</span>&#x27;&gt;,)</span></span><br></pre></td></tr></table></figure>
-
-<p>图示：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/8a82a7f295c855c39b0d21f5bb1352c2_1440w.jpg"
-                      alt="img"
-                ></p>
-]]></content>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>PostgreSQL</title>
     <url>/iSTEP.github.io/2021/08/01/PostgreSQL/</url>
     <content><![CDATA[<h5 id="发展历史"><a href="#发展历史" class="headerlink" title="发展历史"></a>发展历史</h5><p>现在称为 PostgreSQL 的对象关系数据库管理系统源自加州大学伯克利分校的 POSTGRES 项目，经过二十多年的发展，现已成为最先进的开源数据库。其发展经历了三个阶段：The Berkeley POSTGRES Project、Postgres95 和 PostgreSQL。</p>
@@ -462,6 +410,58 @@
       <categories>
         <category>DB</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Python @classmethod 与 @staticmethod</title>
+    <url>/iSTEP.github.io/2021/08/04/Python/</url>
+    <content><![CDATA[<h2 id="classmethod"><a href="#classmethod" class="headerlink" title="@classmethod"></a>@classmethod</h2><p><strong>转载自</strong> <a class="link"   href="http://30daydo.com/article/89" >python @classmethod 的使用场合<i class="fas fa-external-link-alt"></i></a></p>
+<p>这里解释的不错。 至于staticmethod用法和classmethod在继承的时候有点区别。</p>
+<p>官方的说法：</p>
+<p><em><strong>classmethod(function)</strong></em></p>
+<ul>
+<li><p>是用来指定一个类的方法为类方法，没有此参数指定的类的方法为实例方法，使用方法如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">cls, arg1, arg2, ...</span>):</span> ...</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>看后之后真是一头雾水。说的啥子东西呢？？？</p>
+<p>自己到国外的论坛看其他的例子和解释，顿时就很明朗。 下面自己用例子来说明。</p>
+<p>看下面的定义的一个时间类：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data_test</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    day=<span class="number">0</span></span><br><span class="line">    month=<span class="number">0</span></span><br><span class="line">    year=<span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,year=<span class="number">0</span>,month=<span class="number">0</span>,day=<span class="number">0</span></span>):</span></span><br><span class="line">        self.day=day</span><br><span class="line">        self.month=month</span><br><span class="line">        self.year=year</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">out_date</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;year :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.year</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;month :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.month</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;day :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.day</span><br><span class="line"></span><br><span class="line">t=Data_test(<span class="number">2016</span>,<span class="number">8</span>,<span class="number">1</span>)</span><br><span class="line">t.out_date()</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">year :</span><br><span class="line">2016</span><br><span class="line">month :</span><br><span class="line">8</span><br><span class="line">day :</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<p>符合期望。</p>
+<p>如果用户输入的是 “2016-8-1” 这样的字符格式，那么就需要调用Date_test 类前做一下处理：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string_date=<span class="string">&#x27;2016-8-1&#x27;</span></span><br><span class="line">year,month,day=<span class="built_in">map</span>(<span class="built_in">int</span>,string_date.split(<span class="string">&#x27;-&#x27;</span>))</span><br><span class="line">s=Data_test(year,month,day)</span><br></pre></td></tr></table></figure>
+
+<p>先把‘2016-8-1’ 分解成 year，month，day 三个变量，然后转成int，再调用Date_test(year,month,day)函数。 也很符合期望。</p>
+<p>那我可不可以把这个字符串处理的函数放到 Date_test 类当中呢？</p>
+<p>那么@classmethod 就开始出场了</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data_test2</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    day=<span class="number">0</span></span><br><span class="line">    month=<span class="number">0</span></span><br><span class="line">    year=<span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,year=<span class="number">0</span>,month=<span class="number">0</span>,day=<span class="number">0</span></span>):</span></span><br><span class="line">        self.day=day</span><br><span class="line">        self.month=month</span><br><span class="line">        self.year=year</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_date</span>(<span class="params">cls,string_date</span>):</span></span><br><span class="line">        <span class="comment">#这里第一个参数是cls， 表示调用当前的类名</span></span><br><span class="line">        year,month,day=<span class="built_in">map</span>(<span class="built_in">int</span>,string_date.split(<span class="string">&#x27;-&#x27;</span>))</span><br><span class="line">        date1=cls(year,month,day)</span><br><span class="line">        <span class="comment">#返回的是一个初始化后的类</span></span><br><span class="line">        <span class="keyword">return</span> date1</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">out_date</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;year :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.year</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;month :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.month</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;day :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.day</span><br></pre></td></tr></table></figure>
+
+<p>在Date_test类里面创建一个成员函数， 前面用了@classmethod装饰。 它的作用就是有点像静态类，比静态类不一样的就是它可以传进来一个当前类作为第一个参数。</p>
+<p>那么如何调用呢？</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">r=Data_test2.get_date(<span class="string">&quot;2016-8-6&quot;</span>)</span><br><span class="line">r.out_date()</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">year :</span><br><span class="line">2016</span><br><span class="line">month :</span><br><span class="line">8</span><br><span class="line">day :</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<p>这样子等于先调用get_date（）对字符串进行出来，然后才使用Data_test的构造函数初始化。</p>
+<p>这样的好处就是你以后重构类的时候不必要修改构造函数，只需要额外添加你要处理的函数，然后使用装饰符 @classmethod 就可以了。</p>
+<p>示例：【***@classmethod*** 与 <em><strong>@staticmethod</strong></em>】</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Kls</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, data</span>):</span></span><br><span class="line">        self.data = data</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">printd</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(self.data)</span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">smethod</span>(<span class="params">*arg</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Static:&#x27;</span>, arg)</span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cmethod</span>(<span class="params">*arg</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Class:&#x27;</span>, arg)</span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ik = Kls(<span class="number">23</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ik.printd()</span><br><span class="line"><span class="number">23</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ik.smethod()</span><br><span class="line">Static: ()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ik.cmethod()</span><br><span class="line">Class: (&lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">__main__</span>.<span class="title">Kls</span>&#x27;&gt;,)</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">Kls</span>.<span class="title">printd</span>()</span></span><br><span class="line"><span class="class"><span class="title">TypeError</span>:</span> unbound method printd() must be called <span class="keyword">with</span> Kls instance <span class="keyword">as</span> first argument (got nothing instead)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Kls.smethod()</span><br><span class="line">Static: ()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Kls.cmethod()</span><br><span class="line">Class: (&lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">__main__</span>.<span class="title">Kls</span>&#x27;&gt;,)</span></span><br></pre></td></tr></table></figure>
+
+<p>图示：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/8a82a7f295c855c39b0d21f5bb1352c2_1440w.jpg"
+                      alt="img"
+                ></p>
+]]></content>
+      <tags>
+        <tag>python</tag>
+      </tags>
   </entry>
   <entry>
     <title>Redis</title>
@@ -691,14 +691,15 @@
 <p>or</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    User.objects.get(username=testusername)</span><br><span class="line"><span class="keyword">except</span> User.DoesNotExist:</span><br></pre></td></tr></table></figure>
 
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a><strong>解决方案</strong></h2><p><strong>Speed test: exists() vs. get() + try/except</strong></p>
-<p>Test functions in <strong>test.py</strong>:</p>
+<p>解决方案</p>
+<h2 id="Speed-test-exists-vs-get-try-except"><a href="#Speed-test-exists-vs-get-try-except" class="headerlink" title="Speed test: exists() vs get() + try/except"></a>Speed test: exists() vs get() + try/except</h2><p>Test functions in <strong>test.py</strong>:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> testapp.models <span class="keyword">import</span> User</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exists</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> User.objects.<span class="built_in">filter</span>(pk=x).exists()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        User.objects.get(pk=x)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">except</span> User.DoesNotExist:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
 
 <p>Using <strong>timeit</strong> in shell:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">from</span> testapp <span class="keyword">import</span> test</span><br><span class="line">In [<span class="number">2</span>]: %timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>): test.exists(x)</span><br><span class="line"><span class="number">10</span> loops, best of <span class="number">3</span>: <span class="number">88.4</span> ms per loop</span><br><span class="line">In [<span class="number">3</span>]: %timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>): test.get(x)</span><br><span class="line"><span class="number">10</span> loops, best of <span class="number">3</span>: <span class="number">105</span> ms per loop</span><br><span class="line">In [<span class="number">4</span>]: timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>): test.exists(x)</span><br><span class="line"><span class="number">1</span> loops, best of <span class="number">3</span>: <span class="number">880</span> ms per loop</span><br><span class="line">In [<span class="number">5</span>]: timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>): test.get(x)</span><br><span class="line"><span class="number">1</span> loops, best of <span class="number">3</span>: <span class="number">1.02</span> s per loop</span><br></pre></td></tr></table></figure>
 
 <p><strong>Conclusion</strong>: exists() is <strong>over 10% faster</strong> for checking if an object has been saved in the database.</p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>这仅仅是在单单判断某数据是否存在时的情况下，使用 <code>exists() </code>更好，而<code>get() + try/except</code>有更广的应用场景。</p>
 ]]></content>
       <tags>
         <tag>Django</tag>

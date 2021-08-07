@@ -206,7 +206,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>208 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>247 字</span>
         </span>
     
     
@@ -236,14 +236,15 @@
 <p>or</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    User.objects.get(username=testusername)</span><br><span class="line"><span class="keyword">except</span> User.DoesNotExist:</span><br></pre></td></tr></table></figure>
 
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a><strong>解决方案</strong></h2><p><strong>Speed test: exists() vs. get() + try/except</strong></p>
-<p>Test functions in <strong>test.py</strong>:</p>
+<p>解决方案</p>
+<h2 id="Speed-test-exists-vs-get-try-except"><a href="#Speed-test-exists-vs-get-try-except" class="headerlink" title="Speed test: exists() vs get() + try/except"></a>Speed test: exists() vs get() + try/except</h2><p>Test functions in <strong>test.py</strong>:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> testapp.models <span class="keyword">import</span> User</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exists</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> User.objects.<span class="built_in">filter</span>(pk=x).exists()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        User.objects.get(pk=x)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">except</span> User.DoesNotExist:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
 
 <p>Using <strong>timeit</strong> in shell:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">from</span> testapp <span class="keyword">import</span> test</span><br><span class="line">In [<span class="number">2</span>]: %timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>): test.exists(x)</span><br><span class="line"><span class="number">10</span> loops, best of <span class="number">3</span>: <span class="number">88.4</span> ms per loop</span><br><span class="line">In [<span class="number">3</span>]: %timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>): test.get(x)</span><br><span class="line"><span class="number">10</span> loops, best of <span class="number">3</span>: <span class="number">105</span> ms per loop</span><br><span class="line">In [<span class="number">4</span>]: timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>): test.exists(x)</span><br><span class="line"><span class="number">1</span> loops, best of <span class="number">3</span>: <span class="number">880</span> ms per loop</span><br><span class="line">In [<span class="number">5</span>]: timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>): test.get(x)</span><br><span class="line"><span class="number">1</span> loops, best of <span class="number">3</span>: <span class="number">1.02</span> s per loop</span><br></pre></td></tr></table></figure>
 
 <p><strong>Conclusion</strong>: exists() is <strong>over 10% faster</strong> for checking if an object has been saved in the database.</p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>这仅仅是在单单判断某数据是否存在时的情况下，使用 <code>exists() </code>更好，而<code>get() + try/except</code>有更广的应用场景。</p>
 
         </div>
 
@@ -448,7 +449,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">解决方案</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Speed-test-exists-vs-get-try-except"><span class="nav-text">Speed test: exists() vs get() + try&#x2F;except</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-text">说明</span></a></li></ol>
     </div>
 </div>
         </aside>
