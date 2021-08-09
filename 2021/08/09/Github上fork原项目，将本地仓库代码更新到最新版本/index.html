@@ -9,7 +9,7 @@
     
     <title>
         
-            Speed test: `exists()` vs. `get() + try/except |
+            Github上fork原项目，将本地仓库代码更新到最新版本 |
         
         iSTEP&#39;s Blog
     </title>
@@ -169,7 +169,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Speed test: `exists()` vs. `get() + try/except</span>
+            <span class="title-hover-animation">Github上fork原项目，将本地仓库代码更新到最新版本</span>
         </div>
 
         
@@ -187,7 +187,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-08-07 21:54:53
+        <i class="fas fa-edit"></i>&nbsp;2021-08-09 15:17:47
     </span>
     
     
@@ -196,7 +196,7 @@
             <ul>
                 
                     <li>
-                        <a href="/iSTEP.github.io/tags/Django/">Django</a>&nbsp;
+                        <a href="/iSTEP.github.io/tags/Git/">Git</a>&nbsp;
                     </li>
                 
             </ul>
@@ -206,7 +206,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>265 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>411 字</span>
         </span>
     
     
@@ -228,24 +228,82 @@
 
         <div class="article-content markdown-body">
             <blockquote>
-<p>From <a class="link"   target="_blank" rel="noopener" href="https://try2explore.com/questions/11203372" >Try2Explore.com<i class="fas fa-external-link-alt"></i></a> by <a class="link"   target="_blank" rel="noopener" href="https://stackoverflow.com/users/2208811" >Abraham<i class="fas fa-external-link-alt"></i></a></p>
+<p>方法一仅适用于 <code>fork的项目</code></p>
+<p>方法二可适用于 <code>未重置原项目 .git 的项目</code> </p>
 </blockquote>
-<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>I’m writing tests for a django application and I want to check if an object has been saved to the database. Which is the most efficient/correct way to do it?</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">User.objects.<span class="built_in">filter</span>(username=testusername).exists()</span><br></pre></td></tr></table></figure>
+<h2 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h2><p>在Github上fork原项目，项目组成员发起pull request提交了代码，这时自己在本地仓库该如何更新到最新代码？</p>
+<h2 id="操作方法如下："><a href="#操作方法如下：" class="headerlink" title="操作方法如下："></a>操作方法如下：</h2><h3 id="方法一、从github上进行操作然后更新"><a href="#方法一、从github上进行操作然后更新" class="headerlink" title="方法一、从github上进行操作然后更新"></a>方法一、从github上进行操作然后更新</h3><p>登录自己的github账号，在fork的项目内点击“New pull request”：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/new%20pull%20request"
+                      alt="img"
+                ></p>
+<p>将base fork改成自己github上fork后的项目，head fork改成原项目，如果base fork选择了自己fork完的项目后变成两个都是master，可以点一下“compare across forks” </p>
+<p> <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/compare%20across%20forks"
+                      alt="img"
+                ></p>
+<p> 点击“Create pull request”进入页面，填写信息后提交</p>
+<p>点击“Merge pull request”合入代码</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/merge%20pull%20request"
+                      alt="img"
+                ></p>
+<p>这时候回到自己github账号下fork的项目code下看commits可以看到原项目新提交的内容都已经合过来了</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/fork%20commit"
+                      alt="img"
+                ></p>
+<p>这时候在本地执行”git pull”就可以更新到最新的代码了</p>
+<h3 id="方法二、通过命令行fetch拉取原仓库更新"><a href="#方法二、通过命令行fetch拉取原仓库更新" class="headerlink" title="方法二、通过命令行fetch拉取原仓库更新"></a>方法二、通过命令行fetch拉取原仓库更新</h3><ol>
+<li>配置当前当前fork的仓库的原仓库地址</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add upstream &lt;原仓库github地址&gt;</span><br></pre></td></tr></table></figure>
 
-<p>or</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    User.objects.get(username=testusername)</span><br><span class="line"><span class="keyword">except</span> User.DoesNotExist:</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>查看当前仓库的远程仓库地址和原仓库地址</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
 
-<p>解决方案</p>
-<h2 id="Speed-test-exists-vs-get-try-except"><a href="#Speed-test-exists-vs-get-try-except" class="headerlink" title="Speed test: exists() vs get() + try/except"></a>Speed test: exists() vs get() + try/except</h2><p>Test functions in <strong>test.py</strong>:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> testapp.models <span class="keyword">import</span> User</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exists</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> User.objects.<span class="built_in">filter</span>(pk=x).exists()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        User.objects.get(pk=x)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">except</span> User.DoesNotExist:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/git%20remote%20-v"
+                      alt="img"
+                ></p>
+<ol start="3">
+<li>获取原仓库的更新。使用fetch更新，fetch后会被存储在一个本地分支upstream/master上。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch upstream</span><br></pre></td></tr></table></figure>
 
-<p>Using <strong>timeit</strong> in shell:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">from</span> testapp <span class="keyword">import</span> test</span><br><span class="line">In [<span class="number">2</span>]: %timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>): test.exists(x)</span><br><span class="line"><span class="number">10</span> loops, best of <span class="number">3</span>: <span class="number">88.4</span> ms per loop</span><br><span class="line">In [<span class="number">3</span>]: %timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>): test.get(x)</span><br><span class="line"><span class="number">10</span> loops, best of <span class="number">3</span>: <span class="number">105</span> ms per loop</span><br><span class="line">In [<span class="number">4</span>]: timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>): test.exists(x)</span><br><span class="line"><span class="number">1</span> loops, best of <span class="number">3</span>: <span class="number">880</span> ms per loop</span><br><span class="line">In [<span class="number">5</span>]: timeit <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>): test.get(x)</span><br><span class="line"><span class="number">1</span> loops, best of <span class="number">3</span>: <span class="number">1.02</span> s per loop</span><br></pre></td></tr></table></figure>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/git%20fetch%20upstream"
+                      alt="img"
+                ></p>
+<ol start="4">
+<li>合并到本地分支。切换到本地master分支，合并upstream/master分支。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge upstream/master</span><br></pre></td></tr></table></figure>
 
-<p><strong>Conclusion</strong>: exists() is <strong>over 10% faster</strong> for checking if an object has been saved in the database.</p>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>在只要求判断数据库是否存在某条数据的情况，使用 <code>exists()</code>有更高的效率。</p>
-<p>在需要获得实例并作检查等情况下，<code>get() + try/except</code>有着更广的应用场景。</p>
+<ol start="5">
+<li>这时候使用git log就能看到原仓库的更新了。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>如果需要自己Github上的fork的仓库需要保持同步更新，执行git push进行推送</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+
 
         </div>
 
@@ -253,11 +311,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：Speed test: `exists()` vs. `get() + try/except</li>
+        <li>本文标题：Github上fork原项目，将本地仓库代码更新到最新版本</li>
         <li>本文作者：iSTEP</li>
-        <li>创建时间：2021-08-07 21:54:53</li>
+        <li>创建时间：2021-08-09 15:17:47</li>
         <li>
-            本文链接：https://istep.github.io/2021/08/07/Speed-test-exists-vs-get-try-except/
+            本文链接：https://istep.github.io/2021/08/09/Github上fork原项目，将本地仓库代码更新到最新版本/
         </li>
         <li>
             版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -274,13 +332,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/iSTEP.github.io/2021/08/09/Github%E4%B8%8Afork%E5%8E%9F%E9%A1%B9%E7%9B%AE%EF%BC%8C%E5%B0%86%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%96%B0%E5%88%B0%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC/"
+                           href="/iSTEP.github.io/2021/08/09/vue-js%E9%A1%B5%E9%9D%A2%E5%88%B7%E6%96%B0%E5%8F%8A%E5%90%8E%E9%80%80%E5%8F%82%E6%95%B0%E4%B8%A2%E5%A4%B1/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Github上fork原项目，将本地仓库代码更新到最新版本</span>
+                                <span class="post-nav-title-item">vue.js页面刷新及后退参数丢失</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -290,10 +348,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/iSTEP.github.io/2021/08/04/Python/"
+                           href="/iSTEP.github.io/2021/08/07/Speed-test-exists-vs-get-try-except/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Python @classmethod 与 @staticmethod</span>
+                                <span class="post-nav-title-item">Speed test: `exists()` vs. `get() + try/except</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -465,7 +523,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Speed-test-exists-vs-get-try-except"><span class="nav-text">Speed test: exists() vs get() + try&#x2F;except</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-text">说明</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%EF%BC%9A"><span class="nav-text">场景：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="nav-text">操作方法如下：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%E3%80%81%E4%BB%8Egithub%E4%B8%8A%E8%BF%9B%E8%A1%8C%E6%93%8D%E4%BD%9C%E7%84%B6%E5%90%8E%E6%9B%B4%E6%96%B0"><span class="nav-text">方法一、从github上进行操作然后更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%E3%80%81%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%E8%A1%8Cfetch%E6%8B%89%E5%8F%96%E5%8E%9F%E4%BB%93%E5%BA%93%E6%9B%B4%E6%96%B0"><span class="nav-text">方法二、通过命令行fetch拉取原仓库更新</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
