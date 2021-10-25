@@ -82,148 +82,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Issue</title>
-    <url>/iSTEP.github.io/2021/08/01/Issue/</url>
-    <content><![CDATA[<h2 id="backend"><a href="#backend" class="headerlink" title="backend"></a>backend</h2><p><code>docker 可通过 【docker logs name --tail 行数】来查看服务的日志</code></p>
-<h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><h4 id="1-前端页面显示正常，登入用户时报-“server-error”"><a href="#1-前端页面显示正常，登入用户时报-“server-error”" class="headerlink" title="1. 前端页面显示正常，登入用户时报 “server error”"></a>1. 前端页面显示正常，登入用户时报 “server error”</h4><p><strong>错误分析</strong></p>
-<ul>
-<li>通过本地后端调试发现报错：MISCONF Redis is configured to save RDB snapshots, but is currently not able to persist on disk. Commands that may modify the data set are disabled. Please check Redis logs for details about the error.</li>
-<li>该错误表示Redis被配置为保存数据库快照，但它目前不能持久化到硬盘。用来修改集合数据的命令不能用。</li>
-<li>Redis因为强制重启或宿主机内存不足导致快照未能从内存完整保存至本地，最终造成持久化失败，Redis拒绝写入新数据。</li>
-<li>由于登入请求记录无法提交至Redis数据库，导致用户登入失败。</li>
-</ul>
-<p><strong>解决方案</strong></p>
-<ul>
-<li>bgsave: 进行当前数据的异步保存</li>
-<li>save: 进行当前数据的保存，会阻塞当前请求</li>
-<li>如果当前数据丢失，似乎会影响竞赛排名页的更新</li>
-</ul>
-<ol>
-<li><p>【<strong>推荐</strong>】在/etc/sysctl.conf 添加一项 ‘vm.overcommit_memory = 1’ ，然后运行命令’sysctl vm.overcommit_memory=1’（或者重启）使其生效。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">内存不足：简单说，Redis在保存数据到硬盘时为了避免主进程假死，需要Fork一份主进程，然后在Fork进程内完成数据保存到硬盘的操作，如果主进程使用了4GB的内存，Fork子进程的时候需要额外的4GB，此时内存就不够了，Fork失败，进而数据保存硬盘也失败了。</span><br><span class="line"></span><br><span class="line">而将vm.overcommit_memory改为1有什么作用呢，网上看到一个博客是如下解释：</span><br><span class="line"></span><br><span class="line">0 — 默认设置,当应用进程尝试申请内存时，内核会做一个检测。内核将检查是否有足够的可用内存供应用进程使用；如果有足够的可用内存，内存申请允许；否则，内存申请失败，并把错误返回给应用进程。举个例子，比如1G的机器，A进程已经使用了500M，当有另外进程尝试malloc 500M的内存时，内核就会进行check，发现超出剩余可用内存，就会提示失败。</span><br><span class="line"></span><br><span class="line">1 — 对于内存的申请请求，内核不会做任何check，直到物理内存用完，触发OOM杀用户态进程。同样是上面的例子，1G的机器，A进程500M，B进程尝试malloc 500M，会成功，但是一旦kernel发现内存使用率接近1个G(内核有策略)，就触发OOM，杀掉一些用户态的进程(有策略的杀)。</span><br><span class="line"></span><br><span class="line">2 — 当请求申请的内存 &gt;= SWAP内存大小 + 物理内存 * N，则拒绝此次内存申请。解释下这个N：N是一个百分比，根据overcommit_ratio/100来确定，比如overcommit_ratio=50，那么N就是50%。</span><br></pre></td></tr></table></figure></li>
-<li><p>【<strong>推荐与1一起使用</strong>】通过redis-cli连接Redis数据库，将stop-writes-on-bgsave-error设置为no，如下。该方法在  <strong>因内存不足时造成错误</strong>  无法从根源解决问题。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">config <span class="built_in">set</span> stop-writes-on-bgsave-error no</span><br></pre></td></tr></table></figure></li>
-<li><p>【<strong>不推荐</strong>】重启Redis可以临时解决，但很快就会再次报错。</p>
-</li>
-</ol>
-<h4 id="1-1-前端直接连不上后端，Redis设置config-set-stop-writes-on-bgsave-error-no临时解决"><a href="#1-1-前端直接连不上后端，Redis设置config-set-stop-writes-on-bgsave-error-no临时解决" class="headerlink" title="1.1 前端直接连不上后端，Redis设置config set stop-writes-on-bgsave-error no临时解决"></a>1.1 前端直接连不上后端，Redis设置config set stop-writes-on-bgsave-error no临时解决</h4><p>   <strong>Redis报错</strong> </p>
-<ul>
-<li>!! Failed opening the RDB file root (in server root dir <em><strong>/etc/crontabs</strong></em>) for saving: Permission denied</li>
-</ul>
-<p>   <strong>问题分析</strong></p>
-<p>   通过 <code>config get dir</code> 发现Redis的数据保存位置被篡改为 <code>/etc/crontabs</code> ，该位置为只读文件系统，Redis的操作为不安全操作，没有写入权限，导致保存失败。</p>
-<p>   <strong>解决方案</strong></p>
-<ol>
-<li><p>通过 <code>config set dir</code> 将目录改回原始存储路径即可解决。</p>
-</li>
-<li><p>为Redis设置密码</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">config <span class="keyword">get</span> requirepass  # 查看现有的redis密码</span><br><span class="line"></span><br><span class="line">config <span class="keyword">set</span> requirepass <span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span>  #（<span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span>为你要设置的密码）设置redis密码</span><br><span class="line"></span><br><span class="line">#  若出现(error) NOAUTH Authentication required.错误，说明已设置密码，使用 auth 密码 来认证密码</span><br></pre></td></tr></table></figure></li>
-<li><p>由于该 Redis 基于 docker 构建，重启后将恢复默认设置！！</p>
-<blockquote>
-<p>另  Django 的 app/oj/setting.py文件需做如下修改</p>
-</blockquote>
-<blockquote>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210728205741096.png"
-                      alt="image-20210728205741096" style="zoom:10%;" 
-                >！！该方法可以实现登入，但在提交问题时会出错</p>
-</blockquote>
-<blockquote>
-<p> 正确方法如下:</p>
-</blockquote>
-<blockquote>
-<p> <img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730141913322.png"
-                      style="zoom:50%;" 
-                >  oj/dev_settings.py: 用于调试环境的配置</p>
-</blockquote>
-<blockquote>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730142131016.png"
-                      alt="image-20210730142131016" style="zoom:50%;" 
-                >  oj/production_settings.py: 用于生产环境的配置</p>
-</blockquote>
-<blockquote>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730142655656.png"
-                      alt="image-20210730142655656" style="zoom:50%;" 
-                >  oj/settings.py: Django 配置 Redis</p>
-</blockquote>
-<blockquote>
-<p> <img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730143136700.png"
-                      alt="image-20210730143136700" style="zoom:50%;" 
-                >  docker-compose.yml: 在环境变量中添加 Redis 密码</p>
-</blockquote>
-<blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d  <span class="comment"># 使 docker-compose.yml 生效【Recreating Done 的 image 无需执行下步】</span></span><br><span class="line">docker restart istep-backend  <span class="comment"># 使修改的 .py 文件生效</span></span><br></pre></td></tr></table></figure></blockquote>
-</li>
-</ol>
-<p><em><strong>TODO</strong></em></p>
-<ol>
-<li>构建本地 redis.config 文件，使配置永久生效【数据存储位置挂载，设置密码】</li>
-<li>在构建容器时预设定 Redis 密码</li>
-</ol>
-<h4 id="2-警告：WARNING-you-have-Transparent-Huge-Pages-THP-support-enabled-in-your-kernel-This-will-create-latency-and-memory-usage-issues-with-Redis-To-fix-this-issue-run-the-command-‘echo-never-gt-sys-kernel-mm-transparent-hugepage-enabled’-as-root-and-add-it-to-your-etc-rc-local-in-order-to-retain-the-setting-after-a-reboot-Redis-must-be-restarted-after-THP-is-disabled"><a href="#2-警告：WARNING-you-have-Transparent-Huge-Pages-THP-support-enabled-in-your-kernel-This-will-create-latency-and-memory-usage-issues-with-Redis-To-fix-this-issue-run-the-command-‘echo-never-gt-sys-kernel-mm-transparent-hugepage-enabled’-as-root-and-add-it-to-your-etc-rc-local-in-order-to-retain-the-setting-after-a-reboot-Redis-must-be-restarted-after-THP-is-disabled" class="headerlink" title="2. 警告：WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command ‘echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled’ as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled."></a>2. 警告：WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command ‘echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled’ as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.</h4><p>说明：Redis建议我们关闭THP，以免造成相关问题</p>
-<p>解决警告中已给出</p>
-<hr>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="smtp-配置不成功"><a href="#smtp-配置不成功" class="headerlink" title="smtp 配置不成功"></a>smtp 配置不成功</h3><ul>
-<li>OnlineJudge 不支持 ssl，请使用 tls，比如 qq 邮箱是 smtp.qq.com / tls / port 25</li>
-<li>部分邮箱 smtp 密码不是登录密码，而是单独的授权密码</li>
-</ul>
-<h3 id="忘记用户密码"><a href="#忘记用户密码" class="headerlink" title="忘记用户密码"></a>忘记用户密码</h3><ul>
-<li>网页上找回密码</li>
-<li>后台用户管理重置</li>
-<li>超级管理员等密码也忘记，可以使用下面的命令</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker exec -it oj-backend /bin/sh</span><br><span class="line">python3 manage.py inituser --username USERNAME --password NEW_PASSWORD --action=reset</span><br></pre></td></tr></table></figure>
-
-<h3 id="CentOS-上部署遇到问题"><a href="#CentOS-上部署遇到问题" class="headerlink" title="CentOS 上部署遇到问题"></a>CentOS 上部署遇到问题</h3><ul>
-<li><p>检查 docker 版本是否太老</p>
-</li>
-<li><p>关闭 SELinux</p>
-</li>
-</ul>
-<h3 id="查看-Docker-容器运行状态"><a href="#查看-Docker-容器运行状态" class="headerlink" title="查看 Docker 容器运行状态"></a>查看 Docker 容器运行状态</h3><p>运行<code>docker ps -a</code>，可以看到以下输出。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CONTAINER ID        IMAGE                                                        COMMAND                  CREATED             STATUS                       PORTS                                         NAMES</span><br><span class="line">645070877c6c        registry.cn-hangzhou.aliyuncs.com/onlinejudge/oj_backend     <span class="string">&quot;/bin/sh -c &#x27;sh /app…&quot;</span>   About an hour ago   Up About an hour (healthy)             0.0.0.0:443-&gt;1443/tcp, 0.0.0.0:80-&gt;8000/tcp   oj-backend</span><br><span class="line">b6fc725b2417        registry.docker-cn.com/library/redis:4.0-alpine              <span class="string">&quot;docker-entrypoint.s…&quot;</span>   About an hour ago   Up About an hour             6379/tcp                                      oj-redis</span><br><span class="line">3402b59b96d3        registry.docker-cn.com/library/postgres:10-alpine            <span class="string">&quot;docker-entrypoint.s…&quot;</span>   About an hour ago   Up About an hour             5432/tcp                                      oj-postgres</span><br><span class="line">7c399af69344        registry.cn-hangzhou.aliyuncs.com/onlinejudge/judge_server   <span class="string">&quot;/bin/sh -c &#x27;/bin/ba…&quot;</span>   About an hour ago   Up About an hour (healthy)   8080/tcp                                      judge-server</span><br></pre></td></tr></table></figure>
-
-<p><code>NAMES</code>就是容器的名称，后面会经常用到。<code>STATUS</code>就是当前容器的运行状态，<code>Up xxx (healthy)</code>就是正常运行状态，<code>unhealthy</code>或<code>Exited (x) xxx</code>就是退出状态。</p>
-<p>注意下面使用 <code>&#123;CONTAINER_NAME&#125;</code> 的地方，都使用对应的名字替换，需要去除大括号。</p>
-<h3 id="进入正在运行的容器"><a href="#进入正在运行的容器" class="headerlink" title="进入正在运行的容器"></a>进入正在运行的容器</h3><p>然后运行<code>docker exec -it &#123;CONTAINER_NAME&#125; /bin/sh</code>，比如 <code>docker exec -it oj-backend /bin/sh</code>。</p>
-<h3 id="容器异常退出"><a href="#容器异常退出" class="headerlink" title="容器异常退出"></a>容器异常退出</h3><p>容器<code>STATUS</code>显示为<code>Exited(x) xxx</code>，运行<code>docker logs &#123;CONTAINER_NAME&#125;</code>，查看错误信息。</p>
-<h3 id="docker-compose-启动的时候报错-‘module’-object-has-on-attribute-‘connection’"><a href="#docker-compose-启动的时候报错-‘module’-object-has-on-attribute-‘connection’" class="headerlink" title="docker-compose 启动的时候报错 ‘module’ object has on attribute ‘connection’"></a>docker-compose 启动的时候报错 ‘module’ object has on attribute ‘connection’</h3><p>尝试运行 <code>pip install --upgrade pip &amp;&amp; pip install -U urllib3</code>，然后再重试看看。</p>
-<h3 id="Invalid-token"><a href="#Invalid-token" class="headerlink" title="Invalid token"></a>Invalid token</h3><p>请查看<code>docker-compose.yml</code>内的<code>JUDGE_SERVER_TOKEN</code>与<code>TOKEN</code>是否一致</p>
-<h3 id="80-或者-443-端口被占用导致-docker-无法启动"><a href="#80-或者-443-端口被占用导致-docker-无法启动" class="headerlink" title="80 或者 443 端口被占用导致 docker 无法启动"></a>80 或者 443 端口被占用导致 docker 无法启动</h3><p>错误信息 <code>bind 0.0.0.0:80 failed, port is already allocated</code></p>
-<p>修改 docker-compose 中 <code>ports</code> 相关的配置，比如 <code>0.0.0.0:80:8080</code> 可以修改为 <code>0.0.0.0:8020:8080</code>，冒号后面的端口号不会冲突请勿改动。</p>
-<h3 id="我的浏览器不显示数据或者显示异常"><a href="#我的浏览器不显示数据或者显示异常" class="headerlink" title="我的浏览器不显示数据或者显示异常"></a>我的浏览器不显示数据或者显示异常</h3><p>请使用 Chrome 或 Firefox 使用本OJ，如不能解决，请反馈问题。</p>
-<h3 id="如何解决-oj-上运行错误但是本地成功的问题"><a href="#如何解决-oj-上运行错误但是本地成功的问题" class="headerlink" title="如何解决 oj 上运行错误但是本地成功的问题"></a>如何解决 oj 上运行错误但是本地成功的问题</h3><ul>
-<li>90% 的可能性是代码的bug，本地没有触发，尤其是是本地没有完整测试数据和相同的运行环境的情况下。</li>
-<li>如果是 <code>Runtime Error</code>，可能是代码运行过程中 crash，如果提示 <code>signal=31</code>，可能是触发了禁止使用的系统调用。通过 <code>dmesg</code> 可以看到系统调用号。</li>
-<li>如果实在想看到代码运行结果，可以修改 <code>docker-compose.yml</code>，去除 <code>judger_debug=1</code> 的注释，然后 <code>docker-compose up -d</code>。重新提交之后，<code>docker exec -it judge-server bash</code> <code>cd /judger/run</code> 就可以看到很多文件夹了，可以找到自己的代码和运行结果。调试完请注释这一行并重新 <code>up -d</code>，否则每次的运行结果都会保留。</li>
-</ul>
-<h3 id="如何调整数据库参数"><a href="#如何调整数据库参数" class="headerlink" title="如何调整数据库参数"></a>如何调整数据库参数</h3><p>在以下情况下，需要考虑调整数据库参数</p>
-<ul>
-<li><p>机器配置较高，比如 CPU 超过 4 核或内存超过 4G</p>
-</li>
-<li><p>后端报错数据库连接数不够 <code>too many clients already</code></p>
-<p>请参考 <a class="link"   href="https://pgtune.leopard.in.ua/" >https://pgtune.leopard.in.ua<i class="fas fa-external-link-alt"></i></a> 选择 DB Version 10，Number of Connections 为 20 倍 CPU 核数，其他的参数按照实际情况填写。</p>
-<p>然后将右侧的参数更新到 <code>OnlineJudgeDeploy/OnlineJudgeDeploy/data/postgres/postgresql.conf</code> 文件中，注意原先配置部分是注释掉的，需要将开头的 <code>#</code> 删除，<code>docker-compose restart oj-postgres</code> 即可。</p>
-</li>
-</ul>
-<hr>
-]]></content>
-  </entry>
-  <entry>
     <title>Environment</title>
     <url>/iSTEP.github.io/2021/08/01/Environment/</url>
     <content><![CDATA[<h2 id="推荐环境"><a href="#推荐环境" class="headerlink" title="推荐环境"></a>推荐环境</h2><ul>
@@ -495,6 +353,200 @@
       <categories>
         <category>DB</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Issue</title>
+    <url>/iSTEP.github.io/2021/08/01/Issue/</url>
+    <content><![CDATA[<h2 id="backend"><a href="#backend" class="headerlink" title="backend"></a>backend</h2><p><code>docker 可通过 【docker logs name --tail 行数】来查看服务的日志</code></p>
+<h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><h4 id="1-前端页面显示正常，登入用户时报-“server-error”"><a href="#1-前端页面显示正常，登入用户时报-“server-error”" class="headerlink" title="1. 前端页面显示正常，登入用户时报 “server error”"></a>1. 前端页面显示正常，登入用户时报 “server error”</h4><p><strong>错误分析</strong></p>
+<ul>
+<li>通过本地后端调试发现报错：MISCONF Redis is configured to save RDB snapshots, but is currently not able to persist on disk. Commands that may modify the data set are disabled. Please check Redis logs for details about the error.</li>
+<li>该错误表示Redis被配置为保存数据库快照，但它目前不能持久化到硬盘。用来修改集合数据的命令不能用。</li>
+<li>Redis因为强制重启或宿主机内存不足导致快照未能从内存完整保存至本地，最终造成持久化失败，Redis拒绝写入新数据。</li>
+<li>由于登入请求记录无法提交至Redis数据库，导致用户登入失败。</li>
+</ul>
+<p><strong>解决方案</strong></p>
+<ul>
+<li>bgsave: 进行当前数据的异步保存</li>
+<li>save: 进行当前数据的保存，会阻塞当前请求</li>
+<li>如果当前数据丢失，似乎会影响竞赛排名页的更新</li>
+</ul>
+<ol>
+<li><p>【<strong>推荐</strong>】在/etc/sysctl.conf 添加一项 ‘vm.overcommit_memory = 1’ ，然后运行命令’sysctl vm.overcommit_memory=1’（或者重启）使其生效。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">内存不足：简单说，Redis在保存数据到硬盘时为了避免主进程假死，需要Fork一份主进程，然后在Fork进程内完成数据保存到硬盘的操作，如果主进程使用了4GB的内存，Fork子进程的时候需要额外的4GB，此时内存就不够了，Fork失败，进而数据保存硬盘也失败了。</span><br><span class="line"></span><br><span class="line">而将vm.overcommit_memory改为1有什么作用呢，网上看到一个博客是如下解释：</span><br><span class="line"></span><br><span class="line">0 — 默认设置,当应用进程尝试申请内存时，内核会做一个检测。内核将检查是否有足够的可用内存供应用进程使用；如果有足够的可用内存，内存申请允许；否则，内存申请失败，并把错误返回给应用进程。举个例子，比如1G的机器，A进程已经使用了500M，当有另外进程尝试malloc 500M的内存时，内核就会进行check，发现超出剩余可用内存，就会提示失败。</span><br><span class="line"></span><br><span class="line">1 — 对于内存的申请请求，内核不会做任何check，直到物理内存用完，触发OOM杀用户态进程。同样是上面的例子，1G的机器，A进程500M，B进程尝试malloc 500M，会成功，但是一旦kernel发现内存使用率接近1个G(内核有策略)，就触发OOM，杀掉一些用户态的进程(有策略的杀)。</span><br><span class="line"></span><br><span class="line">2 — 当请求申请的内存 &gt;= SWAP内存大小 + 物理内存 * N，则拒绝此次内存申请。解释下这个N：N是一个百分比，根据overcommit_ratio/100来确定，比如overcommit_ratio=50，那么N就是50%。</span><br></pre></td></tr></table></figure></li>
+<li><p>【<strong>推荐与1一起使用</strong>】通过redis-cli连接Redis数据库，将stop-writes-on-bgsave-error设置为no，如下。该方法在  <strong>因内存不足时造成错误</strong>  无法从根源解决问题。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">config <span class="built_in">set</span> stop-writes-on-bgsave-error no</span><br></pre></td></tr></table></figure></li>
+<li><p>【<strong>不推荐</strong>】重启Redis可以临时解决，但很快就会再次报错。</p>
+</li>
+</ol>
+<h4 id="1-1-前端直接连不上后端，Redis设置config-set-stop-writes-on-bgsave-error-no临时解决"><a href="#1-1-前端直接连不上后端，Redis设置config-set-stop-writes-on-bgsave-error-no临时解决" class="headerlink" title="1.1 前端直接连不上后端，Redis设置config set stop-writes-on-bgsave-error no临时解决"></a>1.1 前端直接连不上后端，Redis设置config set stop-writes-on-bgsave-error no临时解决</h4><p>   <strong>Redis报错</strong> </p>
+<ul>
+<li>!! Failed opening the RDB file root (in server root dir <em><strong>/etc/crontabs</strong></em>) for saving: Permission denied</li>
+</ul>
+<p>   <strong>问题分析</strong></p>
+<p>   通过 <code>config get dir</code> 发现Redis的数据保存位置被篡改为 <code>/etc/crontabs</code> ，该位置为只读文件系统，Redis的操作为不安全操作，没有写入权限，导致保存失败。</p>
+<p>   <strong>解决方案</strong></p>
+<ol>
+<li><p>通过 <code>config set dir</code> 将目录改回原始存储路径即可解决。</p>
+</li>
+<li><p>为Redis设置密码</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">config <span class="keyword">get</span> requirepass  # 查看现有的redis密码</span><br><span class="line"></span><br><span class="line">config <span class="keyword">set</span> requirepass <span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span>  #（<span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span>为你要设置的密码）设置redis密码</span><br><span class="line"></span><br><span class="line">#  若出现(error) NOAUTH Authentication required.错误，说明已设置密码，使用 auth 密码 来认证密码</span><br></pre></td></tr></table></figure></li>
+<li><p>由于该 Redis 基于 docker 构建，重启后将恢复默认设置！！</p>
+<blockquote>
+<p>另  Django 的 app/oj/setting.py文件需做如下修改</p>
+</blockquote>
+<blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210728205741096.png"
+                      alt="image-20210728205741096" style="zoom:10%;" 
+                >！！该方法可以实现登入，但在提交问题时会出错</p>
+</blockquote>
+<blockquote>
+<p> 正确方法如下:</p>
+</blockquote>
+<blockquote>
+<p> <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730141913322.png"
+                      style="zoom:50%;" 
+                >  oj/dev_settings.py: 用于调试环境的配置</p>
+</blockquote>
+<blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730142131016.png"
+                      alt="image-20210730142131016" style="zoom:50%;" 
+                >  oj/production_settings.py: 用于生产环境的配置</p>
+</blockquote>
+<blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730142655656.png"
+                      alt="image-20210730142655656" style="zoom:50%;" 
+                >  oj/settings.py: Django 配置 Redis</p>
+</blockquote>
+<blockquote>
+<p> <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/image-20210730143136700.png"
+                      alt="image-20210730143136700" style="zoom:50%;" 
+                >  docker-compose.yml: 在环境变量中添加 Redis 密码</p>
+</blockquote>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d  <span class="comment"># 使 docker-compose.yml 生效【Recreating Done 的 image 无需执行下步】</span></span><br><span class="line">docker restart istep-backend  <span class="comment"># 使修改的 .py 文件生效</span></span><br></pre></td></tr></table></figure></blockquote>
+</li>
+</ol>
+<p><em><strong>TODO</strong></em></p>
+<ol>
+<li>构建本地 redis.config 文件，使配置永久生效【数据存储位置挂载，设置密码】</li>
+<li>在构建容器时预设定 Redis 密码</li>
+</ol>
+<h4 id="2-警告：WARNING-you-have-Transparent-Huge-Pages-THP-support-enabled-in-your-kernel-This-will-create-latency-and-memory-usage-issues-with-Redis-To-fix-this-issue-run-the-command-‘echo-never-gt-sys-kernel-mm-transparent-hugepage-enabled’-as-root-and-add-it-to-your-etc-rc-local-in-order-to-retain-the-setting-after-a-reboot-Redis-must-be-restarted-after-THP-is-disabled"><a href="#2-警告：WARNING-you-have-Transparent-Huge-Pages-THP-support-enabled-in-your-kernel-This-will-create-latency-and-memory-usage-issues-with-Redis-To-fix-this-issue-run-the-command-‘echo-never-gt-sys-kernel-mm-transparent-hugepage-enabled’-as-root-and-add-it-to-your-etc-rc-local-in-order-to-retain-the-setting-after-a-reboot-Redis-must-be-restarted-after-THP-is-disabled" class="headerlink" title="2. 警告：WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command ‘echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled’ as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled."></a>2. 警告：WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command ‘echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled’ as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.</h4><p>说明：Redis建议我们关闭THP，以免造成相关问题</p>
+<p>解决警告中已给出</p>
+<hr>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="smtp-配置不成功"><a href="#smtp-配置不成功" class="headerlink" title="smtp 配置不成功"></a>smtp 配置不成功</h3><ul>
+<li>OnlineJudge 不支持 ssl，请使用 tls，比如 qq 邮箱是 smtp.qq.com / tls / port 25</li>
+<li>部分邮箱 smtp 密码不是登录密码，而是单独的授权密码</li>
+</ul>
+<h3 id="忘记用户密码"><a href="#忘记用户密码" class="headerlink" title="忘记用户密码"></a>忘记用户密码</h3><ul>
+<li>网页上找回密码</li>
+<li>后台用户管理重置</li>
+<li>超级管理员等密码也忘记，可以使用下面的命令</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker exec -it oj-backend /bin/sh</span><br><span class="line">python3 manage.py inituser --username USERNAME --password NEW_PASSWORD --action=reset</span><br></pre></td></tr></table></figure>
+
+<h3 id="CentOS-上部署遇到问题"><a href="#CentOS-上部署遇到问题" class="headerlink" title="CentOS 上部署遇到问题"></a>CentOS 上部署遇到问题</h3><ul>
+<li><p>检查 docker 版本是否太老</p>
+</li>
+<li><p>关闭 SELinux</p>
+</li>
+</ul>
+<h3 id="查看-Docker-容器运行状态"><a href="#查看-Docker-容器运行状态" class="headerlink" title="查看 Docker 容器运行状态"></a>查看 Docker 容器运行状态</h3><p>运行<code>docker ps -a</code>，可以看到以下输出。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CONTAINER ID        IMAGE                                                        COMMAND                  CREATED             STATUS                       PORTS                                         NAMES</span><br><span class="line">645070877c6c        registry.cn-hangzhou.aliyuncs.com/onlinejudge/oj_backend     <span class="string">&quot;/bin/sh -c &#x27;sh /app…&quot;</span>   About an hour ago   Up About an hour (healthy)             0.0.0.0:443-&gt;1443/tcp, 0.0.0.0:80-&gt;8000/tcp   oj-backend</span><br><span class="line">b6fc725b2417        registry.docker-cn.com/library/redis:4.0-alpine              <span class="string">&quot;docker-entrypoint.s…&quot;</span>   About an hour ago   Up About an hour             6379/tcp                                      oj-redis</span><br><span class="line">3402b59b96d3        registry.docker-cn.com/library/postgres:10-alpine            <span class="string">&quot;docker-entrypoint.s…&quot;</span>   About an hour ago   Up About an hour             5432/tcp                                      oj-postgres</span><br><span class="line">7c399af69344        registry.cn-hangzhou.aliyuncs.com/onlinejudge/judge_server   <span class="string">&quot;/bin/sh -c &#x27;/bin/ba…&quot;</span>   About an hour ago   Up About an hour (healthy)   8080/tcp                                      judge-server</span><br></pre></td></tr></table></figure>
+
+<p><code>NAMES</code>就是容器的名称，后面会经常用到。<code>STATUS</code>就是当前容器的运行状态，<code>Up xxx (healthy)</code>就是正常运行状态，<code>unhealthy</code>或<code>Exited (x) xxx</code>就是退出状态。</p>
+<p>注意下面使用 <code>&#123;CONTAINER_NAME&#125;</code> 的地方，都使用对应的名字替换，需要去除大括号。</p>
+<h3 id="进入正在运行的容器"><a href="#进入正在运行的容器" class="headerlink" title="进入正在运行的容器"></a>进入正在运行的容器</h3><p>然后运行<code>docker exec -it &#123;CONTAINER_NAME&#125; /bin/sh</code>，比如 <code>docker exec -it oj-backend /bin/sh</code>。</p>
+<h3 id="容器异常退出"><a href="#容器异常退出" class="headerlink" title="容器异常退出"></a>容器异常退出</h3><p>容器<code>STATUS</code>显示为<code>Exited(x) xxx</code>，运行<code>docker logs &#123;CONTAINER_NAME&#125;</code>，查看错误信息。</p>
+<h3 id="docker-compose-启动的时候报错-‘module’-object-has-on-attribute-‘connection’"><a href="#docker-compose-启动的时候报错-‘module’-object-has-on-attribute-‘connection’" class="headerlink" title="docker-compose 启动的时候报错 ‘module’ object has on attribute ‘connection’"></a>docker-compose 启动的时候报错 ‘module’ object has on attribute ‘connection’</h3><p>尝试运行 <code>pip install --upgrade pip &amp;&amp; pip install -U urllib3</code>，然后再重试看看。</p>
+<h3 id="Invalid-token"><a href="#Invalid-token" class="headerlink" title="Invalid token"></a>Invalid token</h3><p>请查看<code>docker-compose.yml</code>内的<code>JUDGE_SERVER_TOKEN</code>与<code>TOKEN</code>是否一致</p>
+<h3 id="80-或者-443-端口被占用导致-docker-无法启动"><a href="#80-或者-443-端口被占用导致-docker-无法启动" class="headerlink" title="80 或者 443 端口被占用导致 docker 无法启动"></a>80 或者 443 端口被占用导致 docker 无法启动</h3><p>错误信息 <code>bind 0.0.0.0:80 failed, port is already allocated</code></p>
+<p>修改 docker-compose 中 <code>ports</code> 相关的配置，比如 <code>0.0.0.0:80:8080</code> 可以修改为 <code>0.0.0.0:8020:8080</code>，冒号后面的端口号不会冲突请勿改动。</p>
+<h3 id="我的浏览器不显示数据或者显示异常"><a href="#我的浏览器不显示数据或者显示异常" class="headerlink" title="我的浏览器不显示数据或者显示异常"></a>我的浏览器不显示数据或者显示异常</h3><p>请使用 Chrome 或 Firefox 使用本OJ，如不能解决，请反馈问题。</p>
+<h3 id="如何解决-oj-上运行错误但是本地成功的问题"><a href="#如何解决-oj-上运行错误但是本地成功的问题" class="headerlink" title="如何解决 oj 上运行错误但是本地成功的问题"></a>如何解决 oj 上运行错误但是本地成功的问题</h3><ul>
+<li>90% 的可能性是代码的bug，本地没有触发，尤其是是本地没有完整测试数据和相同的运行环境的情况下。</li>
+<li>如果是 <code>Runtime Error</code>，可能是代码运行过程中 crash，如果提示 <code>signal=31</code>，可能是触发了禁止使用的系统调用。通过 <code>dmesg</code> 可以看到系统调用号。</li>
+<li>如果实在想看到代码运行结果，可以修改 <code>docker-compose.yml</code>，去除 <code>judger_debug=1</code> 的注释，然后 <code>docker-compose up -d</code>。重新提交之后，<code>docker exec -it judge-server bash</code> <code>cd /judger/run</code> 就可以看到很多文件夹了，可以找到自己的代码和运行结果。调试完请注释这一行并重新 <code>up -d</code>，否则每次的运行结果都会保留。</li>
+</ul>
+<h3 id="如何调整数据库参数"><a href="#如何调整数据库参数" class="headerlink" title="如何调整数据库参数"></a>如何调整数据库参数</h3><p>在以下情况下，需要考虑调整数据库参数</p>
+<ul>
+<li><p>机器配置较高，比如 CPU 超过 4 核或内存超过 4G</p>
+</li>
+<li><p>后端报错数据库连接数不够 <code>too many clients already</code></p>
+<p>请参考 <a class="link"   href="https://pgtune.leopard.in.ua/" >https://pgtune.leopard.in.ua<i class="fas fa-external-link-alt"></i></a> 选择 DB Version 10，Number of Connections 为 20 倍 CPU 核数，其他的参数按照实际情况填写。</p>
+<p>然后将右侧的参数更新到 <code>OnlineJudgeDeploy/OnlineJudgeDeploy/data/postgres/postgresql.conf</code> 文件中，注意原先配置部分是注释掉的，需要将开头的 <code>#</code> 删除，<code>docker-compose restart oj-postgres</code> 即可。</p>
+</li>
+</ul>
+<hr>
+]]></content>
+  </entry>
+  <entry>
+    <title>Python @classmethod 与 @staticmethod</title>
+    <url>/iSTEP.github.io/2021/08/04/Python/</url>
+    <content><![CDATA[<h2 id="classmethod"><a href="#classmethod" class="headerlink" title="@classmethod"></a>@classmethod</h2><p><strong>转载自</strong> <a class="link"   href="http://30daydo.com/article/89" >python @classmethod 的使用场合<i class="fas fa-external-link-alt"></i></a></p>
+<p>这里解释的不错。 至于staticmethod用法和classmethod在继承的时候有点区别。</p>
+<p>官方的说法：</p>
+<p><em><strong>classmethod(function)</strong></em></p>
+<ul>
+<li><p>是用来指定一个类的方法为类方法，没有此参数指定的类的方法为实例方法，使用方法如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">cls, arg1, arg2, ...</span>):</span> ...</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>看后之后真是一头雾水。说的啥子东西呢？？？</p>
+<p>自己到国外的论坛看其他的例子和解释，顿时就很明朗。 下面自己用例子来说明。</p>
+<p>看下面的定义的一个时间类：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data_test</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    day=<span class="number">0</span></span><br><span class="line">    month=<span class="number">0</span></span><br><span class="line">    year=<span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,year=<span class="number">0</span>,month=<span class="number">0</span>,day=<span class="number">0</span></span>):</span></span><br><span class="line">        self.day=day</span><br><span class="line">        self.month=month</span><br><span class="line">        self.year=year</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">out_date</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;year :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.year</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;month :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.month</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;day :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.day</span><br><span class="line"></span><br><span class="line">t=Data_test(<span class="number">2016</span>,<span class="number">8</span>,<span class="number">1</span>)</span><br><span class="line">t.out_date()</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">year :</span><br><span class="line">2016</span><br><span class="line">month :</span><br><span class="line">8</span><br><span class="line">day :</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<p>符合期望。</p>
+<p>如果用户输入的是 “2016-8-1” 这样的字符格式，那么就需要调用Date_test 类前做一下处理：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string_date=<span class="string">&#x27;2016-8-1&#x27;</span></span><br><span class="line">year,month,day=<span class="built_in">map</span>(<span class="built_in">int</span>,string_date.split(<span class="string">&#x27;-&#x27;</span>))</span><br><span class="line">s=Data_test(year,month,day)</span><br></pre></td></tr></table></figure>
+
+<p>先把‘2016-8-1’ 分解成 year，month，day 三个变量，然后转成int，再调用Date_test(year,month,day)函数。 也很符合期望。</p>
+<p>那我可不可以把这个字符串处理的函数放到 Date_test 类当中呢？</p>
+<p>那么@classmethod 就开始出场了</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data_test2</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    day=<span class="number">0</span></span><br><span class="line">    month=<span class="number">0</span></span><br><span class="line">    year=<span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,year=<span class="number">0</span>,month=<span class="number">0</span>,day=<span class="number">0</span></span>):</span></span><br><span class="line">        self.day=day</span><br><span class="line">        self.month=month</span><br><span class="line">        self.year=year</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_date</span>(<span class="params">cls,string_date</span>):</span></span><br><span class="line">        <span class="comment">#这里第一个参数是cls， 表示调用当前的类名</span></span><br><span class="line">        year,month,day=<span class="built_in">map</span>(<span class="built_in">int</span>,string_date.split(<span class="string">&#x27;-&#x27;</span>))</span><br><span class="line">        date1=cls(year,month,day)</span><br><span class="line">        <span class="comment">#返回的是一个初始化后的类</span></span><br><span class="line">        <span class="keyword">return</span> date1</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">out_date</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;year :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.year</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;month :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.month</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;day :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.day</span><br></pre></td></tr></table></figure>
+
+<p>在Date_test类里面创建一个成员函数， 前面用了@classmethod装饰。 它的作用就是有点像静态类，比静态类不一样的就是它可以传进来一个当前类作为第一个参数。</p>
+<p>那么如何调用呢？</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">r=Data_test2.get_date(<span class="string">&quot;2016-8-6&quot;</span>)</span><br><span class="line">r.out_date()</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">year :</span><br><span class="line">2016</span><br><span class="line">month :</span><br><span class="line">8</span><br><span class="line">day :</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<p>这样子等于先调用get_date（）对字符串进行出来，然后才使用Data_test的构造函数初始化。</p>
+<p>这样的好处就是你以后重构类的时候不必要修改构造函数，只需要额外添加你要处理的函数，然后使用装饰符 @classmethod 就可以了。</p>
+<p>示例：【***@classmethod*** 与 <em><strong>@staticmethod</strong></em>】</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Kls</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, data</span>):</span></span><br><span class="line">        self.data = data</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">printd</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(self.data)</span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">smethod</span>(<span class="params">*arg</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Static:&#x27;</span>, arg)</span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cmethod</span>(<span class="params">*arg</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Class:&#x27;</span>, arg)</span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ik = Kls(<span class="number">23</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ik.printd()</span><br><span class="line"><span class="number">23</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ik.smethod()</span><br><span class="line">Static: ()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ik.cmethod()</span><br><span class="line">Class: (&lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">__main__</span>.<span class="title">Kls</span>&#x27;&gt;,)</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">Kls</span>.<span class="title">printd</span>()</span></span><br><span class="line"><span class="class"><span class="title">TypeError</span>:</span> unbound method printd() must be called <span class="keyword">with</span> Kls instance <span class="keyword">as</span> first argument (got nothing instead)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Kls.smethod()</span><br><span class="line">Static: ()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Kls.cmethod()</span><br><span class="line">Class: (&lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">__main__</span>.<span class="title">Kls</span>&#x27;&gt;,)</span></span><br></pre></td></tr></table></figure>
+
+<p>图示：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/8a82a7f295c855c39b0d21f5bb1352c2_1440w.jpg"
+                      alt="img"
+                ></p>
+]]></content>
+      <tags>
+        <tag>python</tag>
+      </tags>
   </entry>
   <entry>
     <title>Redis</title>
@@ -1012,58 +1064,6 @@ docker
 ]]></content>
       <tags>
         <tag>Vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Python @classmethod 与 @staticmethod</title>
-    <url>/iSTEP.github.io/2021/08/04/Python/</url>
-    <content><![CDATA[<h2 id="classmethod"><a href="#classmethod" class="headerlink" title="@classmethod"></a>@classmethod</h2><p><strong>转载自</strong> <a class="link"   href="http://30daydo.com/article/89" >python @classmethod 的使用场合<i class="fas fa-external-link-alt"></i></a></p>
-<p>这里解释的不错。 至于staticmethod用法和classmethod在继承的时候有点区别。</p>
-<p>官方的说法：</p>
-<p><em><strong>classmethod(function)</strong></em></p>
-<ul>
-<li><p>是用来指定一个类的方法为类方法，没有此参数指定的类的方法为实例方法，使用方法如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">cls, arg1, arg2, ...</span>):</span> ...</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>看后之后真是一头雾水。说的啥子东西呢？？？</p>
-<p>自己到国外的论坛看其他的例子和解释，顿时就很明朗。 下面自己用例子来说明。</p>
-<p>看下面的定义的一个时间类：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data_test</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    day=<span class="number">0</span></span><br><span class="line">    month=<span class="number">0</span></span><br><span class="line">    year=<span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,year=<span class="number">0</span>,month=<span class="number">0</span>,day=<span class="number">0</span></span>):</span></span><br><span class="line">        self.day=day</span><br><span class="line">        self.month=month</span><br><span class="line">        self.year=year</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">out_date</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;year :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.year</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;month :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.month</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;day :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.day</span><br><span class="line"></span><br><span class="line">t=Data_test(<span class="number">2016</span>,<span class="number">8</span>,<span class="number">1</span>)</span><br><span class="line">t.out_date()</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">year :</span><br><span class="line">2016</span><br><span class="line">month :</span><br><span class="line">8</span><br><span class="line">day :</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
-
-<p>符合期望。</p>
-<p>如果用户输入的是 “2016-8-1” 这样的字符格式，那么就需要调用Date_test 类前做一下处理：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">string_date=<span class="string">&#x27;2016-8-1&#x27;</span></span><br><span class="line">year,month,day=<span class="built_in">map</span>(<span class="built_in">int</span>,string_date.split(<span class="string">&#x27;-&#x27;</span>))</span><br><span class="line">s=Data_test(year,month,day)</span><br></pre></td></tr></table></figure>
-
-<p>先把‘2016-8-1’ 分解成 year，month，day 三个变量，然后转成int，再调用Date_test(year,month,day)函数。 也很符合期望。</p>
-<p>那我可不可以把这个字符串处理的函数放到 Date_test 类当中呢？</p>
-<p>那么@classmethod 就开始出场了</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data_test2</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    day=<span class="number">0</span></span><br><span class="line">    month=<span class="number">0</span></span><br><span class="line">    year=<span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,year=<span class="number">0</span>,month=<span class="number">0</span>,day=<span class="number">0</span></span>):</span></span><br><span class="line">        self.day=day</span><br><span class="line">        self.month=month</span><br><span class="line">        self.year=year</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_date</span>(<span class="params">cls,string_date</span>):</span></span><br><span class="line">        <span class="comment">#这里第一个参数是cls， 表示调用当前的类名</span></span><br><span class="line">        year,month,day=<span class="built_in">map</span>(<span class="built_in">int</span>,string_date.split(<span class="string">&#x27;-&#x27;</span>))</span><br><span class="line">        date1=cls(year,month,day)</span><br><span class="line">        <span class="comment">#返回的是一个初始化后的类</span></span><br><span class="line">        <span class="keyword">return</span> date1</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">out_date</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;year :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.year</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;month :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.month</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;day :&quot;</span></span><br><span class="line">        <span class="built_in">print</span> self.day</span><br></pre></td></tr></table></figure>
-
-<p>在Date_test类里面创建一个成员函数， 前面用了@classmethod装饰。 它的作用就是有点像静态类，比静态类不一样的就是它可以传进来一个当前类作为第一个参数。</p>
-<p>那么如何调用呢？</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">r=Data_test2.get_date(<span class="string">&quot;2016-8-6&quot;</span>)</span><br><span class="line">r.out_date()</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">year :</span><br><span class="line">2016</span><br><span class="line">month :</span><br><span class="line">8</span><br><span class="line">day :</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
-
-<p>这样子等于先调用get_date（）对字符串进行出来，然后才使用Data_test的构造函数初始化。</p>
-<p>这样的好处就是你以后重构类的时候不必要修改构造函数，只需要额外添加你要处理的函数，然后使用装饰符 @classmethod 就可以了。</p>
-<p>示例：【***@classmethod*** 与 <em><strong>@staticmethod</strong></em>】</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Kls</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, data</span>):</span></span><br><span class="line">        self.data = data</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">printd</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(self.data)</span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">smethod</span>(<span class="params">*arg</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Static:&#x27;</span>, arg)</span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cmethod</span>(<span class="params">*arg</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Class:&#x27;</span>, arg)</span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ik = Kls(<span class="number">23</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ik.printd()</span><br><span class="line"><span class="number">23</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ik.smethod()</span><br><span class="line">Static: ()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ik.cmethod()</span><br><span class="line">Class: (&lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">__main__</span>.<span class="title">Kls</span>&#x27;&gt;,)</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">Kls</span>.<span class="title">printd</span>()</span></span><br><span class="line"><span class="class"><span class="title">TypeError</span>:</span> unbound method printd() must be called <span class="keyword">with</span> Kls instance <span class="keyword">as</span> first argument (got nothing instead)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Kls.smethod()</span><br><span class="line">Static: ()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Kls.cmethod()</span><br><span class="line">Class: (&lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">__main__</span>.<span class="title">Kls</span>&#x27;&gt;,)</span></span><br></pre></td></tr></table></figure>
-
-<p>图示：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://gitee.com/yzketx/image-markdown/raw/master/img/8a82a7f295c855c39b0d21f5bb1352c2_1440w.jpg"
-                      alt="img"
-                ></p>
-]]></content>
-      <tags>
-        <tag>python</tag>
       </tags>
   </entry>
   <entry>
